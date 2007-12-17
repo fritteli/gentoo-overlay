@@ -1,0 +1,15 @@
+--- ddclient.orig	2005-01-16 15:18:36.485003496 -0500
++++ ddclient	2005-01-16 15:19:15.628052848 -0500
+@@ -924,6 +924,12 @@
+ 	my $def    = $variables{'merged'}{$k};
+ 	my $ovalue = define($globals{$k}, $def->{'default'});
+ 	my $value  = check_value($ovalue, $def);
++
++	# we should really be allowed to set daemon to 0 in the config file
++	if ($k eq 'daemon' && $ovalue == 0) {
++		$value = $ovalue;
++	}
++
+ 	if ($def->{'required'} && !defined $value) {
+ 	    $value = default($k);
+ 	    warning("'%s=%s' is an invalid %s. (using default of %s)", $k, $ovalue, $def->{'type'}, $value);
