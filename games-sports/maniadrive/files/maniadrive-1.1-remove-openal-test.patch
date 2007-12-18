@@ -1,0 +1,54 @@
+--- configure.old2	2006-08-19 02:54:26.000000000 +0200
++++ configure	2006-08-19 02:56:59.000000000 +0200
+@@ -339,51 +339,6 @@
+ exit_if_error "$?" "You must install libglew devel package"
+ 
+ 
+-# OpenAL
+-file="
+-#include <AL/al.h>
+-#include <AL/alc.h>
+-#include <AL/alut.h>
+-#include <time.h>
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <sys/time.h>
+-#include <sys/types.h>
+-#include <unistd.h>
+-int main(int argc, char **argv) {
+-ALCdevice *dev;
+-const ALubyte *initstr=(const ALubyte *) \"'( ( devices '( native null ) ) )\";
+-dev=alcOpenDevice(initstr);
+-sleep(1);
+-alcCloseDevice(dev);
+-return 0; }"
+-test_build "OpenAL" "$file" "-lopenal"
+-exit_if_error "$?" "openal-devel is required. Official CVS may be a good idea"
+-
+-# OpenAL 1.1
+-file="
+-#include <AL/al.h>
+-#include <AL/alc.h>
+-#include <AL/alut.h>
+-#include <time.h>
+-#include <stdio.h>
+-#include <stdlib.h>
+-#include <sys/time.h>
+-#include <sys/types.h>
+-#include <unistd.h>
+-int main(int argc, char **argv) {
+-ALCdevice *dev;
+-const ALubyte *initstr=(const ALubyte *) \"'( ( devices '( native null ) ) )\";
+-dev=alcOpenDevice(initstr);
+-sleep(1);
+-#ifndef ALUT_API_MAJOR_VERSION
+-#error ALUT for OpenAL 1.1 is required
+-#endif
+-alcCloseDevice(dev);
+-return 0; }"
+-test_build "OpenAL 1.1 and ALUT" "$file" "-lopenal -lalut"
+-exit_if_error "$?" "Cannot find OpenAL 1.1 and ALUT. You can try to remove -lalut from Makefile and/or *comp*sh scripts, but Raydium with OpenAL 1.0 is not supported."
+-
+ # OGG/Vorbis
+ file='
+ #include <stdio.h>
