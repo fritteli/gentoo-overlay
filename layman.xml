@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layman>
-   <overlay type="svn" src="https://svn.fritteli.ch/gentoo-portage" name="fritteli" contact="manuel@fritteli.ch">
+   <overlay type="svn" src="https://svn.fritteli.ch/gentoo-overlay" name="fritteli" contact="manuel@fritteli.ch">
       <description>
          Fritteli's overlay of Gentoo ebuilds
       </description>
