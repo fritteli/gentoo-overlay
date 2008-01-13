@@ -1,0 +1,5 @@
+#!/bin/bash
+XMAILDIR="$1"
+eval ${LOGINRUN} \
+	/usr/sbin/courier-imapd \
+	${XMAILDIR}
