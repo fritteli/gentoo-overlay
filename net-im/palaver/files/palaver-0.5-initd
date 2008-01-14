@@ -1,0 +1,23 @@
+#!/sbin/runscript
+# Copyright 1999-2007 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+depend() {
+	need net
+	use jabber-server
+}
+
+start() {
+	ebegin "Starting Palaver MUC service"
+	start-stop-daemon --start --pidfile /var/run/jabber/palaver.pid --chuid jabber:jabber \
+		--exec /usr/bin/twistd -- -f /etc/jabber/palaver.tap -l /var/log/jabber/palaver.log \
+		--pidfile /var/run/jabber/palaver.pid
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping Palaver MUC service"
+	start-stop-daemon --stop --quiet --pidfile /var/run/jabber/palaver.pid
+	eend $?
+}
