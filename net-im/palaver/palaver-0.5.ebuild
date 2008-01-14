@@ -44,10 +44,10 @@ src_install() {
 
 }
 
-post_install() {
+pkg_postinst() {
 	einfo "A sample config file has been installes into /etc/jabber/${PN}.xml."
 	einfo "Please adjust the settings as needed."
-	einfo "After that, you need to create e TAP-file for twisted in order to start palaver, like this:"
+	einfo "After that, you MUST create a TAP-file for twisted in order to start Palaver, like this:"
 	einfo "# cd /etc/jabber"
 	einfo "# mktap palaver -c palaver.xml"
 }
