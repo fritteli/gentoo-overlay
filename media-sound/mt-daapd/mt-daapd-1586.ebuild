@@ -33,9 +33,9 @@ pkg_setup() {
 src_unpack() {
 	unpack ${A}
 	cd "${S}"
-#	epatch "${FILESDIR}"/${P}-sparc.patch
-#	epatch -p1 "${FILESDIR}"/${PN}-0.2.4.1-libsorder.patch
-#	epatch -p1 "${FILESDIR}"/${PN}-0.2.4.1-pidfile.patch
+	epatch "${FILESDIR}"/${P}-sparc.patch
+	epatch -p1 "${FILESDIR}"/${PN}-0.2.4.1-libsorder.patch
+	epatch -p1 "${FILESDIR}"/${PN}-0.2.4.1-pidfile.patch
 	eautoreconf
 
 	cp "${FILESDIR}"/${PN}.init.2 initd
