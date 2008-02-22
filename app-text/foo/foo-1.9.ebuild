@@ -6,8 +6,8 @@ inherit eutils versionator games
 
 VER="$(get_version_component_range 1-2)"
 REV="$(get_version_component_range 3-3)"
-MY_PV="${VER}-full.${REV:+r${REV}}"
-MY_BODY="ETQW-client-${MY_PV}.x86"
+MY_PV="${VER}-full.${REV:+r${REV}.}"
+MY_BODY="ETQW-client-${MY_PV}x86"
 
 DESCRIPTION="Enemy Territory"
 HOMEPAGE="http://zerowing.idsoftware.com/linux/etqw/"
