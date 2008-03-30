@@ -26,7 +26,7 @@ RDEPEND="
 	gnome? ( >=gnome-base/nautilus-2.10 )
 	>=app-text/poppler-bindings-0.6
 	dvi? (
-		virtual/tetex
+		virtual/tex-base
 		t1lib? ( >=media-libs/t1lib-5.0.0 )
 	)
 	tiff? ( >=media-libs/tiff-3.6 )
