@@ -45,7 +45,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	einfo "A sample config file has been installes into /etc/jabber/${PN}.xml."
+	einfo "A sample config file has been installed into /etc/jabber/${PN}.xml."
 	einfo "Please adjust the settings as needed."
 	einfo "After that, you MUST create a TAP-file for twisted in order to start Palaver, like this:"
 	einfo "# cd /etc/jabber"
