@@ -4,8 +4,8 @@
 
 inherit eutils python distutils
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
-HOMEPAGE="http://onlinegamegroup.com/projects/palaver/"
-SRC_URI="http://onlinegamegroup.com/releases/${PN}/${P}.tar.gz"
+HOMEPAGE="http://code.stanziq.com/palaver"
+SRC_URI="http://code.stanziq.com/${PN}/export/16/releases/${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~x86"
