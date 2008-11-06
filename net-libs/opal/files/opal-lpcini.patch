@@ -1,0 +1,11 @@
+--- plugins/audio/LPC_10/src/lpcini.c.orig	2008-09-24 23:01:05.000000000 -0400
++++ plugins/audio/LPC_10/src/lpcini.c	2008-09-25 00:39:34.000000000 -0400
+@@ -50,6 +50,8 @@
+   #ifdef _MSC_VER
+     #include <malloc.h>
+   #endif
++#else
++	extern void * malloc();
+ #endif
+ 
+ /* Common Block Declarations */
