@@ -26,7 +26,7 @@ RDEPEND="${DEPEND}
 	webinterface? ( >=dev-python/nevow-0.4.1 )
 	>=dev-python/imaging-1.1"
 
-src_compile() {
+src_unpack() {
 	epatch "${FILESDIR}/${P}-hashlib.patch"
 }
 
