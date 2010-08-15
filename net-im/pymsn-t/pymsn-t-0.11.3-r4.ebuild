@@ -62,12 +62,12 @@ src_install() {
 }
 
 pkg_postinst() {
-	python_mod_optimize ${PN}
+	python_mod_optimize $(python_get_sitedir)/${PN}
 
 	elog "A sample configuration file has been installed in /etc/jabber/${PN}.xml."
 	elog "Please edit it and the configuration of your Jabber server to match."
 }
 
 pkg_postrm() {
-	python_mod_cleanup ${PN}
+	python_mod_cleanup $(python_get_sitedir)/${PN}
 }
