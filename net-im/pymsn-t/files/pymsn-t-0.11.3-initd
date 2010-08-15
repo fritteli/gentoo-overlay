@@ -11,7 +11,7 @@ depend() {
 start() {
 	ebegin "Starting MSN Jabber Transport"
 	start-stop-daemon --start --pidfile /var/run/jabber/pymsn-t.pid --chuid jabber:jabber \
-		--exec /usr/bin/python2.6 INSPATH/pymsn-t.py -- \
+		--exec /usr/bin/python INSPATH/pymsn-t.py -- \
 		-b -c /etc/jabber/pymsn-t.xml -l /var/log/jabber/pymsn-t.log
 	eend $?
 }

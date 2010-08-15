@@ -1,122 +1,24 @@
-diff -ru pymsnt-0.11.3-vanilla/src/avatar.py pymsnt-0.11.3/src/avatar.py
---- pymsnt-0.11.3-vanilla/src/avatar.py	2008-02-08 13:55:07.000000000 +0000
-+++ pymsnt-0.11.3/src/avatar.py	2010-01-20 17:18:44.000000000 +0000
-@@ -6,7 +6,7 @@
- from twisted.internet import reactor
- from twisted.words.xish.domish import Element
- 
--import sha, base64, os, os.path
-+import hashlib, base64, os, os.path
- 
- import utils
- import config
-@@ -34,7 +34,7 @@
- class Avatar:
- 	""" Represents an Avatar. Does not store the image in memory. """
- 	def __init__(self, imageData, avatarCache):
--		self.__imageHash = sha.sha(imageData).hexdigest()
-+		self.__imageHash = hashlib.sha1(imageData).hexdigest()
- 		self.__avatarCache = avatarCache
- 
- 	def getImageHash(self):
-diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msn.py pymsnt-0.11.3/src/legacy/msn/msn.py
---- pymsnt-0.11.3-vanilla/src/legacy/msn/msn.py	2008-02-08 13:55:07.000000000 +0000
-+++ pymsnt-0.11.3/src/legacy/msn/msn.py	2010-01-20 17:18:25.000000000 +0000
-@@ -106,7 +106,7 @@
- 
- 
- # System imports
--import types, operator, os, sys, base64, random, struct, random, sha, base64, StringIO, array, codecs, binascii
-+import types, operator, os, sys, base64, random, struct, random, hashlib, base64, StringIO, array, codecs, binascii
- from urllib import quote, unquote
- 
- 
-@@ -490,7 +490,7 @@
-         self.type = 3
-         self.location = "TMP" + str(random.randint(1000,9999))
-         self.friendly = "AAA="
--        self.sha1d = b64enc(sha.sha(imageData).digest())
-+        self.sha1d = b64enc(hashlib.sha1(imageData).digest())
-         self.makeText()
-     
-     def setNull(self):
-@@ -518,7 +518,7 @@
-         h.append(self.friendly)
-         h.append("SHA1D")
-         h.append(self.sha1d)
--        sha1c = b64enc(sha.sha("".join(h)).digest())
-+        sha1c = b64enc(hashlib.sha1("".join(h)).digest())
-         self.text = '<msnobj Creator="%s" Size="%s" Type="%s" Location="%s" Friendly="%s" SHA1D="%s" SHA1C="%s"/>' % (self.creator, str(self.size), str(self.type), self.location, self.friendly, self.sha1d, sha1c)
-     
-     def parse(self, s):
-diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py pymsnt-0.11.3/src/legacy/msn/msnp11chl.py
---- pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py	2008-02-08 13:55:07.000000000 +0000
-+++ pymsnt-0.11.3/src/legacy/msn/msnp11chl.py	2010-01-20 17:20:28.000000000 +0000
-@@ -1,7 +1,7 @@
- # Copyright 2005 James Bunton <james@delx.cjb.net>
- # Licensed for distribution under the GPL version 2, check COPYING for details
- 
--import md5
-+import hashlib
- import struct
- 
- MSNP11_PRODUCT_ID = "PROD0090YUAUV{2B"
-@@ -10,7 +10,7 @@
- 
- 
- def doChallenge(chlData):
--	md5digest = md5.md5(chlData + MSNP11_PRODUCT_KEY).digest()
-+	md5digest = hashlib.md5(chlData + MSNP11_PRODUCT_KEY).digest()
- 
- 	# Make array of md5 string ints
- 	md5Ints = struct.unpack("<llll", md5digest)
-diff -ru pymsnt-0.11.3-vanilla/src/twistfix/words/xish/xmlstream.py pymsnt-0.11.3/src/twistfix/words/xish/xmlstream.py
---- pymsnt-0.11.3-vanilla/src/twistfix/words/xish/xmlstream.py	2008-02-08 13:56:54.000000000 +0000
-+++ pymsnt-0.11.3/src/twistfix/words/xish/xmlstream.py	2010-01-20 17:19:09.000000000 +0000
-@@ -29,8 +29,8 @@
- 
- def hashPassword(sid, password):
-     """Create a SHA1-digest string of a session identifier and password """
--    import sha
--    return sha.new("%s%s" % (sid, password)).hexdigest()
-+    import hashlib
-+    return hashlib.sha1("%s%s" % (sid, password)).hexdigest()
- 
- class Authenticator:
-     """ Base class for business logic of authenticating an XmlStream
 diff -ru pymsnt-0.11.3-vanilla/src/utils.py pymsnt-0.11.3/src/utils.py
---- pymsnt-0.11.3-vanilla/src/utils.py	2008-02-08 13:55:07.000000000 +0000
-+++ pymsnt-0.11.3/src/utils.py	2010-01-20 17:19:40.000000000 +0000
-@@ -7,9 +7,9 @@
+--- pymsnt-0.11.3-vanilla/src/utils.py	2008-02-08 14:55:07.000000000 +0100
++++ pymsnt-0.11.3/src/utils.py	2010-08-15 21:46:32.000000000 +0200
+@@ -7,7 +7,7 @@
  	return el.getAttribute((u'http://www.w3.org/XML/1998/namespace', u'lang'))
  
  
 -import sha
-+import hashlib
++from hashlib import sha
  def socks5Hash(sid, initiator, target):
--	return sha.new("%s%s%s" % (sid, initiator, target)).hexdigest()
-+	return hashlib.sha1("%s%s%s" % (sid, initiator, target)).hexdigest()
+ 	return sha.new("%s%s%s" % (sid, initiator, target)).hexdigest()
  
- 
- import urllib
 diff -ru pymsnt-0.11.3-vanilla/src/xdb.py pymsnt-0.11.3/src/xdb.py
---- pymsnt-0.11.3-vanilla/src/xdb.py	2008-02-08 13:55:07.000000000 +0000
-+++ pymsnt-0.11.3/src/xdb.py	2010-01-20 17:21:01.000000000 +0000
+--- pymsnt-0.11.3-vanilla/src/xdb.py	2008-02-08 14:55:07.000000000 +0100
++++ pymsnt-0.11.3/src/xdb.py	2010-08-15 21:46:57.000000000 +0200
 @@ -6,7 +6,7 @@
  import os
  import os.path
  import shutil
 -import md5
-+import hashlib
++from hashlib import md5
  import config
  
  X = os.path.sep
-@@ -23,7 +23,7 @@
- 	return file.replace("@", "%")
- 
- def makeHash(file):
--	return md5.md5(file).hexdigest()[0:3]
-+	return hashlib.md5(file).hexdigest()[0:3]
- 
- 
- class XDB:
