@@ -1,3 +1,38 @@
+diff -ru pymsnt-0.11.3-vanilla/src/avatar.py pymsnt-0.11.3/src/avatar.py
+--- pymsnt-0.11.3-vanilla/src/avatar.py	2008-02-08 14:55:07.000000000 +0100
++++ pymsnt-0.11.3/src/avatar.py	2010-08-15 22:17:32.000000000 +0200
+@@ -5,8 +5,8 @@
+ 
+ from twisted.internet import reactor
+ from twisted.words.xish.domish import Element
+-
+-import sha, base64, os, os.path
++from hashlib import sha1
++import base64, os, os.path
+ 
+ import utils
+ import config
+@@ -34,7 +34,7 @@
+ class Avatar:
+ 	""" Represents an Avatar. Does not store the image in memory. """
+ 	def __init__(self, imageData, avatarCache):
+-		self.__imageHash = sha.sha(imageData).hexdigest()
++		self.__imageHash = sha1(imageData).hexdigest()
+ 		self.__avatarCache = avatarCache
+ 
+ 	def getImageHash(self):
+diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py pymsnt-0.11.3/src/legacy/msn/msnp11chl.py
+--- pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py	2008-02-08 14:55:07.000000000 +0100
++++ pymsnt-0.11.3/src/legacy/msn/msnp11chl.py	2010-08-15 22:17:56.000000000 +0200
+@@ -1,7 +1,7 @@
+ # Copyright 2005 James Bunton <james@delx.cjb.net>
+ # Licensed for distribution under the GPL version 2, check COPYING for details
+ 
+-import md5
++from hashlib import md5
+ import struct
+ 
+ MSNP11_PRODUCT_ID = "PROD0090YUAUV{2B"
 diff -ru pymsnt-0.11.3-vanilla/src/utils.py pymsnt-0.11.3/src/utils.py
 --- pymsnt-0.11.3-vanilla/src/utils.py	2008-02-08 14:55:07.000000000 +0100
 +++ pymsnt-0.11.3/src/utils.py	2010-08-15 22:12:36.000000000 +0200
