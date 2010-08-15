@@ -1,15 +1,18 @@
 diff -ru pymsnt-0.11.3-vanilla/src/utils.py pymsnt-0.11.3/src/utils.py
 --- pymsnt-0.11.3-vanilla/src/utils.py	2008-02-08 14:55:07.000000000 +0100
-+++ pymsnt-0.11.3/src/utils.py	2010-08-15 21:46:32.000000000 +0200
-@@ -7,7 +7,7 @@
++++ pymsnt-0.11.3/src/utils.py	2010-08-15 22:12:36.000000000 +0200
+@@ -7,9 +7,9 @@
  	return el.getAttribute((u'http://www.w3.org/XML/1998/namespace', u'lang'))
  
  
 -import sha
-+from hashlib import sha
++from hashlib import sha1
  def socks5Hash(sid, initiator, target):
- 	return sha.new("%s%s%s" % (sid, initiator, target)).hexdigest()
+-	return sha.new("%s%s%s" % (sid, initiator, target)).hexdigest()
++	return sha1.new("%s%s%s" % (sid, initiator, target)).hexdigest()
  
+ 
+ import urllib
 diff -ru pymsnt-0.11.3-vanilla/src/xdb.py pymsnt-0.11.3/src/xdb.py
 --- pymsnt-0.11.3-vanilla/src/xdb.py	2008-02-08 14:55:07.000000000 +0100
 +++ pymsnt-0.11.3/src/xdb.py	2010-08-15 21:46:57.000000000 +0200
