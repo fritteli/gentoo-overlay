@@ -54,7 +54,7 @@ diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msn.py pymsnt-0.11.3/src/legacy/ms
      def parse(self, s):
 diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py pymsnt-0.11.3/src/legacy/msn/msnp11chl.py
 --- pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py	2008-02-08 14:55:07.000000000 +0100
-+++ pymsnt-0.11.3/src/legacy/msn/msnp11chl.py	2010-08-15 22:17:56.000000000 +0200
++++ pymsnt-0.11.3/src/legacy/msn/msnp11chl.py	2010-08-15 22:34:02.000000000 +0200
 @@ -1,7 +1,7 @@
  # Copyright 2005 James Bunton <james@delx.cjb.net>
  # Licensed for distribution under the GPL version 2, check COPYING for details
@@ -64,6 +64,15 @@ diff -ru pymsnt-0.11.3-vanilla/src/legacy/msn/msnp11chl.py pymsnt-0.11.3/src/leg
  import struct
  
  MSNP11_PRODUCT_ID = "PROD0090YUAUV{2B"
+@@ -10,7 +10,7 @@
+ 
+ 
+ def doChallenge(chlData):
+-	md5digest = md5.md5(chlData + MSNP11_PRODUCT_KEY).digest()
++	md5digest = md5(chlData + MSNP11_PRODUCT_KEY).digest()
+ 
+ 	# Make array of md5 string ints
+ 	md5Ints = struct.unpack("<llll", md5digest)
 diff -ru pymsnt-0.11.3-vanilla/src/utils.py pymsnt-0.11.3/src/utils.py
 --- pymsnt-0.11.3-vanilla/src/utils.py	2008-02-08 14:55:07.000000000 +0100
 +++ pymsnt-0.11.3/src/utils.py	2010-08-15 22:12:36.000000000 +0200
@@ -81,7 +90,7 @@ diff -ru pymsnt-0.11.3-vanilla/src/utils.py pymsnt-0.11.3/src/utils.py
  import urllib
 diff -ru pymsnt-0.11.3-vanilla/src/xdb.py pymsnt-0.11.3/src/xdb.py
 --- pymsnt-0.11.3-vanilla/src/xdb.py	2008-02-08 14:55:07.000000000 +0100
-+++ pymsnt-0.11.3/src/xdb.py	2010-08-15 21:46:57.000000000 +0200
++++ pymsnt-0.11.3/src/xdb.py	2010-08-15 22:33:14.000000000 +0200
 @@ -6,7 +6,7 @@
  import os
  import os.path
@@ -91,3 +100,12 @@ diff -ru pymsnt-0.11.3-vanilla/src/xdb.py pymsnt-0.11.3/src/xdb.py
  import config
  
  X = os.path.sep
+@@ -23,7 +23,7 @@
+ 	return file.replace("@", "%")
+ 
+ def makeHash(file):
+-	return md5.md5(file).hexdigest()[0:3]
++	return md5(file).hexdigest()[0:3]
+ 
+ 
+ class XDB:
