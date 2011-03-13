@@ -6,7 +6,7 @@ EAPI=2
 PYTHON_DEPEND="*:2.5"
 SUPPORT_PYTHON_ABIS=1
 
-inherit distutils
+inherit bzr distutils
 
 MY_P="${PN/r/R}-${PV}"
 
