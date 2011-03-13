@@ -13,7 +13,7 @@ MY_P="${PN/r/R}-${PV}"
 DESCRIPTION="A simple CalDAV calendar server"
 HOMEPAGE="http://www.radicale.org/"
 #SRC_URI="http://www.radicale.org/src/${PN}/${MY_P}.tar.gz"
-EGIT_REPO_URI="http://gitorious.org/radicale/radicale/archive-tarball/master"
+EGIT_REPO_URI="git://gitorious.org/radicale/radicale.git"
 
 LICENSE="GPL-3"
 SLOT="0"
