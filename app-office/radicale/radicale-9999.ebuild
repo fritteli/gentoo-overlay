@@ -6,14 +6,14 @@ EAPI=2
 PYTHON_DEPEND="*:2.5"
 SUPPORT_PYTHON_ABIS=1
 
-inherit bzr distutils
+inherit distutils git
 
 MY_P="${PN/r/R}-${PV}"
 
 DESCRIPTION="A simple CalDAV calendar server"
 HOMEPAGE="http://www.radicale.org/"
 #SRC_URI="http://www.radicale.org/src/${PN}/${MY_P}.tar.gz"
-EBZR_REPO_URI="http://gitorious.org/radicale/radicale/archive-tarball/master"
+EGIT_REPO_URI="http://gitorious.org/radicale/radicale/archive-tarball/master"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -25,7 +25,7 @@ PDEPEND="dev-vcs/git"
 S=${WORKDIR}/${MY_P}
 
 src_unpack() {
-	bzr_src_unpack
+	git_src_unpack
 }
 
 src_install() {
