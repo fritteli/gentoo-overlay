@@ -13,14 +13,20 @@ MY_P="${PN/r/R}-${PV}"
 DESCRIPTION="A simple CalDAV calendar server"
 HOMEPAGE="http://www.radicale.org/"
 #SRC_URI="http://www.radicale.org/src/${PN}/${MY_P}.tar.gz"
-SRC_URI="http://gitorious.org/radicale/radicale/archive-tarball/master"
+EBZR_REPO_URI="http://gitorious.org/radicale/radicale/archive-tarball/master"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86"
 IUSE=""
 
+PDEPEND="dev-vcs/git"
+
 S=${WORKDIR}/${MY_P}
+
+src_unpack() {
+	bzr_src_unpack
+}
 
 src_install() {
 	distutils_src_install
