@@ -7,7 +7,7 @@
 -	my $url = "http://$config{$h}{'server'}/nic/update?system=";
 -    $url .= 'noip';
 -	$url  .= "&hostname=$hosts";
-+	my $url = "http://$config{$h}{'server'}/nic/update?"
++	my $url = "http://$config{$h}{'server'}/nic/update?";
 +	$url  .= "hostname=";
 +	$url  .= "$hosts";
  	$url  .= "&myip=";
