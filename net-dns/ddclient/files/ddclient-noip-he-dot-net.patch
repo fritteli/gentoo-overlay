@@ -1,14 +1,15 @@
---- ddclient.orig	2009-01-27 20:14:02.000000000 +0100
-+++ ddclient	2011-05-12 01:34:15.995845012 +0200
-@@ -2460,9 +2460,8 @@
+--- ddclient.orig	2009-01-27 19:14:02.000000000 +0000
++++ ddclient	2011-05-12 09:48:01.000000000 +0000
+@@ -2460,9 +2460,9 @@
  	info("setting IP address to %s for %s", $ip, $hosts);
  	verbose("UPDATE:","updating %s", $hosts);
  
 -	my $url = "http://$config{$h}{'server'}/nic/update?system=";
 -    $url .= 'noip';
 -	$url  .= "&hostname=$hosts";
-+	my $url = "http://$config{$h}{'server'}/nic/update?";
-+	$url  .= "hostname=$hosts";
++	my $url = "http://$config{$h}{'server'}/nic/update?"
++	$url  .= "hostname=";
++	$url  .= "$hosts";
  	$url  .= "&myip=";
  	$url  .= $ip            if $ip;
  
