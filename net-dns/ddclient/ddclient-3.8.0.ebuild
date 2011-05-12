@@ -27,6 +27,7 @@ src_unpack() {
 
 	epatch "${FILESDIR}/${PN}-reasonable-security.patch"
 	epatch "${FILESDIR}/${PN}-noip-he-dot-net.patch"
+	epatch "${FILESDIR}/${PN}-everydns.patch"
 
 	einfo "Applying version string fix"
 	if ! sed -i "s/3\.7\.1/$PV/" "$PN"; then
