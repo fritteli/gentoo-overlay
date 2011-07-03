@@ -11,7 +11,7 @@ depend() {
 start() {
 	ebegin "Starting Palaver MUC service"
 	start-stop-daemon --start --pidfile /var/run/jabber/palaver.pid --chuid jabber:jabber \
-		--exec /usr/bin/twistd-2.6 -- -f /etc/jabber/palaver.tap -l /var/log/jabber/palaver.log \
+		--exec /usr/bin/twistd -- -f /etc/jabber/palaver.tap -l /var/log/jabber/palaver.log \
 		--pidfile /var/run/jabber/palaver.pid
 	eend $?
 }

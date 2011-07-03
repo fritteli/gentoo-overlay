@@ -4,7 +4,7 @@
 
 PYTHON_DEPEND="2"
 
-inherit eutils python distutils
+inherit eutils python
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="http://code.stanziq.com/palaver"
 SRC_URI="http://code.stanziq.com/cgit/${PN}/${PN}/snapshot/${P}.tar.bz2"
