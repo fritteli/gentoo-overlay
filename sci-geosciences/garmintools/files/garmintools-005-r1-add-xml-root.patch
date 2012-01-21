@@ -1,0 +1,17 @@
+--- src/garmin_dump.c~	2007-07-20 13:59:04.000000000 -0400
++++ src/garmin_dump.c	2007-08-27 21:02:04.000000000 -0400
+@@ -9,12 +9,14 @@
+   garmin_data * data;
+   int           i;
+ 
++  printf("<data>\n");
+   for ( i = 1; i < argc; i++ ) {    
+     if ( (data = garmin_load(argv[i])) != NULL ) {
+       garmin_print_data(data,stdout,0);
+       garmin_free_data(data);
+     }
+   }
++  printf("</data>\n");
+ 
+   return 0;
+ }
