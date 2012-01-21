@@ -25,7 +25,7 @@ DEPEND="${RDEPEND}"
 
 src_unpack() {
 	unpack ${A}
-	cd "${S}"
+	cd "${MY_S}"
 	epatch "${FILESDIR}"/${PF}-version-to-4.0.1.0.patch || die "Unable to tweak version"
 }
 
