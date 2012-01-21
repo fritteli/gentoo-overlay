@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 
 SLOT="0"
 
-KEYWORDS="x86"
+KEYWORDS="~x86 ~amd64"
 
 IUSE="usb"
 
@@ -25,7 +25,7 @@ DEPEND="${RDEPEND}"
 src_unpack(){
 	unpack ${A}
 	cd "${S}"
-#	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
 }
 
 src_compile() {
