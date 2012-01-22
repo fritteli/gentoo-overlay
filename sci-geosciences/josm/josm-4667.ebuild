@@ -19,9 +19,9 @@ LICENSE="GPL-2"
 SLOT="0"
 [[ ${PV} == "9999" ]] || KEYWORDS="~amd64 ~x86"
 
-DEPEND=">=virtual/jdk-1.6"
+DEPEND=">=virtual/jdk-1.6
+        >=dev-vcs/subversion-1.7"
 RDEPEND=">=virtual/jre-1.6"
-CDEPEND=">=dev-vcs/subversion-1.7"
 S="${WORKDIR}/${PN}"
 
 IUSE=""
