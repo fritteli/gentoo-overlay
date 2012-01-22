@@ -21,7 +21,7 @@ SLOT="0"
 
 DEPEND=">=virtual/jdk-1.6"
 RDEPEND=">=virtual/jre-1.6"
-
+CDEPEND=">=dev-vcs/subversion-1.7"
 S="${WORKDIR}/${PN}"
 
 IUSE=""
