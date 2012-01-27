@@ -8,7 +8,7 @@ DESCRIPTION="A free replacement for the Garmin browser plugin"
 HOMEPAGE="http://www.andreas-diesner.de/garminplugin/"
 
 SRC_URI="http://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
-MY_S="adiesner-GarminPlugin-5ccae59"
+MY_S="adiesner-GarminPlugin-c89a563"
 
 LICENSE="GPL-3"
 
@@ -23,11 +23,9 @@ RDEPEND="sci-geosciences/garmintools
 
 DEPEND="${RDEPEND}"
 
-src_unpack() {
-	unpack ${A}
-	cd "${MY_S}"
-	epatch "${FILESDIR}"/${PF}-version-to-4.0.1.0.patch || die "Unable to tweak version"
-}
+#src_unpack(){
+#	tar -zxf "${DISTDIR}/${A}" || die "unpack failed"
+#}
 
 src_configure() {
 	cd "${MY_S}/src" || die "barf"
