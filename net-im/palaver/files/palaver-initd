@@ -1,5 +1,5 @@
 #!/sbin/runscript
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -10,7 +10,7 @@ depend() {
 
 start() {
 	ebegin "Starting Palaver MUC service"
-	start-stop-daemon --start --pidfile /var/run/jabber/palaver.pid --chuid jabber:jabber \
+	start-stop-daemon --start --pidfile /var/run/jabber/palaver.pid -u jabber -g jabber \
 		--exec /usr/bin/twistd -- -f /etc/jabber/palaver.tap -l /var/log/jabber/palaver.log \
 		--pidfile /var/run/jabber/palaver.pid
 	eend $?
