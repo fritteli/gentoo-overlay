@@ -10,7 +10,7 @@ HOMEPAGE="http://code.stanziq.com/palaver"
 SRC_URI="http://code.stanziq.com/cgit/${PN}/${PN}/snapshot/${P}.tar.bz2"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 DEPEND="net-im/jabber-base"
 RDEPEND=">=dev-python/twisted-2.4.0
