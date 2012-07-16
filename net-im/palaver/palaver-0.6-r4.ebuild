@@ -14,7 +14,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-DEPEND="net-im/jabber-base"
+DEPEND="net-im/jabber-base
+app-arch/unzip"
 RDEPEND=">=dev-python/twisted-2.4.0
 >=dev-python/twisted-words-0.5
 ${DEPEND}"
