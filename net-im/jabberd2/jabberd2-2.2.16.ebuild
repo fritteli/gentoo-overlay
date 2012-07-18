@@ -14,6 +14,7 @@ KEYWORDS="~amd64 ~ppc ~sparc ~x86 ~x86-fbsd"
 IUSE="berkdb debug memdebug mysql ldap pam postgres sqlite ssl zlib"
 
 DEPEND="dev-libs/expat
+	dev-util/cppunit
 	net-libs/udns
 	>=net-dns/libidn-0.3
 	virtual/gsasl
