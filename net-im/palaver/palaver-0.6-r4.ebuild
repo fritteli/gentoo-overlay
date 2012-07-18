@@ -8,14 +8,13 @@ inherit eutils python
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="https://github.com/twonds/palaver"
 MY_PN="master"
-SRC_URI="https://github.com/twonds/palaver/zipball/${MY_PN}"
+SRC_URI="https://github.com/twonds/palaver/tarball/${MY_PN}"
 #SRC_URI="http://code.stanziq.com/cgit/${PN}/${PN}/snapshot/${P}.tar.bz2"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-DEPEND="net-im/jabber-base
-app-arch/unzip"
+DEPEND="net-im/jabber-base"
 RDEPEND=">=dev-python/twisted-2.4.0
 >=dev-python/twisted-words-0.5
 ${DEPEND}"
