@@ -11,8 +11,8 @@ depend() {
 start() {
 	ebegin "Starting Punjab BOSH connection manager"
 	start-stop-daemon --start --pidfile /var/run/jabber/punjab.pid -u jabber -g jabber \
-		--exec /usr/bin/twistd -- -f /etc/jabber/punjab.tap -l /var/log/jabber/punjab.log \
-		--pidfile /var/run/jabber/punjab.pid
+		--exec /usr/bin/twistd -- -l /var/log/jabber/punjab.log --pidfile /var/run/jabber/punjab.pid \
+		punjab -c ${CONFIG}
 	eend $?
 }
 
