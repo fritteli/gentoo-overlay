@@ -38,19 +38,11 @@ src_install() {
 		"s:<spool>[^\<]*</spool>:<spool>/var/spool/jabber</spool>:" \
 		/etc/jabber/${PN}.xml
 
-#	dosed \
-#		"s:<pid>[^\<]*</pid>:<pid>/var/run/jabber/${PN}.pid</pid>:" \
-#		/etc/jabber/${PN}.xml
-
 	newinitd "${FILESDIR}/${PN}-initd" ${PN}
-#	dosed "s:INSPATH:${inspath}:" /etc/init.d/${PN}
-
+	newconfd "${FILESDIR}/${PN}-confd" ${PN}
 }
 
 pkg_postinst() {
 	einfo "A sample config file has been installed into /etc/jabber/${PN}.xml."
 	einfo "Please adjust the settings as needed."
-	einfo "After that, you MUST create a TAP-file for twisted in order to start Palaver, like this:"
-	einfo "# cd /etc/jabber"
-	einfo "# mktap palaver -c palaver.xml"
 }
