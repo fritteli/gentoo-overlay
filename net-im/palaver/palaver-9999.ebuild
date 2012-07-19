@@ -22,6 +22,11 @@ pkg_setup() {
 	python_set_active_version 2
 }
 
+src_prepare() {
+	cp ${FILESDIR}/palaver_plugin.py ${S}/twisted/plugins
+	rm ${S}/twisted/plugins/palaver.py
+}
+
 src_compile() {
 	# nothing to be done here?
 	distutils_src_compile
