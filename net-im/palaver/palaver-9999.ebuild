@@ -4,7 +4,7 @@
 
 PYTHON_DEPEND="2"
 
-inherit eutils python git-2
+inherit distutils eutils python git-2
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="https://github.com/twonds/palaver"
 EGIT_REPO_URI="git://github.com/twonds/palaver"
