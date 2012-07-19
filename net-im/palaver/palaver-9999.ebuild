@@ -2,6 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=3
 PYTHON_DEPEND="2"
 
 inherit distutils eutils python git-2
@@ -14,8 +15,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 DEPEND="net-im/jabber-base"
 RDEPEND=">=dev-python/twisted-2.4.0
->=dev-python/twisted-words-0.5
-${DEPEND}"
+	>=dev-python/twisted-words-0.5
+	${DEPEND}"
+
+pkg_setup() {
+	python_set_active_version 2
+}
 
 src_compile() {
 	# nothing to be done here?
