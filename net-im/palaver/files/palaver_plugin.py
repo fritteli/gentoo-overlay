@@ -10,6 +10,7 @@ import palaver
 
 class Options(usage.Options):
     optParameters = [
+        ('jid', None, None),
         ('rhost', None, None),
         ('rport', None, None),
         ('secret', None, None),
@@ -21,7 +22,7 @@ class Options(usage.Options):
         ('dbuser', None, 'muc'),
         ('dbhostname', None, None),
         ('log', 'l', './html/logs/'),
-        ('config', 'c', 'config.xml')
+        ('config', 'c', 'config.xml'),
     ]
 
     optFlags = [
