@@ -1,0 +1,51 @@
+diff -ur jabberd-2.2.16/util/log.c jabberd-2.2.16_patched/util/log.c
+--- jabberd-2.2.16/util/log.c	2012-05-04 14:51:08.000000000 +0000
++++ jabberd-2.2.16_patched/util/log.c	2012-07-25 08:10:49.004560934 +0000
+@@ -223,12 +223,12 @@
+     debug_flag = v;
+ }
+ 
+-int set_debug_log_from_config(config_t c)
++void set_debug_log_from_config(config_t c)
+ {
+     return set_debug_file(config_get_one(c, "log.debug", 0));
+-};
++}
+ 
+-JABBERD2_API int set_debug_file(const char *filename)
++JABBERD2_API void set_debug_file(const char *filename)
+ {
+     // Close debug output file but not stderr
+     if (debug_log_target != 0 &&
+@@ -255,7 +255,7 @@
+         // set stderr
+         debug_log_target = stderr;
+     }
+-};
++}
+ 
+ #else /* DEBUG */
+ void debug_log(const char *file, int line, const char *msgfmt, ...)
+@@ -263,4 +263,7 @@
+ 
+ void set_debug_flag(int v)
+ { }
++
++void set_debug_log_from_config(config_t c)
++{ }
+ #endif
+diff -ur jabberd-2.2.16/util/util.h jabberd-2.2.16_patched/util/util.h
+--- jabberd-2.2.16/util/util.h	2012-05-04 14:51:08.000000000 +0000
++++ jabberd-2.2.16_patched/util/util.h	2012-07-25 08:11:19.612564607 +0000
+@@ -414,9 +414,9 @@
+ JABBERD2_API int get_debug_flag(void);
+ JABBERD2_API void set_debug_flag(int v);
+ JABBERD2_API void debug_log(const char *file, int line, const char *msgfmt, ...);
+-JABBERD2_API int set_debug_file(const char *filename);
++JABBERD2_API void set_debug_file(const char *filename);
+ 
+-JABBERD2_API int set_debug_log_from_config(config_t c);
++JABBERD2_API void set_debug_log_from_config(config_t c);
+ 
+ #define ZONE __FILE__,__LINE__
+ #define MAX_DEBUG 8192

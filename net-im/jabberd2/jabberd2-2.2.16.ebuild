@@ -32,6 +32,12 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/jabberd-${PV}"
 
+src_prepare() {
+	if use -debug; then
+		epatch "${FILESDIR}"/${P}-no_debug.patch
+	fi
+}
+
 src_compile() {
 
 	# https://bugs.gentoo.org/show_bug.cgi?id=207655#c3
