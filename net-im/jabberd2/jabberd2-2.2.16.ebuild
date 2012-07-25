@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-im/jabberd2/jabberd2-2.2.16.ebuild,v 1.4 2012/02/20 12:16:52 naota Exp $
 
+EAPI="2"
+
 inherit db-use eutils flag-o-matic pam
 
 DESCRIPTION="Open Source Jabber Server"
