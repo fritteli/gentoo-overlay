@@ -58,7 +58,7 @@ start() {
 		start-stop-daemon \
 			--background \
 			--start  \
-			--chuid jabber:jabber \
+			--user jabber:jabber \
 			--exec /usr/bin/${service} \
 			--pid /var/run/jabber/$(basename ${cfgfile%.xml}).pid \
 			-- -c ${cfgfile}
