@@ -33,9 +33,7 @@ RDEPEND="${DEPEND}
 S="${WORKDIR}/jabberd-${PV}"
 
 src_prepare() {
-	if use -debug; then
-		epatch "${FILESDIR}"/${P}-no_debug.patch
-	fi
+	use debug || epatch "${FILESDIR}/${P}-no_debug.patch"
 }
 
 src_compile() {
