@@ -8,7 +8,7 @@ inherit db-use eutils flag-o-matic pam
 
 DESCRIPTION="Open Source Jabber Server"
 HOMEPAGE="http://jabberd2.xiaoka.com/"
-SRC_URI="http://cloud.github.com/downloads/${PN}/${PN}/jabberd-${PV}.tar.xz"
+SRC_URI="http://github.com/${PN}/${PN}/archive/jabberd-${PV}.tar.gz"
 
 SLOT="0"
 LICENSE="GPL-2"
