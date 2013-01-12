@@ -32,6 +32,11 @@ start() {
 	local services
 	services=$(grep -v ^# /etc/jabber/jabberd.cfg | grep '..*' | awk '{print $1 ":" $2}')
 	eindent
+
+	if [ ! -d /var/run/jabber ] ; then
+		mkdir /var/run/jabber || die "Can't create run directory /var/run/jabber"
+	fi
+
 	for service in ${services}; do
 
 		cfgfile=$(echo ${service} | cut -d ':' -f 2)
