@@ -32,7 +32,7 @@ RDEPEND="${DEPEND}
 	>=net-im/jabber-base-0.01
 	!net-im/jabberd"
 
-S="${WORKDIR}/jabberd-${PV}"
+S="${WORKDIR}/${PN}-jabberd-${PV}"
 
 src_compile() {
 
