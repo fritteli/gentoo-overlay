@@ -35,6 +35,7 @@ start() {
 
 	if [ ! -d /var/run/jabber ] ; then
 		mkdir /var/run/jabber || die "Can't create run directory /var/run/jabber"
+		chown jabber:jabber /var/run/jabber
 	fi
 
 	for service in ${services}; do
