@@ -8,7 +8,7 @@ DESCRIPTION="A free replacement for the Garmin browser plugin"
 HOMEPAGE="http://www.andreas-diesner.de/garminplugin/"
 
 SRC_URI="http://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
-MY_S="adiesner-GarminPlugin-072a60e"
+MY_S="adiesner-GarminPlugin-42e30ff"
 
 LICENSE="GPL-3"
 
