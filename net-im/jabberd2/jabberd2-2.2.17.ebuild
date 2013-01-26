@@ -36,10 +36,12 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/${PN}-jabberd-${PV}"
 
-src_configure() {
+src_prepare() {
 	eautoreconf
 	eautomake
+}
 
+src_configure() {
 	# https://bugs.gentoo.org/show_bug.cgi?id=207655#c3
 	replace-flags -O[3s] -O2
 
