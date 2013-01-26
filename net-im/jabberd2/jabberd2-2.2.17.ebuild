@@ -2,9 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-im/jabberd2/jabberd2-2.2.16.ebuild,v 1.4 2012/02/20 12:16:52 naota Exp $
 
-EAPI="2"
+EAPI="4"
+WANT_AUTOCONF="latest"
+WANT_AUTOMAKE="latest"
 
-inherit db-use eutils flag-o-matic pam
+inherit autotools db-use eutils flag-o-matic pam
 
 DESCRIPTION="Open Source Jabber Server"
 HOMEPAGE="http://jabberd2.xiaoka.com/"
@@ -34,7 +36,9 @@ RDEPEND="${DEPEND}
 
 S="${WORKDIR}/${PN}-jabberd-${PV}"
 
-src_compile() {
+src_configure() {
+	eautoreconf
+	eautomake
 
 	# https://bugs.gentoo.org/show_bug.cgi?id=207655#c3
 	replace-flags -O[3s] -O2
@@ -65,8 +69,10 @@ src_compile() {
 		$(use_enable sqlite) \
 		$(use_enable ssl) \
 		$(use_with zlib)
-	emake || die "make failed"
+}
 
+src_compile() {
+	emake || die "make failed"
 }
 
 src_install() {
