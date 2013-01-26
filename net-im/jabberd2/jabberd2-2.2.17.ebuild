@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-im/jabberd2/jabberd2-2.2.16.ebuild,v 1.4 2012/02/20 12:16:52 naota Exp $
+# $Id$
 
 EAPI="4"
 WANT_AUTOCONF="latest"
