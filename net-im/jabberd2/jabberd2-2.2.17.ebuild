@@ -115,7 +115,6 @@ pkg_postinst() {
 		ewarn 'is likely to change in future versions of jabberd-2. It may'
 		ewarn 'be advisable to avoid PAM authentication for the time being.'
 		echo
-		ebeep
 	fi
 
 }
