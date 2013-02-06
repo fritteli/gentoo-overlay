@@ -9,7 +9,7 @@ WANT_AUTOMAKE="latest"
 inherit autotools db-use eutils flag-o-matic pam
 
 DESCRIPTION="Open Source Jabber Server"
-HOMEPAGE="http://jabberd2.xiaoka.com/"
+HOMEPAGE="http://jabberd2.org/"
 SRC_URI="http://github.com/${PN}/${PN}/archive/jabberd-${PV}.tar.gz"
 
 SLOT="0"
