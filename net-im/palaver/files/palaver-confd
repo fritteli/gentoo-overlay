@@ -1,2 +1,2 @@
 # location of the configuration file
-CONFIG=/etc/jabber/palaver.xml
+CONFIG=/etc/jabber/palaver.conf

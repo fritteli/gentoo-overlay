@@ -38,18 +38,18 @@ src_install() {
 	distutils_src_install
 
 	insinto /etc/jabber
-	newins example-config.xml ${PN}.xml
-	fperms 600 /etc/jabber/${PN}.xml
-	fowners jabber:jabber /etc/jabber/${PN}.xml
-	dosed \
-		"s:<spool>[^\<]*</spool>:<spool>/var/spool/jabber</spool>:" \
-		/etc/jabber/${PN}.xml
+	newins "${FILESDIR}/"palaver.conf ${PN}.conf
+	fperms 600 /etc/jabber/${PN}.conf
+	fowners jabber:jabber /etc/jabber/${PN}.conf
+#	dosed \
+#		"s:<spool>[^\<]*</spool>:<spool>/var/spool/jabber</spool>:" \
+#		/etc/jabber/${PN}.xml
 
 	newinitd "${FILESDIR}/${PN}-initd" ${PN}
 	newconfd "${FILESDIR}/${PN}-confd" ${PN}
 }
 
 pkg_postinst() {
-	einfo "A sample config file has been installed into /etc/jabber/${PN}.xml."
+	einfo "A sample config file has been installed into /etc/jabber/${PN}.conf."
 	einfo "Please adjust the settings as needed."
 }
