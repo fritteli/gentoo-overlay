@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="tls"
 DEPEND="net-im/jabber-base"
-RDEPEND=">=dev-python/twisted-11.1.0
+RDEPEND=">=dev-python/twisted-core-11.1.0
 	>=dev-python/twisted-names-11.1.0
 	tls? ( dev-python/pyopenssl )
 	${DEPEND}"

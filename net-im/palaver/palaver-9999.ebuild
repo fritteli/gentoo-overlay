@@ -14,7 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 DEPEND="net-im/jabber-base"
-RDEPEND=">=dev-python/twisted-2.4.0
+RDEPEND=">=dev-python/twisted-core-2.4.0
 	>=dev-python/twisted-words-0.5
 	${DEPEND}"
 
