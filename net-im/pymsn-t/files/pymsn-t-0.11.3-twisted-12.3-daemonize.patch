@@ -1,0 +1,11 @@
+--- src/main.py~	2008-02-08 14:55:07.000000000 +0100
++++ src/main.py	2013-09-09 10:29:35.003933282 +0200
+@@ -328,7 +328,7 @@
+ 		
+ 		# Daemonise the process and write the PID file
+ 		if config.background and os.name == "posix":
+-			twistd.daemonize()
++			twistd.daemonize(reactor, os)
+ 		if config.pid:
+ 			self.writePID()
+ 
