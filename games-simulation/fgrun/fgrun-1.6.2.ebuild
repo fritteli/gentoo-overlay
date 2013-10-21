@@ -27,10 +27,10 @@ RDEPEND="${COMMON_DEPEND}
 	>=games-simulation/flightgear-2
 "
 
-src_prepare() {
-	epatch "${FILESDIR}/${PN}-1.5.2-fltk.patch"
-	AT_M4DIR=. eautoreconf
-}
+#src_prepare() {
+#	epatch "${FILESDIR}/${PN}-1.5.2-fltk.patch"
+#	AT_M4DIR=. eautoreconf
+#}
 
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
