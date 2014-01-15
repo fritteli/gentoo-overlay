@@ -3,7 +3,7 @@
 
 EAPI="2"
 
-inherit eutils
+inherit eutils user
 
 # Maintainer notes:
 # - This ebuild supports only "standalone mode". If you want to use JBoss AS in
