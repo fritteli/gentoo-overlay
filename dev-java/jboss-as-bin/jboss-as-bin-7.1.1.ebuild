@@ -3,13 +3,13 @@
 
 EAPI="5"
 
+inherit eutils
+
 # Maintainer notes:
 # - This ebuild supports only "standalone mode". If you want to use JBoss AS in
 #   "domain mode", please fix this ebuild yourself and send me a pull request.
 
 DESCRIPTION="JBoss Application Server ${PV} (standalone only)" 
-
-inherit eutils
 
 MY_P="jboss-as-${PV}.Final"
 SLOT="7.1"
