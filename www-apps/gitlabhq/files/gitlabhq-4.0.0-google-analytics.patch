@@ -1,0 +1,81 @@
+diff --git a/app/helpers/application_helper.rb b/app/helpers/application_helper.rb
+index 52715a265bd49e0cc54a0f524351c15a70ea3c66..359d5cdaef52cd27322c9dfd71890c46c9f16bc7 100644
+--- a/app/helpers/application_helper.rb
++++ b/app/helpers/application_helper.rb
+@@ -160,4 +160,8 @@ module ApplicationHelper
+     image_tag("authbuttons/#{file_name}",
+               alt: "Sign in with #{provider.to_s.titleize}")
+   end
++
++  def analytics_enable?
++    Gitlab.config.analytics.enabled and Rails.env.production?
++  end
+ end
+diff --git a/app/views/layouts/_head.html.haml b/app/views/layouts/_head.html.haml
+index 4a0f60d36c26b5f5eb3a02d44a7da39bacaae04b..013ff6d15e02ea1e0c08b06b391fe865e7ba94f5 100644
+--- a/app/views/layouts/_head.html.haml
++++ b/app/views/layouts/_head.html.haml
+@@ -15,3 +15,4 @@
+     - if current_controller?(:issues)
+       = auto_discovery_link_tag(:atom, project_issues_url(@project, :atom, private_token: current_user.private_token), title: "#{@project.name} issues")
+   = csrf_meta_tags
++  = render "shared/google_analytics" if analytics_enable?
+diff --git a/app/views/shared/_google_analytics.html.haml b/app/views/shared/_google_analytics.html.haml
+new file mode 100644
+index 0000000000000000000000000000000000000000..e8d4b9146680fb4da666d1462881f991bb1661fe
+--- /dev/null
++++ b/app/views/shared/_google_analytics.html.haml
+@@ -0,0 +1,9 @@
++:javascript
++  var _gaq = _gaq || [];
++  _gaq.push(['_setAccount', '#{ Gitlab.config.analytics.tracking_id }']);
++  _gaq.push(['_trackPageview']);
++  (function() {
++    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
++    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
++    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
++  })();
+diff --git a/config/gitlab.yml.example b/config/gitlab.yml.example
+index f47625eb132ab304a71e35bf2ccf998fbe413c1f..3a603159cfab83ce078f839cf8c14ddf934dd837 100644
+--- a/config/gitlab.yml.example
++++ b/config/gitlab.yml.example
+@@ -1,4 +1,4 @@
+-# # # # # # # # # # # # # # # # # # 
++# # # # # # # # # # # # # # # # # #
+ # Gitlab application config file  #
+ # # # # # # # # # # # # # # # # # #
+ #
+@@ -109,3 +109,13 @@ git:
+   max_size: 5242880 # 5.megabytes
+   # Git timeout to read commit, in seconds
+   timeout: 10
++  git_timeout: 10
++
++#
++# 4. Other settings:
++# ==========================
++
++# Google Analytics
++analytics:
++  enabled: false
++  tracking_id: '_your_tracking_id'
+diff --git a/config/initializers/1_settings.rb b/config/initializers/1_settings.rb
+index 4fe3ced4d8d1f7021a4e8cc8064a1ceaf74d65bc..6699c7f896781da77ecc4e525a7acf53b12c80cb 100644
+--- a/config/initializers/1_settings.rb
++++ b/config/initializers/1_settings.rb
+@@ -266,8 +266,6 @@ class Settings < Settingslogic
+       app['gravatar_ssl_url'] || 'https://secure.gravatar.com/avatar/%{hash}?s=%{size}&d=mm'
+     end
+ 
+-
+-
+     def gitlab_on_non_standard_port?
+       ![443, 80].include?(gitlab.port.to_i)
+     end
+@@ -350,3 +348,6 @@ Settings.git['max_size']  ||= Settings.pre_40_config ? Settings.git_max_size : 5
+ Settings.git['bin_path']  ||= Settings.pre_40_config ? Settings.git_bin_path : '/usr/bin/git'
+ Settings.git['timeout']   ||= Settings.pre_40_config ? Settings.git_timeout : 10
+ Settings.git['path']      ||= Settings.git.bin_path # FIXME: Deprecated: remove for 4.1
++
++Settings['analytics'] ||= Settingslogic.new({})
++Settings.analytics['enabled'] ||= false

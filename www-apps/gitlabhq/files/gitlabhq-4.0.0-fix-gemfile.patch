@@ -1,0 +1,48 @@
+diff --git a/Gemfile b/Gemfile
+index 49fbcad04fcdbb0d9a46c79e9185e10013c00f33..14b3553ffb8ae9bcb88c55b2d2772a926771cc55 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -28,6 +28,9 @@ gem 'yaml_db',       git: "https://github.com/gitlabhq/yaml_db.git",        ref:
+ gem 'grack',         git: "https://github.com/gitlabhq/grack.git",          ref: 'ba46f3b0845c6a09d488ae6abdce6ede37e227e8'
+ gem 'grit_ext',      git: "https://github.com/gitlabhq/grit_ext.git",       ref: '8e6afc2da821354774aa4d1ee8a1aa2082f84a3e'
+ 
++# Patched to fix issues with compiling on Gentoo
++gem "charlock_holmes", git: "https://github.com/ISSIntel/charlock_holmes.git", ref: '994dcf37aba066250750866e13bb51e3d5e72898'
++
+ # Gitolite client (for work with gitolite-admin repo)
+ gem "gitolite", '1.1.0'
+ 
+diff --git a/Gemfile.lock b/Gemfile.lock
+index d8be14ba80ab191d6001e601026d27cdfa8fbb54..60f98ef22a8daf77ef08b58c52fab8f0cf560b51 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -6,6 +6,13 @@ GIT
+     database_cleaner (0.9.1)
+ 
+ GIT
++  remote: https://github.com/ISSIntel/charlock_holmes.git
++  revision: 994dcf37aba066250750866e13bb51e3d5e72898
++  ref: 994dcf37aba066250750866e13bb51e3d5e72898
++  specs:
++    charlock_holmes (0.6.9)
++
++GIT
+   remote: https://github.com/ctran/annotate_models.git
+   revision: be4e26825b521f0b2d86b181e2dff89901aa9b1e
+   specs:
+@@ -129,7 +136,6 @@ GEM
+     carrierwave (0.7.1)
+       activemodel (>= 3.2.0)
+       activesupport (>= 3.2.0)
+-    charlock_holmes (0.6.9)
+     childprocess (0.3.6)
+       ffi (~> 1.0, >= 1.0.6)
+     chosen-rails (0.9.8)
+@@ -461,6 +467,7 @@ DEPENDENCIES
+   bootstrap-sass (= 2.2.1.1)
+   capybara
+   carrierwave (~> 0.7.1)
++  charlock_holmes!
+   chosen-rails (= 0.9.8)
+   coffee-rails (~> 3.2.2)
+   colored

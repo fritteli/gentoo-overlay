@@ -1,0 +1,67 @@
+#!/sbin/runscript
+
+name="GitLab-@SLOT@"
+description="GitLab @SLOT@ on Unicorns"
+
+: ${gitlab_user:=@USER@}
+: ${gitlab_base:="@GITLAB_BASE@"}
+: ${rails_env:=production}
+
+: ${server_pidfile:="/run/gitlab/unicorn.pid"}
+
+: ${sidekiq_pidfile:="/run/gitlab/sidekiq.pid"}
+: ${sidekiq_logfile:="@LOGS_DIR@/sidekiq.log"}
+: ${sidekiq_queues:="@QUEUES@"}
+
+server_command="/usr/bin/bundle"
+server_command_args="exec unicorn_rails -c ${gitlab_base}/config/unicorn.rb -E ${rails_env} -D"
+
+sidekiq_command="/usr/bin/bundle"
+sidekiq_command_args="exec sidekiq -q ${sidekiq_queues} -P ${sidekiq_pidfile} -L ${sidekiq_logfile}"
+
+depend() {
+	provide gitlab
+	need redis
+	use net
+}
+
+start() {
+	ebegin "Starting ${name} - Unicorn servers"
+
+	checkpath -d -o ${gitlab_user} -m755 "$(dirname "${server_pidfile}")"
+	checkpath -d -o ${gitlab_user} -m755 "$(dirname "${sidekiq_pidfile}")"
+
+	start-stop-daemon --start \
+		--chdir "${gitlab_base}" \
+		--user=${gitlab_user} \
+		--pidfile="${server_pidfile}" \
+		--env RAILS_ENV=${rails_env} \
+		--exec ${server_command} -- ${server_command_args}
+	eend $?
+
+	ebegin "Starting ${name} - Sidekiq"
+
+	start-stop-daemon --start \
+		--background --quiet \
+		--chdir "${gitlab_base}" \
+		--user=${gitlab_user} \
+		--pidfile="${sidekiq_pidfile}" \
+		--env RAILS_ENV=${rails_env} \
+		--exec ${sidekiq_command} -- ${sidekiq_command_args}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${name} - Sidekiq"
+	start-stop-daemon --stop \
+		--pidfile=${sidekiq_pidfile} \
+		--exec ${sidekiq_command}
+	eend $?
+
+	ebegin "Stopping ${name} - Unicorn servers"
+	start-stop-daemon --stop \
+		--signal QUIT \
+		--pidfile=${server_pidfile} \
+		--exec ${server_command}
+	eend $?
+}

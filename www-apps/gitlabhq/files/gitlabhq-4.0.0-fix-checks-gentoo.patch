@@ -1,0 +1,58 @@
+--- a/lib/tasks/gitlab/info.rake	2012-12-25 00:33:12.066872526 +0100
++++ b/lib/tasks/gitlab/info.rake	2012-12-25 00:33:55.682878240 +0100
+@@ -12,6 +12,9 @@
+                     debian_version = File.read('/etc/debian_version')
+                     "Debian #{debian_version}"
+                   end
++      os_name ||= if File.readable?('/etc/gentoo-release')
++                    File.read('/etc/gentoo-release')
++                  end
+       os_name.squish!
+ 
+       # check if there is an RVM environment
+--- a/lib/tasks/gitlab/check.rake	2012-12-25 01:47:35.162380668 +0100
++++ b/lib/tasks/gitlab/check.rake	2012-12-25 01:49:49.006346565 +0100
+@@ -20,8 +20,8 @@
+       check_gitlab_config_not_outdated
+       check_log_writable
+       check_tmp_writable
+-      check_init_script_exists
+-      check_init_script_up_to_date
++#      check_init_script_exists
++#      check_init_script_up_to_date
+       check_satellites_exist
+ 
+       finished_checking "GitLab"
+@@ -254,7 +254,7 @@
+       start_checking "Environment"
+ 
+       check_gitlab_in_git_group
+-      check_issue_1056_shell_profile_error
++#      check_issue_1056_shell_profile_error --don't need on Gentoo
+       check_gitlab_git_config
+       check_python2_exists
+       check_python2_version
+@@ -542,7 +542,7 @@
+ 
+     def check_gitolite_is_up_to_date
+       print "Using recommended version ... "
+-      if gitolite_version.try(:start_with?, "v3.04")
++      if gitolite_version.try(:start_with?, "3.2")
+         puts "yes".green
+       else
+         puts "no".red
+@@ -838,11 +838,13 @@
+       gitolite_version_file = "#{gitolite_home}/gitolite/src/VERSION"
+       if File.readable?(gitolite_version_file)
+         File.read(gitolite_version_file)
++      else
++        run("equery -q list -F '$version' 'gitolite'")
+       end
+     end
+ 
+     def has_gitolite3?
+-      gitolite_version.try(:start_with?, "v3.")
++      gitolite_version.try(:start_with?, "3.")
+     end
+   end
+ 

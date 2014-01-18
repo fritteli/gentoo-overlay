@@ -1,0 +1,105 @@
+--- a/Gemfile	2012-12-23 12:58:41.000000000 +0100
++++ b/Gemfile	2013-01-02 01:05:20.267204968 +0100
+@@ -14,6 +14,9 @@
+ gem "mysql2", group: :mysql
+ gem "pg", group: :postgres
+ 
++# Cache store adapter for Memcached
++gem "dalli", group: :memcached
++
+ # Auth
+ gem "devise", "~> 2.1.0"
+ gem 'omniauth', "~> 1.1.1"
+@@ -28,8 +31,12 @@
+ gem 'grack',         git: "https://github.com/gitlabhq/grack.git",          ref: 'ba46f3b0845c6a09d488ae6abdce6ede37e227e8'
+ gem 'grit_ext',      git: "https://github.com/gitlabhq/grit_ext.git",       ref: '8e6afc2da821354774aa4d1ee8a1aa2082f84a3e'
+ 
++# Patched to fix issues with compiling on Gentoo
++gem "charlock_holmes", git: "https://github.com/ISSIntel/charlock_holmes.git", ref: '994dcf37aba066250750866e13bb51e3d5e72898'
++
+ # Gitolite client (for work with gitolite-admin repo)
+-gem "gitolite", '1.1.0'
++# Forked version with important performance patch (will be merged to upstream soon)
++gem "gitolite",      git: "git://github.com/jirutka/gitolite.git",          ref: '75d64ea15aa51557034fae44c578438f85249f1e'
+ 
+ # Syntax highlighter
+ gem "pygments.rb",  git: "https://github.com/gitlabhq/pygments.rb.git", branch: "master"
+--- a/Gemfile.lock	2012-12-23 12:58:41.000000000 +0100
++++ b/Gemfile.lock	2013-01-02 01:05:20.271204975 +0100
+@@ -1,4 +1,14 @@
+ GIT
++  remote: git://github.com/jirutka/gitolite.git
++  revision: 75d64ea15aa51557034fae44c578438f85249f1e
++  ref: 75d64ea15aa51557034fae44c578438f85249f1e
++  specs:
++    gitolite (1.1.0)
++      gratr19 (~> 0.4.4.1)
++      grit (~> 2.5.0)
++      hashery (~> 1.5.0)
++
++GIT
+   remote: https://github.com/bmabey/database_cleaner.git
+   revision: f89c34300e114be99532f14c115b2799a3380ac6
+   ref: f89c34300e114be99532f14c115b2799a3380ac6
+@@ -6,6 +16,13 @@
+     database_cleaner (0.9.1)
+ 
+ GIT
++  remote: https://github.com/ISSIntel/charlock_holmes.git
++  revision: 994dcf37aba066250750866e13bb51e3d5e72898
++  ref: 994dcf37aba066250750866e13bb51e3d5e72898
++  specs:
++    charlock_holmes (0.6.9)
++
++GIT
+   remote: https://github.com/ctran/annotate_models.git
+   revision: be4e26825b521f0b2d86b181e2dff89901aa9b1e
+   specs:
+@@ -129,7 +146,6 @@
+     carrierwave (0.7.1)
+       activemodel (>= 3.2.0)
+       activesupport (>= 3.2.0)
+-    charlock_holmes (0.6.9)
+     childprocess (0.3.6)
+       ffi (~> 1.0, >= 1.0.6)
+     chosen-rails (0.9.8)
+@@ -147,6 +163,7 @@
+     colorize (0.5.8)
+     crack (0.3.1)
+     daemons (1.1.9)
++    dalli (2.6.0)
+     devise (2.1.2)
+       bcrypt-ruby (~> 3.0)
+       orm_adapter (~> 0.1)
+@@ -190,10 +207,6 @@
+       pygments.rb (>= 0.2.13)
+     github-markup (0.7.4)
+     gitlab_meta (4.0)
+-    gitolite (1.1.0)
+-      gratr19 (~> 0.4.4.1)
+-      grit (~> 2.5.0)
+-      hashery (~> 1.5.0)
+     grape (0.2.2)
+       activesupport
+       hashie (~> 1.2)
+@@ -461,9 +474,11 @@
+   bootstrap-sass (= 2.2.1.1)
+   capybara
+   carrierwave (~> 0.7.1)
++  charlock_holmes!
+   chosen-rails (= 0.9.8)
+   coffee-rails (~> 3.2.2)
+   colored
++  dalli
+   database_cleaner!
+   devise (~> 2.1.0)
+   draper (~> 0.18.0)
+@@ -477,7 +492,7 @@
+   github-linguist (~> 2.3.4)
+   github-markup (~> 0.7.4)
+   gitlab_meta (= 4.0)
+-  gitolite (= 1.1.0)
++  gitolite!
+   grack!
+   grape (~> 0.2.1)
+   grit!

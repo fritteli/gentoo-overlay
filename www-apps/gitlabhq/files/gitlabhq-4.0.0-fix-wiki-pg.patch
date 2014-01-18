@@ -1,0 +1,93 @@
+diff --git a/app/controllers/wikis_controller.rb b/app/controllers/wikis_controller.rb
+index a93afe114df68c026716911fa49963a0c77db016..0be71d465a28779db3ed646df9ac116fea73e49a 100644
+--- a/app/controllers/wikis_controller.rb
++++ b/app/controllers/wikis_controller.rb
+@@ -2,9 +2,9 @@ class WikisController < ProjectResourceController
+   before_filter :authorize_read_wiki!
+   before_filter :authorize_write_wiki!, only: [:edit, :create, :history]
+   before_filter :authorize_admin_wiki!, only: :destroy
+-  
++
+   def pages
+-    @wikis = @project.wikis.group(:slug).order("created_at")
++    @wikis = @project.wikis.last_revisions.order("created_at")
+   end
+ 
+   def show
+@@ -49,7 +49,7 @@ class WikisController < ProjectResourceController
+   def history
+     @wikis = @project.wikis.where(slug: params[:id]).order("created_at")
+   end
+-  
++
+   def destroy
+     @wikis = @project.wikis.where(slug: params[:id]).delete_all
+ 
+diff --git a/app/models/wiki.rb b/app/models/wiki.rb
+index 252a97e8cca647dda190cec95f3a9bbe8129181e..53d52ec2a19760a7e6d37e38e8858c1ed92433cc 100644
+--- a/app/models/wiki.rb
++++ b/app/models/wiki.rb
+@@ -47,6 +47,19 @@ class Wiki < ActiveRecord::Base
+     new_wiki
+   end
+ 
++  # Scope with last revisions of pages (i.e. newest page per project_id
++  # and slug).
++  #
++  # return:
++  # ActiveRecord::Relation
++  #
++  def self.last_revisions
++    t1 = arel_table.alias(table_name + '1')
++    where(
++      id: from(t1).select(t1[:id].maximum).where(project_id: t1[:project_id], slug: t1[:slug])
++    )
++  end
++
+   def set_slug
+     self.slug = self.title.parameterize
+   end
+diff --git a/spec/factories.rb b/spec/factories.rb
+index abc0d37470176e57eb8006e0af64dbb4fbbebb02..8357fe2127f358c3e82f06b9cc3c575e5d9ae6b2 100644
+--- a/spec/factories.rb
++++ b/spec/factories.rb
+@@ -138,9 +138,10 @@ FactoryGirl.define do
+   end
+ 
+   factory :wiki do
+-    title
+-    content
++    sequence(:title) { |n| "wiki#{n}" }
++    content "Content"
+     user
++    project
+   end
+ 
+   factory :snippet do
+diff --git a/spec/models/wiki_spec.rb b/spec/models/wiki_spec.rb
+index 9750b81d303ecd1105a6c2bbe2d6b76aa79edd5b..a8967e95b200f45e26374be419f90375870c8d4a 100644
+--- a/spec/models/wiki_spec.rb
++++ b/spec/models/wiki_spec.rb
+@@ -32,4 +32,22 @@ describe Wiki do
+     it { should validate_presence_of(:content) }
+     it { should validate_presence_of(:user) }
+   end
++
++  describe "#last_revisions" do
++    let(:project) { create(:project) }
++    before do
++      %w(p1 p2).each do |title|
++        %w(old new).each do |content|
++          create(:wiki, title: title, slug: title, project: project, content: content)
++        end
++      end
++    end
++    subject(:last_revisions) { project.wikis.last_revisions.all }
++
++    its(:count) { should == 2 }
++    it "should return each page once" do
++      last_revisions.map(&:title).should =~ %w(p1 p2)
++    end
++  end
++
+ end

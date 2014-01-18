@@ -1,0 +1,50 @@
+#!/sbin/runscript
+
+name="GitLab support"
+description="Support for GitLab @SLOT@"
+
+: ${gitlab_user:=@USER@}
+: ${gitlab_group:=@GROUP@}
+: ${gitlab_home:="@GITLAB_HOME@"}
+
+: ${resque_pidfile:="/run/gitlab/resque_worker.pid"}
+: ${resque_log:="@LOG_DIR@/resque.log"}
+
+: ${resque_queue:="@RESQUE_QUEUE@"}
+: ${rails_env:=production}
+
+resque_command="/usr/bin/bundle"
+resque_command_args="exec rake environment resque:work QUEUE=${resque_queue} RAILS_ENV=${rails_env}"
+
+if [ ${rails_env} = development ]; then
+	resque_command_args+=" VVERBOSE=1"
+fi
+
+depend() {
+	provide gitlab
+	need redis
+	use net
+}
+
+start() {
+	ebegin "Starting GitLab @SLOT@ Resque worker"
+
+	checkpath -d -o "${gitlab_user}:${gitlab_group}" -m750 "$(dirname "${resque_pidfile}")"
+
+	start-stop-daemon --start \
+		--background --quiet \
+		--chdir "${gitlab_home}" \
+		--user="${gitlab_user}:${gitlab_group}" \
+		--make-pidfile --pidfile=${resque_pidfile} \
+		--stdout "${resque_log}" --stderr "${resque_log}" \
+		--exec ${resque_command} -- ${resque_command_args}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping GitLab @SLOT@ Resque worker"
+	start-stop-daemon --stop \
+		--pidfile=${resque_pidfile} \
+		--exec ${resque_command}
+	eend $?
+}
