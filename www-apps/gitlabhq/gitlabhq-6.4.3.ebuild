@@ -335,7 +335,7 @@ pkg_config() {
 	fi
 	
 	einfo "Precompiling assests ..."
-	exec_rake assets:precompile:all
+	exec_rake assets:precompile
 	
 	if [ "${update}" = 'true' ]; then
 		ewarn
