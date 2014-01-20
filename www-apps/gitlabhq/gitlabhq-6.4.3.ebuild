@@ -66,14 +66,10 @@ ruby_add_bdepend "
 # fix-sendmail-config:
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
-# ldap-user-mapping:
-#     Updated and fixed patch from https://github.com/gitlabhq/gitlabhq/pull/3646.
-#
 RUBY_PATCHES=(
 	"${P}-fix-gemfile.patch"
 	"${P}-fix-project-name-regex.patch"
 	"${P}-fix-sendmail-config.patch"
-#	"${P}-ldap-user-mapping.patch"
 )
 
 MY_NAME="gitlab"
@@ -86,6 +82,7 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://github.com/gitlabhq/gitlabhq/blob/${PV}/lib/tasks/sidekiq.rake
+# TODO fritteli: I don't know what to look for in that file ... so I left this unchanged from gitlabhq-6.0.2-r2.ebuild
 SIDEKIQ_QUEUES="post_receive,mailer,system_hook,project_web_hook,gitlab_shell,common,default"
 
 all_ruby_prepare() {
@@ -227,8 +224,8 @@ pkg_postinst() {
 	elog "2. Configure your database settings in ${CONF_DIR}/database.yml"
 	elog "   for \"production\" environment."
 	elog
-	elog "3. Then you should create database for your GitLab instance, if you"
-	elog "haven't it already."
+	elog "3. Then you should create a database for your GitLab instance, if you"
+	elog "haven't done so already."
 	elog
 	if use postgres; then
         elog   "If you have local PostgreSQL running, just copy&run:"
@@ -329,6 +326,10 @@ pkg_config() {
 
 		einfo "Cleaning cache ..."
 		exec_rake cache:clear
+
+		# https://github.com/gitlabhq/gitlabhq/issues/5311#issuecomment-31656496
+		einfo "Migrating iids ..."
+		exec_rake migrate_iids
 	else
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
