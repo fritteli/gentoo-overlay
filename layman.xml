@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
-<repositories version="1.0">
+<repositories xmlns="" version="1.0">
 	<repo quality="experimental" status="unofficial">
 		<name>fritteli</name>
 		<description lang="en">fritteli's overlay of Gentoo ebuilds</description>
@@ -10,6 +10,8 @@
 			<name>Manuel Friedli</name>
 		</owner>
 		<source type="git">https://git.friedli.info/manuel/gentoo-overlay.git</source>
+		<feed>https://git.friedli.info/manuel/gentoo-overlay/commits/master.atom</feed>
+		<feed>https://git.friedli.info/manuel/gentoo-overlay/issues.atom</feed>
 	</repo>
 </repositories>
 
