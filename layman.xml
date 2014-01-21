@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<layman>
-   <overlay type="git" src="https://git.friedli.info/manuel/gentoo-overlay.git" name="fritteli" contact="manuel@fritteli.ch">
-      <link>
-         https://git.friedli.info/manuel/gentoo-overlay
-      </link>
-      <description>
-         fritteli's overlay of Gentoo ebuilds
-      </description>
-   </overlay>
-</layman>
+<repositories version="1.0">
+	<repo quality="experimental" status="unofficial">
+		<name>fritteli</name>
+		<description>fritteli's overlay of Gentoo ebuilds</description>
+		<homepage>https://git.friedli.info/manuel/gentoo-overlay</homepage>
+		<owner>
+			<email>manuel@fritteli.ch</email>
+		</owner>
+		<source type="git">https://git.friedli.info/manuel/gentoo-overlay.git</source>
+	</repo>
+</repositories>
+
