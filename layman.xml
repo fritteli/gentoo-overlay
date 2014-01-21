@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
 <repositories version="1.0">
 	<repo quality="experimental" status="unofficial">
 		<name>fritteli</name>
-		<description>fritteli's overlay of Gentoo ebuilds</description>
+		<description lang="en">fritteli's overlay of Gentoo ebuilds</description>
 		<homepage>https://git.friedli.info/manuel/gentoo-overlay</homepage>
-		<owner>
+		<owner type="person">
 			<email>manuel@fritteli.ch</email>
+			<name>Manuel Friedli</name>
 		</owner>
 		<source type="git">https://git.friedli.info/manuel/gentoo-overlay.git</source>
 	</repo>
