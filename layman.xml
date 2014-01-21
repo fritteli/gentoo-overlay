@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <layman>
-   <overlay type="svn" src="https://svn.friedli.info/gentoo-overlay" name="fritteli" contact="manuel@friedli.info">
+   <overlay type="git" src="https://git.friedli.info/manuel/gentoo-overlay.git" name="fritteli" contact="manuel@fritteli.ch">
       <link>
-         https://svn.friedli.info/listing.php?repname=Gentoo-Overlay
+         https://git.friedli.info/manuel/gentoo-overlay
       </link>
       <description>
-         Fritteli's overlay of Gentoo ebuilds
+         fritteli's overlay of Gentoo ebuilds
       </description>
    </overlay>
 </layman>
