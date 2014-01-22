@@ -70,6 +70,7 @@ RUBY_PATCHES=(
 	"${P}-fix-gemfile.patch"
 	"${P}-fix-project-name-regex.patch"
 	"${P}-fix-sendmail-config.patch"
+	"${P}-fix-login-over-ssl.patch"
 )
 
 MY_NAME="gitlab"
