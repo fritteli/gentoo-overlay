@@ -19,7 +19,7 @@ KEYWORDS="~x86 amd64"
 RDEPEND="sci-geosciences/garmintools
 	sci-geosciences/gpsbabel
 	dev-libs/tinyxml[stl]
-	dev-libs/libusb"
+	virtual/libusb:1"
 
 DEPEND="${RDEPEND}"
 

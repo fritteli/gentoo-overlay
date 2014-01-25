@@ -2,6 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/sci-geosciences/gpsbabel/gpsbabel-1.3.3.ebuild,v 1.3 2007/07/18 02:02:04 cryos Exp $
 
+EAPI="5"
+
 inherit eutils
 
 DESCRIPTION="A Linux interface to the Garmin Forerunner GPS units"
@@ -18,7 +20,7 @@ KEYWORDS="~x86 amd64"
 
 IUSE="usb"
 
-RDEPEND="usb? ( dev-libs/libusb )"
+RDEPEND="usb? ( virtual/libusb:1 )"
 
 DEPEND="${RDEPEND}"
 
