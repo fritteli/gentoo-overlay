@@ -244,7 +244,7 @@ pkg_postinst() {
 	elog "to backup your database before running the config phase!"
 	elog
 	elog "If you're running Gitlabhq behind an SSL proxy such as Apache or nginx and"
-	elog "you can't login after the upgrade, be sure to read the Gitlabhqtrouble-"
+	elog "you can't login after the upgrade, be sure to read the Gitlabhq trouble-"
 	elog "shooting guide at"
 	elog "https://github.com/gitlabhq/gitlab-public-wiki/wiki/Trouble-Shooting-Guide"
 	elog "especially the section about the verification of the CSRF token:"
