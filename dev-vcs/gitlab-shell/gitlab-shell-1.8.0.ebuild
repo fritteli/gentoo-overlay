@@ -38,6 +38,17 @@ CONF_FILE="/etc/gitlab-shell.yml"
 pkg_setup() {
 	enewgroup ${GIT_USER}
 	enewuser ${GIT_USER} -1 /bin/bash ${DATA_DIR} "${GIT_USER}"
+	# who knows, perhaps the user "git" already exists, but with wrong home dir or shell ... perform some checks
+	local thehomedir=$(egethome "${GIT_USER}")
+	local theshell=$(egetshell "${GIT_USER}")
+	if [[ "${thehomedir}" != "${DATA_DIR}" ]] ; then
+		ewarn "User ${GIT_USER} exists and has home directory ${thehomedir}, but ${DATA_DIR} is required."
+		ewarn "Please adjust the home directory by hand after the installation!"
+	fi
+	if [[ "${theshell}" != "/bin/bash" ]] ; then
+		ewarn "User ${GIT_USER} exists and has shell ${theshell}, but /bin/bash is required."
+		ewarn "Please adjust the shell by hand after the installation!"
+	fi
 }
 
 all_ruby_prepare() {
