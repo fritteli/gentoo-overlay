@@ -35,7 +35,7 @@ src_unpack() {
     # TODO remove unneded files
 
     # Fix permissions
-    chmod -R a-x,a+X conf data extensions extras lib web COPYING
+    chmod -R a-x,a+X conf data extensions lib web COPYING
 
     # Fix EOL in configuration files
     for i in conf/* ; do
@@ -46,7 +46,7 @@ src_unpack() {
 
 src_install() {
     insinto ${INSTALL_DIR}
-    doins -r bin conf data extensions extras lib logs web COPYING
+    doins -r bin conf data extensions lib logs web COPYING
 
     newinitd "${FILESDIR}/init.sh" sonar
 
