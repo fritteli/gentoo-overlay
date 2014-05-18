@@ -1,0 +1,28 @@
+--- a/lib/gitlab/regex.rb
++++ b/lib/gitlab/regex.rb
+@@ -1,3 +1,5 @@
++# encoding: utf-8
++
+ module Gitlab
+   module Regex
+     extend self
+@@ -7,7 +9,7 @@
+     end
+ 
+     def project_name_regex
+-      /\A[a-zA-Z0-9][a-zA-Z0-9_\-\. ]*\z/
++      /\A\p{Word}[\p{Word}\-:\. ]*\z/
+     end
+ 
+     def name_regex
+--- a/app/models/project.rb
++++ b/app/models/project.rb
+@@ -85,7 +85,7 @@
+   validates :description, length: { maximum: 2000 }, allow_blank: true
+   validates :name, presence: true, length: { within: 0..255 },
+             format: { with: Gitlab::Regex.project_name_regex,
+-                      message: "only letters, digits, spaces & '_' '-' '.' allowed. Letter or digit should be first" }
++                      message: "only letters, digits, spaces & '_' '-' '.' ':' allowed. Letter or digit should be first" }
+   validates :path, presence: true, length: { within: 0..255 },
+             exclusion: { in: Gitlab::Blacklist.path },
+             format: { with: Gitlab::Regex.path_regex,

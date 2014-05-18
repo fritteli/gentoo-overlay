@@ -1,0 +1,20 @@
+diff --git a/lib/gitlab/ldap/user.rb b/lib/gitlab/ldap/user.rb
+index 59f0fa6..8afd64f 100644
+--- a/lib/gitlab/ldap/user.rb
++++ b/lib/gitlab/ldap/user.rb
+@@ -83,8 +83,14 @@ module Gitlab
+ 
+         private
+ 
++        # Override superclass method to use our case-insensitive find_by_uid
++        def find_by_uid_and_provider
++          find_by_uid(uid)
++        end
++
+         def find_by_uid(uid)
+-          model.where(provider: provider, extern_uid: uid).last
++          # LDAP distinguished name is case-insensitive
++          model.where("provider = ? and lower(extern_uid) = ?", provider, uid.downcase).last
+         end
+ 
+         def provider

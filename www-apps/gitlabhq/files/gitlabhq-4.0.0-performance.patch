@@ -1,0 +1,190 @@
+diff --git a/app/helpers/application_helper.rb b/app/helpers/application_helper.rb
+--- a/app/helpers/application_helper.rb
++++ b/app/helpers/application_helper.rb
+@@ -147,9 +147,8 @@ module ApplicationHelper
+   end
+ 
+   def project_last_activity project
+-    activity = project.last_activity
+-    if activity && activity.created_at
+-      time_ago_in_words(activity.created_at) + " ago"
++    if project.last_activity_date != project.created_at
++      time_ago_in_words(project.last_activity_date) + " ago"
+     else
+       "Never"
+     end
+diff --git a/app/models/event.rb b/app/models/event.rb
+--- a/app/models/event.rb
++++ b/app/models/event.rb
+@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
+   delegate :title, to: :merge_request, prefix: true, allow_nil: true
+ 
+   belongs_to :author, class_name: "User"
+-  belongs_to :project
++  belongs_to :project, touch: true
+   belongs_to :target, polymorphic: true
+ 
+   # For Hash only
+diff --git a/app/models/project.rb b/app/models/project.rb
+--- a/app/models/project.rb
++++ b/app/models/project.rb
+@@ -227,7 +227,8 @@ class Project < ActiveRecord::Base
+   end
+ 
+   def last_activity_date
+-    last_event.try(:created_at) || updated_at
++    # touched when any associated event is saved
++    updated_at
+   end
+ 
+   def project_id
+diff --git a/db/migrate/20121227190440_touch_projects_last_activity.rb b/db/migrate/20121227190440_touch_projects_last_activity.rb
+--- /dev/null
++++ b/db/migrate/20121227190440_touch_projects_last_activity.rb
+@@ -0,0 +1,18 @@
++class TouchProjectsLastActivity < ActiveRecord::Migration
++  def up
++    Project.record_timestamps = false
++
++    Project.find_each do |project|
++      last_event = project.events.order(:created_at).last
++      if last_event and last_event.created_at > project.updated_at
++        project.update_attribute(:updated_at, last_event.created_at)
++      end
++    end
++
++    Project.record_timestamps = true
++  end
++
++  def down
++    raise ActiveRecord::IrreversibleMigration
++  end
++end
+diff --git a/db/schema.rb b/db/schema.rb
+--- a/db/schema.rb
++++ b/db/schema.rb
+@@ -11,7 +11,7 @@
+ #
+ # It's strongly recommended to check this file into your version control system.
+ 
+-ActiveRecord::Schema.define(:version => 20121219095402) do
++ActiveRecord::Schema.define(:version => 20121227190440) do
+ 
+   create_table "events", :force => true do |t|
+     t.string   "target_type"
+diff --git a/spec/models/event_spec.rb b/spec/models/event_spec.rb
+--- a/spec/models/event_spec.rb
++++ b/spec/models/event_spec.rb
+@@ -30,6 +30,17 @@ describe Event do
+     it { should respond_to(:commits) }
+   end
+ 
++  describe "Save" do
++    let(:event) { create(:event) }
++    let(:project) { create(:project) }
++
++    it "should touch associated project" do
++      event.stub(project: project)
++      event.project.should_receive(:touch)
++      event.save!
++    end
++  end
++
+   describe "Push event" do
+     before do
+       project = create(:project)
+diff --git a/spec/models/project_spec.rb b/spec/models/project_spec.rb
+--- a/spec/models/project_spec.rb
++++ b/spec/models/project_spec.rb
+@@ -163,22 +163,18 @@ describe Project do
+ 
+   describe "last_activity methods" do
+     let(:project)    { create(:project) }
+-    let(:last_event) { double(created_at: Time.now) }
++    let(:last_event) { create(:event) }
+ 
+     describe "last_activity" do
+-      it "should alias last_activity to last_event"do
++      it "should alias last_activity to last_event" do
+         project.stub(last_event: last_event)
+         project.last_activity.should == last_event
+       end
+     end
+ 
+-    describe 'last_activity_date' do
+-      it 'returns the creation date of the project\'s last event if present' do
+-        project.stub(last_event: last_event)
+-        project.last_activity_date.should == last_event.created_at
+-      end
+-
+-      it 'returns the project\'s last update date if it has no events' do
++    describe "last_activity_date" do
++      it "should alias last_activity_date to updated_at" do
++        project.stub(updated_at: Time.now)
+         project.last_activity_date.should == project.updated_at
+       end
+     end
+diff --git a/app/roles/authority.rb b/app/roles/authority.rb
+--- a/app/roles/authority.rb
++++ b/app/roles/authority.rb
+@@ -19,21 +19,25 @@ module Authority
+   end
+ 
+   def repository_readers
+-    keys = Key.joins({user: :users_projects}).
+-      where("users_projects.project_id = ? AND users_projects.project_access = ?", id, UsersProject::REPORTER)
+-    keys.map(&:identifier) + deploy_keys.map(&:identifier)
++    repository_members[UsersProject::REPORTER]
+   end
+ 
+   def repository_writers
+-    keys = Key.joins({user: :users_projects}).
+-      where("users_projects.project_id = ? AND users_projects.project_access = ?", id, UsersProject::DEVELOPER)
+-    keys.map(&:identifier)
++    repository_members[UsersProject::DEVELOPER]
+   end
+ 
+   def repository_masters
+-    keys = Key.joins({user: :users_projects}).
+-      where("users_projects.project_id = ? AND users_projects.project_access = ?", id, UsersProject::MASTER)
+-    keys.map(&:identifier)
++    repository_members[UsersProject::MASTER]
++  end
++
++  def repository_members
++    keys = Hash.new {|h,k| h[k] = [] }
++    UsersProject.select("keys.identifier, project_access").
++        joins(user: :keys).where(project_id: id).
++        each {|row| keys[row.project_access] << [row.identifier] }
++
++    keys[UsersProject::REPORTER] += deploy_keys.pluck(:identifier)
++    keys
+   end
+ 
+   def allow_read_for?(user)
+diff --git a/app/views/events/_event.html.haml b/app/views/events/_event.html.haml
+--- a/app/views/events/_event.html.haml
++++ b/app/views/events/_event.html.haml
+@@ -2,14 +2,14 @@
+   %div.event-item
+     %span.cgray.right
+       #{time_ago_in_words(event.created_at)} ago.
++    - cache event do
++      = image_tag gravatar_icon(event.author_email), class: "avatar s24"
+ 
+-    = image_tag gravatar_icon(event.author_email), class: "avatar s24"
+-
+-    - if event.push?
+-      = render "events/event/push", event: event
+-      .clearfix
+-    - elsif event.note?
+-      = render "events/event/note", event: event
+-    - else
+-      = render "events/event/common", event: event
++      - if event.push?
++        = render "events/event/push", event: event
++        .clearfix
++      - elsif event.note?
++        = render "events/event/note", event: event
++      - else
++        = render "events/event/common", event: event

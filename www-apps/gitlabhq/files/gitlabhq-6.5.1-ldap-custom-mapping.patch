@@ -1,0 +1,99 @@
+diff --git a/Gemfile b/Gemfile
+index fe8e54e..b33a74e 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -36,7 +36,8 @@ gem "gitlab_git", "~> 4.0.0"
+ gem 'gitlab-grack', '~> 2.0.0.pre', require: 'grack'
+ 
+ # LDAP Auth
+-gem 'gitlab_omniauth-ldap', '1.0.3', require: "omniauth-ldap"
++# Patched for attributes mapping customization
++gem 'gitlab_omniauth-ldap', '1.0.4', require: 'omniauth-ldap', git: 'https://github.com/jirutka/omniauth-ldap.git', ref: 'b55852bfc9b46ecf790a2c5526386702350eab89'
+ 
+ # Syntax highlighter
+ gem "gitlab-pygments.rb", '~> 0.5.4', require: 'pygments.rb'
+diff --git a/Gemfile.lock b/Gemfile.lock
+index d0f185b..46543e3 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -6,6 +6,17 @@ GIT
+     charlock_holmes (0.6.9.4)
+ 
+ GIT
++  remote: https://github.com/jirutka/omniauth-ldap.git
++  revision: b55852bfc9b46ecf790a2c5526386702350eab89
++  ref: b55852bfc9b46ecf790a2c5526386702350eab89
++  specs:
++    gitlab_omniauth-ldap (1.0.4)
++      net-ldap (~> 0.3.1)
++      omniauth (~> 1.0)
++      pyu-ruby-sasl (~> 0.0.3.1)
++      rubyntlm (~> 0.1.1)
++
++GIT
+   remote: https://github.com/gitlabhq/markup.git
+   revision: 61ade389c1e1c159359338f570d18464a44ddbc4
+   ref: 61ade389c1e1c159359338f570d18464a44ddbc4
+@@ -193,11 +204,6 @@ GEM
+       gitlab-linguist (~> 2.9.5)
+       gitlab-pygments.rb (~> 0.5.4)
+     gitlab_meta (6.0)
+-    gitlab_omniauth-ldap (1.0.3)
+-      net-ldap (~> 0.3.1)
+-      omniauth (~> 1.0)
+-      pyu-ruby-sasl (~> 0.0.3.1)
+-      rubyntlm (~> 0.1.1)
+     gon (5.0.1)
+       actionpack (>= 2.3.0)
+       json
+@@ -587,7 +593,7 @@ DEPENDENCIES
+   gitlab-pygments.rb (~> 0.5.4)
+   gitlab_git (~> 4.0.0)
+   gitlab_meta (= 6.0)
+-  gitlab_omniauth-ldap (= 1.0.3)
++  gitlab_omniauth-ldap (= 1.0.4)!
+   gon (~> 5.0.0)
+   grape (~> 0.6.1)
+   grape-entity (~> 0.3.0)
+diff --git a/config/gitlab.yml.example b/config/gitlab.yml.example
+index 776d930..a5b96e4 100644
+--- a/config/gitlab.yml.example
++++ b/config/gitlab.yml.example
+@@ -130,6 +130,10 @@ production: &base
+     method: 'ssl' # "ssl" or "plain"
+     bind_dn: '_the_full_dn_of_the_user_you_will_bind_with'
+     password: '_the_password_of_the_bind_user'
++    mapping:
++      username: 'uid'
++      name: 'cn'
++      email: 'mail'
+     # If allow_username_or_email_login is enabled, GitLab will ignore everything
+     # after the first '@' in the LDAP username submitted by the user on login.
+     #
+diff --git a/config/initializers/devise.rb b/config/initializers/devise.rb
+index 2539097..739de8e 100644
+--- a/config/initializers/devise.rb
++++ b/config/initializers/devise.rb
+@@ -223,6 +223,7 @@ Devise.setup do |config|
+       method:   Gitlab.config.ldap['method'],
+       bind_dn:  Gitlab.config.ldap['bind_dn'],
+       password: Gitlab.config.ldap['password'],
++      mapping:  Gitlab.config.ldap['mapping'],
+       name_proc: email_stripping_proc
+   end
+ 
+diff --git a/lib/gitlab/ldap/user.rb b/lib/gitlab/ldap/user.rb
+index 8afd64f..f1f1bea 100644
+--- a/lib/gitlab/ldap/user.rb
++++ b/lib/gitlab/ldap/user.rb
+@@ -97,6 +97,10 @@ module Gitlab
+           'ldap'
+         end
+ 
++        def username
++          (auth.info.username || auth.info.nickname).to_s.force_encoding('utf-8')
++        end
++
+         def raise_error(message)
+           raise OmniAuth::Error, "(LDAP) " + message
+         end

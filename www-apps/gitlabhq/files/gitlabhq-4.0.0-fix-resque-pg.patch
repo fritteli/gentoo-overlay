@@ -1,0 +1,13 @@
+--- a/lib/tasks/resque.rake	2012-12-25 14:39:00.679594127 +0100
++++ b/lib/tasks/resque.rake	2012-12-25 14:40:14.003591438 +0100
+@@ -3,6 +3,10 @@
+ task "resque:setup" => :environment do
+   Resque.after_fork do
+     Resque.redis.client.reconnect
++
++    # Without that you will see exception:
++    #   'PGError: ERROR: prepared statement "a1" already exists'
++    ActiveRecord::Base.establish_connection
+   end
+ end
+ 
