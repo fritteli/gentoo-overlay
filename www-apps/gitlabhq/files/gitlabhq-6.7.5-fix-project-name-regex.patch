@@ -1,5 +1,5 @@
---- a/lib/gitlab/regex.rb
-+++ b/lib/gitlab/regex.rb
+--- lib/gitlab/regex.rb.orig	2014-05-19 12:17:42.210000000 +0200
++++ lib/gitlab/regex.rb	2014-05-19 12:18:56.920000000 +0200
 @@ -1,3 +1,5 @@
 +# encoding: utf-8
 +
@@ -10,14 +10,14 @@
      end
  
      def project_name_regex
--      /\A[a-zA-Z0-9][a-zA-Z0-9_\-\. ]*\z/
-+      /\A\p{Word}[\p{Word}\-:\. ]*\z/
+-      /\A[a-zA-Z0-9_][a-zA-Z0-9_\-\. ]*\z/
++      /\A[\p{Word}_][\p{Word}_\-:\. ]*\z/
      end
  
      def name_regex
---- a/app/models/project.rb
-+++ b/app/models/project.rb
-@@ -85,7 +85,7 @@
+--- app/models/project.rb.orig	2014-05-19 12:19:44.700000000 +0200
++++ app/models/project.rb	2014-05-19 12:20:16.050000000 +0200
+@@ -84,7 +84,7 @@
    validates :description, length: { maximum: 2000 }, allow_blank: true
    validates :name, presence: true, length: { within: 0..255 },
              format: { with: Gitlab::Regex.project_name_regex,

@@ -45,7 +45,7 @@ GEMS_DEPEND="
 	postgres? ( dev-db/postgresql-base )
 	mysql? ( virtual/mysql )"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-1.8
+	>=dev-vcs/gitlab-shell-1.9.1
 	dev-vcs/git"
 RDEPEND="${DEPEND}
 	dev-db/redis
@@ -68,11 +68,10 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${P}-fix-gemfile.patch"
-	"${PN}-6.5.1-fix-project-name-regex.patch"
+	"${PN}-6.7.5-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
-	"${PN}-6.5.1-fix-ldap-dn-case.patch"
 	"${P}-ldap-custom-mapping.patch"
-	"${P}-email-custom-reply_to.patch"
+	"${PN}-6.7.5-email-custom-reply_to.patch"
 )
 
 MY_NAME="gitlab"

@@ -1,0 +1,84 @@
+--- Gemfile.orig	2014-05-19 13:04:44.700000000 +0200
++++ Gemfile	2014-05-19 13:05:44.400000000 +0200
+@@ -142,6 +142,10 @@
+ # Sanitize user input
+ gem "sanitize", '~> 2.0'
+ 
++# The newer revision of charlock_holmes that is finally fixed to
++# be compatible with Gentoo
++gem "charlock_holmes", git: "https://github.com/brianmario/charlock_holmes.git", ref: "dde194609b3513b0d2369ce8f916ae52566154b4"
++
+ # Protect against bruteforcing
+ gem "rack-attack"
+ 
+@@ -151,7 +155,6 @@
+ gem "sass-rails", '~> 4.0.2'
+ gem "coffee-rails"
+ gem "uglifier"
+-gem "therubyracer"
+ gem 'turbolinks'
+ gem 'jquery-turbolinks'
+ 
+--- Gemfile.lock.orig	2014-05-19 13:06:11.660000000 +0200
++++ Gemfile.lock	2014-05-19 13:08:38.440000000 +0200
+@@ -1,3 +1,10 @@
++GIT
++  remote: https://github.com/brianmario/charlock_holmes.git
++  revision: dde194609b3513b0d2369ce8f916ae52566154b4
++  ref: dde194609b3513b0d2369ce8f916ae52566154b4
++  specs:
++    charlock_holmes (0.6.9.4)
++
+ GEM
+   remote: https://rubygems.org/
+   specs:
+@@ -60,7 +67,6 @@
+       json (>= 1.7)
+     celluloid (0.15.2)
+       timers (~> 1.1.0)
+-    charlock_holmes (0.6.9.4)
+     cliver (0.2.2)
+     code_analyzer (0.4.3)
+       sexp_processor
+@@ -267,7 +273,6 @@
+       addressable (~> 2.3)
+     letter_opener (1.1.2)
+       launchy (~> 2.2)
+-    libv8 (3.16.14.3)
+     listen (2.3.1)
+       celluloid (>= 0.15.2)
+       rb-fsevent (>= 0.9.3)
+@@ -402,7 +407,6 @@
+       redis-store (~> 1.1.0)
+     redis-store (1.1.4)
+       redis (>= 2.2)
+-    ref (1.0.5)
+     require_all (1.3.2)
+     rest-client (1.6.7)
+       mime-types (>= 1.16)
+@@ -496,9 +500,6 @@
+     term-ansicolor (1.2.2)
+       tins (~> 0.8)
+     test_after_commit (0.2.2)
+-    therubyracer (0.12.0)
+-      libv8 (~> 3.16.14.0)
+-      ref
+     thin (1.6.1)
+       daemons (>= 1.0.9)
+       eventmachine (>= 1.0.0)
+@@ -567,6 +568,7 @@
+   bootstrap-sass (~> 3.0)
+   capybara
+   carrierwave
++  charlock_holmes!
+   coffee-rails
+   colored
+   coveralls
+@@ -654,7 +656,6 @@
+   stamp
+   state_machine
+   test_after_commit
+-  therubyracer
+   thin
+   tinder (~> 1.9.2)
+   turbolinks
