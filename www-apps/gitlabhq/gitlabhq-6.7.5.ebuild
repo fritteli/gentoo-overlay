@@ -173,9 +173,12 @@ all_ruby_install() {
 	dodir /etc/logrotate.d
 	cat > "${D}/etc/logrotate.d/${MY_NAME}" <<-EOF
 		${logs}/*.log {
+		    daily
 		    missingok
+		    rotate 90
 		    delaycompress
 		    compress
+		    notifempty
 		    copytruncate
 		}
 	EOF
@@ -342,6 +345,12 @@ pkg_config() {
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
 	fi
+
+	einfo "You can check the setup of your GitLab installation after starting"
+	einfo "GitLab and Apache (or nginx) with these commands:"
+	einfo "$ sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production"
+	einfo "$ sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production"
+	einfo "Enjoy!"
 }
 
 ryaml() {
