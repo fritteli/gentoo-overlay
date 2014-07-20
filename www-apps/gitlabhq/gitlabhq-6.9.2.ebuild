@@ -72,6 +72,7 @@ RUBY_PATCHES=(
 	"${PN}-6.0.2-fix-sendmail-config.patch"
 	"${PN}-6.8.2-ldap-custom-mapping.patch"
 	"${PN}-6.7.5-email-custom-reply_to.patch"
+	"${PN}-6.8.2-fix-gemfile-lock.patch"
 )
 
 MY_NAME="gitlab"
@@ -130,7 +131,7 @@ all_ruby_prepare() {
 		mv ${dbconf}.mysql ${dbconf}
 		rm ${dbconf}.postgresql
 	fi
-
+	
 	# remove useless files
 	rm -r lib/support/{deploy,init.d}
 	rm -r script/{background_jobs,web}
