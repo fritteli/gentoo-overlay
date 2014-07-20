@@ -1,0 +1,11 @@
+--- Gemfile.lock.orig	2014-07-20 23:01:25.111641645 +0200
++++ Gemfile.lock	2014-07-20 23:00:43.898976942 +0200
+@@ -5,7 +5,7 @@
+   specs:
+     charlock_holmes (0.6.9.4)
+ 
+- GIT
++GIT
+   remote: https://github.com/jirutka/omniauth-ldap.git
+   revision: b55852bfc9b46ecf790a2c5526386702350eab89
+   ref: b55852bfc9b46ecf790a2c5526386702350eab89
