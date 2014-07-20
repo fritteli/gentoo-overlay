@@ -72,6 +72,7 @@ RUBY_PATCHES=(
 	"${PN}-6.0.2-fix-sendmail-config.patch"
 	"${P}-ldap-custom-mapping.patch"
 	"${PN}-6.7.5-email-custom-reply_to.patch"
+	"${P}-fix-gemfile-lock.patch"
 )
 
 MY_NAME="gitlab"
