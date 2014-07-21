@@ -67,12 +67,11 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-6.8.2-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-6.7.5-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
-	"${PN}-6.8.2-ldap-custom-mapping.patch"
-	"${PN}-6.7.5-email-custom-reply_to.patch"
-	"${PN}-6.8.2-fix-gemfile-lock.patch"
+	"${P}-ldap-custom-mapping.patch"
+	"${P}-email-custom-reply_to.patch"
 )
 
 MY_NAME="gitlab"
@@ -134,7 +133,6 @@ all_ruby_prepare() {
 	
 	# remove useless files
 	rm -r lib/support/{deploy,init.d}
-	rm -r script/{background_jobs,web}
 	use unicorn || rm config/unicorn.rb
 }
 
