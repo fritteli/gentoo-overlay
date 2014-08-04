@@ -11,7 +11,7 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby19 ruby20"
+USE_RUBY="ruby20 ruby21"
 PYTHON_DEPEND="2:2.7"
 
 inherit eutils python ruby-ng user
