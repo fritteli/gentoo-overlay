@@ -1,0 +1,88 @@
+diff --git a/Gemfile b/Gemfile
+index 86f8edb..0f2a83e 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -146,6 +146,10 @@ gem "underscore-rails", "~> 1.4.4"
+ # Sanitize user input
+ gem "sanitize", '~> 2.0'
+ 
++# The newer revision of charlock_holmes that is finally fixed to
++# be compatible with Gentoo
++gem "charlock_holmes", git: "https://github.com/brianmario/charlock_holmes.git", ref: "dde194609b3513b0d2369ce8f916ae52566154b4"
++
+ # Protect against bruteforcing
+ gem "rack-attack"
+ 
+@@ -158,7 +162,6 @@ gem 'semantic-ui-sass', '~> 0.16.1.0'
+ gem "sass-rails", '~> 4.0.2'
+ gem "coffee-rails"
+ gem "uglifier"
+-gem "therubyracer"
+ gem 'turbolinks'
+ gem 'jquery-turbolinks'
+ 
+diff --git a/Gemfile.lock b/Gemfile.lock
+index fe85e9e..7b4b1b1 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -1,3 +1,10 @@
++GIT
++  remote: https://github.com/brianmario/charlock_holmes.git
++  revision: dde194609b3513b0d2369ce8f916ae52566154b4
++  ref: dde194609b3513b0d2369ce8f916ae52566154b4
++  specs:
++    charlock_holmes (0.6.9.4)
++
+ GEM
+   remote: https://rubygems.org/
+   specs:
+@@ -61,7 +68,6 @@ GEM
+       json (>= 1.7)
+     celluloid (0.15.2)
+       timers (~> 1.1.0)
+-    charlock_holmes (0.6.9.4)
+     cliver (0.3.2)
+     code_analyzer (0.4.3)
+       sexp_processor
+@@ -271,7 +277,6 @@ GEM
+       addressable (~> 2.3)
+     letter_opener (1.1.2)
+       launchy (~> 2.2)
+-    libv8 (3.16.14.3)
+     listen (2.3.1)
+       celluloid (>= 0.15.2)
+       rb-fsevent (>= 0.9.3)
+@@ -408,7 +413,6 @@ GEM
+       redis-store (~> 1.1.0)
+     redis-store (1.1.4)
+       redis (>= 2.2)
+-    ref (1.0.5)
+     request_store (1.0.5)
+     require_all (1.3.2)
+     rest-client (1.6.7)
+@@ -506,9 +510,6 @@ GEM
+     term-ansicolor (1.2.2)
+       tins (~> 0.8)
+     test_after_commit (0.2.2)
+-    therubyracer (0.12.0)
+-      libv8 (~> 3.16.14.0)
+-      ref
+     thin (1.6.1)
+       daemons (>= 1.0.9)
+       eventmachine (>= 1.0.0)
+@@ -580,6 +581,7 @@ DEPENDENCIES
+   bootstrap-sass (~> 3.0)
+   capybara (~> 2.2.1)
+   carrierwave
++  charlock_holmes!
+   coffee-rails
+   colored
+   coveralls
+@@ -671,7 +673,6 @@ DEPENDENCIES
+   stamp
+   state_machine
+   test_after_commit
+-  therubyracer
+   thin
+   tinder (~> 1.9.2)
+   turbolinks

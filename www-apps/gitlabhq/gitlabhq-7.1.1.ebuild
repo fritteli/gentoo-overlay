@@ -68,10 +68,10 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${P}-fix-gemfile.patch"
-	"${PN}-6.7.5-fix-project-name-regex.patch"
+	"${P}-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
-	"${P}-ldap-custom-mapping.patch"
-	"${P}-email-custom-reply_to.patch"
+	"${PN}-7.0.0-ldap-custom-mapping.patch"
+	"${PN}-7.0.0-email-custom-reply_to.patch"
 )
 
 MY_NAME="gitlab"

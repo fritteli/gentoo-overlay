@@ -1,0 +1,24 @@
+diff --git a/lib/gitlab/regex.rb b/lib/gitlab/regex.rb
+index 4b80388..30730aa 100644
+--- a/lib/gitlab/regex.rb
++++ b/lib/gitlab/regex.rb
+@@ -1,3 +1,5 @@
++# encoding: utf-8
++
+ module Gitlab
+   module Regex
+     extend self
+@@ -11,11 +13,11 @@ module Gitlab
+     end
+ 
+     def project_name_regex
+-      /\A[a-zA-Z0-9_][a-zA-Z0-9_\-\. ]*\z/
++      /\A[\p{Word}_][\p{Word}_\-:\. ]*\z/
+     end
+ 
+     def project_regex_message
+-      "can contain only letters, digits, '_', '-' and '.' and space. " \
++      "can contain only letters, digits, '_', '-', ':' and '.' and space. " \
+       "It must start with letter, digit or '_'."
+     end
+ 
