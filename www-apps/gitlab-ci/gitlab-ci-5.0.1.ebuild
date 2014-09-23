@@ -25,7 +25,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="mysql +postgres +unicorn"
+IUSE="mysql +postgres"
 
 ## Gems dependencies:
 #   charlock_holmes		dev-libs/icu
@@ -60,6 +60,7 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
+RUN_DIR="/run/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ci/blob/v${PV}/script/background_jobs
@@ -76,15 +77,14 @@ all_ruby_prepare() {
 	sed -i -E \
 		-e "s|redis://redis.example.com:6379|unix:/run/redis/redis.sock|" \
 		config/resque.yml.example || die "failed to filter resque.yml.example"
-	local run_path=/run/${MY_NAME}
 	sed -i -E \
-		-e "s|/home/gitlab_ci/gitlab-ci/tmp/(pids\|sockets)|${run_path}|" \
+		-e "s|/home/gitlab_ci/gitlab-ci/tmp/(pids\|sockets)|${RUN_DIR}|" \
 		-e "s|/home/gitlab_ci/gitlab-ci/log|${LOGS_DIR}|" \
 		-e "s|/home/gitlab_ci/gitlab-ci|${DEST_DIR}|" \
 		config/unicorn.rb.example || die "failed to filter unicorn.rb.example"
 	
 	sed -i \
-		-e "s|/home/gitlab_ci/gitlab-ci/tmp/sockets|${run_path}|" \
+		-e "s|/home/gitlab_ci/gitlab-ci/tmp/sockets|${RUN_DIR}|" \
 		-e "s|/home/gitlab_ci/gitlab-ci/public|${DEST_DIR}/public|" \
 		lib/support/nginx/gitlab_ci || die "failed to filter nginx/gitlab_ci"
 	
@@ -115,7 +115,6 @@ all_ruby_prepare() {
 	
 	# remove useless files
 	rm -r lib/support/init.d
-	use unicorn || rm config/unicorn.rb
 }
 
 all_ruby_install() {
@@ -123,6 +122,7 @@ all_ruby_install() {
 	local conf=${CONF_DIR}
 	local logs=${LOGS_DIR}
 	local temp=${TEMP_DIR}
+	local runs=${RUN_DIR}
 
 	# prepare directories
 	diropts -m750
@@ -164,7 +164,7 @@ all_ruby_install() {
 	cd "${D}/${dest}"
 
 	local without="development test aws"
-	local flag; for flag in mysql postgres unicorn; do
+	local flag; for flag in mysql postgres; do
 		without+="$(use $flag || echo ' '$flag)"
 	done
 	local bundle_args="--deployment ${without:+--without ${without}}"
@@ -180,15 +180,14 @@ all_ruby_install() {
 
 	## RC script ##
 
-	local rcscript=gitlab-ci-sidekiq.init
-	use unicorn && rcscript=gitlab-ci-unicorn.init
+	local rcscript=gitlab-ci-unicorn.init
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
 		-e "s|@USER@|${MY_USER}|" \
-		-e "s|@SLOT@|${SLOT}|" \
-		-e "s|@GITLAB_BASE@|${dest}|" \
+		-e "s|@GITLAB_CI_BASE@|${dest}|" \
 		-e "s|@LOGS_DIR@|${logs}|" \
+		-e "s|@RUN_DIR@|${runs}|" \
 		-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
 		"${T}/${rcscript}" \
 		|| die "failed to filter ${rcscript}"
@@ -198,20 +197,20 @@ all_ruby_install() {
 
 pkg_postinst() {
 	elog
-	elog "1. Configure your GitLab's settings in ${CONF_DIR}/gitlab.yml."
+	elog "1. Configure your GitLab CI's settings in ${CONF_DIR}/application.yml."
 	elog
 	elog "2. Configure your database settings in ${CONF_DIR}/database.yml"
 	elog "   for \"production\" environment."
 	elog
-	elog "3. Then you should create a database for your GitLab instance, if you"
+	elog "3. Then you should create a database for your GitLab CI instance, if you"
 	elog "haven't done so already."
 	elog
 	if use postgres; then
         elog "If you have local PostgreSQL running, just copy&run:"
         elog "      su postgres"
-        elog "      psql -c \"CREATE ROLE gitlab PASSWORD 'gitlab' \\"
+        elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
         elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
-        elog "      createdb -E UTF-8 -O gitlab gitlabhq_production"
+        elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
 		elog "  Note: You should change your password to something more random..."
 		elog
 	fi
@@ -221,16 +220,9 @@ pkg_postinst() {
 	elog
 	elog "If this is an update from previous version, it's HIGHLY recommended"
 	elog "to backup your database before running the config phase!"
-	elog
-	elog "If you're running GitLab behind an SSL proxy such as nginx or Apache and"
-	elog "you can't login after the upgrade, be sure to read the section about the"
-	elog "verification of the CSRF token in GitLab's trouble-shooting guide at"
-	elog "http://goo.gl/5XGRGv."
 }
 
 pkg_config() {
-#	local shell_conf='/etc/gitlab-shell.yml'
-
 	einfo "Checking configuration files"
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
@@ -240,15 +232,15 @@ pkg_config() {
 	fi
 
 
-	local email_from="$(ryaml ${CONF_DIR}/application.yml production gitlab_CI email_from)"
-	local git_home="$(egethome ${MY_USER})"
+	local email_from="$(ryaml ${CONF_DIR}/application.yml production gitlab_ci email_from)"
+	local gitlab_ci_home="$(egethome ${MY_USER})"
 	
 	# configure Git global settings
-#	if [ ! -e "${git_home}/.gitconfig" ]; then
+#	if [ ! -e "${gitlab_ci_home}/.gitconfig" ]; then
 #		einfo "Setting git user"
 #		su -l ${MY_USER} -c "
 #			git config --global user.email '${email_from}';
-#			git config --global user.name 'GitLab'" \
+#			git config --global user.name 'GitLab CI'" \
 #			|| die "failed to setup git name and email"
 #	fi
 
