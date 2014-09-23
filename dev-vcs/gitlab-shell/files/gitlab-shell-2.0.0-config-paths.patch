@@ -1,0 +1,48 @@
+diff --git a/config.yml.example b/config.yml.example
+index 94eb593..3d60f48 100644
+--- a/config.yml.example
++++ b/config.yml.example
+@@ -19,10 +19,10 @@ http_settings:
+ # Give the canonicalized absolute pathname,
+ # REPOS_PATH MUST NOT CONTAIN ANY SYMLINK!!!
+ # Check twice that none of the components is a symlink, including "/home".
+-repos_path: "/home/git/repositories"
++repos_path: "/var/lib/git/repositories"
+ 
+ # File used as authorized_keys for gitlab user
+-auth_file: "/home/git/.ssh/authorized_keys"
++auth_file: "/var/lib/git/.ssh/authorized_keys"
+ 
+ # Redis settings used for pushing commit notices to gitlab
+ redis:
+@@ -36,7 +36,7 @@ redis:
+ 
+ # Log file.
+ # Default is gitlab-shell.log in the root directory.
+-# log_file: "/home/git/gitlab-shell/gitlab-shell.log"
++# log_file: "/var/log/gitlab/gitlab-shell.log"
+ 
+ # Log level. INFO by default
+ log_level: INFO
+diff --git a/lib/gitlab_config.rb b/lib/gitlab_config.rb
+index c97743b..97f4658 100644
+--- a/lib/gitlab_config.rb
++++ b/lib/gitlab_config.rb
+@@ -8,7 +8,7 @@ class GitlabConfig
+   end
+ 
+   def home
+-    ENV['HOME']
++    "/var/lib/git"
+   end
+ 
+   def repos_path
+@@ -36,7 +36,7 @@ class GitlabConfig
+   end
+ 
+   def log_file
+-    @config['log_file'] ||= File.join(ROOT_PATH, 'gitlab-shell.log')
++    @config['log_file'] ||= "/var/log/gitlab/gitlab-shell.log"
+   end
+ 
+   def log_level
