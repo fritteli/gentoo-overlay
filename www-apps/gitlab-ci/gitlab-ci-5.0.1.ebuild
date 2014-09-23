@@ -18,7 +18,7 @@ inherit eutils python ruby-ng user
 
 DESCRIPTION="GitLab CI is a continuous integration server that is tightly integrated with GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci"
-SRC_URI="https://gitlab.com/gitlab-org/gitlab-ci/repository/archive.tar.gz?ref=v${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/gitlabhq/gitlab-ci/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 RESTRICT="mirror"
 
@@ -83,11 +83,10 @@ all_ruby_prepare() {
 		config/resque.yml.example || die "failed to filter resque.yml.example"
 	local run_path=/run/${MY_NAME}
 	sed -i -E \
-		-e "s|/home/gitlab_ci/gitlab-ci/tmp/(pids|sockets)|${run_path}|" \
-		-e "s|/home/gitlab_ci/gitlab-ci/log/|${LOGS_DIR}|" \
+		-e "s|/home/gitlab_ci/gitlab-ci/tmp/(pids\|sockets)|${run_path}|" \
+		-e "s|/home/gitlab_ci/gitlab-ci/log|${LOGS_DIR}|" \
 		-e "s|/home/gitlab_ci/gitlab-ci|${DEST_DIR}|" \
 		config/unicorn.rb.example || die "failed to filter unicorn.rb.example"
-
 	
 	sed -i \
 		-e "s|/home/gitlab_ci/gitlab-ci/tmp/sockets|${run_path}|" \
