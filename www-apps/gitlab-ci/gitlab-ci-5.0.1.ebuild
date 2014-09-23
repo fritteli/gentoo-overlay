@@ -65,6 +65,11 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 # https://gitlab.com/gitlab-org/gitlab-ci/blob/v${PV}/script/background_jobs
 SIDEKIQ_QUEUES="runner,common,default"
 
+pkg_setup() {
+	enewgroup gitlab_ci
+	enewuser gitlab_ci -1 /dev/null ${DEST_DIR} "gitlab_ci,cron"
+}
+
 all_ruby_prepare() {
 
 	# fix paths
