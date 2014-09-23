@@ -85,7 +85,7 @@ LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
-# https://github.com/gitlabhq/gitlabhq/blob/v${PV}/script/background_jobs
+# https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
 SIDEKIQ_QUEUES="post_receive,mailer,system_hook,project_web_hook,gitlab_shell,common,default"
 
 all_ruby_prepare() {
