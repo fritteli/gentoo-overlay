@@ -68,7 +68,7 @@ SIDEKIQ_QUEUES="runner,common,default"
 
 pkg_setup() {
 	enewgroup gitlab_ci
-	enewuser gitlab_ci -1 /dev/null ${DEST_DIR} "gitlab_ci,cron"
+	enewuser gitlab_ci -1 /bin/bash ${DEST_DIR} "gitlab_ci,cron"
 }
 
 all_ruby_prepare() {
@@ -177,6 +177,8 @@ all_ruby_install() {
 
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs} ${runs}
+	fowners ${MY_USER}:${MY_USER} ${conf}/database.yml
+	fperms 750 ${conf}/database.yml
 
 	## RC script ##
 
