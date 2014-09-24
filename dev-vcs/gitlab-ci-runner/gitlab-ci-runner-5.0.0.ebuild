@@ -133,7 +133,7 @@ all_ruby_install() {
 		|| die "failed to filter ${rcscript}"
 
 	newinitd "${T}/${rcscript}" "${MY_NAME}"
-	newconfd "${T}/${rcconf}" "${MY_NAME}"
+	newconfd "${FILESDIR}/${rcconf}" "${MY_NAME}"
 }
 
 pkg_postinst() {
