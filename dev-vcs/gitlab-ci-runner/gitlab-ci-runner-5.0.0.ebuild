@@ -121,7 +121,7 @@ all_ruby_install() {
 	## RC script and conf.d file ##
 
 	local rcscript=gitlab-ci-runner.init
-	local rcscript=gitlab-ci-runner.conf
+	local rcconf=gitlab-ci-runner.conf
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
