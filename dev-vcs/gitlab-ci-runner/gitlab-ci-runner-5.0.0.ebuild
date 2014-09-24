@@ -62,7 +62,7 @@ SIDEKIQ_QUEUES="runner,common,default"
 
 pkg_setup() {
 	enewgroup ${MY_USER}
-	enewuser ${MY_USER} -1 /bin/bash ${DEST_DIR} "${MY_USER}"
+	enewuser ${MY_USER} -1 /bin/bash ${DEST_DIR} ${MY_USER}
 }
 
 all_ruby_prepare() {
