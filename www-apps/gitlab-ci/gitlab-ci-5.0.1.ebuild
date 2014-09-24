@@ -178,7 +178,7 @@ all_ruby_install() {
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs} ${runs}
 	fowners ${MY_USER}:${MY_USER} ${conf}/database.yml
-	fperms 750 ${conf}/database.yml
+	fperms 640 ${conf}/database.yml
 
 	## RC script ##
 
