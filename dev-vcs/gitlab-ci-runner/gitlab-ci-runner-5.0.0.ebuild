@@ -39,7 +39,6 @@ GEMS_DEPEND="
 DEPEND="${GEMS_DEPEND}
 	dev-vcs/git"
 RDEPEND="${DEPEND}
-	dev-db/redis
 	virtual/mta"
 ruby_add_bdepend "
 	virtual/rubygems
@@ -54,10 +53,8 @@ MY_NAME="gitlab-ci-runner"
 MY_USER="gitlab_ci_runner"
 
 DEST_DIR="/opt/${MY_NAME}"
-CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-RUN_DIR="/run/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ci/blob/v${PV}/script/background_jobs
@@ -69,77 +66,29 @@ pkg_setup() {
 }
 
 all_ruby_prepare() {
-
-	# fix paths
-	sed -i -E \
-		-e "s|redis://redis.example.com:6379|unix:/run/redis/redis.sock|" \
-		config/resque.yml.example || die "failed to filter resque.yml.example"
-	sed -i -E \
-		-e "s|/home/gitlab_ci/gitlab-ci/tmp/(pids\|sockets)|${RUN_DIR}|" \
-		-e "s|/home/gitlab_ci/gitlab-ci/log|${LOGS_DIR}|" \
-		-e "s|/home/gitlab_ci/gitlab-ci|${DEST_DIR}|" \
-		config/unicorn.rb.example || die "failed to filter unicorn.rb.example"
-	
-	sed -i \
-		-e "s|/home/gitlab_ci/gitlab-ci/tmp/sockets|${RUN_DIR}|" \
-		-e "s|/home/gitlab_ci/gitlab-ci/public|${DEST_DIR}/public|" \
-		lib/support/nginx/gitlab_ci || die "failed to filter nginx/gitlab_ci"
-	
-	# modify default database settings for PostgreSQL
-	sed -i -E \
-		-e 's|(username:).*|\1 gitlab|' \
-		-e 's|(password:).*|\1 gitlab|' \
-		-e 's|(socket:).*|/run/postgresql/.s.PGSQL.5432|' \
-		config/database.yml.postgresql \
-		|| die "failed to filter database.yml.postgresql"
-	# modify default database settings for MySQL
-	sed -i -E \
-		-e "s|/tmp/mysql.sock|/run/mysqld/mysqld.sock|" \
-		config/database.yml.mysql || die "failed to filter database.yml.mysql"
-
-	# rename config files
-	mv config/application.yml.example config/application.yml
-	mv config/unicorn.rb.example config/unicorn.rb
-
-	local dbconf=config/database.yml
-	if use postgres && ! use mysql; then
-		mv ${dbconf}.postgresql ${dbconf}
-		rm ${dbconf}.mysql
-	elif use mysql && ! use postgres; then
-		mv ${dbconf}.mysql ${dbconf}
-		rm ${dbconf}.postgresql
-	fi
-	
 	# remove useless files
-	rm -r lib/support/init.d
+	rm -r lib/support/{init.d,logrotate.d}
 }
 
 all_ruby_install() {
 	local dest=${DEST_DIR}
-	local conf=${CONF_DIR}
 	local logs=${LOGS_DIR}
 	local temp=${TEMP_DIR}
-	local runs=${RUN_DIR}
 
 	# prepare directories
 	diropts -m750
 	dodir ${logs} ${temp}
 
 	diropts -m755
-	dodir ${conf} ${runs} ${dest}/public/uploads
+	dodir ${dest}
 
 	dosym ${temp} ${dest}/tmp
 	dosym ${logs} ${dest}/log
 
-	# install configs
-	insinto ${conf}
-	doins -r config/*
-	dosym ${conf} ${dest}/config
-
 	echo 'export RAILS_ENV=production' > "${D}/${dest}/.profile"
 
 	# remove needless dirs
-	rm -Rf config tmp log
+#	rm -Rf config tmp log
 
 	# install the rest files
 	# using cp 'cause doins is slow
@@ -160,11 +109,7 @@ all_ruby_install() {
 
 	cd "${D}/${dest}"
 
-	local without="development test aws"
-	local flag; for flag in mysql postgres; do
-		without+="$(use $flag || echo ' '$flag)"
-	done
-	local bundle_args="--deployment ${without:+--without ${without}}"
+	local bundle_args="--deployment"
 
 	einfo "Running bundle install ${bundle_args} ..."
 	${RUBY} /usr/bin/bundle install ${bundle_args} || die "bundler failed"
@@ -173,13 +118,11 @@ all_ruby_install() {
 	rm -Rf vendor/bundle/ruby/*/cache
 
 	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs} ${runs}
-	fowners ${MY_USER}:${MY_USER} ${conf}/database.yml
-	fperms 640 ${conf}/database.yml
+	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
 
 	## RC script ##
 
-	local rcscript=gitlab-ci-unicorn.init
+	local rcscript=gitlab-ci-runner.init
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
