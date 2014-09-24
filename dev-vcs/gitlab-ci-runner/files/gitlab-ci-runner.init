@@ -29,7 +29,7 @@ start() {
 			--make-pidfile \
 			--pidfile="${pidfile}" \
 			--background \
-			--startas /bin/bash -- -c "exec ${bundle_command} ${bundle_command_args} >> ${gitlab_ci_runner_logfile} 2>&1"
+			--exec /bin/bash -- -c "exec ${bundle_command} ${bundle_command_args} >> ${gitlab_ci_runner_logfile} 2>&1"
 		local success=$?
 		if [ ${success}!=0 ] ; then
 			eend ${success}

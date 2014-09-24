@@ -136,31 +136,9 @@ all_ruby_install() {
 
 pkg_postinst() {
 	elog
-	elog "1. Configure your GitLab CI's settings in ${CONF_DIR}/application.yml."
-	elog
-	elog "2. Configure your database settings in ${CONF_DIR}/database.yml"
-	elog "   for \"production\" environment."
-	elog
-	elog "3. Adjust the webserver settings in ${CONF_DIR}/unicorn.rb"
-	elog
-	elog "4. Then you should create a database for your GitLab CI instance, if you"
-	elog "haven't done so already."
-	elog
-	if use postgres; then
-        elog "If you have local PostgreSQL running, just copy&run:"
-        elog "      su postgres"
-        elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
-        elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
-        elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
-		elog "  Note: You should change your password to something more random..."
-		elog
-	fi
-	elog "4. Finally execute the following command to initlize environment:"
-	elog "       emerge --config \"=${CATEGORY}/${PF}\""
-	elog "   Note: Do not forget to start Redis server first!"
-	elog
-	elog "If this is an update from previous version, it's HIGHLY recommended"
-	elog "to backup your database before running the config phase!"
+	elog "If this is a fresh install of GitLab CI Runner, please configure it"
+	elog "with the following command:"
+	elog "        emerge --config \"=${CATEGORY}/${PF}\""
 }
 
 pkg_config() {
