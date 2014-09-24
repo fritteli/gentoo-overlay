@@ -55,7 +55,6 @@ MY_USER="gitlab_ci_runner"
 DEST_DIR="/opt/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-RUN_DIR="/run/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ci/blob/v${PV}/script/background_jobs
@@ -75,11 +74,10 @@ all_ruby_install() {
 	local dest=${DEST_DIR}
 	local logs=${LOGS_DIR}
 	local temp=${TEMP_DIR}
-	local runs=${RUN_DIR}
 
 	# prepare directories
 	diropts -m750
-	dodir ${logs} ${temp} ${runs}
+	dodir ${logs} ${temp}
 
 	diropts -m755
 	dodir ${dest}
@@ -120,7 +118,7 @@ all_ruby_install() {
 	rm -Rf vendor/bundle/ruby/*/cache
 
 	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs} ${runs}
+	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
 
 	## RC script ##
 
