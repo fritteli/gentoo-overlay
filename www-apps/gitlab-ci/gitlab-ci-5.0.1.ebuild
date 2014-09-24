@@ -68,7 +68,7 @@ SIDEKIQ_QUEUES="runner,common,default"
 
 pkg_setup() {
 	enewgroup gitlab_ci
-	enewuser gitlab_ci -1 /bin/bash ${DEST_DIR} "gitlab_ci,cron"
+	enewuser gitlab_ci -1 /bin/bash ${DEST_DIR} "gitlab_ci,cron,redis"
 }
 
 all_ruby_prepare() {
