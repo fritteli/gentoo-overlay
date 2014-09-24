@@ -16,7 +16,7 @@ PYTHON_DEPEND="2:2.7"
 
 inherit eutils python ruby-ng user
 
-DESCRIPTION="GitLab CI Runner is the vuild processor needed for GitLab CI"
+DESCRIPTION="GitLab CI Runner is the build processor needed for GitLab CI"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-runner"
 SRC_URI="https://github.com/gitlabhq/gitlab-ci-runner/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -55,10 +55,7 @@ MY_USER="gitlab_ci_runner"
 DEST_DIR="/opt/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-# When updating ebuild to newer version, check list of the queues in
-# https://gitlab.com/gitlab-org/gitlab-ci/blob/v${PV}/script/background_jobs
-SIDEKIQ_QUEUES="runner,common,default"
+RUN_DIR="/run/${MY_NAME}"
 
 pkg_setup() {
 	enewgroup ${MY_USER}

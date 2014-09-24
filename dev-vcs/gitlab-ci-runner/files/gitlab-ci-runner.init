@@ -48,7 +48,7 @@ stop() {
 		start-stop-daemon --stop \
 			--pidfile="${pidfile}"
 # DO WE NEED --exec? or --startas???
-		local $success=$?
+		local success=$?
 		if [ ${success}!=0 ] ; then
 			eend ${success}
 		fi
