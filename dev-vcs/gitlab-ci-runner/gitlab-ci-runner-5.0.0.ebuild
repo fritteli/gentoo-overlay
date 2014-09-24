@@ -118,9 +118,10 @@ all_ruby_install() {
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
 
-	## RC script ##
+	## RC script and conf.d file ##
 
 	local rcscript=gitlab-ci-runner.init
+	local rcscript=gitlab-ci-runner.conf
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
@@ -132,6 +133,7 @@ all_ruby_install() {
 		|| die "failed to filter ${rcscript}"
 
 	newinitd "${T}/${rcscript}" "${MY_NAME}"
+	newconfd "${T}/${rcconf}" "${MY_NAME}"
 }
 
 pkg_postinst() {
