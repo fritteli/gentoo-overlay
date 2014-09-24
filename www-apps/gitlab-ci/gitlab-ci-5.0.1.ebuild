@@ -129,7 +129,7 @@ all_ruby_install() {
 	dodir ${logs} ${temp}
 
 	diropts -m755
-	dodir ${conf} ${dest}/public/uploads
+	dodir ${conf} ${runs} ${dest}/public/uploads
 
 	dosym ${temp} ${dest}/tmp
 	dosym ${logs} ${dest}/log
@@ -176,7 +176,7 @@ all_ruby_install() {
 	rm -Rf vendor/bundle/ruby/*/cache
 
 	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
+	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs} ${runs}
 
 	## RC script ##
 
@@ -202,7 +202,9 @@ pkg_postinst() {
 	elog "2. Configure your database settings in ${CONF_DIR}/database.yml"
 	elog "   for \"production\" environment."
 	elog
-	elog "3. Then you should create a database for your GitLab CI instance, if you"
+	elog "3. Adjust the webserver settings in ${CONF_DIR}/unicorn.rb"
+	elog
+	elog "4. Then you should create a database for your GitLab CI instance, if you"
 	elog "haven't done so already."
 	elog
 	if use postgres; then
@@ -236,13 +238,13 @@ pkg_config() {
 	local gitlab_ci_home="$(egethome ${MY_USER})"
 	
 	# configure Git global settings
-#	if [ ! -e "${gitlab_ci_home}/.gitconfig" ]; then
-#		einfo "Setting git user"
-#		su -l ${MY_USER} -c "
-#			git config --global user.email '${email_from}';
-#			git config --global user.name 'GitLab CI'" \
-#			|| die "failed to setup git name and email"
-#	fi
+	if [ ! -e "${gitlab_ci_home}/.gitconfig" ]; then
+		einfo "Setting git user"
+		su -l ${MY_USER} -c "
+			git config --global user.email '${email_from}';
+			git config --global user.name 'GitLab CI'" \
+			|| die "failed to setup git name and email"
+	fi
 
 	if [ ! -d "${DEST_DIR}/.git" ]; then
 		# create dummy git repo as workaround for
