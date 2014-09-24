@@ -127,10 +127,9 @@ all_ruby_install() {
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
 		-e "s|@USER@|${MY_USER}|" \
-		-e "s|@GITLAB_CI_BASE@|${dest}|" \
+		-e "s|@GITLAB_CI_RUNNER_BASE@|${dest}|" \
 		-e "s|@LOGS_DIR@|${logs}|" \
 		-e "s|@RUN_DIR@|${runs}|" \
-		-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
 		"${T}/${rcscript}" \
 		|| die "failed to filter ${rcscript}"
 
