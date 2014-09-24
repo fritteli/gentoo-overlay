@@ -71,6 +71,7 @@ all_ruby_install() {
 	local dest=${DEST_DIR}
 	local logs=${LOGS_DIR}
 	local temp=${TEMP_DIR}
+	local runs=${RUN_DIR}
 
 	# prepare directories
 	diropts -m750
