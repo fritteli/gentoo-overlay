@@ -85,11 +85,7 @@ all_ruby_install() {
 
 	echo 'export RAILS_ENV=production' > "${D}/${dest}/.profile"
 
-	# remove needless dirs
-#	rm -Rf config tmp log
-
-	# install the rest files
-	# using cp 'cause doins is slow
+	# install the files using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
 
 	# install logrotate config
@@ -144,83 +140,15 @@ pkg_postinst() {
 }
 
 pkg_config() {
-	einfo "Checking configuration files"
+	einfo "You need to register the runner with your GitLab CI instance. In"
+	einfo "order to do so, you need to know the URL of GitLab CI and the"
+	einfo "authentication token. Please follow the instructions on the screen."
 
-	if [ ! -r "${CONF_DIR}/database.yml" ]; then
-		eerror "Copy ${CONF_DIR}/database.yml.* to"
-		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your" 
-		eerror "database settings for \"production\" environment."; die
-	fi
-
-
-	local email_from="$(ryaml ${CONF_DIR}/application.yml production gitlab_ci email_from)"
-	local gitlab_ci_home="$(egethome ${MY_USER})"
-	
-	# configure Git global settings
-	if [ ! -e "${gitlab_ci_home}/.gitconfig" ]; then
-		einfo "Setting git user"
-		su -l ${MY_USER} -c "
-			git config --global user.email '${email_from}';
-			git config --global user.name 'GitLab CI'" \
-			|| die "failed to setup git name and email"
-	fi
-
-	if [ ! -d "${DEST_DIR}/.git" ]; then
-		# create dummy git repo as workaround for
-		# https://github.com/bundler/bundler/issues/2039
-		einfo "Initializing dummy git repository to avoid false errors from bundler"
-		su -l ${MY_USER} -c "
-			cd ${DEST_DIR}
-			git init
-			git add README.md
-			git commit -m 'Dummy repository'" >/dev/null
-	fi
-
-	## Initialize app ##
-
-	local RAILS_ENV="production"
 	local RUBY=${RUBY:-/usr/bin/ruby}
 	local BUNDLE="${RUBY} /usr/bin/bundle"
 
-	local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
-
-	if [ -f "${DEST_DIR}/.secret" ]; then
-		local update=true
-
-		einfo "Migrating database ..."
-		exec_rake db:migrate
-
-	else
-		local update=false
-
-		einfo "Initializing database ..."
-		exec_rake setup
-
-		einfo "Setting up cron schedules ..."
-		exec_rake whenever -w
-	fi
-	
-	if [ "${update}" = 'true' ]; then
-		ewarn
-		ewarn "This configuration script runs only common migration tasks."
-		ewarn "Please read guides on"
-		ewarn "    https://gitlab.com/gitlab-org/gitlab-ci/tree/v${PV}/doc/update"
-		ewarn "for any additional migration tasks specific to your previous GitLab CI"
-		ewarn "version."
-	fi
-}
-
-ryaml() {
-	ruby -ryaml -e 'puts ARGV[1..-1].inject(YAML.load(File.read(ARGV[0]))) {|acc, key| acc[key] }' "$@"
-}
-
-exec_rake() {
-	local command="${BUNDLE} exec rake $@ RAILS_ENV=${RAILS_ENV}"
-
-	echo "   ${command}"
 	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
 		cd ${DEST_DIR}
-		${command}" \
-		|| die "failed to run rake $@"
+		${BUNDLE} exec ./bin/setup" \
+		|| die "failed to run ${BUNDLE} exec ./bin/setup"
 }
