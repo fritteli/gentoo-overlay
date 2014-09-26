@@ -142,7 +142,13 @@ pkg_postinst() {
 pkg_config() {
 	einfo "You need to register the runner with your GitLab CI instance. In"
 	einfo "order to do so, you need to know the URL of GitLab CI and the"
-	einfo "authentication token. Please follow the instructions on the screen."
+	einfo "authentication token."
+	einfo
+	einfo "You can find the token on your GitLab CI website at"
+	einfo
+	einfo "        http://<GITLAB-CI-HOST>/admin/runners"
+	einfo
+	einfo "Now please follow the instructions on the screen."
 
 	local RUBY=${RUBY:-/usr/bin/ruby}
 	local BUNDLE="${RUBY} /usr/bin/bundle"
