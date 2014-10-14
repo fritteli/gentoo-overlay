@@ -18,7 +18,11 @@ If you haven't used layman yet, just run these commands:
 
 Then you can add this overlay wih:
 
-	layman -o https://git.friedli.info/manuel/gentoo-overlay/raw/master/layman.xml -f -a fritteli
+	layman -o https://gittr.ch/manuel/gentoo-overlay/raw/master/layman.xml -f -a fritteli
+
+Alternatively, you may use the overlay hosted on GitHub. That may not be quite as up-to-date as the one on gittr.ch. To use the GitHub version, use this command:
+
+	layman -o https://raw.githubusercontent.com/fritteli/gentoo-overlay/master/layman.xml -f -a fritteli
 
 Keep the overlay up to date from Git:
 
