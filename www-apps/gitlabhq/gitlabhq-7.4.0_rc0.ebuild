@@ -20,6 +20,7 @@ DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
 #SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/3880bb61760ef1f69b0df49148202ff6b4208f01.tar.gz -> ${P}.tar.gz"
+RUBY_S="${PN}-*"
 
 RESTRICT="mirror"
 
@@ -49,7 +50,7 @@ GEMS_DEPEND="
 	mysql? ( virtual/mysql )
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.0.0
+	>=dev-vcs/gitlab-shell-2.0.1
 	dev-vcs/git"
 RDEPEND="${DEPEND}
 	dev-db/redis
