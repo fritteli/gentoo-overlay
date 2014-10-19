@@ -23,6 +23,7 @@ depend() {
 	provide gitlab-ci
 	need redis
 	use net
+	after bootmisc
 }
 
 start() {
