@@ -8,7 +8,7 @@ PYTHON_DEPEND="2"
 inherit distutils eutils python
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="https://github.com/fritteli/palaver"
-SRC_URI="https://github.com/fritteli/palaver/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/fritteli/palaver/archive/${PV}.0.1.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
