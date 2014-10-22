@@ -24,7 +24,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	cp ${FILESDIR}/palaver_plugin.py ${S}/twisted/plugins
+#	cp ${FILESDIR}/palaver_plugin.py ${S}/twisted/plugins
 #	rm ${S}/twisted/plugins/palaver.py
 	cd ${S}/palaver
 	mv palaver.py __init__.py
