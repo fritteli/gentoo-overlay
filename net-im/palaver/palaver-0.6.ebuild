@@ -8,8 +8,7 @@ PYTHON_DEPEND="2"
 inherit distutils eutils python
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="https://github.com/fritteli/palaver"
-SRC_URI="https://github.com/fritteli/palaver/archive/${PV}.0.1.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/${P}.0.1"
+SRC_URI="https://github.com/fritteli/palaver/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -22,13 +21,6 @@ RDEPEND=">=dev-python/twisted-core-2.4.0
 pkg_setup() {
 	python_set_active_version 2
 	python_pkg_setup
-}
-
-src_prepare() {
-#	cp ${FILESDIR}/palaver_plugin.py ${S}/twisted/plugins
-#	rm ${S}/twisted/plugins/palaver.py
-	cd ${S}/palaver
-	mv palaver.py __init__.py
 }
 
 src_compile() {

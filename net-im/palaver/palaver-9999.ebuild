@@ -23,13 +23,6 @@ pkg_setup() {
 	python_pkg_setup
 }
 
-src_prepare() {
-#	cp ${FILESDIR}/palaver_plugin.py ${S}/twisted/plugins
-#	rm ${S}/twisted/plugins/palaver.py
-	cd ${S}/palaver
-	mv palaver.py __init__.py
-}
-
 src_compile() {
 	# nothing to be done here?
 	distutils_src_compile
