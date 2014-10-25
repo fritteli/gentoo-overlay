@@ -18,8 +18,8 @@ inherit eutils python ruby-ng user
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v7.4.0.rc1.tar.gz -> ${P}.tar.gz"
-RUBY_S="${PN}-7.4.0.rc1"
+SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+#RUBY_S="${PN}-7.4.0"
 
 RESTRICT="mirror"
 
