@@ -98,7 +98,7 @@ all_ruby_install() {
 	fowners -R ${GIT_USER}:${GIT_USER} ${DATA_DIR} ${LOGS_DIR}
 
 	fowners ${GIT_USER}:${GIT_USER} "${TOKEN_FILE}"
-	fperms -m600 "${TOKEN_FILE}"
+	fperms 600 "${TOKEN_FILE}"
 }
 
 pkg_postinst() {
