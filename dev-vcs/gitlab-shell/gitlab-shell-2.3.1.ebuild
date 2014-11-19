@@ -80,6 +80,12 @@ all_ruby_install() {
 	insinto $(dirname ${CONF_FILE})
 	newins config.yml.example $(basename ${CONF_FILE})
 
+	# create random .gitlab_shell_secret
+	einfo "creating random .gitlab_shell_secret"
+	RANDOM_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+	TOKEN_FILE="${DEST_DIR}/.gitlab_shell_secret"
+	echo $RANDOM_TOKEN > ${D}/"$TOKEN_FILE"
+
 	# prepare directories
 	diropts -m750; dodir ${DATA_DIR}
 	diropts -m770; keepdir ${DATA_DIR}/repositories
@@ -90,6 +96,9 @@ all_ruby_install() {
 
 	# fix permissions
 	fowners -R ${GIT_USER}:${GIT_USER} ${DATA_DIR} ${LOGS_DIR}
+
+	fowners ${GIT_USER}:${GIT_USER} "${TOKEN_FILE}"
+	fperms -m600 "${TOKEN_FILE}"
 }
 
 pkg_postinst() {
