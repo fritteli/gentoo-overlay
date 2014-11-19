@@ -48,4 +48,5 @@ src_install() {
     fowners -R nexus:nexus ${INSTALL_DIR}
     fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/jsw/linux-x86-64/wrapper"
     fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/jsw/linux-x86-32/wrapper"
+    fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/nexus"
 }
