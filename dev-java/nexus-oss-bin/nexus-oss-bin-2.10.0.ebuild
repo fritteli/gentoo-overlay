@@ -1,3 +1,5 @@
+EAPI="5"
+
 inherit eutils user
 
 DESCRIPTION="Maven Repository Manager"
@@ -30,7 +32,11 @@ src_unpack() {
     unpack ${A}
     cd "${S}"
 
-#    epatch "${FILESDIR}/${P}.patch"
+#    epatch "${FILESDIR}/nexus-wrapper.patch"
+}
+
+src_prepare() {
+    epatch "${FILESDIR}/nexus-wrapper.patch"
 }
 
 src_install() {
