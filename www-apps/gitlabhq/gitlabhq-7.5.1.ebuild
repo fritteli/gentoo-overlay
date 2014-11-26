@@ -14,7 +14,7 @@ EAPI="5"
 USE_RUBY="ruby20 ruby21"
 PYTHON_DEPEND="2:2.7"
 
-inherit eutils python ruby-ng user
+inherit eutils python ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
@@ -26,7 +26,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="6"
 KEYWORDS="~amd64 ~x86"
-IUSE="mysql +postgres +unicorn"
+IUSE="mysql +postgres +unicorn systemd"
 
 ## Gems dependencies:
 #   charlock_holmes		dev-libs/icu
@@ -53,7 +53,8 @@ DEPEND="${GEMS_DEPEND}
 	dev-vcs/git"
 RDEPEND="${DEPEND}
 	dev-db/redis
-	virtual/mta"
+	virtual/mta
+	systemd? ( sys-apps/systemd:0= )"
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.0"
@@ -201,20 +202,28 @@ all_ruby_install() {
 
 	## RC script ##
 
-	local rcscript=gitlab-sidekiq.init
-	use unicorn && rcscript=gitlab-unicorn-6.init
+	if use systemd ; then
+		ewarn "Beware: systemd support has not been tested, use at your own risk!"
+		local svcfile=gitlab-sidekiq.service
+		use unicorn && svcfile=gitlab-unicorn.service
+		systemd_dounit "${FILESDIR}/${svcfile}"
+		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
+	else
+		local rcscript=gitlab-sidekiq.init
+		use unicorn && rcscript=gitlab-unicorn-6.init
 
-	cp "${FILESDIR}/${rcscript}" "${T}" || die
-	sed -i \
-		-e "s|@USER@|${MY_USER}|" \
-		-e "s|@SLOT@|${SLOT}|" \
-		-e "s|@GITLAB_BASE@|${dest}|" \
-		-e "s|@LOGS_DIR@|${logs}|" \
-		-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
-		"${T}/${rcscript}" \
-		|| die "failed to filter ${rcscript}"
+		cp "${FILESDIR}/${rcscript}" "${T}" || die
+		sed -i \
+			-e "s|@USER@|${MY_USER}|" \
+			-e "s|@SLOT@|${SLOT}|" \
+			-e "s|@GITLAB_BASE@|${dest}|" \
+			-e "s|@LOGS_DIR@|${logs}|" \
+			-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
+			"${T}/${rcscript}" \
+			|| die "failed to filter ${rcscript}"
 
-	newinitd "${T}/${rcscript}" "${MY_NAME}-${SLOT}"
+		newinitd "${T}/${rcscript}" "${MY_NAME}-${SLOT}"
+	fi
 }
 
 pkg_postinst() {
