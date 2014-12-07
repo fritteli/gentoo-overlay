@@ -80,11 +80,10 @@ all_ruby_install() {
 	insinto $(dirname ${CONF_FILE})
 	newins config.yml.example $(basename ${CONF_FILE})
 
-	# create random .gitlab_shell_secret
-	einfo "creating random .gitlab_shell_secret"
-	RANDOM_TOKEN=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+	# create symlink for .gitlab_shell_secret
+	einfo "creating symlink for .gitlab_shell_secret"
 	TOKEN_FILE="${DEST_DIR}/.gitlab_shell_secret"
-	echo $RANDOM_TOKEN > ${D}/"$TOKEN_FILE"
+	dosym /opt/gitlab-6/.gitlab_shell_secret "$TOKEN_FILE"
 
 	# prepare directories
 	diropts -m750; dodir ${DATA_DIR}
