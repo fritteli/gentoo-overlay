@@ -30,12 +30,10 @@ pkg_setup() {
 src_unpack() {
     unpack ${A}
     cd "${S}"
-
-#    epatch "${FILESDIR}/nexus-wrapper.patch"
 }
 
 src_prepare() {
-    epatch "${FILESDIR}/nexus-wrapper.patch"
+    epatch "${FILESDIR}/nexus-wrapper-${PV}.patch"
 }
 
 src_install() {

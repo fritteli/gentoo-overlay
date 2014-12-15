@@ -1,0 +1,42 @@
+diff --git a/bin/nexus b/bin/nexus
+index 3f3a23c..4f69c5e 100755
+--- a/nexus-2.11.0-02/bin/nexus
++++ b/nexus-2.11.0-01/bin/nexus
+@@ -161,6 +161,37 @@ case "$DIST_ARCH" in
+     '9000/800')
+         DIST_ARCH="parisc"
+         ;;
++    *)
++        DIST_ARCH=`uname -m | tr [:upper:] [:lower:] | tr -d [:blank:]`
++        case "$DIST_ARCH" in
++            'athlon' | 'ia32' | 'i386' | 'i486' | 'i586' | 'i686')
++                DIST_ARCH="x86"
++                ;;
++            'amd64' | 'x86_64' | 'ia64')
++                DIST_ARCH="x86"
++                DIST_BITS=64
++                ;;
++            'ip27')
++                DIST_ARCH="mips"
++                ;;
++            'power' | 'powerpc' | 'power_pc')
++                DIST_ARCH="ppc"
++                ;;
++            'ppc64')
++                DIST_ARCH="ppc"
++                DIST_BITS=64
++                ;;
++            'pa_risc' | 'pa-risc')
++                DIST_ARCH="parisc"
++                ;;
++            'sun4u' | 'sparcv9')
++                DIST_ARCH="sparc"
++                ;;
++            '9000/800')
++                DIST_ARCH="parisc"
++                ;;
++        esac
++        ;;
+ esac
+ 
+ # Extra architecture detection

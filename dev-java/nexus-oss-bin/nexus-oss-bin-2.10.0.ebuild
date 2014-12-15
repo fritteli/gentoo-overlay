@@ -36,7 +36,7 @@ src_unpack() {
 }
 
 src_prepare() {
-    epatch "${FILESDIR}/nexus-wrapper.patch"
+    epatch "${FILESDIR}/nexus-wrapper-${PV}.patch"
 }
 
 src_install() {
