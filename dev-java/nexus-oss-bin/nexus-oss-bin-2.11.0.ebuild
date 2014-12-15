@@ -5,7 +5,7 @@ inherit eutils user
 DESCRIPTION="Maven Repository Manager"
 HOMEPAGE="http://nexus.sonatype.org/"
 LICENSE="GPL-3"
-SUB_VERSION=""
+SUB_VERSION="-02"
 SRC_URI="http://download.sonatype.com/nexus/oss/nexus-${PV}${SUB_VERSION}-bundle.tar.gz"
 RESTRICT="mirror"
 KEYWORDS="~x86 ~amd64"
