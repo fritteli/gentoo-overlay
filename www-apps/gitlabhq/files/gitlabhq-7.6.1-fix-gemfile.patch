@@ -1,0 +1,115 @@
+diff --git a/Gemfile b/Gemfile
+index ce9b833..49ddf1a 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -28,6 +28,9 @@ gem 'omniauth-google-oauth2'
+ gem 'omniauth-twitter'
+ gem 'omniauth-github'
+ gem 'omniauth-shibboleth'
++# Version 0.8 does not compile, so let's try tag 0.8.1 from github
++# This is a dependency of omniauth-kerberos
++gem "timfel-krb5-auth", '0.8.1.1', :git => "https://github.com/fritteli/krb5-auth.git", :tag => "v0.8.1.1"
+ gem 'omniauth-kerberos'
+ 
+ # Extracting information from a git repository
+@@ -155,6 +158,10 @@ gem "underscore-rails", "~> 1.4.4"
+ # Sanitize user input
+ gem "sanitize", '~> 2.0'
+ 
++# The newer revision of charlock_holmes that is finally fixed to
++# be compatible with Gentoo
++gem "charlock_holmes", git: "https://github.com/brianmario/charlock_holmes.git", ref: "dde194609b3513b0d2369ce8f916ae52566154b4"
++
+ # Protect against bruteforcing
+ gem "rack-attack"
+ 
+@@ -170,7 +177,6 @@ gem 'semantic-ui-sass', '~> 0.16.1.0'
+ gem "sass-rails", '~> 4.0.2'
+ gem "coffee-rails"
+ gem "uglifier"
+-gem "therubyracer"
+ gem 'turbolinks'
+ gem 'jquery-turbolinks'
+ 
+diff --git a/Gemfile.lock b/Gemfile.lock
+index a93935f..66e2c22 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -1,3 +1,17 @@
++GIT
++  remote: https://github.com/brianmario/charlock_holmes.git
++  revision: dde194609b3513b0d2369ce8f916ae52566154b4
++  ref: dde194609b3513b0d2369ce8f916ae52566154b4
++  specs:
++    charlock_holmes (0.6.9.4)
++
++GIT
++  remote: https://github.com/fritteli/krb5-auth.git
++  revision: 14e09f7fdd79962b146e0a6513fdb1b8e64c221b
++  tag: v0.8.1.1
++  specs:
++    timfel-krb5-auth (0.8.1.1)
++
+ GEM
+   remote: https://rubygems.org/
+   specs:
+@@ -62,7 +76,6 @@ GEM
+       json (>= 1.7)
+     celluloid (0.15.2)
+       timers (~> 1.1.0)
+-    charlock_holmes (0.6.9.4)
+     cliver (0.3.2)
+     code_analyzer (0.4.3)
+       sexp_processor
+@@ -280,7 +293,6 @@ GEM
+       addressable (~> 2.3)
+     letter_opener (1.1.2)
+       launchy (~> 2.2)
+-    libv8 (3.16.14.7)
+     listen (2.3.1)
+       celluloid (>= 0.15.2)
+       rb-fsevent (>= 0.9.3)
+@@ -426,7 +438,6 @@ GEM
+       redis-store (~> 1.1.0)
+     redis-store (1.1.4)
+       redis (>= 2.2)
+-    ref (1.0.5)
+     request_store (1.0.5)
+     require_all (1.3.2)
+     rest-client (1.6.7)
+@@ -525,9 +536,6 @@ GEM
+     term-ansicolor (1.2.2)
+       tins (~> 0.8)
+     test_after_commit (0.2.2)
+-    therubyracer (0.12.0)
+-      libv8 (~> 3.16.14.0)
+-      ref
+     thin (1.6.1)
+       daemons (>= 1.0.9)
+       eventmachine (>= 1.0.0)
+@@ -536,7 +544,6 @@ GEM
+     thread_safe (0.3.4)
+     tilt (1.4.1)
+     timers (1.1.0)
+-    timfel-krb5-auth (0.8)
+     tinder (1.9.3)
+       eventmachine (~> 1.0)
+       faraday (~> 0.8)
+@@ -606,6 +613,7 @@ DEPENDENCIES
+   bootstrap-sass (~> 3.0)
+   capybara (~> 2.2.1)
+   carrierwave
++  charlock_holmes!
+   coffee-rails
+   colored
+   coveralls
+@@ -704,8 +712,8 @@ DEPENDENCIES
+   stamp
+   state_machine
+   test_after_commit
+-  therubyracer
+   thin
++  timfel-krb5-auth (= 0.8.1.1)!
+   tinder (~> 1.9.2)
+   turbolinks
+   uglifier
