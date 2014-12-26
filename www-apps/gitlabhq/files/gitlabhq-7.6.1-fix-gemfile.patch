@@ -8,7 +8,7 @@ index ce9b833..49ddf1a 100644
  gem 'omniauth-shibboleth'
 +# Version 0.8 does not compile, so let's try tag 0.8.1 from github
 +# This is a dependency of omniauth-kerberos
-+gem "timfel-krb5-auth", '0.8.1.1', :git => "https://github.com/fritteli/krb5-auth.git", :tag => "v0.8.1.1"
++gem "timfel-krb5-auth", '0.8.1.1', :require => 'krb5_auth', :git => "https://github.com/fritteli/krb5-auth.git", :tag => "v0.8.1.1"
  gem 'omniauth-kerberos'
  
  # Extracting information from a git repository
