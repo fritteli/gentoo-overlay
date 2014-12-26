@@ -47,6 +47,7 @@ GEMS_DEPEND="
 	net-libs/nodejs
 	postgres? ( dev-db/postgresql-base )
 	mysql? ( virtual/mysql )
+	virtual/krb5
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.4.0
