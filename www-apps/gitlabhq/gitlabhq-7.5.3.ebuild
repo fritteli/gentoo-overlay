@@ -35,7 +35,7 @@ IUSE="mysql +postgres +unicorn systemd"
 #   json				dev-util/ragel
 #   pygments.rb			python 2.7+
 #   execjs				net-libs/nodejs, or any other JS runtime
-#   pg					dev-db/postgresql-base
+#   pg					dev-db/postgresql
 #   mysql				virtual/mysql
 #
 GEMS_DEPEND="
@@ -45,7 +45,7 @@ GEMS_DEPEND="
 	dev-util/cmake
 	dev-util/ragel
 	net-libs/nodejs
-	postgres? ( dev-db/postgresql-base )
+	postgres? ( dev-db/postgresql )
 	mysql? ( virtual/mysql )
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
