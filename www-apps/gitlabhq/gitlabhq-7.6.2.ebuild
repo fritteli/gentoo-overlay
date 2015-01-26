@@ -73,7 +73,7 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-7.6.1-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-7.1.1-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
 	"${PN}-7.0.0-email-custom-reply_to.patch"
