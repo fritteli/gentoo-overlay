@@ -25,8 +25,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="6"
-#KEYWORDS="~amd64 ~x86"
-KEYWORDS="-*"
+KEYWORDS="~amd64 ~x86"
 IUSE="mysql +postgres +unicorn systemd"
 
 ## Gems dependencies:
@@ -52,7 +51,8 @@ GEMS_DEPEND="
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.4.0
-	dev-vcs/git"
+	dev-vcs/git
+	virtual/krb5"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
