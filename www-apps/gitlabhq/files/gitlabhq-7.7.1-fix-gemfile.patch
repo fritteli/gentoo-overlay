@@ -1,0 +1,97 @@
+diff --git a/Gemfile b/Gemfile
+index b403e85..03f48ed 100644
+--- a/Gemfile
++++ b/Gemfile
+@@ -160,6 +160,10 @@ gem "underscore-rails", "~> 1.4.4"
+ # Sanitize user input
+ gem "sanitize", '~> 2.0'
+ 
++# The newer revision of charlock_holmes that is finally fixed to
++# be compatible with Gentoo
++gem "charlock_holmes", git: "https://github.com/brianmario/charlock_holmes.git", ref: "dde194609b3513b0d2369ce8f916ae52566154b4"
++
+ # Protect against bruteforcing
+ gem "rack-attack"
+ 
+@@ -259,7 +263,6 @@ end
+ 
+ group :production do
+   gem "gitlab_meta", '7.0'
+-  gem "therubyracer"
+ end
+ 
+ gem "newrelic_rpm"
+diff --git a/Gemfile.lock b/Gemfile.lock
+index c6aa35a..531a483 100644
+--- a/Gemfile.lock
++++ b/Gemfile.lock
+@@ -1,3 +1,10 @@
++GIT
++  remote: https://github.com/brianmario/charlock_holmes.git
++  revision: dde194609b3513b0d2369ce8f916ae52566154b4
++  ref: dde194609b3513b0d2369ce8f916ae52566154b4
++  specs:
++    charlock_holmes (0.6.9.4)
++
+ GEM
+   remote: https://rubygems.org/
+   specs:
+@@ -64,7 +71,6 @@ GEM
+       json (>= 1.7)
+     celluloid (0.15.2)
+       timers (~> 1.1.0)
+-    charlock_holmes (0.6.9.4)
+     cliver (0.3.2)
+     code_analyzer (0.4.3)
+       sexp_processor
+@@ -285,7 +291,6 @@ GEM
+       addressable (~> 2.3)
+     letter_opener (1.1.2)
+       launchy (~> 2.2)
+-    libv8 (3.16.14.7)
+     listen (2.3.1)
+       celluloid (>= 0.15.2)
+       rb-fsevent (>= 0.9.3)
+@@ -439,7 +444,6 @@ GEM
+       redis-store (~> 1.1.0)
+     redis-store (1.1.4)
+       redis (>= 2.2)
+-    ref (1.0.5)
+     request_store (1.0.5)
+     require_all (1.3.2)
+     rest-client (1.6.7)
+@@ -541,9 +545,6 @@ GEM
+     term-ansicolor (1.2.2)
+       tins (~> 0.8)
+     test_after_commit (0.2.2)
+-    therubyracer (0.12.0)
+-      libv8 (~> 3.16.14.0)
+-      ref
+     thin (1.6.1)
+       daemons (>= 1.0.9)
+       eventmachine (>= 1.0.0)
+@@ -552,7 +553,7 @@ GEM
+     thread_safe (0.3.4)
+     tilt (1.4.1)
+     timers (1.1.0)
+-    timfel-krb5-auth (0.8)
++    timfel-krb5-auth (0.8.3)
+     tinder (1.9.3)
+       eventmachine (~> 1.0)
+       faraday (~> 0.8)
+@@ -623,6 +624,7 @@ DEPENDENCIES
+   browser
+   capybara (~> 2.2.1)
+   carrierwave
++  charlock_holmes!
+   coffee-rails
+   colored
+   coveralls
+@@ -724,7 +726,6 @@ DEPENDENCIES
+   stamp
+   state_machine
+   test_after_commit
+-  therubyracer
+   thin
+   tinder (~> 1.9.2)
+   turbolinks
