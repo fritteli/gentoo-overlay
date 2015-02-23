@@ -25,7 +25,9 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="6"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
+# need to update the init script before releasing this ebuild into the wild
+KEYWORDS="-*"
 IUSE="mysql +postgres +unicorn systemd"
 
 ## Gems dependencies:
