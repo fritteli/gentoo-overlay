@@ -199,7 +199,7 @@ all_ruby_install() {
 	## RC script ##
 
 	local rcscript=gitlab-sidekiq.init
-	use unicorn && rcscript=gitlab-unicorn-6.init
+	use unicorn && rcscript=gitlab-unicorn-7.init
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
