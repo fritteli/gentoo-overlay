@@ -51,12 +51,12 @@ GEMS_DEPEND="
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.4.1
-	dev-vcs/git"
+	dev-vcs/git
+	!app-crypt/heimdal"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
-	systemd? ( sys-apps/systemd:0= )
-	!app-crypt/heimdal"
+	systemd? ( sys-apps/systemd:0= )"
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.0"
