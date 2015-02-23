@@ -55,7 +55,8 @@ DEPEND="${GEMS_DEPEND}
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
-	systemd? ( sys-apps/systemd:0= )"
+	systemd? ( sys-apps/systemd:0= )
+	!app-crypt/heimdal"
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.0"
