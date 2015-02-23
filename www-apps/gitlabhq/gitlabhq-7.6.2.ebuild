@@ -51,7 +51,8 @@ GEMS_DEPEND="
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.4.0
-	dev-vcs/git"
+	dev-vcs/git
+	!app-crypt/heimdal"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
