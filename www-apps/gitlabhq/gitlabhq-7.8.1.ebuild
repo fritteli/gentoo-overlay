@@ -47,10 +47,12 @@ GEMS_DEPEND="
 	net-libs/nodejs
 	postgres? ( dev-db/postgresql )
 	mysql? ( virtual/mysql )
+	virtual/krb5
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.0.1
-	dev-vcs/git"
+	>=dev-vcs/gitlab-shell-2.5.4
+	dev-vcs/git
+	!app-crypt/heimdal"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
@@ -72,10 +74,10 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-7.1.1-fix-gemfile.patch"
-	"${PN}-7.1.1-fix-project-name-regex.patch"
+	"${PN}-7.8.0-fix-gemfile.patch"
+	"${PN}-7.7.1-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
-	"${PN}-7.0.0-email-custom-reply_to.patch"
+	"${PN}-7.8.0-email-custom-reply_to.patch"
 )
 
 MY_NAME="gitlab"
@@ -204,12 +206,12 @@ all_ruby_install() {
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-sidekiq-7.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
 		local rcscript=gitlab-sidekiq.init
-		use unicorn && rcscript=gitlab-unicorn-6.init
+		use unicorn && rcscript=gitlab-unicorn-7.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \

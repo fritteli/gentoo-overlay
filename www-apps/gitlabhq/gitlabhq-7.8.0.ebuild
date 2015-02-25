@@ -206,7 +206,7 @@ all_ruby_install() {
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_newunit "${FILESDIR}/gitlab-sidekiq-7.service gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-sidekiq-7.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
