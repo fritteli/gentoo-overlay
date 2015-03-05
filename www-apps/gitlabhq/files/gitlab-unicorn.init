@@ -1,27 +1,23 @@
 #!/sbin/runscript
 
 name="GitLab"
-description="GitLab @SLOT@ on Unicorns"
+description="GitLab on Unicorns"
 
 : ${gitlab_user:=@USER@}
-: ${gitlab_group:=@GROUP@}
-: ${gitlab_home:="@GITLAB_HOME@"}
-
-: ${server_pidfile:="/run/gitlab/unicorn.pid"}
+: ${gitlab_base:="@GITLAB_BASE@"}
 : ${rails_env:=production}
 
-: ${resque_pidfile:="/run/gitlab/resque_worker.pid"}
-: ${resque_log:="/var/log/gitlab-4.0/resque.log"}
-: ${resque_queue:=@RESQUE_QUEUE@}
+: ${server_pidfile:="/run/gitlab/unicorn.pid"}
+
+: ${sidekiq_pidfile:="/run/gitlab/sidekiq.pid"}
+: ${sidekiq_logfile:="@LOGS_DIR@/sidekiq.log"}
+: ${sidekiq_queues:="@QUEUES@"}
 
 server_command="/usr/bin/bundle"
-server_command_args="exec unicorn_rails -c ${gitlab_home}/config/unicorn.rb -E ${rails_env} -D"
-resque_command="/usr/bin/bundle"
-resque_command_args="exec rake environment resque:work QUEUE=${resque_queue} RAILS_ENV=${rails_env}"
+server_command_args="exec unicorn_rails -c ${gitlab_base}/config/unicorn.rb -E ${rails_env} -D"
 
-if [ ${rails_env} = development ]; then
-	resque_command_args+=" VVERBOSE=1"
-fi
+sidekiq_command="/usr/bin/bundle"
+sidekiq_command_args="exec sidekiq -q ${sidekiq_queues//,/ -q } -P ${sidekiq_pidfile} -L ${sidekiq_logfile}"
 
 depend() {
 	provide gitlab
@@ -30,40 +26,42 @@ depend() {
 }
 
 start() {
-	ebegin "Starting GitLab @SLOT@ Unicorn servers"
+	ebegin "Starting ${name} - Unicorn servers"
 
-	checkpath -d -o "${gitlab_user}:${gitlab_group}" -m750 "$(dirname "${server_pidfile}")"
-	checkpath -d -o "${gitlab_user}:${gitlab_group}" -m750 "$(dirname "${resque_pidfile}")"
+	checkpath -d -o ${gitlab_user} -m755 "$(dirname "${server_pidfile}")"
+	checkpath -d -o ${gitlab_user} -m755 "$(dirname "${sidekiq_pidfile}")"
 
 	start-stop-daemon --start \
-		--chdir "${gitlab_home}" \
-		--user="${gitlab_user}:${gitlab_group}" \
+		--chdir "${gitlab_base}" \
+		--user=${gitlab_user} \
 		--pidfile="${server_pidfile}" \
+		--env RAILS_ENV=${rails_env} \
 		--exec ${server_command} -- ${server_command_args}
 	eend $?
 
-	ebegin "Starting GitLab @SLOT@ Resque worker"
+	ebegin "Starting ${name} - Sidekiq"
 
 	start-stop-daemon --start \
 		--background --quiet \
-		--chdir "${gitlab_home}" \
-		--user="${gitlab_user}:${gitlab_group}" \
-		--make-pidfile --pidfile=${resque_pidfile} \
-		--stdout "${resque_log}" --stderr "${resque_log}" \
-		--exec ${resque_command} -- ${resque_command_args}
+		--chdir "${gitlab_base}" \
+		--user=${gitlab_user} \
+		--pidfile="${sidekiq_pidfile}" \
+		--env RAILS_ENV=${rails_env} \
+		--exec ${sidekiq_command} -- ${sidekiq_command_args}
 	eend $?
 }
 
 stop() {
-	ebegin "Stopping GitLab @SLOT@ Resque worker"
+	ebegin "Stopping ${name} - Sidekiq"
 	start-stop-daemon --stop \
-		--pidfile=${resque_pidfile} \
-		--exec ${resque_command}
+		--pidfile=${sidekiq_pidfile} \
+		--exec ${sidekiq_command}
 	eend $?
 
-	ebegin "Stopping GitLab @SLOT@ Unicorn servers"
+	ebegin "Stopping ${name} - Unicorn servers"
 	start-stop-daemon --stop \
+		--signal QUIT \
 		--pidfile=${server_pidfile} \
-		--exec ${server_command} -- ${server_command_args}
+		--exec ${server_command}
 	eend $?
 }
