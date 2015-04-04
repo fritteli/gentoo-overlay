@@ -1,0 +1,156 @@
+diff --git a/gtk/gtktreeview.c b/gtk/gtktreeview.c
+index 0f700f8..3f9e727 100644
+--- a/gtk/gtktreeview.c
++++ b/gtk/gtktreeview.c
+@@ -1584,22 +1584,6 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+ 				  GTK_MOVEMENT_PAGES, 1);
+ 
+ 
+-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Right, 0, "move-cursor", 2,
+-				G_TYPE_ENUM, GTK_MOVEMENT_VISUAL_POSITIONS,
+-				G_TYPE_INT, 1);
+-
+-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Left, 0, "move-cursor", 2,
+-				G_TYPE_ENUM, GTK_MOVEMENT_VISUAL_POSITIONS,
+-				G_TYPE_INT, -1);
+-
+-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Right, 0, "move-cursor", 2,
+-				G_TYPE_ENUM, GTK_MOVEMENT_VISUAL_POSITIONS,
+-				G_TYPE_INT, 1);
+-
+-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Left, 0, "move-cursor", 2,
+-				G_TYPE_ENUM, GTK_MOVEMENT_VISUAL_POSITIONS,
+-				G_TYPE_INT, -1);
+-
+   gtk_binding_entry_add_signal (binding_set, GDK_KEY_Right, GDK_CONTROL_MASK,
+                                 "move-cursor", 2,
+ 				G_TYPE_ENUM, GTK_MOVEMENT_VISUAL_POSITIONS,
+@@ -1651,6 +1635,16 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+ 				G_TYPE_BOOLEAN, TRUE,
+ 				G_TYPE_BOOLEAN, FALSE);
+ 
++  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Right, 0, "expand-collapse-cursor-row", 3,
++				G_TYPE_BOOLEAN, FALSE,
++				G_TYPE_BOOLEAN, TRUE,
++				G_TYPE_BOOLEAN, FALSE);
++
++  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Right, 0, "expand-collapse-cursor-row", 3,
++				G_TYPE_BOOLEAN, FALSE,
++				G_TYPE_BOOLEAN, TRUE,
++				G_TYPE_BOOLEAN, FALSE);
++
+   gtk_binding_entry_add_signal (binding_set, GDK_KEY_asterisk, 0,
+                                 "expand-collapse-cursor-row", 3,
+                                 G_TYPE_BOOLEAN, TRUE,
+@@ -1662,6 +1656,16 @@ G_GNUC_END_IGNORE_DEPRECATIONS
+                                 G_TYPE_BOOLEAN, TRUE,
+                                 G_TYPE_BOOLEAN, TRUE);
+ 
++  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Left, 0,
++                                "expand-collapse-cursor-row", 3,
++                                G_TYPE_BOOLEAN, FALSE,
++                                G_TYPE_BOOLEAN, FALSE,
++                                G_TYPE_BOOLEAN, FALSE);
++  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Left, 0,
++                                "expand-collapse-cursor-row", 3,
++                                G_TYPE_BOOLEAN, FALSE,
++                                G_TYPE_BOOLEAN, FALSE,
++                                G_TYPE_BOOLEAN, FALSE);
+   gtk_binding_entry_add_signal (binding_set, GDK_KEY_slash, 0,
+                                 "expand-collapse-cursor-row", 3,
+                                 G_TYPE_BOOLEAN, TRUE,
+@@ -10973,6 +10977,7 @@ gtk_tree_view_real_expand_collapse_cursor_row (GtkTreeView *tree_view,
+ 					       gboolean     open_all)
+ {
+   GtkTreePath *cursor_path = NULL;
++  gboolean return_value = TRUE;
+ 
+   if (!gtk_widget_has_focus (GTK_WIDGET (tree_view)))
+     return FALSE;
+@@ -10983,31 +10988,73 @@ gtk_tree_view_real_expand_collapse_cursor_row (GtkTreeView *tree_view,
+   cursor_path = _gtk_tree_path_new_from_rbtree (tree_view->priv->cursor_tree,
+                                                 tree_view->priv->cursor_node);
+ 
+-  /* Don't handle the event if we aren't an expander */
+-  if (!GTK_RBNODE_FLAG_SET (tree_view->priv->cursor_node, GTK_RBNODE_IS_PARENT))
+-    return FALSE;
+-
+   if (!logical
+       && gtk_widget_get_direction (GTK_WIDGET (tree_view)) == GTK_TEXT_DIR_RTL)
+     expand = !expand;
+ 
+-  if (expand)
+-    gtk_tree_view_real_expand_row (tree_view,
+-                                   cursor_path,
+-                                   tree_view->priv->cursor_tree,
+-                                   tree_view->priv->cursor_node,
+-                                   open_all,
+-                                   TRUE);
++  /* If we are on a collapsed node */
++  if (!gtk_tree_view_row_expanded(tree_view, cursor_path))
++  {
++    if (!expand)
++    {
++      if (gtk_tree_path_up(cursor_path))
++      {
++        /* If we try to collapse using arrows, select the parent node */
++        if (!logical)
++          gtk_tree_view_set_cursor(tree_view,cursor_path,NULL,FALSE);
++        /* If we try to collapse a leaf node using minus,
++           cancel action and start interactive search */
++        else if (!GTK_RBNODE_FLAG_SET (tree_view->priv->cursor_node, GTK_RBNODE_IS_PARENT))
++          return_value = FALSE;
++      }
++    }
++    else if (GTK_RBNODE_FLAG_SET (tree_view->priv->cursor_node, GTK_RBNODE_IS_PARENT))
++    {
++      gtk_tree_view_real_expand_row (tree_view,  
++                                     cursor_path,
++                                     tree_view->priv->cursor_tree,
++                                     tree_view->priv->cursor_node,
++                                     open_all,
++                                     TRUE);
++    }   
++    else
++      /* If we try to expand a leaf node, cancel action */
++      return_value = !logical;
++  }
++  /* If we are on a expanded node */
++
+   else
+-    gtk_tree_view_real_collapse_row (tree_view,
++  {
++    if (expand)
++    {
++      if(open_all)
++      {
++        gtk_tree_view_real_expand_row (tree_view,
+                                      cursor_path,
+                                      tree_view->priv->cursor_tree,
+                                      tree_view->priv->cursor_node,
++                                     open_all,
+                                      TRUE);
++      }
++ 
++      /* If we try to expand using arrows, select the first child */
++      if (!logical)
++      {
++        gtk_tree_path_down(cursor_path);
++        gtk_tree_view_set_cursor(tree_view,cursor_path,NULL,FALSE);
++      }
++    }  
++    else
++      gtk_tree_view_real_collapse_row (tree_view,
++                                       cursor_path,
++                                       tree_view->priv->cursor_tree,
++                                       tree_view->priv->cursor_node,
++                                       TRUE);
++  }
+ 
+   gtk_tree_path_free (cursor_path);
+ 
+-  return TRUE;
++  return return_value;
+ }
+ 
+ static gboolean
