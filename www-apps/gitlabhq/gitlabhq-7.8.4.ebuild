@@ -99,7 +99,6 @@ all_ruby_prepare() {
 	ewarn "- /etc/gitlab-6 -> /etc/gitlab"
 	ewarn "- /opt/gitlab-6 -> /opt/gitlab"
 	ewarn "If you feel uncomfortable with this change, please abort the build now."
-	#[[ -z ${EPAUSE_IGNORE} ]] && 
 	sleep 5
 
 	# fix paths
@@ -112,14 +111,14 @@ all_ruby_prepare() {
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*repos_path:\s).*|\1${repos_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*hooks_path:\s).*|\1${shell_path}/hooks/|" \
 		config/gitlab.yml.example || die "failed to filter gitlab.yml.example"
-	
+
 	local run_path=/run/${MY_NAME}
 	sed -i -E \
 		-e "s|/home/git/gitlab/tmp/(pids\|sockets)|${run_path}|" \
 		-e "s|/home/git/gitlab/log|${LOGS_DIR}|" \
 		-e "s|/home/git/gitlab|${DEST_DIR}|" \
 		config/unicorn.rb.example || die "failed to filter unicorn.rb.example"
-	
+
 	sed -i \
 		-e "s|/home/git/gitlab/tmp/sockets|${run_path}|" \
 		lib/support/nginx/gitlab || die "failed to filter nginx/gitlab"
@@ -144,7 +143,7 @@ all_ruby_prepare() {
 		mv ${dbconf}.mysql ${dbconf}
 		rm ${dbconf}.postgresql
 	fi
-	
+
 	# remove useless files
 	rm -r lib/support/{deploy,init.d}
 	use unicorn || rm config/unicorn.rb
@@ -296,7 +295,7 @@ pkg_config() {
 
 	local email_from="$(ryaml ${CONF_DIR}/gitlab.yml production gitlab email_from)"
 	local git_home="$(egethome ${MY_USER})"
-	
+
 	# configure Git global settings
 	if [ ! -e "${git_home}/.gitconfig" ]; then
 		einfo "Setting git user"
@@ -346,10 +345,10 @@ pkg_config() {
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
 	fi
-	
+
 	einfo "Precompiling assests ..."
 	exec_rake assets:precompile
-	
+
 	if [ "${update}" = 'true' ]; then
 		ewarn
 		ewarn "This configuration script runs only common migration tasks."
