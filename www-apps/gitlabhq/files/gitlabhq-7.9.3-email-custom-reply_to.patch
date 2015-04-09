@@ -1,0 +1,39 @@
+diff --git a/app/mailers/notify.rb b/app/mailers/notify.rb
+index ee27879..90364a0 100644
+--- a/app/mailers/notify.rb
++++ b/app/mailers/notify.rb
+@@ -19,7 +19,7 @@ class Notify < ActionMailer::Base
+   default_url_options[:script_name] = Gitlab.config.gitlab.relative_url_root
+ 
+   default from: Proc.new { default_sender_address.format }
+-  default reply_to: "noreply@#{Gitlab.config.gitlab.host}"
++  default reply_to: Gitlab.config.gitlab.email_reply_to
+ 
+   # Just send email with 2 seconds delay
+   def self.delay
+diff --git a/config/gitlab.yml.example b/config/gitlab.yml.example
+index a85db10..47605d2 100644
+--- a/config/gitlab.yml.example
++++ b/config/gitlab.yml.example
+@@ -45,6 +45,9 @@ production: &base
+     email_from: example@example.com
+     email_display_name: GitLab
+ 
++    # Email address used in the "Reply-To" field in mails send by GitLab (default: no-reply@<host>
++    email_reply_to: no-reply@example.com
++
+     # Email server smtp settings are in config/initializers/smtp_settings.rb.sample
+ 
+     # default_can_create_group: false  # default: true
+diff --git a/config/initializers/1_settings.rb b/config/initializers/1_settings.rb
+index 70af7a8..ee00e17 100644
+--- a/config/initializers/1_settings.rb
++++ b/config/initializers/1_settings.rb
+@@ -103,6 +103,7 @@ Settings.gitlab['protocol']   ||= Settings.gitlab.https ? "https" : "http"
+ Settings.gitlab['email_enabled'] ||= true if Settings.gitlab['email_enabled'].nil?
+ Settings.gitlab['email_from'] ||= "gitlab@#{Settings.gitlab.host}"
+ Settings.gitlab['email_display_name'] ||= "GitLab"
++Settings.gitlab['email_reply_to'] ||= "no-reply@#{Settings.gitlab.host}"
+ Settings.gitlab['url']        ||= Settings.send(:build_gitlab_url)
+ Settings.gitlab['user']       ||= 'git'
+ Settings.gitlab['user_home']  ||= begin
