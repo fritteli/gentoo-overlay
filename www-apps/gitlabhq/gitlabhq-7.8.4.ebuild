@@ -93,6 +93,14 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 SIDEKIQ_QUEUES="post_receive,mailer,system_hook,project_web_hook,gitlab_shell,common,default"
 
 all_ruby_prepare() {
+	ewarn "Please note: This version of the Gitlab ebuild is unslotted, unlike older"
+	ewarn "versions (<7.8.4). Therefore, some directories have changed. Please update"
+	ewarn "your configuration accordingly. The changed directories as as follows:"
+	ewarn "- /etc/gitlab-6 -> /etc/gitlab"
+	ewarn "- /opt/gitlab-6 -> /opt/gitlab"
+	ewarn "If you feel uncomfortable with this change, please abort the build now."
+	#[[ -z ${EPAUSE_IGNORE} ]] && 
+	sleep 5
 
 	# fix paths
 	local satellites_path="${TEMP_DIR}/repo_satellites"
