@@ -145,7 +145,8 @@ all_ruby_prepare() {
 	fi
 
 	# remove useless files
-	rm -r lib/support/{deploy,init.d}
+	rm -r lib/support/deploy
+	rm -r lib/support/init.d/*
 	use unicorn || rm config/unicorn.rb
 }
 
@@ -178,6 +179,8 @@ all_ruby_install() {
 	# install the rest files
 	# using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
+
+	cp "${FILESDIR}/${rcscript}" "${D}/${dest}/lib/support/init.d/gitlab"
 
 	# install logrotate config
 	dodir /etc/logrotate.d
