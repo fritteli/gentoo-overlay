@@ -1,5 +1,5 @@
 diff --git a/Gemfile b/Gemfile
-index f697f09..770b7b0 100644
+index f697f09..d557a18 100644
 --- a/Gemfile
 +++ b/Gemfile
 @@ -168,6 +168,10 @@ gem "underscore-rails", "~> 1.4.4"
@@ -13,6 +13,16 @@ index f697f09..770b7b0 100644
  # Protect against bruteforcing
  gem "rack-attack"
  
+@@ -177,9 +181,6 @@ gem 'ace-rails-ap'
+ # Keyboard shortcuts
+ gem 'mousetrap-rails'
+ 
+-# Detect and convert string character encoding
+-gem 'charlock_holmes'
+-
+ gem "sass-rails", '~> 4.0.2'
+ gem "coffee-rails"
+ gem "uglifier"
 diff --git a/Gemfile.lock b/Gemfile.lock
 index c38daf6..067fc86 100644
 --- a/Gemfile.lock
