@@ -83,7 +83,7 @@ all_ruby_install() {
 	# create symlink for .gitlab_shell_secret
 	einfo "creating symlink for .gitlab_shell_secret"
 	TOKEN_FILE="${DEST_DIR}/.gitlab_shell_secret"
-	dosym /opt/gitlab-6/.gitlab_shell_secret "$TOKEN_FILE"
+	dosym /opt/gitlab/.gitlab_shell_secret "$TOKEN_FILE"
 
 	# prepare directories
 	diropts -m750; dodir ${DATA_DIR}
