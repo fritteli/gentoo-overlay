@@ -126,7 +126,7 @@ all_ruby_prepare() {
 	sed -i -E \
 		-e 's|(username:).*|\1 gitlab|' \
 		-e 's|(password:).*|\1 gitlab|' \
-		-e 's|(socket:).*|/run/postgresql/.s.PGSQL.5432|' \
+		-e 's|(socket:).*|\1 /run/postgresql/.s.PGSQL.5432|' \
 		config/database.yml.postgresql \
 		|| die "failed to filter database.yml.postgresql"
 
