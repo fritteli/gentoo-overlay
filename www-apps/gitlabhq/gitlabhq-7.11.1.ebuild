@@ -18,9 +18,9 @@ inherit eutils python ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
-#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v7.11.0.rc2.tar.gz -> ${P}.tar.gz"
-RUBY_S="${PN}-7.11.0"
+SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v7.11.0.rc2.tar.gz -> ${P}.tar.gz"
+#RUBY_S="${PN}-7.11.0"
 
 RESTRICT="mirror"
 
@@ -76,7 +76,6 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${PN}-7.9.3-fix-gemfile.patch"
-	"${PN}-7.10.3-fix-project-name-regex.patch"
 	"${PN}-6.0.2-fix-sendmail-config.patch"
 )
 
