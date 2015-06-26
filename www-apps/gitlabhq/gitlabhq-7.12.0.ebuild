@@ -27,7 +27,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="mysql +postgres +unicorn systemd"
+IUSE="kerberos mysql +postgres +unicorn systemd"
 
 ## Gems dependencies:
 #   charlock_holmes		dev-libs/icu
@@ -48,12 +48,12 @@ GEMS_DEPEND="
 	net-libs/nodejs
 	postgres? ( dev-db/postgresql )
 	mysql? ( virtual/mysql )
-	virtual/krb5
+	kerberos? ( virtual/krb5 )
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.3
 	dev-vcs/git
-	!app-crypt/heimdal"
+	kerberos? ( !app-crypt/heimdal )"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
@@ -186,7 +186,7 @@ all_ruby_install() {
 	cd "${D}/${dest}"
 
 	local without="development test aws"
-	local flag; for flag in mysql postgres unicorn; do
+	local flag; for flag in mysql postgres unicorn kerberos; do
 		without+="$(use $flag || echo ' '$flag)"
 	done
 	local bundle_args="--deployment ${without:+--without ${without}}"
