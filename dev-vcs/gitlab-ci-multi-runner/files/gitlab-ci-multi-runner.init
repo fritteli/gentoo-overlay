@@ -1,58 +1,21 @@
 #!/sbin/runscript
-
-name="GitLab CI Multi Runner"
-description="GitLab CI Multi Runner, starts runners in the background"
-
-: ${gitlab_ci_runner_user:=@USER@}
-: ${gitlab_ci_runner_base:="@GITLAB_CI_RUNNER_BASE@"}
-: ${gitlab_ci_runner_pidfile_base:="@RUN_DIR@/gitlab-ci-runner.pid"}
-: ${gitlab_ci_runner_logfile:="@LOGS_DIR@/gitlab-ci-runner.log"}
-: ${gitlab_ci_runner_num:=1} # number of runners to spawn
-
-bundle_command="/usr/bin/bundle"
-bundle_command_args="exec ./bin/runner"
+# Copyright 2015 Nicolas Heine
 
 depend() {
-	provide gitlab-ci-multi-runner
+        after sshd
+        need net
+        need localmount
 }
 
 start() {
-	ebegin "Starting ${name}"
-
-	for (( i=1; i<=${gitlab_ci_runner_num}; i++ )) ; do
-		einfo "Starting runner ${i} of ${gitlab_ci_runner_num} ..."
-		local pidfile="${gitlab_ci_runner_pidfile_base}${i}"
-		checkpath -d -o ${gitlab_ci_runner_user} -m755 "$(dirname "${pidfile}")"
-		start-stop-daemon --start \
-			--chdir "${gitlab_ci_runner_base}" \
-			--user=${gitlab_ci_runner_user} \
-			--make-pidfile \
-			--pidfile="${pidfile}" \
-			--background \
-			--exec /bin/bash -- -c "exec ${bundle_command} ${bundle_command_args} >> ${gitlab_ci_runner_logfile} 2>&1"
-		local success=$?
-		if [ ${success}!=0 ] ; then
-			eend ${success}
-		fi
-	done
-
-	eend 0
+        ebegin "Starting gitlab-ci-multi-runner"
+        start-stop-daemon --start -b -u @USER@ --chdir /var/tmp/gitlab-ci-multi-runner --pidfile /var/run/gitlab-ci-multi-runner.pid -1 /dev/null -2 /dev/null --make-pidfile \
+                --exec /opt/gitlab-ci-multi-runner/gitlab-ci-multi-runner -- run
+        eend $?
 }
 
 stop() {
-	ebegin "Stopping ${name}"
-
-	for (( i=1; i<=${gitlab_ci_runner_num}; i++ )) ; do
-		einfo "Stopping runner ${i} of ${gitlab_ci_runner_num} ..."
-		local pidfile="${gitlab_ci_runner_pidfile_base}${i}"
-		start-stop-daemon --stop \
-			--pidfile="${pidfile}"
-# DO WE NEED --exec? or --startas???
-		local success=$?
-		if [ ${success}!=0 ] ; then
-			eend ${success}
-		fi
-	done
-
-	eend 0
+        ebegin "Stopping gitlab-ci-multi-runner"
+        start-stop-daemon --stop --pidfile /var/run/gitlab-ci-multi-runner.pid
+        eend $?
 }
