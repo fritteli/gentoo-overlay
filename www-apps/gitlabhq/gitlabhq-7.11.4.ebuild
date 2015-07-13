@@ -68,15 +68,12 @@ ruby_add_bdepend "
 #     nodejs instead that is faster and better). Also replace broken
 #     charlock_holmes version with fixed one.
 #
-# fix-project-name-regex:
-#     Allow project name to contain non-ASCII characters.
-#
 # fix-sendmail-config:
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-7.9.3-fix-gemfile.patch"
-	"${PN}-6.0.2-fix-sendmail-config.patch"
+	"${PN}-fix-gemfile.patch"
+	"${PN}-fix-sendmail-config.patch"
 )
 
 MY_NAME="gitlab"
@@ -212,11 +209,11 @@ all_ruby_install() {
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_newunit "${FILESDIR}/gitlab-sidekiq-7.service" "gitlab-sidekiq.service"
+		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq-noslot.init
+		local rcscript=gitlab-sidekiq.init
 		use unicorn && rcscript=gitlab-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
