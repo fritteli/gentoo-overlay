@@ -1,7 +1,7 @@
 #!/sbin/runscript
 
 name="GitLab Sidekiq"
-description="Sidekiq for GitLab @SLOT@"
+description="Sidekiq for GitLab"
 
 : ${gitlab_user:=@USER@}
 : ${gitlab_base:="@GITLAB_BASE@"}
