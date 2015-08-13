@@ -54,7 +54,7 @@ DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.3
 	dev-vcs/git
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser >=dev-libs/libgit2-0.22.0 )"
+	rugged_use_system_libraries? ( net-libs/http-parser =dev-libs/libgit2-0.22* )"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
