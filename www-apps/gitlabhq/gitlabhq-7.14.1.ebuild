@@ -51,7 +51,7 @@ GEMS_DEPEND="
 	kerberos? ( virtual/krb5 )
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.3
+	>=dev-vcs/gitlab-shell-2.6.4
 	dev-vcs/git
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser =dev-libs/libgit2-0.22* )"
