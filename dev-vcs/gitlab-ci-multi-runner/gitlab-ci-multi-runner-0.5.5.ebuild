@@ -8,9 +8,9 @@ inherit eutils user
 
 DESCRIPTION="GitLab CI Multi Runner is the new build processor needed for GitLab CI >= 7.12"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
-SRC_URI="x86?   ( https://${PN}-downloads.s3.amazonaws.com/${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
-         amd64? ( https://${PN}-downloads.s3.amazonaws.com/${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
-         arm?   ( https://${PN}-downloads.s3.amazonaws.com/${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
+SRC_URI="x86?   ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
+         amd64? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
+         arm?   ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
 
 RESTRICT="mirror"
 
