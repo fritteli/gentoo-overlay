@@ -23,6 +23,7 @@ IUSE="amd64 arm x86"
 
 DEPEND="dev-vcs/git"
 RDEPEND="${DEPEND}
+	net-libs/nodejs
 	virtual/mta"
 
 MY_NAME="${PN}"
