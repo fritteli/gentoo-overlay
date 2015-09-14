@@ -16,22 +16,9 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND="dev-vcs/git"
-CDEPEND="dev-lang/go"
-RDEPEND="${DEPEND}
-	net-libs/nodejs
-	virtual/mta"
+CDEPEND=">=dev-lang/go-1.5"
 
-MY_NAME="${PN}"
 MY_USER="gitlab_git_http_server"
-
-DEST_DIR="/opt/${MY_NAME}"
-LOGS_DIR="/var/log/${MY_NAME}"
-TEMP_DIR="/var/tmp/${MY_NAME}"
-RUN_DIR="/run/${MY_NAME}"
-
-#pkg_setup() {
-#}
 
 src_prepare() {
 	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
@@ -45,9 +32,6 @@ src_install() {
 
 	exeinto ${dest}
 	doexe "${S}/${PN}"
-
-	# fix permissions
-#	fowners -R ${MY_USER}:${MY_USER} ${dest}
 
 	## RC script ##
 	newinitd "${FILESDIR}/gitlab-git-http-server.init" "${PN}"
