@@ -53,6 +53,7 @@ GEMS_DEPEND="
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.5
 	dev-vcs/git
+	>=dev-vcs/gitlab-git-http-server-0.2.10
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser =dev-libs/libgit2-0.22* )"
 RDEPEND="${DEPEND}
@@ -73,7 +74,7 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-7.13.1-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-fix-sendmail-config.patch"
 )
 
