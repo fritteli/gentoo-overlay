@@ -9,7 +9,7 @@ inherit eutils user
 DESCRIPTION="GitLab Git HTTP Server is the new backend for Git-over-HTTP communication needed for GitLab >= 8.0"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-git-http-server"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${PV} -> ${P}.tar.bz2"
-S="${WORKDIR}/${P}-ffd46d3adeb1ebaf88eaedf4d4845834cfe8b385"
+S="${WORKDIR}/${P}-c846662dced60bb1eef5cc4f59e4e71cc8aa5c5d"
 RESTRICT="mirror"
 
 LICENSE="MIT"
@@ -21,7 +21,7 @@ CDEPEND=">=dev-lang/go-1.5"
 MY_USER="gitlab_git_http_server"
 
 src_prepare() {
-	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
+	epatch "${FILESDIR}/fix-Makefile.patch"
 }
 
 src_install() {
