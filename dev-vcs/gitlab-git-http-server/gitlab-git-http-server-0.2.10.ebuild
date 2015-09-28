@@ -21,7 +21,7 @@ CDEPEND=">=dev-lang/go-1.5"
 MY_USER="gitlab_git_http_server"
 
 src_prepare() {
-	epatch "${FILESDIR}/fix-Makefile.patch"
+	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
 }
 
 src_install() {
