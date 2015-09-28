@@ -209,8 +209,8 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq.init
-		use unicorn && rcscript=gitlab-unicorn.init
+		local rcscript=gitlab-sidekiq-8.init
+		use unicorn && rcscript=gitlab-unicorn-8.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
