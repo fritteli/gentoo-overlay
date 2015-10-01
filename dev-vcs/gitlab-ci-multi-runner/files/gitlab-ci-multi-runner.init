@@ -10,6 +10,7 @@ depend() {
 start() {
         ebegin "Starting gitlab-ci-multi-runner"
         checkpath -d /var/run
+        checkpath -f -o @USER@ -m640 "${LOGFILE}"
         start-stop-daemon --start -b -u @USER@ --chdir /opt/gitlab-ci-multi-runner --pidfile /var/run/gitlab-ci-multi-runner.pid -1 "${LOGFILE}" -2 "${LOGFILE}" --make-pidfile \
                 --exec /opt/gitlab-ci-multi-runner/gitlab-ci-multi-runner -- run
         eend $?
