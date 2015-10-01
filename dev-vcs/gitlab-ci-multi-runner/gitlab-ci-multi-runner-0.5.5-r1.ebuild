@@ -68,7 +68,7 @@ src_install() {
 
 	## RC script ##
 
-	local rcscript=gitlab-ci-multi-runner.init
+	local rcscript="${MY_NAME}.init"
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
@@ -77,6 +77,7 @@ src_install() {
 		|| die "failed to filter ${rcscript}"
 
 	newinitd "${T}/${rcscript}" "${MY_NAME}"
+	newconfd "${FILESDIR}/${MY_NAME}.conf" "${MY_NAME}"
 }
 
 pkg_postinst() {
