@@ -18,8 +18,6 @@ KEYWORDS="~amd64 ~x86"
 
 CDEPEND=">=dev-lang/go-1.5"
 
-MY_USER="gitlab_git_http_server"
-
 src_prepare() {
 	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
 }
@@ -36,9 +34,4 @@ src_install() {
 	## RC script ##
 	newinitd "${FILESDIR}/gitlab-git-http-server.init" "${PN}"
 	newconfd "${FILESDIR}/gitlab-git-http-server.conf" "${PN}"
-}
-
-pkg_postinst() {
-	enewgroup ${MY_USER}
-	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
 }
