@@ -12,9 +12,9 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_DEPEND="2:2.7"
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python ruby-ng user
+inherit eutils python-r1 ruby-ng user
 
 DESCRIPTION="GitLab CI is a continuous integration server that is tightly integrated with GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci"

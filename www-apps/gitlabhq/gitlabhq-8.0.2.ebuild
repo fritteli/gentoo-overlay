@@ -12,9 +12,9 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_DEPEND="2:2.7"
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python ruby-ng user systemd
+inherit eutils python-r1 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
