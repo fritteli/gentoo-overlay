@@ -38,7 +38,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
-	postgres? ( dev-db/postgresql )
+	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )"
 DEPEND="${GEMS_DEPEND}
 	dev-vcs/git"

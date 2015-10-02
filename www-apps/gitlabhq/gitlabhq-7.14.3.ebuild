@@ -46,7 +46,7 @@ GEMS_DEPEND="
 	dev-util/cmake
 	dev-util/ragel
 	net-libs/nodejs
-	postgres? ( dev-db/postgresql )
+	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
 	kerberos? ( virtual/krb5 )
 	virtual/pkgconfig"
