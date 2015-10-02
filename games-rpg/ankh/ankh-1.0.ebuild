@@ -2,33 +2,47 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
+EAPI="5"
+
 inherit eutils games
 DESCRIPTION="Ankh a Adventure like Monkey Island"
 HOMEPAGE="http://www.ankh-game.de/ankh.html"
-LICENSE="public-domain"
+LICENSE="all-rights-reserved"
 
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE=""
+KEYWORDS="-* ~amd64 ~x86"
+IUSE="+abi_x86_32"
 RESTRICT="strip"
+
+REQUIRED_USE="abi_x86_32"
 
 DEPEND="app-arch/bzip2
 	app-arch/tar
 	app-arch/unzip"
 
 RDEPEND="sys-libs/glibc
-	virtual/opengl
-	x11-libs/libXext
-	x11-libs/libX11
-	x11-libs/libXau
-	x11-libs/libXdmcp
-	amd64? ( app-emulation/emul-linux-x86-xlibs
-		app-emulation/emul-linux-x86-soundlibs
+	amd64? (
+		virtual/opengl[abi_x86_32(-)]
+		x11-libs/libXext[abi_x86_32(-)]
+		x11-libs/libX11[abi_x86_32(-)]
+		x11-libs/libXau[abi_x86_32(-)]
+		x11-libs/libXdmcp[abi_x86_32(-)]
 		|| (
-			>=app-emulation/emul-linux-x86-xlibs-7.0
+			x11-drivers/nvidia-drivers[multilib(-)]
+			x11-drivers/ati-drivers[abi_x86_32(-)]
+		)
+	)
+	x86? (
+		virtual/opengl
+		x11-libs/libXext
+		x11-libs/libX11
+		x11-libs/libXau
+		x11-libs/libXdmcp
+		|| (
 			x11-drivers/nvidia-drivers
-			x11-drivers/nvidia-legacy-drivers
-			>=x11-drivers/ati-drivers-8.8.25-r1 ) )"
+			x11-drivers/ati-drivers
+		)
+	)"
 
 S=${WORKDIR}
 
