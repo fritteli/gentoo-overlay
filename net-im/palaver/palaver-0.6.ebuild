@@ -4,8 +4,9 @@
 
 EAPI=5
 PYTHON_DEPEND="2"
+PYTHON_COMPAT=( python2_7 )
 
-inherit distutils eutils python
+inherit distutils-r1 eutils python-r1
 DESCRIPTION="Multi-user chat component for jabber implemented in python"
 HOMEPAGE="https://github.com/fritteli/palaver"
 SRC_URI="https://github.com/fritteli/palaver/archive/${PV}.tar.gz -> ${P}.tar.gz"
