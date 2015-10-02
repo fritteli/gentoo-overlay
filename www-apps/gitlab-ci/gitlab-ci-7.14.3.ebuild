@@ -210,11 +210,11 @@ pkg_postinst() {
 	elog "haven't done so already."
 	elog
 	if use postgres; then
-        elog "If you have local PostgreSQL running, just copy&run:"
-        elog "      su postgres"
-        elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
-        elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
-        elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
+	elog "If you have local PostgreSQL running, just copy&run:"
+		elog "      su postgres"
+		elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
+		elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
+		elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
 		elog "  Note: You should change your password to something more random..."
 		elog
 	fi
@@ -231,7 +231,7 @@ pkg_config() {
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
-		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your" 
+		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
 	fi
 
