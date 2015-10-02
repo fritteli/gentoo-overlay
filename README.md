@@ -3,6 +3,7 @@ fritteli's Gentoo overlay
 
 Gentoo overlay with some ebuilds that I found either outdated or missing in the official repository or in other overlays. Ebuilds are usually removed from this overlay whenever I find a version available in the official tree or in another overlay (provided I'm content with them).
 
+Build status of master branch, as seen by repoman: [![build status](https://gittr.ch/ci/projects/9/status.png?ref=master)](https://gittr.ch/ci/projects/9?ref=master)
 
 Using with Layman
 -----------------
@@ -38,4 +39,3 @@ Acknowledgements
 ----------------
 
 Thanks go to Jakub Jirutka, the maintainer of the [CVUT Overlay](https://github.com/cvut/gentoo-overlay), from whom I shamelessly copied this README.md for a start.
-
