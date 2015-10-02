@@ -44,7 +44,6 @@ src_compile() {
 }
 
 src_install() {
-	cd "${S}"
 	make DESTDIR="${D}" install || die "Install failed"
 }
 
