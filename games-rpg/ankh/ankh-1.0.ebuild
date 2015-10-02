@@ -2,7 +2,6 @@ inherit eutils games
 DESCRIPTION="Ankh a Adventure like Monkey Island"
 HOMEPAGE="http://www.ankh-game.de/ankh.html"
 
-LICENSE="Runesoft"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
