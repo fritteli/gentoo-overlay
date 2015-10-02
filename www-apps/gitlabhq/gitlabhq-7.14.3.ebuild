@@ -43,12 +43,13 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
-	dev-util/cmake
 	dev-util/ragel
 	net-libs/nodejs
 	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
-	kerberos? ( virtual/krb5 )
+	kerberos? ( virtual/krb5 )"
+CDEPEND="
+	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.5
