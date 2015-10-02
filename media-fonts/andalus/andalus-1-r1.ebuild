@@ -30,4 +30,3 @@ pkg_nofetch() {
 #src_unpack() {
 #	unzip $A
 #}
- 

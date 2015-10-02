@@ -24,15 +24,22 @@ RDEPEND="usb? ( virtual/libusb:1 )"
 
 DEPEND="${RDEPEND}"
 
-src_unpack(){
-	unpack ${A}
-	cd "${S}"
-	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+src_prepare() {
+	epatch "${FILESDIR}"/"${PF}"-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+}
+
+#src_unpack(){
+#	unpack ${A}
+#	cd "${S}"
+#	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+#}
+
+src_configure() {
+	local myconf="";
+	econf ${myconf}
 }
 
 src_compile() {
-	local myconf="";
-	econf ${myconf}
 	emake || die "emake failed"
 }
 
