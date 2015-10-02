@@ -14,7 +14,7 @@ LICENSE="public-domain"
 
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-RESTRICT="fetch nomirror"
+RESTRICT="fetch"
 IUSE=""
 
 DOCS="fonts101.txt"
