@@ -1,6 +1,6 @@
-# Copyright 2008 Manuel Friedli <manuel@fritteli.ch>
-# This ebuild is distributed under the terms of the GNU General Public License v2
-# $Header: $
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 inherit font
 

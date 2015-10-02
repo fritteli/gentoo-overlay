@@ -1,3 +1,7 @@
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
 inherit eutils games
 DESCRIPTION="Ankh a Adventure like Monkey Island"
 HOMEPAGE="http://www.ankh-game.de/ankh.html"

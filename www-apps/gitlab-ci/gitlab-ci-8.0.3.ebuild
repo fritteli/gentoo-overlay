@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -234,7 +234,6 @@ pkg_config() {
 		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
 	fi
-
 
 	local email_from="$(ryaml ${CONF_DIR}/application.yml production gitlab_ci email_from)"
 	local gitlab_ci_home="$(egethome ${MY_USER})"
