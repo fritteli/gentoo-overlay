@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -8,18 +8,15 @@ inherit eutils user
 
 DESCRIPTION="GitLab CI Multi Runner is the new build processor needed for GitLab CI >= 7.12"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
-SRC_URI="x86?   ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
-         amd64? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
-         arm?   ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
+SRC_URI="x86? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
+	amd64?    ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
+	arm?      ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
 
 RESTRICT="mirror"
 
-REQUIRED_USE="^^ ( x86 amd64 arm )"
-
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="amd64 arm x86"
+KEYWORDS="~amd64 ~x86 ~arm"
 
 DEPEND="dev-vcs/git"
 RDEPEND="${DEPEND}
@@ -40,9 +37,9 @@ pkg_setup() {
 }
 
 src_unpack() {
-    local a="$(usev amd64)$(usev arm)$(usev x86)"
-    mkdir -p "${S}"
-    cp "${DISTDIR}/${P}-${a}" "${S}/${PN}"
+	local a="$(usev amd64)$(usev arm)$(usev x86)"
+	mkdir -p "${S}"
+	cp "${DISTDIR}/${P}-${a}" "${S}/${PN}"
 }
 
 src_prepare() {

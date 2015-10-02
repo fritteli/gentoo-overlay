@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -12,9 +12,9 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_DEPEND="2:2.7"
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python ruby-ng user
+inherit eutils python-r1 ruby-ng user
 
 DESCRIPTION="GitLab CI is a continuous integration server that is tightly integrated with GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci"
@@ -38,7 +38,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
-	postgres? ( dev-db/postgresql )
+	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )"
 DEPEND="${GEMS_DEPEND}
 	dev-vcs/git"
@@ -210,11 +210,11 @@ pkg_postinst() {
 	elog "haven't done so already."
 	elog
 	if use postgres; then
-        elog "If you have local PostgreSQL running, just copy&run:"
-        elog "      su postgres"
-        elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
-        elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
-        elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
+		elog "If you have local PostgreSQL running, just copy&run:"
+		elog "      su postgres"
+		elog "      psql -c \"CREATE ROLE gitlab_ci PASSWORD 'gitlab_ci' \\"
+		elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
+		elog "      createdb -E UTF-8 -O gitlab_ci gitlab_ci_production"
 		elog "  Note: You should change your password to something more random..."
 		elog
 	fi
@@ -231,10 +231,9 @@ pkg_config() {
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
-		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your" 
+		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
 	fi
-
 
 	local email_from="$(ryaml ${CONF_DIR}/application.yml production gitlab_ci email_from)"
 	local gitlab_ci_home="$(egethome ${MY_USER})"

@@ -1,6 +1,6 @@
-# Copyright 1999-2007 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/sci-geosciences/gpsbabel/gpsbabel-1.3.3.ebuild,v 1.3 2007/07/18 02:02:04 cryos Exp $
+# $Id$
 
 EAPI="5"
 
@@ -24,20 +24,26 @@ RDEPEND="usb? ( virtual/libusb:1 )"
 
 DEPEND="${RDEPEND}"
 
-src_unpack(){
-	unpack ${A}
-	cd "${S}"
-	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+src_prepare() {
+	epatch "${FILESDIR}"/"${PF}"-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+}
+
+#src_unpack(){
+#	unpack ${A}
+#	cd "${S}"
+#	epatch "${FILESDIR}"/${PF}-add-xml-root.patch || die "Unable to apply ${PF}-add-xml-root.patch"
+#}
+
+src_configure() {
+	local myconf="";
+	econf ${myconf}
 }
 
 src_compile() {
-	local myconf="";
-	econf ${myconf}
 	emake || die "emake failed"
 }
 
 src_install() {
-	cd "${S}"
 	make DESTDIR="${D}" install || die "Install failed"
 }
 

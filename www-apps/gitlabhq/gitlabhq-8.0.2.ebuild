@@ -1,6 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 EAPI="5"
 
@@ -12,9 +12,9 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_DEPEND="2:2.7"
+PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python ruby-ng user systemd
+inherit eutils python-r1 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
@@ -43,12 +43,13 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
-	dev-util/cmake
 	dev-util/ragel
 	net-libs/nodejs
-	postgres? ( dev-db/postgresql )
+	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
-	kerberos? ( virtual/krb5 )
+	kerberos? ( virtual/krb5 )"
+CDEPEND="
+	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.5
@@ -236,11 +237,11 @@ pkg_postinst() {
 	elog "haven't done so already."
 	elog
 	if use postgres; then
-        elog "If you have local PostgreSQL running, just copy&run:"
-        elog "      su postgres"
-        elog "      psql -c \"CREATE ROLE gitlab PASSWORD 'gitlab' \\"
-        elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
-        elog "      createdb -E UTF-8 -O gitlab gitlabhq_production"
+		elog "If you have local PostgreSQL running, just copy&run:"
+		elog "      su postgres"
+		elog "      psql -c \"CREATE ROLE gitlab PASSWORD 'gitlab' \\"
+		elog "          NOSUPERUSER NOCREATEDB NOCREATEROLE INHERIT LOGIN;\""
+		elog "      createdb -E UTF-8 -O gitlab gitlabhq_production"
 		elog "  Note: You should change your password to something more random..."
 		elog
 	fi
@@ -264,7 +265,7 @@ pkg_config() {
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
-		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your" 
+		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
 	fi
 

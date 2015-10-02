@@ -1,6 +1,6 @@
-# Copyright 2008 Manuel Friedli <manuel@fritteli.ch>
-# This ebuild is distributed under the terms of the GNU General Public License v2
-# $Header: $
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 inherit font
 
@@ -10,17 +10,18 @@ S="${WORKDIR}"
 DESCRIPTION="Snowflake Letters Truetype Font"
 HOMEPAGE="http://www.fontstock.net/9746/Snowflake-Letters.html"
 SRC_URI="http://www.fontstock.net/font/9746/Snowflake-Letters.zip"
+LICENSE="public-domain"
 
-LICENSE="Unknown"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-RESTRICT="fetch nomirror"
+RESTRICT="fetch"
 IUSE=""
 
 DOCS="fonts101.txt"
 FONT_SUFFIX="ttf"
 FONT_S="${S}"
 DEPEND="app-arch/unzip"
+RDEPEND=""
 
 pkg_nofetch() {
 	einfo "Please download ${MY_P} from here:"
