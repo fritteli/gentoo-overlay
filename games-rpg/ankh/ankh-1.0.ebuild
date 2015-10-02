@@ -13,6 +13,7 @@ SLOT="0"
 KEYWORDS="-* ~amd64 ~x86"
 IUSE="+abi_x86_32"
 RESTRICT="strip"
+ABI="x86"
 
 REQUIRED_USE="abi_x86_32"
 
