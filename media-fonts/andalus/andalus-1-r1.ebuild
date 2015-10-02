@@ -8,8 +8,9 @@ MY_PN="andalus"
 MY_P="${MY_PN}"
 S="${WORKDIR}"
 DESCRIPTION="Andalus Truetype Font"
-HOMEPAGE="http://www.fonts101.com/xt_fontdetails_az_FID!19125~Andalus~font.html"
-SRC_URI="http://www.fonts101.com/andalus.zip"
+HOMEPAGE="http://fontzone.net/font-download/andalus"
+SRC_URI="http://fontzone.net/downloadfile/andalus"
+LICENSE="public-domain"
 
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
@@ -24,7 +25,7 @@ RDEPEND=""
 
 pkg_nofetch() {
 	einfo "Please download ${MY_P} from here:"
-	einfo "http://www.fonts101.com/xt_fontdetails_az_FID!19125~Andalus~font.html"
+	einfo "http://fontzone.net/font-download/andalus"
 }
 
 #src_unpack() {
