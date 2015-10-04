@@ -3,7 +3,7 @@
 start() {
 	ebegin "Starting gitlab-git-http-server"
 	start-stop-daemon --start --exec /usr/bin/gitlab-git-http-server --pidfile /run/gitlab-git-http-server.pid \
-	--make-pidfile --background --user ${RUNAS_USER}:${RUNAS_GROUP} --stdout "${LOGFILE}" --stderr "${LOGFILE}"\
+	--make-pidfile --background --user ${RUNAS_USER}:${RUNAS_GROUP} --stdout "${LOGFILE}" --stderr "${LOGFILE}" \
 	-- -authBackend=${AUTH_BACKEND} -listenAddr=${LISTEN_ADDR} -listenNetwork=${LISTEN_NETWORK} -listenUmask=${LISTEN_UMASK} \
 	-pprofListenAddr=${PPROF_LISTEN_ADDR} ${GIT_REPO_PATH}
 	eend $?
