@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit eutils games
+inherit eutils cdrom games
 DESCRIPTION="Ankh a Adventure like Monkey Island"
 HOMEPAGE="http://www.ankh-game.de/ankh.html"
 LICENSE="all-rights-reserved"
@@ -15,7 +15,7 @@ IUSE="+abi_x86_32"
 RESTRICT="strip"
 ABI="x86"
 
-REQUIRED_USE="abi_x86_32"
+REQUIRED_USE="amd64? ( abi_x86_32 )"
 
 DEPEND="app-arch/bzip2
 	app-arch/tar
