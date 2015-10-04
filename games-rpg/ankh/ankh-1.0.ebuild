@@ -22,27 +22,17 @@ DEPEND="app-arch/bzip2
 	app-arch/unzip"
 
 RDEPEND="sys-libs/glibc
-	amd64? (
-		virtual/opengl[abi_x86_32(-)]
-		x11-libs/libXext[abi_x86_32(-)]
-		x11-libs/libX11[abi_x86_32(-)]
-		x11-libs/libXau[abi_x86_32(-)]
-		x11-libs/libXdmcp[abi_x86_32(-)]
-		|| (
-			x11-drivers/nvidia-drivers[multilib(-)]
-			x11-drivers/ati-drivers[abi_x86_32(-)]
+	virtual/opengl[abi_x86_32(-)]
+	x11-libs/libXext[abi_x86_32(-)]
+	x11-libs/libX11[abi_x86_32(-)]
+	x11-libs/libXau[abi_x86_32(-)]
+	x11-libs/libXdmcp[abi_x86_32(-)]
+	|| (
+		(
+			amd64? ( x11-drivers/nvidia-drivers[multilib(-)] )
+			x86? ( x11-drivers/nvidia-drivers )
 		)
-	)
-	x86? (
-		virtual/opengl
-		x11-libs/libXext
-		x11-libs/libX11
-		x11-libs/libXau
-		x11-libs/libXdmcp
-		|| (
-			x11-drivers/nvidia-drivers
-			x11-drivers/ati-drivers
-		)
+		x11-drivers/ati-drivers[abi_x86_32(-)]
 	)"
 
 S=${WORKDIR}
