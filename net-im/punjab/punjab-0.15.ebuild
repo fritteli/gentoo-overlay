@@ -5,10 +5,10 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit distutils-r1 eutils python-r1 git-2
+inherit distutils-r1 eutils python-r1
 DESCRIPTION="BOSH connection manager for jabber implemented in python"
 HOMEPAGE="https://github.com/twonds/punjab"
-EGIT_REPO_URI="git://github.com/twonds/punjab"
+SRC_URI="https://github.com/twonds/punjab/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
