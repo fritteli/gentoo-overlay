@@ -12,7 +12,7 @@ S="${WORKDIR}"
 DESCRIPTION="Andalus Truetype Font"
 HOMEPAGE="http://fontzone.net/font-download/andalus"
 SRC_URI="http://fontzone.net/downloadfile/andalus -> andlso.ttf"
-LICENSE="public-domain"
+LICENSE="all-rights-reserved"
 
 SLOT="0"
 KEYWORDS="~x86 ~amd64"

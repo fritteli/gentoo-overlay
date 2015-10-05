@@ -10,7 +10,7 @@ S="${WORKDIR}"
 DESCRIPTION="Snowflake Letters Truetype Font"
 HOMEPAGE="http://www.fontstock.net/9746/Snowflake-Letters.html"
 SRC_URI="http://www.fontstock.net/font/9746/Snowflake-Letters.zip"
-LICENSE="public-domain"
+LICENSE="all-rights-reserved"
 
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
