@@ -3,7 +3,6 @@
 # $Id$
 
 EAPI=5
-PYTHON_DEPEND="2"
 PYTHON_COMPAT=( python2_7 )
 
 inherit distutils-r1 eutils python-r1
@@ -14,23 +13,24 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
-DEPEND="net-im/jabber-base"
-RDEPEND=">=dev-python/twisted-core-2.4.0
-	>=dev-python/twisted-words-0.5
+DEPEND="${PYTHON_DEPS}
+	net-im/jabber-base"
+RDEPEND="${PYTHON_DEPS}
+	>=dev-python/twisted-core-2.4.0[${PYTHON_USEDEP}]
+	>=dev-python/twisted-words-0.5[${PYTHON_USEDEP}]
 	${DEPEND}"
 
 pkg_setup() {
-	python_set_active_version 2
-	python_pkg_setup
+	python-r1_pkg_setup
 }
 
 src_compile() {
 	# nothing to be done here?
-	distutils_src_compile
+	distutils-r1_src_compile
 }
 
 src_install() {
-	distutils_src_install
+	distutils-r1_src_install
 
 	insinto /etc/jabber
 	newins "${FILESDIR}/"palaver.conf ${PN}.conf
