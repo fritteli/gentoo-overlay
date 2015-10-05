@@ -18,7 +18,7 @@ IUSE=""
 
 S="${WORKDIR}"
 
-RDEPEND=">=virtual/jdk-1.6"
+RDEPEND=">=virtual/jdk-1.8"
 
 INSTALL_DIR="/opt/nexus"
 
