@@ -208,7 +208,7 @@ all_ruby_install() {
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
 		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
-        systemd_dounit "${FILESDIR}/gitlab-git-http.service"
+		systemd_dounit "${FILESDIR}/gitlab-git-http.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
 		local rcscript=gitlab-sidekiq-8.init
