@@ -1,6 +1,3 @@
-# cat /etc/systemd/system/gitlab-unicorn.service - for personal use
-# cat /var/lib/systemd/system/gitlab-unicorn.service - for package devs
-
 #####################################################
 #
 # GitLab version    : 5.x - 7.x
@@ -17,12 +14,12 @@ After=redis.service mysqld.service postgresql.service
 
 [Service]
 User=git
-WorkingDirectory=/opt/gitlab-6
+WorkingDirectory=/opt/gitlab
 Environment=RAILS_ENV=production
 SyslogIdentifier=gitlab-unicorn
 PIDFile=/run/gitlab/unicorn.pid
 
-ExecStart=/usr/bin/bundle exec "unicorn_rails -D -c /opt/gitlab-6/config/unicorn.rb -E production"
+ExecStart=/usr/bin/bundle exec "unicorn_rails -D -c /opt/gitlab/config/unicorn.rb -E production"
 
 [Install]
 WantedBy=multi-user.target
