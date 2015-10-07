@@ -4,14 +4,13 @@
 	<repo quality="experimental" status="unofficial">
 		<name>fritteli</name>
 		<description lang="en">fritteli's overlay of Gentoo ebuilds</description>
-		<homepage>https://gittr.ch/manuel/gentoo-overlay</homepage>
+		<homepage>https://gittr.ch/linux/gentoo-overlay</homepage>
 		<owner type="person">
 			<email>manuel@fritteli.ch</email>
 			<name>Manuel Friedli</name>
 		</owner>
-		<source type="git">https://gittr.ch/manuel/gentoo-overlay.git</source>
-		<feed>https://gittr.ch/manuel/gentoo-overlay/commits/master.atom</feed>
-		<feed>https://gittr.ch/manuel/gentoo-overlay/issues.atom</feed>
+		<source type="git">https://gittr.ch/linux/gentoo-overlay.git</source>
+		<feed>https://gittr.ch/linux/gentoo-overlay/commits/master.atom</feed>
+		<feed>https://gittr.ch/linux/gentoo-overlay/issues.atom</feed>
 	</repo>
 </repositories>
-
