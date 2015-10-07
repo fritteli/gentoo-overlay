@@ -3,7 +3,7 @@ fritteli's Gentoo overlay
 
 Gentoo overlay with some ebuilds that I found either outdated or missing in the official repository or in other overlays. Ebuilds are usually removed from this overlay whenever I find a version available in the official tree or in another overlay (provided I'm satisfied with them).
 
-Build status of the [master branch](https://gittr.ch/manuel/gentoo-overlay/tree/master), as seen by `repoman -p -x`: [![build status](https://gittr.ch/ci/projects/9/status.png?ref=master)](https://gittr.ch/ci/projects/9?ref=master)
+Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/tree/master), as seen by `repoman -p -x`: [![build status](https://gittr.ch/ci/projects/10/status.png?ref=master)](https://gittr.ch/ci/projects/10?ref=master)
 
 Using with Layman
 -----------------
@@ -19,7 +19,7 @@ If you haven't used layman yet, just run these commands:
 
 Then you can add this overlay wih:
 
-	layman -o https://gittr.ch/manuel/gentoo-overlay/raw/master/layman.xml -f -a fritteli
+	layman -o https://gittr.ch/linux/gentoo-overlay/raw/master/layman.xml -f -a fritteli
 
 Alternatively, you may use the overlay hosted on GitHub. That may not be quite as up-to-date as the one on gittr.ch. To use the GitHub version, use this command:
 
