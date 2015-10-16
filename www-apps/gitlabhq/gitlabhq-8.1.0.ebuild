@@ -18,9 +18,9 @@ inherit eutils python-r1 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v8.0.0.rc1.tar.gz -> ${P}.tar.gz"
-#RUBY_S="${PN}-8.0.0"
+#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v8.1.0.rc1.tar.gz -> ${P}.tar.gz"
+RUBY_S="${PN}-8.1.0"
 
 RESTRICT="mirror"
 
@@ -56,7 +56,7 @@ DEPEND="${GEMS_DEPEND}
 	dev-vcs/git
 	>=dev-vcs/gitlab-git-http-server-0.2.10
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser =dev-libs/libgit2-0.22* )"
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/22 )"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
@@ -198,6 +198,7 @@ all_ruby_install() {
 
 	# clean gems cache
 	rm -Rf vendor/bundle/ruby/*/cache
+	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
@@ -208,6 +209,7 @@ all_ruby_install() {
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
 		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
+		systemd_dounit "${FILESDIR}/gitlab-git-http.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
 		local rcscript=gitlab-sidekiq-8.init
