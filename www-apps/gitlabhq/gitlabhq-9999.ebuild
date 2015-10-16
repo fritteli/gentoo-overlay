@@ -17,7 +17,7 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils git-r3 python-r1 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
-HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
+HOMEPAGE="https://about.gitlab.com/"
 EGIT_REPO_URI="https://gitlab.com/gitlab-org/gitlab-ce.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
