@@ -75,7 +75,7 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-8.0.2-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-fix-sendmail-config.patch"
 )
 
