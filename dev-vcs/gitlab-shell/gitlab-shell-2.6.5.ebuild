@@ -9,7 +9,7 @@ USE_RUBY="ruby20 ruby21"
 inherit eutils ruby-ng user
 
 DESCRIPTION="SSH access and repository management for GitLab"
-HOMEPAGE="https://github.com/gitlabhq/gitlab-shell"
+HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-shell"
 SRC_URI="https://github.com/gitlabhq/gitlab-shell/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
