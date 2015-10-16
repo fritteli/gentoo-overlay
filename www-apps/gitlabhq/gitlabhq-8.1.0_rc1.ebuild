@@ -20,7 +20,7 @@ DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
 #SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.rc1.tar.gz -> ${P}.tar.gz"
-RUBY_S="${P}.rc1"
+RUBY_S="${PN}-8.1.0.rc1"
 
 RESTRICT="mirror"
 
