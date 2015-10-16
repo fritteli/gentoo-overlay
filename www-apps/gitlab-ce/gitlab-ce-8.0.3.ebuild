@@ -19,8 +19,9 @@ inherit eutils python-r1 ruby-ng user systemd
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
 SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+MY_PKGNAME="gitlabhq"
 #SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v8.0.0.rc1.tar.gz -> ${P}.tar.gz"
-#RUBY_S="${PN}-8.0.0"
+RUBY_S="${MY_PKGNAME}-${PV}"
 
 RESTRICT="mirror"
 
@@ -198,7 +199,6 @@ all_ruby_install() {
 
 	# clean gems cache
 	rm -Rf vendor/bundle/ruby/*/cache
-	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
