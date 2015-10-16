@@ -16,7 +16,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-DEPEND=">=dev-lang/go-1.5"
+DEPEND=">=dev-lang/go-1.5.1"
 
 src_prepare() {
 	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
