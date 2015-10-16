@@ -19,8 +19,8 @@ inherit eutils python-r1 ruby-ng user systemd
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
 #SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v8.1.0.rc1.tar.gz -> ${P}.tar.gz"
-RUBY_S="${PN}-8.1.0"
+SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.rc1.tar.gz -> ${P}.tar.gz"
+RUBY_S="${P}.rc1"
 
 RESTRICT="mirror"
 
@@ -75,7 +75,7 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-8.0.2-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-fix-sendmail-config.patch"
 )
 
