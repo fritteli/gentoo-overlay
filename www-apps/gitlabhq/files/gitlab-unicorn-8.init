@@ -13,11 +13,18 @@ description="GitLab on Unicorns"
 : ${sidekiq_logfile:="@LOGS_DIR@/sidekiq.log"}
 : ${sidekiq_queues:="@QUEUES@"}
 
+: ${mail_room_pidfile:="/run/gitlab/mail_room.pid"}
+: ${mail_room_logfile:="/var/log/gitlab/mail_room.log"}
+: ${mail_room_config:="/etc/gitlab/mail_room.yml"}
+
 server_command="/usr/bin/bundle"
 server_command_args="exec unicorn_rails -c ${gitlab_base}/config/unicorn.rb -E ${rails_env} -D"
 
 sidekiq_command="/usr/bin/bundle"
 sidekiq_command_args="exec sidekiq -q ${sidekiq_queues//,/ -q } -P ${sidekiq_pidfile} -L ${sidekiq_logfile}"
+
+mail_room_command="/usr/bin/bundle"
+mail_room_command_args="exec mail_room -q -c ${mail_room_config} >> ${mail_room_logfile} 2>&1"
 
 depend() {
 	provide gitlab
@@ -49,9 +56,32 @@ start() {
 		--env RAILS_ENV=${rails_env} \
 		--exec ${sidekiq_command} -- ${sidekiq_command_args}
 	eend $?
+
+	if [ -e /etc/default/gitlab ]; then
+		. /etc/default/gitlab
+		if [ "${mail_room_enabled}" == "true" ]; then
+			ebegin "Starting ${name} - mail_room"
+
+			start-stop-daemon --start \
+				--background --quiet \
+				--chdir "${gitlab_base}" \
+				--user=${gitlab_user} \
+				--pidfile="${mail_room_pidfile}" \
+				--env RAILS_ENV=${rails_env} \
+				--exec ${mail_room_command} -- ${mail_room_command_args}
+			eend $?
+		fi
+	fi
 }
 
 stop() {
+	ebegin "Stopping ${name} - mail_room"
+	start-stop-daemon --stop \
+		--signal QUIT \
+		--pidfile=${mail_room_pidfile} \
+		--exec ${mail_room_command}
+	eend $?
+
 	ebegin "Stopping ${name} - Sidekiq"
 	start-stop-daemon --stop \
 		--pidfile=${sidekiq_pidfile} \
