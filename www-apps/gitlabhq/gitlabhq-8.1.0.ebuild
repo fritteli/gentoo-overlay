@@ -17,10 +17,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils python-r1 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
-HOMEPAGE="https://github.com/gitlabhq/gitlabhq"
-#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.rc1.tar.gz -> ${P}.tar.gz"
-RUBY_S="${PN}-8.1.0.rc1"
+HOMEPAGE="https://about.gitlab.com/"
+SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 RESTRICT="mirror"
 
@@ -54,7 +52,7 @@ CDEPEND="
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.5
 	dev-vcs/git
-	>=dev-vcs/gitlab-git-http-server-0.2.10
+	~dev-vcs/gitlab-git-http-server-0.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/22 )"
 RDEPEND="${DEPEND}
