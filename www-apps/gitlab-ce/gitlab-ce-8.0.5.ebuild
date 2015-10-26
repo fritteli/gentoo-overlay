@@ -16,11 +16,11 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit eutils python-r1 ruby-ng user systemd
 
+MY_PKGNAME="gitlabhq"
+
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-MY_PKGNAME="gitlabhq"
-#SRC_URI="https://github.com/gitlabhq/gitlabhq/archive/v8.0.0.rc1.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/${MY_PKGNAME}/${MY_PKGNAME}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 RUBY_S="${MY_PKGNAME}-${PV}"
 
 RESTRICT="mirror"
