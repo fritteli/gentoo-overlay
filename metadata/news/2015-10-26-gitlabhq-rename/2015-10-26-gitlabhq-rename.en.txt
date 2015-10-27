@@ -1,0 +1,22 @@
+Title: Package rename: www-apps/gitlabhq -> www-apps/gitlab-ce
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2015-10-26
+Revision: 3
+News-Item-Format: 1.0
+Display-If-Installed: www-apps/gitlabhq
+
+The package www-apps/gitlabhq will be renamed to www-apps/gitlab-ce in
+the near future (mid-november 2015 or so). The rename should not have
+any impact on your installed GitLab instance, as all installation paths
+will remain the same as before.
+
+Please make sure to update your /etc/portage/package.* files, though,
+if that doesn't happen automatically.
+
+If you feel that such a rename is inappropriate, or that it will cause
+too much unnecessary trouble, please open an issue on Github at
+
+https://github.com/fritteli/gentoo-overlay/issues
+
+Thank you.
