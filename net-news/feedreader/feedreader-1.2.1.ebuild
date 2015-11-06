@@ -4,7 +4,6 @@
 
 EAPI="5"
 
-#inherit autotools eutils gnome2 pax-utils
 inherit cmake-utils gnome2 vala
 
 CMAKE_MIN_VERSION="2.6"
@@ -13,8 +12,8 @@ VALA_MIN_API_VERSION="0.24"
 MY_P="FeedReader"
 
 DESCRIPTION="Simple and modern News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
-HOMEPAGE="http://jangernert.github.io/feedreader/"
-SRC_URI="https://launchpad.net/feedreader/1.2/${PV}/+download/${MY_P}-${PV}.tar.gz"
+HOMEPAGE="http://jangernert.github.io/${PN}/"
+SRC_URI="https://launchpad.net/${PN}/1.2/${PV}/+download/${MY_P}-${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -53,7 +52,6 @@ src_configure() {
 		-DVALA_EXECUTABLE="${VALAC}"
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}"
 		-DGSETTINGS_LOCALINSTALL=OFF
-#		-DGSETTINGS_COMPILE=OFF
 	)
 #		$(cmake-utils_use_use myUseFlag WEBKIT_4)
 	cmake-utils_src_configure
