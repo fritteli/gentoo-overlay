@@ -5,7 +5,7 @@
 EAPI="5"
 
 #inherit autotools eutils gnome2 pax-utils
-inherit cmake-utils vala
+inherit cmake-utils gnome2 vala
 
 CMAKE_MIN_VERSION="2.6"
 VALA_MIN_API_VERSION="0.24"
@@ -52,8 +52,8 @@ src_configure() {
 		-DWITH_LIBUNITY=OFF
 		-DVALA_EXECUTABLE="${VALAC}"
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}"
-		-DGSETTINGS_COMPILE=OFF
-		-DGSETTINGS_LOCALINSTALL=OFF
+#		-DGSETTINGS_LOCALINSTALL=OFF
+#		-DGSETTINGS_COMPILE=OFF
 	)
 #		$(cmake-utils_use_use myUseFlag WEBKIT_4)
 	cmake-utils_src_configure
@@ -65,4 +65,16 @@ src_compile() {
 
 src_install() {
 	cmake-utils_src_install
+}
+
+pkg_preinst() {
+	gnome2_pkg_preinst
+}
+
+pkg_postinst() {
+	gnome2_pkg_postinst
+}
+
+pkg_postrm() {
+	gnome2_pkg_postrm
 }
