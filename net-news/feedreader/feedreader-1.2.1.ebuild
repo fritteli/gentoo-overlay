@@ -53,6 +53,7 @@ src_configure() {
 		-DVALA_EXECUTABLE="${VALAC}"
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}"
 		-DGSETTINGS_COMPILE=OFF
+		-DGSETTINGS_LOCALINSTALL=OFF
 	)
 #		$(cmake-utils_use_use myUseFlag WEBKIT_4)
 	cmake-utils_src_configure
