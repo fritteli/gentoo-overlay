@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<use>
+		<flag name="webkit4">Use net-libs/webkit-gtk:4 instead of net-libs/webkit-gtk:3</flag>
+	</use>
+</pkgmetadata>
