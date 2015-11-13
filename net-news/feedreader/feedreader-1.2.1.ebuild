@@ -19,7 +19,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="+gnome"
+IUSE="+gnome webkit4"
 
 RDEPEND=">=x11-libs/gtk+-3.12:3
 	app-text/html2text
@@ -32,7 +32,8 @@ RDEPEND=">=x11-libs/gtk+-3.12:3
 	x11-libs/libnotify
 	dev-libs/libxml2
 	net-libs/rest:0.7
-	net-libs/webkit-gtk:3
+	!webkit4? ( net-libs/webkit-gtk:3 )
+	webkit4? ( net-libs/webkit-gtk:4 )
 	dev-libs/gobject-introspection
 	gnome? ( gnome-base/gnome-keyring )"
 
@@ -53,7 +54,7 @@ src_configure() {
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}"
 		-DGSETTINGS_LOCALINSTALL=OFF
 	)
-#		$(cmake-utils_use_use myUseFlag WEBKIT_4)
+	$(cmake-utils_use_use webkit4 WEBKIT_4)
 	cmake-utils_src_configure
 }
 
