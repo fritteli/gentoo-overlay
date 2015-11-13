@@ -149,7 +149,7 @@ all_ruby_install() {
 
 	# prepare directories
 	diropts -m750
-	dodir ${logs} ${temp} ${temp}/repo_satellites
+	dodir ${logs} ${temp}
 
 	diropts -m755
 	dodir ${conf} ${dest}/public/uploads

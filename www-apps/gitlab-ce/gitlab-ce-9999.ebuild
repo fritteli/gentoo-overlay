@@ -89,7 +89,7 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
-SIDEKIQ_QUEUES="post_receive,mailer,archive_repo,system_hook,project_web_hook,gitlab_shell,common,default"
+SIDEKIQ_QUEUES="post_receive,mailer,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_unpack() {
 	git-r3_fetch
@@ -153,7 +153,7 @@ all_ruby_install() {
 
 	# prepare directories
 	diropts -m750
-	dodir ${logs} ${temp} ${temp}/repo_satellites
+	dodir ${logs} ${temp}
 
 	diropts -m755
 	dodir ${conf} ${dest}/public/uploads
@@ -203,6 +203,7 @@ all_ruby_install() {
 
 	# clean gems cache
 	rm -Rf vendor/bundle/ruby/*/cache
+	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
@@ -214,6 +215,7 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-git-http.service"
+		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
 		local rcscript=gitlab-sidekiq-8.init
