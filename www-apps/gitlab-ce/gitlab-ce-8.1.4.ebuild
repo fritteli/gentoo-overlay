@@ -14,13 +14,14 @@ EAPI="5"
 USE_RUBY="ruby21"
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils git-r3 python-r1 ruby-ng user systemd
+inherit eutils python-r1 ruby-ng user systemd
+
+MY_PKGNAME="gitlabhq"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/gitlab-ce.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+SRC_URI="https://github.com/${MY_PKGNAME}/${MY_PKGNAME}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+RUBY_S="${MY_PKGNAME}-${PV}"
 
 RESTRICT="mirror"
 
@@ -54,7 +55,7 @@ CDEPEND="
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.5
 	dev-vcs/git
-	>=dev-vcs/gitlab-git-http-server-0.3.0
+	~dev-vcs/gitlab-git-http-server-0.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/22 )"
 RDEPEND="${DEPEND}
@@ -75,7 +76,7 @@ ruby_add_bdepend "
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${PN}-8.0.2-fix-gemfile.patch"
+	"${P}-fix-gemfile.patch"
 	"${PN}-fix-sendmail-config.patch"
 )
 
@@ -89,12 +90,7 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
-SIDEKIQ_QUEUES="post_receive,mailer,archive_repo,system_hook,project_web_hook,gitlab_shell,common,default"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
+SIDEKIQ_QUEUES="post_receive,mailer,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_prepare() {
 	# fix paths
@@ -153,7 +149,7 @@ all_ruby_install() {
 
 	# prepare directories
 	diropts -m750
-	dodir ${logs} ${temp} ${temp}/repo_satellites
+	dodir ${logs} ${temp}
 
 	diropts -m755
 	dodir ${conf} ${dest}/public/uploads
@@ -203,6 +199,7 @@ all_ruby_install() {
 
 	# clean gems cache
 	rm -Rf vendor/bundle/ruby/*/cache
+	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
 	# fix permissions
 	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
@@ -214,6 +211,7 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-git-http.service"
+		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
 		local rcscript=gitlab-sidekiq-8.init
