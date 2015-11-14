@@ -56,7 +56,7 @@ DEPEND="${GEMS_DEPEND}
 	dev-vcs/git
 	>=dev-vcs/gitlab-git-http-server-0.3.0
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/22 )"
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
 	dev-db/redis
 	virtual/mta
@@ -66,16 +66,10 @@ ruby_add_bdepend "
 	>=dev-ruby/bundler-1.0"
 
 #
-# fix-gemfile:
-#     Remove therubyracer that doesn't compile well on Gentoo (we're using
-#     nodejs instead that is faster and better). Also replace broken
-#     charlock_holmes version with fixed one.
-#
 # fix-sendmail-config:
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
 #
 RUBY_PATCHES=(
-	"${P}-fix-gemfile.patch"
 	"${PN}-fix-sendmail-config.patch"
 )
 
