@@ -1,0 +1,25 @@
+Title: Upgrade to gitlab-ce-8.2.0
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2015-11-23
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: www-apps/gitlab-ce
+
+GitLab 8.2.0 introduces some bigge changes that may require your attention
+when upgrading:
+- gitlab-git-http-server was renamed to gitlab-workhorse. Accordingly,
+  dev-vcs/gitlab-git-http-server has been renamed to
+  dev-vcs/gitlab-workhorse. The old package still exists, though, because
+  it is still needed by <gitlab-ce-8.2. The two packages can not be
+  installed simultaneously. Therefore, before upgrading, you may need to
+  manually unmerge gitlab-git-http-server.
+- If you're using CI, please note that you must upgrade
+  dev-vcs/gitlab-ci-multi-runner to version 0.7.1.
+
+As always, backup your database before upgrading. And be sure to read the
+GitLab upgrade guide at
+
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/8.1-to-8.2.md
+
+Thank you.
