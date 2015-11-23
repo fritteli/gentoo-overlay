@@ -52,9 +52,9 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.6
+	>=dev-vcs/gitlab-shell-2.6.7
 	dev-vcs/git
-	>=dev-vcs/gitlab-git-http-server-0.3.0
+	>=dev-vcs/gitlab-workhorse-0.4.2
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
@@ -208,12 +208,12 @@ all_ruby_install() {
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
 		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
-		systemd_dounit "${FILESDIR}/gitlab-git-http.service"
+		systemd_dounit "${FILESDIR}/gitlab-workhorse.service"
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq-8.init
-		use unicorn && rcscript=gitlab-unicorn-8.init
+		local rcscript=gitlab-sidekiq-8.2.init
+		use unicorn && rcscript=gitlab-unicorn-8.2.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
