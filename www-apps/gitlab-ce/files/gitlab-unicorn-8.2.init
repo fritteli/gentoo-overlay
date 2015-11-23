@@ -28,8 +28,8 @@ mail_room_command_args="exec mail_room -q -c ${mail_room_config} >> ${mail_room_
 
 depend() {
 	provide gitlab
-	need redis
-	use net gitlab-workhorse
+	need redis gitlab-workhorse
+	use net
 }
 
 start() {
