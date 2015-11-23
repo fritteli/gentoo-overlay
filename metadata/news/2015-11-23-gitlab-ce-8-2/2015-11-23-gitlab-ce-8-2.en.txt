@@ -2,11 +2,11 @@ Title: Upgrade to gitlab-ce-8.2.0
 Author: Manuel Friedli <manuel@fritteli.ch>
 Content-Type: text/plain
 Posted: 2015-11-23
-Revision: 1
+Revision: 2
 News-Item-Format: 1.0
 Display-If-Installed: www-apps/gitlab-ce
 
-GitLab 8.2.0 introduces some bigge changes that may require your attention
+GitLab 8.2.0 introduces some bigger changes that may require your attention
 when upgrading:
 - gitlab-git-http-server was renamed to gitlab-workhorse. Accordingly,
   dev-vcs/gitlab-git-http-server has been renamed to
