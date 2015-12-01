@@ -52,7 +52,7 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.7
+	>=dev-vcs/gitlab-shell-2.6.8
 	dev-vcs/git
 	>=dev-vcs/gitlab-workhorse-0.4.2
 	kerberos? ( !app-crypt/heimdal )
