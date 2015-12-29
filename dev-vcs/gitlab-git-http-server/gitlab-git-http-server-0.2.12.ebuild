@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils user
 
-DESCRIPTION="GitLab Git HTTP Server is the new backend for Git-over-HTTP communication needed for GitLab >= 8.0"
+DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for GitLab 8"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-git-http-server"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${PV} -> ${P}.tar.bz2"
 S="${WORKDIR}/${P}-dda7c98adf850e032fa19c24173cbe567a416065"

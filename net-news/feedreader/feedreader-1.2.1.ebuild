@@ -11,7 +11,7 @@ VALA_MIN_API_VERSION="0.24"
 
 MY_P="FeedReader"
 
-DESCRIPTION="Simple and modern News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
+DESCRIPTION="Simple News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
 HOMEPAGE="http://jangernert.github.io/${PN}/"
 SRC_URI="https://launchpad.net/${PN}/1.2/${PV}/+download/${MY_P}-${PV}.tar.gz"
 

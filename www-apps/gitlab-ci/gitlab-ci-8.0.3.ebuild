@@ -16,7 +16,7 @@ PYTHON_COMPAT=( python2_7 )
 
 inherit eutils python-r1 ruby-ng user
 
-DESCRIPTION="GitLab CI is a continuous integration server that is tightly integrated with GitLab"
+DESCRIPTION="GitLab CI is a continuous integration server tightly integrated with GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci"
 SRC_URI="https://github.com/gitlabhq/gitlab-ci/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
