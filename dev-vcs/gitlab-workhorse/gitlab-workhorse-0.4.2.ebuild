@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils user
 
-DESCRIPTION="GitLab Workhorse is the new backend for Git-over-HTTP communication needed for GitLab >= 8.2"
+DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for GitLab >= 8.2"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${PV} -> ${P}.tar.bz2"
 S="${WORKDIR}/${P}-7a84085b1671f5d6b28408a83ff97a4ff3428b71"
