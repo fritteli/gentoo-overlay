@@ -1,0 +1,15 @@
+Title: Upgrade to gitlab-ce-8.3.2
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2016-01-02
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: www-apps/gitlab-ce
+
+GitLab 8.3 introduces some major changes related to proxying HTTP requests
+through Apache / nginx. Notably, all requests are now routed through
+gitlab-workhorse. Before you upgrade, please read the upgrade guide at
+
+https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/update/8.2-to-8.3.md
+
+Thank you.
