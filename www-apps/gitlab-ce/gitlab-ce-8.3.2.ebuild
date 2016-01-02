@@ -12,9 +12,8 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python-r1 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
 
 MY_PKGNAME="gitlabhq"
 
@@ -53,13 +52,13 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.8
+	>=dev-vcs/gitlab-shell-2.6.9
 	dev-vcs/git
-	~dev-vcs/gitlab-workhorse-0.4.2
+	~dev-vcs/gitlab-workhorse-0.5.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
-	dev-db/redis
+	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
 ruby_add_bdepend "

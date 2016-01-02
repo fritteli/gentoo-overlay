@@ -6,7 +6,7 @@ index c2c8c59..419f4d8 100644
 -PREFIX=/usr/local
 -VERSION=$(shell git describe)-$(shell date -u +%Y%m%d.%H%M%S)
 +PREFIX=${DESTDIR}/usr
-+VERSION=0.4.2-$(shell date -u +%Y%m%d.%H%M%S)
++VERSION=0.5.1-$(shell date -u +%Y%m%d.%H%M%S)
  
  gitlab-workhorse: $(wildcard *.go)
 -	go build -ldflags "-X main.Version ${VERSION}" -o gitlab-workhorse

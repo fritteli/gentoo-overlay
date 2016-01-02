@@ -52,13 +52,13 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.8
+	>=dev-vcs/gitlab-shell-2.6.9
 	dev-vcs/git
-	>=dev-vcs/gitlab-workhorse-0.4.2
+	~dev-vcs/gitlab-workhorse-0.5.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
-	dev-db/redis
+	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
 ruby_add_bdepend "
@@ -229,6 +229,14 @@ all_ruby_install() {
 }
 
 pkg_postinst() {
+	elog "If this is an update from a previous version, stop your GitLab"
+	elog "instance and issue the following command to perform all required"
+	elog "migrations:"
+	elog "       emerge --config \"=${CATEGORY}/${PF}\""
+	elog "PLEASE NOTE: It's HIGHLY recommended to backup your database"
+	elog "before running the config phase!"
+	elog
+	elog "If this was a fresh install, follow these steps:"
 	elog
 	elog "1. Configure your GitLab's settings in ${CONF_DIR}/gitlab.yml."
 	elog
@@ -250,9 +258,6 @@ pkg_postinst() {
 	elog "4. Finally execute the following command to initlize environment:"
 	elog "       emerge --config \"=${CATEGORY}/${PF}\""
 	elog "   Note: Do not forget to start Redis server first!"
-	elog
-	elog "If this is an update from previous version, it's HIGHLY recommended"
-	elog "to backup your database before running the config phase!"
 	elog
 	elog "If you're running GitLab behind an SSL proxy such as nginx or Apache and"
 	elog "you can't login after the upgrade, be sure to read the section about the"
