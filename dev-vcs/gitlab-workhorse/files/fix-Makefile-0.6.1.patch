@@ -1,16 +1,12 @@
 diff --git a/Makefile b/Makefile
-index c2c8c59..419f4d8 100644
+index c81222f..1a90927 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,8 +1,8 @@
+@@ -1,5 +1,5 @@
 -PREFIX=/usr/local
 -VERSION=$(shell git describe)-$(shell date -u +%Y%m%d.%H%M%S)
 +PREFIX=${DESTDIR}/usr
 +VERSION=0.6.1-$(shell date -u +%Y%m%d.%H%M%S)
+ GOBUILD=go build -ldflags "-X main.Version=${VERSION}"
  
- gitlab-workhorse: $(wildcard *.go)
--	go build -ldflags "-X main.Version ${VERSION}" -o gitlab-workhorse
-+	go build -ldflags "-X main.Version=${VERSION}" -o gitlab-workhorse
- 
- install: gitlab-workhorse
- 	install gitlab-workhorse ${PREFIX}/bin/
+ all: gitlab-zip-cat gitlab-zip-metadata gitlab-workhorse
