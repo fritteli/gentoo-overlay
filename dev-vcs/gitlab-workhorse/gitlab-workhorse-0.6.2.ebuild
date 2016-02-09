@@ -6,10 +6,10 @@ EAPI="5"
 
 inherit eutils user
 
-DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for GitLab >= 8.2"
+DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for GitLab >= 8.4"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${PV} -> ${P}.tar.bz2"
-S="${WORKDIR}/${P}-58957d60b525e83663f48b119b82160be604111c"
+S="${WORKDIR}/${P}-7a8ab7a2a8a297cfd0eeefa1ecf163a811bd1015"
 RESTRICT="mirror"
 
 LICENSE="MIT"

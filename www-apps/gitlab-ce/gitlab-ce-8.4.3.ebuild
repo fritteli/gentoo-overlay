@@ -52,9 +52,9 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.9
+	>=dev-vcs/gitlab-shell-2.6.10
 	dev-vcs/git
-	~dev-vcs/gitlab-workhorse-0.5.4
+	>=dev-vcs/gitlab-workhorse-0.6.2
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}

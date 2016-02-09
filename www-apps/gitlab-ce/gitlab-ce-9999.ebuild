@@ -12,9 +12,8 @@ EAPI="5"
 #
 
 USE_RUBY="ruby21"
-PYTHON_COMPAT=( python2_7 )
 
-inherit eutils git-r3 python-r1 ruby-ng user systemd
+inherit eutils git-r3 ruby-ng user systemd
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -52,9 +51,9 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-2.6.10
+	>=dev-vcs/gitlab-shell-2.6.10
 	dev-vcs/git
-	~dev-vcs/gitlab-workhorse-0.5.4
+	>=dev-vcs/gitlab-workhorse-0.6.3
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
@@ -83,7 +82,7 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
-SIDEKIQ_QUEUES="post_receive,mailer,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
+SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_unpack() {
 	git-r3_fetch

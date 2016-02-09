@@ -1,0 +1,33 @@
+Title: Cleanup of Gitlab ebuilds
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2016-02-09
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: dev-vcs/gitlab-ci-multi-runner
+Display-If-Installed: dev-vcs/gitlab-git-http-server
+Display-If-Installed: dev-vcs/gitlab-shell
+Display-If-Installed: dev-vcs/gitlab-workhorse
+Display-If-Installed: www-apps/gitlab-ce
+Display-If-Installed: www-apps/gitlab-ci
+
+A big cleanup of various Gitlab related packages is planned. Please
+upgrade to the following versions:
+
+  - =dev-vcs/gitlab-ci-multi-runner-1.0.2
+  - =dev-vcs/gitlab-shell-2.6.10
+  - =dev-vcs/gitlab-workhorse-0.6.2
+  - =www-apps/gitlab-ce-8.4.3
+
+Older versions will be removed from the overlay.
+
+The following packages will be removed entirely, as they are now
+obsolete:
+
+  - dev-vcs/gitlab-git-http-server
+  - www-apps/gitlab-ci
+
+The cleanup will happen sometime in March 2016.
+
+Cheers,
+fritteli.
