@@ -1,0 +1,12 @@
+diff --git a/Makefile b/Makefile
+index c81222f..1a90927 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,5 @@
+-PREFIX=/usr/local
+-VERSION=$(shell git describe)-$(shell date -u +%Y%m%d.%H%M%S)
++PREFIX=${DESTDIR}/usr
++VERSION=0.6.4-$(shell date -u +%Y%m%d.%H%M%S)
+ GOBUILD=go build -ldflags "-X main.Version=${VERSION}"
+ 
+ all: gitlab-zip-cat gitlab-zip-metadata gitlab-workhorse
