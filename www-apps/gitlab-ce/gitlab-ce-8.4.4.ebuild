@@ -13,19 +13,20 @@ EAPI="5"
 
 USE_RUBY="ruby21"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
+
+MY_PKGNAME="gitlabhq"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+SRC_URI="https://github.com/${MY_PKGNAME}/${MY_PKGNAME}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+RUBY_S="${MY_PKGNAME}-${PV}"
 
 RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -53,9 +54,9 @@ CDEPEND="
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.10
 	dev-vcs/git
-	>=dev-vcs/gitlab-workhorse-0.6.4
+	>=dev-vcs/gitlab-workhorse-0.6.2
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/23 )"
 RDEPEND="${DEPEND}
 	>=dev-db/redis-2.8
 	virtual/mta
@@ -83,11 +84,6 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
 SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths

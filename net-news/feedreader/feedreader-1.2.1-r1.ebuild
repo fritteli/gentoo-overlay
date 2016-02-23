@@ -7,7 +7,7 @@ EAPI="5"
 inherit cmake-utils gnome2 vala
 
 CMAKE_MIN_VERSION="2.6"
-VALA_MIN_API_VERSION="0.24"
+VALA_MIN_API_VERSION="0.26"
 
 MY_P="FeedReader"
 
