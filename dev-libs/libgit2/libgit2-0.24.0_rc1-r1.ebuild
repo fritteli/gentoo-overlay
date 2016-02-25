@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/${PN}/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="-*"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="A linkable library for Git"
@@ -43,7 +43,6 @@ src_prepare() {
 	# skip online tests
 	sed -i '/libgit2_clar/s/-ionline/-xonline/' CMakeLists.txt || die
 
-	epatch "${FILESDIR}/${P}-fix-version.patch"
 	cmake-utils_src_prepare
 }
 
