@@ -30,14 +30,14 @@ KEYWORDS="~amd64 ~x86"
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:
-#   charlock_holmes		dev-libs/icu
-#   grape, capybara		dev-libs/libxml2, dev-libs/libxslt
-#   rugged				dev-util/cmake, virtual/pkgconfig
-#   json				dev-util/ragel
-#   pygments.rb			python 2.7+
-#   execjs				net-libs/nodejs, or any other JS runtime
-#   pg					dev-db/postgresql
-#   mysql				virtual/mysql
+#   charlock_holmes     dev-libs/icu
+#   grape, capybara     dev-libs/libxml2, dev-libs/libxslt
+#   rugged              dev-util/cmake, virtual/pkgconfig
+#   json                dev-util/ragel
+#   pygments.rb         python 2.7+
+#   execjs              net-libs/nodejs, or any other JS runtime
+#   pg                  dev-db/postgresql
+#   mysql               virtual/mysql
 #
 GEMS_DEPEND="
 	dev-libs/icu
