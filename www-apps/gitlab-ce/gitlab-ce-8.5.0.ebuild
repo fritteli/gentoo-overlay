@@ -26,7 +26,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="-*"
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:

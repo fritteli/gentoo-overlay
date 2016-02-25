@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/${PN}/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="amd64 ~arm ~x86 ~ppc-macos"
+	KEYWORDS="-*"
 fi
 
 DESCRIPTION="A linkable library for Git"
