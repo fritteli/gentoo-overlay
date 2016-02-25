@@ -20,7 +20,7 @@ DESCRIPTION="A linkable library for Git"
 HOMEPAGE="https://libgit2.github.com/"
 
 LICENSE="GPL-2-with-linking-exception"
-SLOT="0/23"
+SLOT="0/24"
 IUSE="examples gssapi libressl ssh test threads trace"
 
 S="${WORKDIR}/${PN}-${MY_PV}"
