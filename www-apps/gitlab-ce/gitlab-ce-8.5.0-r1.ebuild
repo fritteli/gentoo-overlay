@@ -229,7 +229,10 @@ pkg_postinst() {
 	elog "migrations:"
 	elog "       emerge --config \"=${CATEGORY}/${PF}\""
 	elog "PLEASE NOTE: It's HIGHLY recommended to backup your database"
-	elog "before running the config phase!"
+	elog "before running the config phase. Run these commands (as root):"
+	elog
+	elog "    cd /opt/gitlab"
+	elog "    sudo -u git -H bundle exec rake gitlab:backup:create RAILS_ENV=production"
 	elog
 	elog "If this was a fresh install, follow these steps:"
 	elog
@@ -239,7 +242,7 @@ pkg_postinst() {
 	elog "   for \"production\" environment."
 	elog
 	elog "3. Then you should create a database for your GitLab instance, if you"
-	elog "haven't done so already."
+	elog "   haven't done so already."
 	elog
 	if use postgres; then
 		elog "If you have local PostgreSQL running, just copy&run:"
@@ -250,7 +253,7 @@ pkg_postinst() {
 		elog "  Note: You should change your password to something more random..."
 		elog
 	fi
-	elog "4. Finally execute the following command to initlize environment:"
+	elog "4. Finally execute the following command to initialize the environment:"
 	elog "       emerge --config \"=${CATEGORY}/${PF}\""
 	elog "   Note: Do not forget to start Redis server first!"
 	elog
@@ -352,6 +355,14 @@ pkg_config() {
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
 	fi
+	elog
+	elog "If you want to make sure that the install/upgrade was successful, start"
+	elog "Gitlab now and then run these commands (as root):"
+	elog
+	elog "    cd /opt/gitlab"
+	elog "    sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production"
+	elog "    sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production"
+	elog
 }
 
 ryaml() {
