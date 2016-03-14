@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -53,7 +53,7 @@ CDEPEND="
 DEPEND="${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.10
 	dev-vcs/git
-	>=dev-vcs/gitlab-workhorse-0.6.4
+	>=dev-vcs/gitlab-workhorse-0.6.5
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 RDEPEND="${DEPEND}
@@ -211,8 +211,8 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq-8.2.init
-		use unicorn && rcscript=gitlab-unicorn-8.2.init
+		local rcscript=gitlab-sidekiq.init
+		use unicorn && rcscript=gitlab-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \

@@ -15,7 +15,7 @@ sidekiq_command="/usr/bin/bundle"
 sidekiq_command_args="exec sidekiq -q ${sidekiq_queues} -P ${sidekiq_pidfile} -L ${sidekiq_logfile}"
 
 depend() {
-	need redis
+	need redis gitlab-workhorse
 	use net
 }
 
