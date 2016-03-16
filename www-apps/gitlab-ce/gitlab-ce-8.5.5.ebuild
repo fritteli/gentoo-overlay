@@ -58,6 +58,7 @@ DEPEND="${GEMS_DEPEND}
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 RDEPEND="${DEPEND}
+	${CDEPEND}
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
