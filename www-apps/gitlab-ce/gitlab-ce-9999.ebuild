@@ -51,6 +51,7 @@ CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
 DEPEND="${GEMS_DEPEND}
+	${CDEPEND}
 	>=dev-vcs/gitlab-shell-2.6.10
 	dev-vcs/git
 	>=dev-vcs/gitlab-workhorse-0.6.5
