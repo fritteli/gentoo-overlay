@@ -14,7 +14,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 DEPEND=">=dev-lang/go-1.5.1
 	!dev-vcs/gitlab-git-http-server"

@@ -14,12 +14,12 @@ SRC_URI="https://github.com/gitlabhq/gitlab-shell/archive/v${PV}.tar.gz -> ${P}.
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 IUSE=""
 
 DEPEND=""
 RDEPEND="
-	dev-vcs/git
+	>=dev-vcs/git-2.7.3
 	dev-db/redis
 	virtual/ssh"
 ruby_add_bdepend "
