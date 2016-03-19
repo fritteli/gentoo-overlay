@@ -19,7 +19,7 @@ IUSE=""
 
 DEPEND=""
 RDEPEND="
-	dev-vcs/git
+	>=dev-vcs/git-2.7.3
 	dev-db/redis
 	virtual/ssh"
 ruby_add_bdepend "
