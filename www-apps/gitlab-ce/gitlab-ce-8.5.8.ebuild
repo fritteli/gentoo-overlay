@@ -51,14 +51,18 @@ GEMS_DEPEND="
 CDEPEND="
 	dev-util/cmake
 	virtual/pkgconfig"
-DEPEND="${GEMS_DEPEND}
-	${CDEPEND}
+COMMON_DEPEND="
+	${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.6.10
-	dev-vcs/git
+	>=dev-vcs/git-2.7.3
 	>=dev-vcs/gitlab-workhorse-0.6.5
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
-RDEPEND="${DEPEND}
+DEPEND="
+	${CDEPEND}
+	${COMMON_DEPEND}"
+RDEPEND="
+	${COMMON_DEPEND}
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
