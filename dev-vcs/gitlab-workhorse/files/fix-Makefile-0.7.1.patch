@@ -6,7 +6,7 @@ index c81222f..1a90927 100644
 -PREFIX=/usr/local
 -VERSION=$(shell git describe)-$(shell date -u +%Y%m%d.%H%M%S)
 +PREFIX=${DESTDIR}/usr
-+VERSION=0.6.2-$(shell date -u +%Y%m%d.%H%M%S)
++VERSION=0.7.1-$(shell date -u +%Y%m%d.%H%M%S)
  GOBUILD=go build -ldflags "-X main.Version=${VERSION}"
  
  all: gitlab-zip-cat gitlab-zip-metadata gitlab-workhorse
