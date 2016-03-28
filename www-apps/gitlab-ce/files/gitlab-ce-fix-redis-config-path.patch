@@ -1,0 +1,26 @@
+diff --git a/config/application.rb b/config/application.rb
+index 5a0ac70..5a2ab43 100644
+--- a/config/application.rb
++++ b/config/application.rb
+@@ -4,7 +4,7 @@ require 'rails/all'
+ require 'devise'
+ I18n.config.enforce_available_locales = false
+ Bundler.require(:default, Rails.env)
+-require_relative '../lib/gitlab/redis_config'
++require_relative '/opt/gitlab/lib/gitlab/redis_config'
+ 
+ module Gitlab
+   REDIS_CACHE_NAMESPACE = 'cache:gitlab'
+diff --git a/config/mail_room.yml b/config/mail_room.yml
+index aed55f7..dace83f 100644
+--- a/config/mail_room.yml
++++ b/config/mail_room.yml
+@@ -2,7 +2,7 @@
+ <%
+ require "yaml"
+ require "json"
+-require_relative "lib/gitlab/redis_config"
++require_relative "/opt/gitlab/lib/gitlab/redis_config"
+ 
+ rails_env = ENV["RAILS_ENV"] || ENV["RACK_ENV"] || "development"
+ 
