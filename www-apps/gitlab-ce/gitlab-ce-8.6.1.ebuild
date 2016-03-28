@@ -73,9 +73,12 @@ ruby_add_bdepend "
 #
 # fix-sendmail-config:
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
+# fix-redis-config-path:
+#     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
 	"${PN}-fix-sendmail-config.patch"
+	"${PN}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
