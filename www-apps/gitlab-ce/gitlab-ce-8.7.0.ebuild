@@ -53,9 +53,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.6.10
-	>=dev-vcs/git-2.7.3
-	>=dev-vcs/gitlab-workhorse-0.6.5
+	>=dev-vcs/gitlab-shell-2.7.2
+	>=dev-vcs/git-2.7.4
+	>=dev-vcs/gitlab-workhorse-0.7.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -73,9 +73,12 @@ ruby_add_bdepend "
 #
 # fix-sendmail-config:
 #     Fix default settings to work with ssmtp that doesn't know '-t' argument.
+# fix-redis-config-path:
+#     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
 	"${PN}-fix-sendmail-config.patch"
+	"${PN}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
@@ -195,6 +198,9 @@ all_ruby_install() {
 	einfo "Running bundle install ${bundle_args} ..."
 	${RUBY} /usr/bin/bundle install ${bundle_args} || die "bundler failed"
 
+	einfo "Cleaning old gems ..."
+	${RUBY} /usr/bin/bundle clean
+
 	# clean gems cache
 	rm -Rf vendor/bundle/ruby/*/cache
 	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
@@ -266,6 +272,13 @@ pkg_postinst() {
 	elog "you can't login after the upgrade, be sure to read the section about the"
 	elog "verification of the CSRF token in GitLab's trouble-shooting guide at"
 	elog "http://goo.gl/5XGRGv."
+	if use postgres; then
+		elog "Please note: As of GitLab 8.6, users of PostgreSQL need to enable the"
+		elog "`pg_trgm` extension by running the following command as a PostgreSQL"
+		elog "super user for *every* GitLab database:"
+		elog "      CREATE EXTENSION IF NOT EXISTS pg_trgm;"
+		elog "For details, see the documentation at the GitLab website."
+	fi
 }
 
 pkg_config() {
