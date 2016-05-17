@@ -15,9 +15,21 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 CDEPEND=""
-DEPEND=">=dev-lang/mono-4.0.5.1"
+DEPEND=">=dev-lang/mono-3.12.1"
 RDEPEND=""
 
+PATCHES="
+	${FILESDIR}/${P}-filenames-casesensitive.patch
+"
+
 src_prepare() {
-	epatch "${FILESDIR}/${P}-filenames-casesensitive.patch"
+	for p in ${PATCHES} ; do
+		epatch "${p}"
+	done
 }
+
+src_compile() {
+	cd ${S}
+	xbuild
+}
+
