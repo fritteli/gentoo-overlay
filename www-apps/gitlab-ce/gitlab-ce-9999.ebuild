@@ -54,7 +54,7 @@ COMMON_DEPEND="
 	${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-2.7.2
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-0.7.1
+	=dev-vcs/gitlab-workhorse-0.7.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -76,7 +76,7 @@ ruby_add_bdepend "
 #     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
-	"${PN}-fix-sendmail-config.patch"
+	"${PN}-8.7.3-fix-sendmail-config.patch"
 	"${PN}-8.7.0-fix-redis-config-path.patch"
 )
 
