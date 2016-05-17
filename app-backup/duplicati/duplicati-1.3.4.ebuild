@@ -18,7 +18,9 @@ CDEPEND=""
 DEPEND=">=dev-lang/mono-4.4.0.40"
 RDEPEND=""
 
-PATCHES="${FILESDIR}/${P}-filenames-casesensitive.patch"
+PATCHES=(
+	"${FILESDIR}/${P}-filenames-casesensitive.patch"
+)
 
 src_prepare() {
 	for p in ${PATCHES} ; do
@@ -29,4 +31,3 @@ src_prepare() {
 src_compile() {
 	xbuild
 }
-
