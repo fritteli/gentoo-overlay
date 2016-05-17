@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils mono
 
-DESCRIPTION="Duplicati is a backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers."
+DESCRIPTION="A free backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers."
 HOMEPAGE="http://www.duplicati.com/"
 SRC_URI="https://github.com/${PN}/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 CDEPEND=""
-DEPEND=">=dev-lang/mono-3.12.1"
+DEPEND=">=dev-lang/mono-4.4.0.40"
 RDEPEND=""
 
 PATCHES="
