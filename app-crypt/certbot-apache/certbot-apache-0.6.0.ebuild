@@ -5,11 +5,11 @@
 EAPI=5
 PYTHON_COMPAT=(python2_7)
 
-MY_PN="letsencrypt"
+MY_PN="certbot"
 MY_P="${MY_PN}-${PV}"
 
 if [[ ${PV} == 9999* ]]; then
-	EGIT_REPO_URI="https://github.com/letsencrypt/letsencrypt.git"
+	EGIT_REPO_URI="https://github.com/${MY_PN}/${MY_PN}.git"
 	inherit git-r3 distutils-r1
 	KEYWORDS=""
 else
@@ -19,13 +19,13 @@ else
 fi
 
 DESCRIPTION="Apache plugin for letsencrypt"
-HOMEPAGE="https://github.com/letsencrypt/letsencrypt https://letsencrypt.org/"
+HOMEPAGE="https://github.com/certbot/certbot https://letsencrypt.org/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
 IUSE="test"
 
-RDEPEND="app-crypt/letsencrypt[${PYTHON_USEDEP}]
+RDEPEND="app-crypt/certbot[${PYTHON_USEDEP}]
 	app-crypt/acme[${PYTHON_USEDEP}]
 	dev-python/mock[${PYTHON_USEDEP}]
 	dev-python/python-augeas[${PYTHON_USEDEP}]
