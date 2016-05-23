@@ -20,14 +20,22 @@ RDEPEND=""
 
 PATCHES=(
 	"${FILESDIR}/${P}-filenames-casesensitive.patch"
+	"${FILESDIR}/${P}-remove-unsigned-backends.patch"
+	"${FILESDIR}/${P}-patch-Makefile.patch"
 )
 
 src_prepare() {
-	for p in ${PATCHES} ; do
+	for p in "${PATCHES[@]}" ; do
 		epatch "${p}"
 	done
 }
 
 src_compile() {
-	xbuild
+	cd ${S}/Installer/Makefile
+	emake translations
+}
+
+src_install() {
+	cd ${S}/Installer/Makefile
+	emake package
 }
