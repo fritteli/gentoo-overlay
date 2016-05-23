@@ -24,6 +24,8 @@ PATCHES=(
 	"${FILESDIR}/${P}-patch-Makefile.patch"
 )
 
+MY_MAKE_DIR="${S}/Installer/Makefile"
+
 src_prepare() {
 	for p in "${PATCHES[@]}" ; do
 		epatch "${p}"
@@ -31,11 +33,11 @@ src_prepare() {
 }
 
 src_compile() {
-	cd ${S}/Installer/Makefile
+	cd "${MY_MAKE_DIR}"
 	emake translations
 }
 
 src_install() {
-	cd ${S}/Installer/Makefile
+	cd "${MY_MAKE_DIR}"
 	emake package
 }
