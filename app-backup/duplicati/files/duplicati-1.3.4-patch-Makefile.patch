@@ -1,5 +1,5 @@
 diff --git a/Installer/Makefile/Makefile b/Installer/Makefile/Makefile
-index 5528c7e..ba8e11f 100644
+index 5528c7e..0dfa485 100644
 --- a/Installer/Makefile/Makefile
 +++ b/Installer/Makefile/Makefile
 @@ -2,20 +2,14 @@ BUILD_TOOL=xbuild
@@ -37,7 +37,15 @@ index 5528c7e..ba8e11f 100644
  	mkdir "$(PACKAGE_DIR)/usr"
  	mkdir "$(PACKAGE_DIR)/usr/lib"
  	mkdir "$(PACKAGE_DIR)/usr/bin"
-@@ -79,16 +69,6 @@ package:
+@@ -51,7 +41,6 @@ package:
+ 	cp -R "$(SOURCE_DIR)/Duplicati/Localization/compiled/"* "$(PKG_TARGET)"
+ 
+ 	rm -rf "$(PKG_TARGET)/alphavss"
+-	rm -rf "$(PKG_TARGET)/SQLite"
+ 	rm -rf "$(PKG_TARGET)/win-tools"
+ 	rm -rf "$(PKG_TARGET)/"*.mdb
+ 	rm -rf "$(PKG_TARGET)/AlphaFS.dll"
+@@ -79,16 +68,6 @@ package:
  	
  	chmod +x "$(PACKAGE_DIR)/usr/bin/duplicati"
  	chmod +x "$(PACKAGE_DIR)/usr/bin/duplicati-commandline"
