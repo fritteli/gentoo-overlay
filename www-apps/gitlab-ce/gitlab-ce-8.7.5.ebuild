@@ -77,8 +77,8 @@ ruby_add_bdepend "
 #     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
-	"${PN}-8.7.3-fix-sendmail-config.patch"
-	"${PN}-8.7.0-fix-redis-config-path.patch"
+	"${P}-fix-sendmail-config.patch"
+	"${P}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
