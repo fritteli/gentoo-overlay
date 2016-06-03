@@ -38,6 +38,7 @@ src_unpack() {
 src_install() {
 	insinto ${WEBAPP_DIR}
 	doins -r nexus-${PV}${SUB_VERSION}/*
+	doins -r nexus-${PV}${SUB_VERSION}/.install4j
 
 	newinitd "${FILESDIR}/init.sh" nexus
 
