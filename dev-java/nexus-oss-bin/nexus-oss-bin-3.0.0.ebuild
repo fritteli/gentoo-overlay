@@ -35,11 +35,6 @@ src_unpack() {
 	cd "${S}"
 }
 
-src_prepare() {
-#	epatch "${FILESDIR}/nexus-wrapper-${PV}.patch"
-:
-}
-
 src_install() {
 	insinto ${WEBAPP_DIR}
 	doins -r nexus-${PV}${SUB_VERSION}/*
@@ -47,7 +42,5 @@ src_install() {
 	newinitd "${FILESDIR}/init.sh" nexus
 
 	fowners -R nexus:nexus ${INSTALL_DIR}
-	fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/jsw/linux-x86-64/wrapper"
-	fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/jsw/linux-x86-32/wrapper"
-	fperms 755 "${INSTALL_DIR}/nexus-oss-webapp/bin/nexus"
+	fperms 755 "${WEBAPP_DIR}/bin/nexus"
 }
