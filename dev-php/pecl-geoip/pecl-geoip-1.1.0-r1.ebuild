@@ -13,7 +13,7 @@ USE_PHP="php7-0"
 
 inherit php-ext-pecl-r2
 
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 
 DESCRIPTION="PHP extension to map IP address to geographic places"
 LICENSE="PHP-3"
