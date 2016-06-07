@@ -8,10 +8,11 @@ PHP_EXT_NAME="geoip"
 PHP_EXT_INI="yes"
 PHP_EXT_ZENDEXT="no"
 DOCS="README ChangeLog"
+MY_PV="1.1.0"
 
 USE_PHP="php7-0"
 
-inherit php-ext-pecl-r2
+inherit eutils php-ext-pecl-r2
 
 KEYWORDS="~amd64 ~x86"
 
@@ -22,3 +23,13 @@ IUSE=""
 
 DEPEND=">=dev-libs/geoip-1.4.0"
 RDEPEND="${DEPEND}"
+
+PATCHES=(
+	"${FILESDIR}(${P}-patch-to-svn-r337409.patch"
+)
+
+src_prepare() {
+	for p in "${PATCHES[@]}" ; do
+		epatch "${p}"
+	done
+}
