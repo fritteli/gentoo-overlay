@@ -25,11 +25,19 @@ DEPEND=">=dev-libs/geoip-1.4.0"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}(${P}-patch-to-svn-r337409.patch"
+	"${FILESDIR}/${P}-patch-to-svn-r337409.patch"
 )
 
+# apply patches in unpack phase, or else the php7.0 dir won't get patched
 src_prepare() {
-	for p in "${PATCHES[@]}" ; do
-		epatch "${p}"
+	local slot
+	local p
+	for slot in $(php_get_slots) ; do
+		cd "${WORKDIR}/${slot}"
+		for p in "${PATCHES[@]}" ; do
+			epatch "${p}"
+		done
 	done
+
+	php-ext-source-r2_src_prepare
 }
