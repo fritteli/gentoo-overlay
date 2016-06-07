@@ -1,0 +1,1313 @@
+diff --git config.m4 config.m4
+index 16ed467..fd75707 100644
+--- config.m4
++++ config.m4
+@@ -43,7 +43,7 @@ if test "$PHP_GEOIP" != "no"; then
+ 
+   PHP_CHECK_LIBRARY($LIBNAME,$LIBSYMBOL,
+   [
+-    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $GEOIP_DIR/lib, GEOIP_SHARED_LIBADD)
++    PHP_ADD_LIBRARY_WITH_PATH($LIBNAME, $GEOIP_DIR/$PHP_LIBDIR, GEOIP_SHARED_LIBADD)
+     AC_DEFINE(HAVE_GEOIPLIB,1,[ ])
+   ],[
+     AC_MSG_ERROR([wrong geoip lib version or lib not found])
+@@ -95,8 +95,7 @@ if test "$PHP_GEOIP" != "no"; then
+   AC_CHECK_DECL(GEOIP_NETSPEED_EDITION_REV1,
+   [
+     MIN_GEOIP_VERSION=1004008
+-  ],[
+-  ],[
++  ],[],[
+     #include <GeoIP.h>
+   ])
+   
+@@ -104,8 +103,7 @@ if test "$PHP_GEOIP" != "no"; then
+   AC_CHECK_DECL(GEOIP_ACCURACYRADIUS_EDITION,
+   [
+     MIN_GEOIP_VERSION=1005000
+-  ],[
+-  ],[
++  ],[],[
+     #include <GeoIP.h>
+   ])
+   
+diff --git geoip.c geoip.c
+index d7f0165..0615b34 100644
+--- geoip.c
++++ geoip.c
+@@ -12,13 +12,13 @@
+   | obtain it through the world-wide-web, please send a note to          |
+   | license@php.net so we can mail you a copy immediately.               |
+   +----------------------------------------------------------------------+
+-  | Author: Olivier Hill   <ohill@php.net>                               |
++  | Author: Olivier Hill <ohill@php.net>                                 |
+   |         Matthew Fonda                                                |
++  |         Adam Saponara <as@php.net>                                   |
+   +----------------------------------------------------------------------+
+   Please contact support@maxmind.com with any comments
+ */
+ 
+-
+ #ifdef HAVE_CONFIG_H
+ #include "config.h"
+ #endif
+@@ -34,39 +34,50 @@
+ #include "ext/standard/info.h"
+ #include "php_geoip.h"
+ 
+-
+-
+ ZEND_DECLARE_MODULE_GLOBALS(geoip)
+ 
+ static int le_geoip;
+ 
+ /* {{{ */
+ zend_function_entry geoip_functions[] = {
+-	PHP_FE(geoip_database_info,   NULL)   
+-#define GEOIPDEF(php_func, c_func, db_type) \
+-	PHP_FE(php_func,	NULL)
+-#include "geoip.def"
+-#undef GEOIPDEF
+-	PHP_FE(geoip_continent_code_by_name,   NULL)
+-	PHP_FE(geoip_org_by_name,   NULL)
+-	PHP_FE(geoip_record_by_name,   NULL)
+-	PHP_FE(geoip_id_by_name,   NULL)
+-	PHP_FE(geoip_region_by_name,   NULL)
+-	PHP_FE(geoip_isp_by_name,   NULL)
+-	PHP_FE(geoip_db_avail,	NULL)
+-	PHP_FE(geoip_db_get_all_info,	NULL)
+-	PHP_FE(geoip_db_filename,	NULL)
++	PHP_FE(geoip_country_code_by_name, NULL)
++	PHP_FE(geoip_country_code3_by_name, NULL)
++	PHP_FE(geoip_country_name_by_name, NULL)
++	PHP_FE(geoip_asnum_by_name, NULL)
++	PHP_FE(geoip_domain_by_name, NULL)
++	PHP_FE(geoip_isp_by_name, NULL)
++	PHP_FE(geoip_org_by_name, NULL)
++	PHP_FE(geoip_region_by_name, NULL)
++	PHP_FE(geoip_record_by_name, NULL)
++	PHP_FE(geoip_id_by_name, NULL)
++	PHP_FE(geoip_continent_code_by_name, NULL)
++#if LIBGEOIP_VERSION >= 1004005
++	PHP_FE(geoip_country_code_by_name_v6, NULL)
++	PHP_FE(geoip_country_code3_by_name_v6, NULL)
++	PHP_FE(geoip_country_name_by_name_v6, NULL)
++	PHP_FE(geoip_asnum_by_name_v6, NULL)
++	PHP_FE(geoip_domain_by_name_v6, NULL)
++	PHP_FE(geoip_isp_by_name_v6, NULL)
++	PHP_FE(geoip_org_by_name_v6, NULL)
++	PHP_FE(geoip_region_by_name_v6, NULL)
++	PHP_FE(geoip_record_by_name_v6, NULL)
++	PHP_FE(geoip_id_by_name_v6, NULL)
++	PHP_FE(geoip_continent_code_by_name_v6, NULL)
++#endif
++	PHP_FE(geoip_db_avail, NULL)
++	PHP_FE(geoip_db_filename, NULL)
++	PHP_FE(geoip_db_get_all_info, NULL)
++	PHP_FE(geoip_database_info, NULL)
+ #if LIBGEOIP_VERSION >= 1004001
+-	PHP_FE(geoip_region_name_by_code,	NULL)
+-	PHP_FE(geoip_time_zone_by_country_and_region,	NULL)
++	PHP_FE(geoip_region_name_by_code, NULL)
++	PHP_FE(geoip_time_zone_by_country_and_region, NULL)
+ #endif
+ #ifdef HAVE_CUSTOM_DIRECTORY
+-    PHP_FE(geoip_setup_custom_directory,	NULL)
++	PHP_FE(geoip_setup_custom_directory, NULL)
+ #endif
+-	PHP_FE(geoip_asnum_by_name,   NULL)
+-	PHP_FE(geoip_domain_by_name,   NULL)
+ #if LIBGEOIP_VERSION >= 1004008
+ 	PHP_FE(geoip_netspeedcell_by_name, NULL)
++	PHP_FE(geoip_netspeedcell_by_name_v6, NULL)
+ #endif
+ 	{NULL, NULL, NULL}
+ };
+@@ -81,9 +92,9 @@ zend_module_entry geoip_module_entry = {
+ 	"geoip",
+ 	geoip_functions,
+ 	PHP_MINIT(geoip),
+-	PHP_MSHUTDOWN(geoip),
+-	PHP_RINIT(geoip),      
+-	PHP_RSHUTDOWN(geoip),   
++	NULL,
++	NULL,
++	PHP_RSHUTDOWN(geoip),
+ 	PHP_MINFO(geoip),
+ #if ZEND_MODULE_API_NO >= 20010901
+ 	PHP_GEOIP_VERSION, /* version number of the extension */
+@@ -96,11 +107,21 @@ zend_module_entry geoip_module_entry = {
+ ZEND_GET_MODULE(geoip)
+ #endif
+ 
++#if PHP_MAJOR_VERSION >= 7
++#define strlen_compat_t size_t
++#define add_assoc_string_compat(zval, key, val, dup) add_assoc_string(zval, key, val)
++#define RETURN_STRING_COMPAT(str, dup) RETURN_STRING(str)
++#define RETVAL_STRING_COMPAT(str, dup) RETVAL_STRING(str)
++#else
++#define strlen_compat_t int
++#define add_assoc_string_compat(zval, key, val, dup) add_assoc_string(zval, key, val, dup)
++#define RETURN_STRING_COMPAT(str, dup) RETURN_STRING(str, dup)
++#define RETVAL_STRING_COMPAT(str, dup) RETVAL_STRING(str, dup)
++#endif
++
+ #ifdef HAVE_CUSTOM_DIRECTORY
+-/* {{{ geoip_change_custom_directory() helper function
+- */
+-static void geoip_change_custom_directory(char *value)
+-{
++/* {{{ geoip_change_custom_directory() helper function */
++static void geoip_change_custom_directory(char *value) {
+ #if LIBGEOIP_VERSION >= 1004007
+ 	GeoIP_cleanup();
+ #else
+@@ -115,7 +136,6 @@ static void geoip_change_custom_directory(char *value)
+ 		GeoIPDBFileName = NULL;
+ 	}
+ #endif
+-
+ 	GeoIP_setup_custom_directory(value);
+ 	_GeoIP_setup_dbfilename();
+ }
+@@ -123,23 +143,28 @@ static void geoip_change_custom_directory(char *value)
+ #endif
+ 
+ #ifdef HAVE_CUSTOM_DIRECTORY
+-/* {{{ PHP_INI_MH 
+-+ */
+-static PHP_INI_MH(OnUpdateDirectory)
+-{
++/* {{{ PHP_INI_MH */
++static PHP_INI_MH(OnUpdateDirectory) {
+ 	if (stage == PHP_INI_STAGE_RUNTIME || stage == PHP_INI_STAGE_HTACCESS) {
+ 		GEOIP_G(set_runtime_custom_directory) = 1;
++#if PHP_MAJOR_VERSION >= 7
++		geoip_change_custom_directory(new_value->val);
++#else
+ 		geoip_change_custom_directory(new_value);
++#endif
+ 		return SUCCESS;
+ 	}
+-	
++#if PHP_MAJOR_VERSION >= 7
++	return OnUpdateString(entry, new_value, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
++#else
+ 	return OnUpdateString(entry, new_value, new_value_length, mh_arg1, mh_arg2, mh_arg3, stage TSRMLS_CC);
++#endif
++
+ }
+ /* }}} */
+ #endif
+ 
+-/* {{{ PHP_INI
+- */
++/* {{{ PHP_INI */
+ PHP_INI_BEGIN()
+ #ifdef HAVE_CUSTOM_DIRECTORY
+ 	STD_PHP_INI_ENTRY("geoip.custom_directory", NULL, PHP_INI_ALL, OnUpdateDirectory, custom_directory, zend_geoip_globals, geoip_globals)
+@@ -147,43 +172,51 @@ PHP_INI_BEGIN()
+ PHP_INI_END()
+ /* }}} */
+ 
+-/* {{{ php_geoip_init_globals
+- */
+-static void php_geoip_init_globals(zend_geoip_globals *geoip_globals)
+-{
++/* {{{ php_geoip_init_globals */
++static void php_geoip_init_globals(zend_geoip_globals *geoip_globals) {
+ 	geoip_globals->custom_directory = NULL;
+ 	geoip_globals->set_runtime_custom_directory = 0;
+ }
+ /* }}} */
+ 
+-/* {{{ PHP_MINIT_FUNCTION
+- */
+-PHP_MINIT_FUNCTION(geoip)
+-{
++/* {{{ PHP_MINIT_FUNCTION */
++PHP_MINIT_FUNCTION(geoip) {
+ 	ZEND_INIT_MODULE_GLOBALS(geoip, php_geoip_init_globals, NULL);
++
+ 	REGISTER_INI_ENTRIES();
+-	
+ 	/* @TODO: Do something for custom_directory before initialization here */
+ 
+ #ifdef HAVE_CUSTOM_DIRECTORY
+ 	GeoIP_setup_custom_directory(GEOIP_G(custom_directory));
+ #endif
++
+ 	_GeoIP_setup_dbfilename();
+-	
+ 	/* For database type constants */
+-	REGISTER_LONG_CONSTANT("GEOIP_COUNTRY_EDITION",     GEOIP_COUNTRY_EDITION,     CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_REGION_EDITION_REV0", GEOIP_REGION_EDITION_REV0, CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV0",   GEOIP_CITY_EDITION_REV0,   CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_ORG_EDITION",         GEOIP_ORG_EDITION,         CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_ISP_EDITION",         GEOIP_ISP_EDITION,         CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV1",   GEOIP_CITY_EDITION_REV1,   CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_REGION_EDITION_REV1", GEOIP_REGION_EDITION_REV1, CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_PROXY_EDITION",       GEOIP_PROXY_EDITION,       CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_ASNUM_EDITION",       GEOIP_ASNUM_EDITION,       CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_NETSPEED_EDITION",    GEOIP_NETSPEED_EDITION,    CONST_CS | CONST_PERSISTENT);
+-	REGISTER_LONG_CONSTANT("GEOIP_DOMAIN_EDITION",      GEOIP_DOMAIN_EDITION,      CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_COUNTRY_EDITION",        GEOIP_COUNTRY_EDITION,        CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_REGION_EDITION_REV0",    GEOIP_REGION_EDITION_REV0,    CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV0",      GEOIP_CITY_EDITION_REV0,      CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ORG_EDITION",            GEOIP_ORG_EDITION,            CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ISP_EDITION",            GEOIP_ISP_EDITION,            CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV1",      GEOIP_CITY_EDITION_REV1,      CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_REGION_EDITION_REV1",    GEOIP_REGION_EDITION_REV1,    CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_PROXY_EDITION",          GEOIP_PROXY_EDITION,          CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ASNUM_EDITION",          GEOIP_ASNUM_EDITION,          CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_NETSPEED_EDITION",       GEOIP_NETSPEED_EDITION,       CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_DOMAIN_EDITION",         GEOIP_DOMAIN_EDITION,         CONST_CS | CONST_PERSISTENT);
++
++#if LIBGEOIP_VERSION >= 1004005
++	REGISTER_LONG_CONSTANT("GEOIP_COUNTRY_EDITION_V6",     GEOIP_COUNTRY_EDITION_V6,     CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV0_V6",   GEOIP_CITY_EDITION_REV0_V6,   CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ORG_EDITION_V6",         GEOIP_ORG_EDITION_V6,         CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ISP_EDITION_V6",         GEOIP_ISP_EDITION_V6,         CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_CITY_EDITION_REV1_V6",   GEOIP_CITY_EDITION_REV1_V6,   CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_ASNUM_EDITION_V6",       GEOIP_ASNUM_EDITION_V6,       CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_DOMAIN_EDITION_V6",      GEOIP_DOMAIN_EDITION_V6,      CONST_CS | CONST_PERSISTENT);
++#endif
++
+ #if LIBGEOIP_VERSION >= 1004008
+-	REGISTER_LONG_CONSTANT("GEOIP_NETSPEED_EDITION_REV1",GEOIP_NETSPEED_EDITION_REV1,CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_NETSPEED_EDITION_REV1",    GEOIP_NETSPEED_EDITION_REV1,    CONST_CS | CONST_PERSISTENT);
++	REGISTER_LONG_CONSTANT("GEOIP_NETSPEED_EDITION_REV1_V6", GEOIP_NETSPEED_EDITION_REV1_V6, CONST_CS | CONST_PERSISTENT);
+ #endif
+ 
+ 	/* For netspeed constants */
+@@ -191,33 +224,13 @@ PHP_MINIT_FUNCTION(geoip)
+ 	REGISTER_LONG_CONSTANT("GEOIP_DIALUP_SPEED",        GEOIP_DIALUP_SPEED,        CONST_CS | CONST_PERSISTENT);
+ 	REGISTER_LONG_CONSTANT("GEOIP_CABLEDSL_SPEED",      GEOIP_CABLEDSL_SPEED,      CONST_CS | CONST_PERSISTENT);
+ 	REGISTER_LONG_CONSTANT("GEOIP_CORPORATE_SPEED",     GEOIP_CORPORATE_SPEED,     CONST_CS | CONST_PERSISTENT);
+-	
+-	return SUCCESS;
+-}
+-/* }}} */
+ 
+-/* {{{ PHP_MSHUTDOWN_FUNCTION
+- */
+-PHP_MSHUTDOWN_FUNCTION(geoip)
+-{
+-	return SUCCESS;
+-}
+-/* }}} */
+-
+-
+-/* {{{ PHP_RINIT_FUNCTION
+- */
+-PHP_RINIT_FUNCTION(geoip)
+-{
+ 	return SUCCESS;
+ }
+ /* }}} */
+ 
+-
+-/* {{{ PHP_RSHUTDOWN_FUNCTION
+- */
+-PHP_RSHUTDOWN_FUNCTION(geoip)
+-{
++/* {{{ PHP_RSHUTDOWN_FUNCTION */
++PHP_RSHUTDOWN_FUNCTION(geoip) {
+ #ifdef HAVE_CUSTOM_DIRECTORY
+ 	/* If we have a custom directory (and have support from   */
+ 	/* libgeoip, we reset the extension to default directory) */
+@@ -226,17 +239,13 @@ PHP_RSHUTDOWN_FUNCTION(geoip)
+ 		GEOIP_G(set_runtime_custom_directory) = 0;
+ 	}
+ #endif
+-	
+ 	return SUCCESS;
+ }
+ /* }}} */
+ 
+-/* {{{ PHP_MINFO_FUNCTION
+- */
+-PHP_MINFO_FUNCTION(geoip)
+-{
++/* {{{ PHP_MINFO_FUNCTION */
++PHP_MINFO_FUNCTION(geoip) {
+ 	char buf[32];
+-	
+ 	php_info_print_table_start();
+ 	php_info_print_table_header(2, "geoip support", "enabled");
+ 	php_info_print_table_row(2, "geoip extension version", PHP_GEOIP_VERSION);
+@@ -247,450 +256,404 @@ PHP_MINFO_FUNCTION(geoip)
+ }
+ /* }}} */
+ 
+-/* {{{ proto boolean geoip_db_avail( [ int database ] ) */
+-PHP_FUNCTION(geoip_db_avail)
+-{
+-	long edition;
+-
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &edition) == FAILURE) {
+-		return;
+-	}
+-	
+-	if (edition < 0 || edition >= NUM_DB_TYPES)
+-	{
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+-		return;
+-	}
+-	
+-	RETURN_BOOL(GeoIP_db_avail(edition));    
+-}
+-/* }}} */
+-
+-/* {{{ proto string geoip_db_filename( [ int database ] ) */
+-PHP_FUNCTION(geoip_db_filename)
+-{
+-	long edition;
+-
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &edition) == FAILURE) {
+-		return;
+-	}
+-	
+-	if (edition < 0 || edition >= NUM_DB_TYPES)
+-	{
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+-		return;
+-	}
+-	
+-	if (NULL != GeoIPDBFileName[edition])
+-		RETURN_STRING(GeoIPDBFileName[edition], 1);	
+-}
+-/* }}} */
+-
+-/* {{{ proto array geoip_db_get_all_info( ) */
+-PHP_FUNCTION(geoip_db_get_all_info)
+-{
+-	int i;
+-	
+-	array_init(return_value);
+-
+-	for (i=0; i < NUM_DB_TYPES; i++)
+-	{
+-		if (NULL != GeoIPDBDescription[i])
+-		{
+-			zval *row;
+-			ALLOC_INIT_ZVAL(row);
+-			array_init(row);
+-
+-			add_assoc_bool(row, "available", GeoIP_db_avail(i));
+-			if (GeoIPDBDescription[i]) {
+-				add_assoc_string(row, "description", (char *)GeoIPDBDescription[i], 1);
+-			}
+-			if (GeoIPDBFileName[i]) {
+-				add_assoc_string(row, "filename", GeoIPDBFileName[i], 1);
+-			}
+-
+-			add_index_zval(return_value, i, row);
+-		}
+-	}
+-}
+-/* }}} */
+-
+-/* {{{ proto string geoip_database_info( [ int database ] )
+-   Returns GeoIP Database information */
+-PHP_FUNCTION(geoip_database_info)
+-{
+-	GeoIP * gi;
+-	char * db_info;
+-	long edition = GEOIP_COUNTRY_EDITION;
+-	
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &edition) == FAILURE) {
+-		return;
+-	}
+-
+-	if (edition < 0 || edition >= NUM_DB_TYPES)
+-	{
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+-		return;
+-	}
+-	
+-	if (GeoIP_db_avail(edition)) {
+-		gi = GeoIP_open_type(edition, GEOIP_STANDARD);
++/* {{{ geoip_open_db helper */
++static GeoIP* geoip_open_db(int db_type, int db_type_fallback, int use_fallback) {
++	GeoIP* gi;
++	gi = NULL;
++	if (db_type < 0 || db_type >= NUM_DB_TYPES
++		|| (use_fallback && (db_type_fallback < 0 || db_type_fallback >= NUM_DB_TYPES))
++	) {
++	    php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
++	} else if (GeoIP_db_avail(db_type)) {
++	    gi = GeoIP_open_type(db_type, GEOIP_STANDARD);
++	} else if (use_fallback && GeoIP_db_avail(db_type_fallback)) {
++		gi = GeoIP_open_type(db_type_fallback, GEOIP_STANDARD);
+ 	} else {
+-		if (NULL != GeoIPDBFileName[edition])
+-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_COUNTRY_EDITION]);
+-		else
++		if (GeoIPDBFileName[db_type]) {
++			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[db_type]);
++        } else {
+ 			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available.");
+-		return;
++		}
+ 	}
+-	
+-	db_info = GeoIP_database_info(gi);
+-	GeoIP_delete(gi);
+-
+-	RETVAL_STRING(db_info, 1);
+-	free(db_info);
++	return gi;
+ }
+ /* }}} */
+ 
+-/* {{{ */
+-#define GEOIPDEF(php_func, c_func, db_type) \
+-	PHP_FUNCTION(php_func) \
+-	{ \
+-		GeoIP * gi; \
+-		char * hostname = NULL; \
+-		const char * return_code; \
+-		int arglen; \
+-		\
+-		if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) { \
+-			return; \
+-		} \
+-		\
+-		if (GeoIP_db_avail(db_type)) { \
+-			gi = GeoIP_open_type(db_type, GEOIP_STANDARD); \
+-		} else { \
+-			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[db_type]); \
+-			return; \
+-		} \
+-		\
+-		return_code = c_func(gi, hostname); \
+-		GeoIP_delete(gi); \
+-		if (return_code == NULL) { \
+-			RETURN_FALSE; \
+-		} \
+-		RETURN_STRING((char*)return_code, 1); \
+-		\
+-	}
+-#include "geoip.def"
+-#undef GEOIPDEF
+-/* }}} */
+-
+-/* {{{ proto string geoip_continent_code_by_name( string hostname )
+-   Returns the Continent name found in the GeoIP Database */
+-PHP_FUNCTION(geoip_continent_code_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	int id;
+-	int arglen;
++/* {{{ geoip_generic_string helper */
++static void geoip_generic_string(
++	INTERNAL_FUNCTION_PARAMETERS,
++	char* (*geoip_func)(GeoIP* gi, const char* host),
++	int db_type,
++    int do_free
++) {
++	GeoIP* gi;
++	char* hostname;
++	char* retval;
++	strlen_compat_t arglen;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+ 		return;
+ 	}
+ 
+-	if (GeoIP_db_avail(GEOIP_COUNTRY_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_COUNTRY_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_COUNTRY_EDITION]);
++	if (!(gi = geoip_open_db(db_type, 0, 0))) {
+ 		return;
+ 	}
+ 
+-	id = GeoIP_id_by_name(gi, hostname);
++	retval = (char*)geoip_func(gi, hostname);
+ 	GeoIP_delete(gi);
+-	if (id == 0) {
++	if (!retval) {
+ 		RETURN_FALSE;
+ 	}
+-	RETURN_STRING((char *)GeoIP_country_continent[id], 1);
++	RETVAL_STRING_COMPAT(retval, 1);
++	if (do_free) free(retval);
+ }
+ /* }}} */
+ 
+-/* {{{ proto string geoip_org_by_name( string hostname )
+-   Returns the Organization Name found in the GeoIP Database */
+-PHP_FUNCTION(geoip_org_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	char * org;
+-	int arglen;
++/* {{{ geoip_generic_string helper */
++static void geoip_generic_region(
++	INTERNAL_FUNCTION_PARAMETERS,
++	GeoIPRegion* (*geoip_func)(GeoIP* gi, const char* host),
++	int db_type_1,
++	int db_type_2
++) {
++	GeoIP* gi;
++	char* hostname;
++	strlen_compat_t arglen;
++	GeoIPRegion* region;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+ 		return;
+ 	}
+-	
+-	if (GeoIP_db_avail(GEOIP_ORG_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_ORG_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_ORG_EDITION]);
+-		return;
++
++	if (!(gi = geoip_open_db(db_type_1, db_type_2, 1))) {
++	    return;
+ 	}
+ 
+-	org = GeoIP_org_by_name(gi, hostname);
++	region = geoip_func(gi, hostname);
+ 	GeoIP_delete(gi);
+-	if (org == NULL) {
++	if (!region) {
+ 		RETURN_FALSE;
+ 	}
+-	RETVAL_STRING(org, 1);
+-	free(org);
++	array_init(return_value);
++	add_assoc_string_compat(return_value, "country_code", region->country_code, 1);
++	add_assoc_string_compat(return_value, "region", region->region, 1);
++	GeoIPRegion_delete(region);
+ }
+ /* }}} */
+ 
+-/* {{{ proto string geoip_asnum_by_name( string hostname )
+-   Returns the Domain Name found in the GeoIP Database */
+-PHP_FUNCTION(geoip_asnum_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	char * org;
+-	int arglen;
++/* {{{ geoip_generic_record helper */
++static void geoip_generic_record(
++	INTERNAL_FUNCTION_PARAMETERS,
++	GeoIPRecord* (*geoip_func)(GeoIP* gi, const char* host),
++    int db_type1,
++    int db_type2
++) {
++	GeoIP* gi;
++	char* hostname;
++	strlen_compat_t arglen;
++	GeoIPRecord* gir;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+ 		return;
+ 	}
+ 
+-	if (GeoIP_db_avail(GEOIP_ASNUM_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_ASNUM_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_ASNUM_EDITION]);
++	if (!(gi = geoip_open_db(db_type1, db_type2, 1))) {
+ 		return;
+ 	}
+ 
+-	org = GeoIP_name_by_name(gi, hostname);
++	gir = geoip_func(gi, hostname);
+ 	GeoIP_delete(gi);
+-	if (org == NULL) {
++	if (!gir) {
+ 		RETURN_FALSE;
+ 	}
+-	RETVAL_STRING(org, 1);
+-	free(org);
++
++	array_init(return_value);
++#if LIBGEOIP_VERSION >= 1004003
++	add_assoc_string_compat(return_value, "continent_code", (gir->continent_code == NULL) ? "" : gir->continent_code, 1);
++#endif
++	add_assoc_string_compat(return_value, "country_code", (gir->country_code == NULL) ? "" : gir->country_code, 1);
++	add_assoc_string_compat(return_value, "country_code3", (gir->country_code3 == NULL) ? "" : gir->country_code3, 1);
++	add_assoc_string_compat(return_value, "country_name", (gir->country_name == NULL) ? "" : gir->country_name, 1);
++	add_assoc_string_compat(return_value, "region", (gir->region == NULL) ? "" : gir->region, 1);
++	add_assoc_string_compat(return_value, "city", (gir->city == NULL) ? "" : gir->city, 1);
++	add_assoc_string_compat(return_value, "postal_code", (gir->postal_code == NULL) ? "" : gir->postal_code, 1);
++	add_assoc_double(return_value, "latitude", gir->latitude);
++	add_assoc_double(return_value, "longitude", gir->longitude);
++#if LIBGEOIP_VERSION >= 1004005
++	add_assoc_long(return_value, "dma_code", gir->metro_code);
++#else
++	add_assoc_long(return_value, "dma_code", gir->dma_code);
++#endif
++	add_assoc_long(return_value, "area_code", gir->area_code);
++
++	GeoIPRecord_delete(gir);
+ }
+ /* }}} */
+ 
+-/* {{{ proto string geoip_domain_by_name( string hostname )
+-   Returns the Domain Name found in the GeoIP Database */
+-PHP_FUNCTION(geoip_domain_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	char * org;
+-	int arglen;
++/* {{{ geoip_generic_id helper */
++static int geoip_generic_id(
++	INTERNAL_FUNCTION_PARAMETERS,
++	int (*geoip_func)(GeoIP* gi, const char* host),
++	int db_type,
++	int* ret_id
++) {
++	GeoIP* gi;
++	char* hostname;
++	strlen_compat_t arglen;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+-		return;
++		return 0;
+ 	}
+ 
+-	if (GeoIP_db_avail(GEOIP_DOMAIN_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_DOMAIN_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_DOMAIN_EDITION]);
+-		return;
++	if (!(gi = geoip_open_db(db_type, 0, 0))) {
++		return 0;
+ 	}
+ 
+-	org = GeoIP_name_by_name(gi, hostname);
++	*ret_id = geoip_func(gi, hostname);
+ 	GeoIP_delete(gi);
+-	if (org == NULL) {
+-		RETURN_FALSE;
+-	}
+-	RETVAL_STRING(org, 1);
+-	free(org);
++	return 1;
+ }
+ /* }}} */
+ 
+-#if LIBGEOIP_VERSION >= 1004008
+-/* {{{ proto string geoip_netspeedcell_by_name( string hostname )
+-   Returns the Net Speed found in the GeoIP Database */
+-PHP_FUNCTION(geoip_netspeedcell_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	char * org;
+-	int arglen;
++/* {{{ proto string geoip_db_avail( [ int database ] ) */
++PHP_FUNCTION(geoip_country_code_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_code_by_name, GEOIP_COUNTRY_EDITION, 0);
++}
+ 
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+-		return;
+-	}
++PHP_FUNCTION(geoip_country_code3_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_code3_by_name, GEOIP_COUNTRY_EDITION, 0);
++}
+ 
+-	if (GeoIP_db_avail(GEOIP_NETSPEED_EDITION_REV1)) {
+-		gi = GeoIP_open_type(GEOIP_NETSPEED_EDITION_REV1, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_NETSPEED_EDITION_REV1]);
+-		return;
+-	}
++PHP_FUNCTION(geoip_country_name_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_name_by_name, GEOIP_COUNTRY_EDITION, 0);
++}
+ 
+-	org = GeoIP_name_by_name(gi, hostname);
+-	GeoIP_delete(gi);
+-	if (org == NULL) {
+-		RETURN_FALSE;
+-	}
+-	RETVAL_STRING(org, 1);
+-	free(org);
++PHP_FUNCTION(geoip_asnum_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name, GEOIP_ASNUM_EDITION, 1);
++}
++
++PHP_FUNCTION(geoip_domain_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name, GEOIP_DOMAIN_EDITION, 1);
++}
++
++#if LIBGEOIP_VERSION >= 1004008
++PHP_FUNCTION(geoip_netspeedcell_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name, GEOIP_NETSPEED_EDITION_REV1, 1);
+ }
+-/* }}} */
+ #endif
+ 
+-/* {{{ proto array geoip_record_by_name( string hostname )
+-   Returns the detailed City information found in the GeoIP Database */
+-PHP_FUNCTION(geoip_record_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	int arglen;
+-	GeoIPRecord * gir;
++PHP_FUNCTION(geoip_isp_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name, GEOIP_ISP_EDITION, 1);
++}
+ 
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
+-		return;
++PHP_FUNCTION(geoip_org_by_name) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_org_by_name, GEOIP_ORG_EDITION, 1);
++}
++
++PHP_FUNCTION(geoip_region_by_name) {
++	geoip_generic_region(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_region_by_name, GEOIP_REGION_EDITION_REV1, GEOIP_REGION_EDITION_REV0);
++}
++
++PHP_FUNCTION(geoip_record_by_name) {
++	geoip_generic_record(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_record_by_name, GEOIP_CITY_EDITION_REV1, GEOIP_CITY_EDITION_REV0);
++}
++
++PHP_FUNCTION(geoip_id_by_name) {
++	int netspeed;
++	if (geoip_generic_id(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_id_by_name, GEOIP_NETSPEED_EDITION_REV1, &netspeed)) {
++		RETURN_LONG(netspeed);
+ 	}
++}
+ 
+-	if (GeoIP_db_avail(GEOIP_CITY_EDITION_REV1) || GeoIP_db_avail(GEOIP_CITY_EDITION_REV0)) {
+-		if (GeoIP_db_avail(GEOIP_CITY_EDITION_REV1)) {
+-			gi = GeoIP_open_type(GEOIP_CITY_EDITION_REV1, GEOIP_STANDARD);
++PHP_FUNCTION(geoip_continent_code_by_name) {
++	int id;
++	if (geoip_generic_id(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_id_by_name, GEOIP_COUNTRY_EDITION, &id)) {
++		if (id == 0) {
++			RETURN_FALSE;
+ 		} else {
+-			gi = GeoIP_open_type(GEOIP_CITY_EDITION_REV0, GEOIP_STANDARD);
++			RETURN_STRING_COMPAT((char*)GeoIP_country_continent[id], 1);
+ 		}
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_CITY_EDITION_REV0]);
+-		return;
+ 	}
+-	gir = GeoIP_record_by_name(gi, hostname);
++}
+ 
+-	GeoIP_delete(gi);
+-	
+-	if (NULL == gir) {
+-		RETURN_FALSE;
+-	}
+-	
+-	array_init(return_value);
+-#if LIBGEOIP_VERSION >= 1004003
+-	add_assoc_string(return_value, "continent_code", (gir->continent_code == NULL) ? "" : gir->continent_code, 1);
+-#endif
+-	add_assoc_string(return_value, "country_code", (gir->country_code == NULL) ? "" : gir->country_code, 1);
+-	add_assoc_string(return_value, "country_code3", (gir->country_code3 == NULL) ? "" : gir->country_code3, 1);
+-	add_assoc_string(return_value, "country_name", (gir->country_name == NULL) ? "" : gir->country_name, 1);
+-	add_assoc_string(return_value, "region", (gir->region == NULL) ? "" : gir->region, 1);
+-	add_assoc_string(return_value, "city", (gir->city == NULL) ? "" : gir->city, 1);
+-	add_assoc_string(return_value, "postal_code", (gir->postal_code == NULL) ? "" : gir->postal_code, 1);
+-	add_assoc_double(return_value, "latitude", gir->latitude);
+-	add_assoc_double(return_value, "longitude", gir->longitude);
+ #if LIBGEOIP_VERSION >= 1004005
+-	add_assoc_long(return_value, "dma_code", gir->metro_code);
+-#else
+-	add_assoc_long(return_value, "dma_code", gir->dma_code);
++/* {{{ IPV6 functions */
++PHP_FUNCTION(geoip_country_code_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_code_by_name_v6, GEOIP_COUNTRY_EDITION_V6, 0);
++}
++
++PHP_FUNCTION(geoip_country_code3_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_code3_by_name_v6, GEOIP_COUNTRY_EDITION_V6, 0);
++}
++
++PHP_FUNCTION(geoip_country_name_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, (char* (*)(GeoIP*, const char*))GeoIP_country_name_by_name_v6, GEOIP_COUNTRY_EDITION_V6, 0);
++}
++
++PHP_FUNCTION(geoip_asnum_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name_v6, GEOIP_ASNUM_EDITION_V6, 1);
++}
++
++PHP_FUNCTION(geoip_domain_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name_v6, GEOIP_DOMAIN_EDITION_V6, 1);
++}
++
++#if LIBGEOIP_VERSION >= 1004008
++PHP_FUNCTION(geoip_netspeedcell_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name_v6, GEOIP_NETSPEED_EDITION_REV1_V6, 1);
++}
+ #endif
+-	add_assoc_long(return_value, "area_code", gir->area_code);
+ 
+-	GeoIPRecord_delete(gir);
++PHP_FUNCTION(geoip_isp_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_name_by_name_v6, GEOIP_ISP_EDITION_V6, 1);
+ }
+-/* }}} */
+ 
+-/* {{{ proto integer geoip_id_by_name( string hostname )
+-   Returns the Net Speed found in the GeoIP Database */
+-PHP_FUNCTION(geoip_id_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	int arglen;
++PHP_FUNCTION(geoip_org_by_name_v6) {
++	geoip_generic_string(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_org_by_name_v6, GEOIP_ORG_EDITION_V6, 1);
++}
++
++PHP_FUNCTION(geoip_region_by_name_v6) {
++	geoip_generic_region(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_region_by_name_v6, GEOIP_REGION_EDITION_REV1, GEOIP_REGION_EDITION_REV0);
++}
++
++PHP_FUNCTION(geoip_record_by_name_v6) {
++	geoip_generic_record(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_record_by_name_v6, GEOIP_CITY_EDITION_REV1_V6, GEOIP_CITY_EDITION_REV0_V6);
++}
++
++PHP_FUNCTION(geoip_id_by_name_v6) {
+ 	int netspeed;
++	if (geoip_generic_id(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_id_by_name_v6, GEOIP_NETSPEED_EDITION_REV1_V6, &netspeed)) {
++		RETURN_LONG(netspeed);
++	}
++}
+ 
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
++PHP_FUNCTION(geoip_continent_code_by_name_v6) {
++	int id;
++	if (geoip_generic_id(INTERNAL_FUNCTION_PARAM_PASSTHRU, GeoIP_id_by_name_v6, GEOIP_COUNTRY_EDITION_V6, &id)) {
++		if (id == 0) {
++			RETURN_FALSE;
++		} else {
++			RETURN_STRING_COMPAT((char*)GeoIP_country_continent[id], 1);
++		}
++	}
++}
++/* }}} */
++#endif
++
++/* {{{ proto boolean geoip_db_avail( [ int database ] ) */
++PHP_FUNCTION(geoip_db_avail) {
++	long edition;
++
++	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &edition) == FAILURE) {
+ 		return;
+ 	}
+ 
+-	if (GeoIP_db_avail(GEOIP_NETSPEED_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_NETSPEED_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_NETSPEED_EDITION]);
++	if (edition < 0 || edition >= NUM_DB_TYPES)
++	{
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+ 		return;
+ 	}
+ 
+-	netspeed = GeoIP_id_by_name(gi, hostname);
+-	GeoIP_delete(gi);
+-	RETURN_LONG(netspeed);
++	RETURN_BOOL(GeoIP_db_avail(edition));
+ }
+ /* }}} */
+ 
+-/* {{{ proto array geoip_region_by_name( string hostname )
+-   Returns the Country Code and region found in the GeoIP Database */
+-PHP_FUNCTION(geoip_region_by_name)
+-{
+-	GeoIP * gi;
+-	char * hostname = NULL;
+-	int arglen;
+-	GeoIPRegion * region;
++/* {{{ proto string geoip_db_filename( [ int database ] ) */
++PHP_FUNCTION(geoip_db_filename) {
++	long edition;
+ 
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
++	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "l", &edition) == FAILURE) {
+ 		return;
+ 	}
+ 
+-	if (GeoIP_db_avail(GEOIP_REGION_EDITION_REV0) || GeoIP_db_avail(GEOIP_REGION_EDITION_REV1)) {
+-		if (GeoIP_db_avail(GEOIP_REGION_EDITION_REV1)) {
+-			gi = GeoIP_open_type(GEOIP_REGION_EDITION_REV1, GEOIP_STANDARD);
+-		} else {
+-			gi = GeoIP_open_type(GEOIP_REGION_EDITION_REV0, GEOIP_STANDARD);
+-		}
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_REGION_EDITION_REV0]);
++	if (edition < 0 || edition >= NUM_DB_TYPES)
++	{
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+ 		return;
+ 	}
+ 
+-	region = GeoIP_region_by_name(gi, hostname);
+-	GeoIP_delete(gi);
++	if (NULL != GeoIPDBFileName[edition])
++		RETURN_STRING_COMPAT(GeoIPDBFileName[edition], 1);
++}
++/* }}} */
+ 
+-	if (NULL == region) {
+-		RETURN_FALSE;
+-	}
++/* {{{ proto array geoip_db_get_all_info( ) */
++PHP_FUNCTION(geoip_db_get_all_info) {
++	int i;
+ 
+ 	array_init(return_value);
+-	add_assoc_string(return_value, "country_code", region->country_code, 1);
+-	add_assoc_string(return_value, "region", region->region, 1);
+-	
+-	GeoIPRegion_delete(region);
++
++	for (i=0; i < NUM_DB_TYPES; i++)
++	{
++		if (NULL != GeoIPDBDescription[i])
++		{
++			zval *row;
++#if PHP_MAJOR_VERSION >= 7
++			zval rowval;
++			row = &rowval;
++#else
++			ALLOC_INIT_ZVAL(row);
++#endif
++			array_init(row);
++
++			add_assoc_bool(row, "available", GeoIP_db_avail(i));
++			if (GeoIPDBDescription[i]) {
++				add_assoc_string_compat(row, "description", (char *)GeoIPDBDescription[i], 1);
++			}
++			if (GeoIPDBFileName[i]) {
++				add_assoc_string_compat(row, "filename", GeoIPDBFileName[i], 1);
++			}
++
++			add_index_zval(return_value, i, row);
++		}
++	}
+ }
+ /* }}} */
+ 
+-/* {{{ proto string geoip_isp_by_name( string hostname )
+-   Returns the ISP Name found in the GeoIP Database */
+-PHP_FUNCTION(geoip_isp_by_name)
++/* {{{ proto string geoip_database_info( [ int database ] )
++   Returns GeoIP Database information */
++PHP_FUNCTION(geoip_database_info)
+ {
+ 	GeoIP * gi;
+-	char * hostname = NULL;
+-	char * isp;
+-	int arglen;
++	char * db_info;
++	long edition = GEOIP_COUNTRY_EDITION;
+ 
+-	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &hostname, &arglen) == FAILURE) {
++	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "|l", &edition) == FAILURE) {
+ 		return;
+ 	}
+-	
+-	if (GeoIP_db_avail(GEOIP_ISP_EDITION)) {
+-		gi = GeoIP_open_type(GEOIP_ISP_EDITION, GEOIP_STANDARD);
+-	}   else {
+-		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_ISP_EDITION]);
++
++	if (edition < 0 || edition >= NUM_DB_TYPES)
++	{
++		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Database type given is out of bound.");
+ 		return;
+ 	}
+ 
+-	isp = GeoIP_name_by_name(gi, hostname);
+-	GeoIP_delete(gi);
+-	if (isp == NULL) {
+-		RETURN_FALSE;
++	if (GeoIP_db_avail(edition)) {
++		gi = GeoIP_open_type(edition, GEOIP_STANDARD);
++	} else {
++		if (NULL != GeoIPDBFileName[edition])
++			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_COUNTRY_EDITION]);
++		else
++			php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available.");
++		return;
+ 	}
+-	RETVAL_STRING(isp, 1);
+-	free(isp);
++
++	db_info = GeoIP_database_info(gi);
++	GeoIP_delete(gi);
++
++	RETVAL_STRING_COMPAT(db_info, 1);
++	free(db_info);
+ }
++/* }}} */
+ 
+ #if LIBGEOIP_VERSION >= 1004001
+ /* {{{ proto string geoip_region_name_by_code( string country_code, string region_code )
+    Returns the region name for some country code and region code combo */
+-PHP_FUNCTION(geoip_region_name_by_code)
+-{
++PHP_FUNCTION(geoip_region_name_by_code) {
+ 	char * country_code = NULL;
+ 	char * region_code = NULL;
+ 	const char * region_name;
+-	int countrylen, regionlen;
++	strlen_compat_t countrylen, regionlen;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "ss", &country_code, &countrylen, &region_code, &regionlen) == FAILURE) {
+ 		return;
+@@ -700,12 +663,12 @@ PHP_FUNCTION(geoip_region_name_by_code)
+ 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You need to specify the country and region codes.");
+ 		RETURN_FALSE;
+ 	}
+-	
++
+ 	region_name = GeoIP_region_name_by_code(country_code, region_code);
+ 	if (region_name == NULL) {
+ 		RETURN_FALSE;
+ 	}
+-	RETURN_STRING((char*)region_name, 1);
++	RETURN_STRING_COMPAT((char*)region_name, 1);
+ }
+ /* }}} */
+ #endif
+@@ -713,12 +676,11 @@ PHP_FUNCTION(geoip_region_name_by_code)
+ #if LIBGEOIP_VERSION >= 1004001
+ /* {{{ proto string geoip_time_zone_by_country_and_region( string country, string region )
+    Returns the time zone for some country code and region code combo */
+-PHP_FUNCTION(geoip_time_zone_by_country_and_region)
+-{
++PHP_FUNCTION(geoip_time_zone_by_country_and_region) {
+ 	char * country = NULL;
+ 	char * region = NULL;
+ 	const char * timezone;
+-	int countrylen, arg2len;
++	strlen_compat_t countrylen, arg2len;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s|s", &country, &countrylen, &region, &arg2len) == FAILURE) {
+ 		return;
+@@ -728,12 +690,12 @@ PHP_FUNCTION(geoip_time_zone_by_country_and_region)
+ 		php_error_docref(NULL TSRMLS_CC, E_WARNING, "You need to specify at least the country code.");
+ 		RETURN_FALSE;
+ 	}
+-	
++
+ 	timezone = GeoIP_time_zone_by_country_and_region(country, region);
+ 	if (timezone == NULL) {
+ 		RETURN_FALSE;
+ 	}
+-	RETURN_STRING((char*)timezone, 1);
++	RETURN_STRING_COMPAT((char*)timezone, 1);
+ }
+ /* }}} */
+ #endif
+@@ -741,10 +703,9 @@ PHP_FUNCTION(geoip_time_zone_by_country_and_region)
+ #ifdef HAVE_CUSTOM_DIRECTORY
+ /* {{{ proto void geoip_setup_custom_directory( string directory )
+    Sets the custom directory for GeoIP databases */
+-PHP_FUNCTION(geoip_setup_custom_directory)
+-{
++PHP_FUNCTION(geoip_setup_custom_directory) {
+ 	char * dir = NULL;
+-	int dirlen;
++	strlen_compat_t dirlen;
+ 
+ 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &dir, &dirlen) == FAILURE) {
+ 		return;
+diff --git geoip.def geoip.def
+deleted file mode 100644
+index 95e05b3..0000000
+--- geoip.def
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/*
+-  +----------------------------------------------------------------------+
+-  | PHP Version 5                                                        |
+-  +----------------------------------------------------------------------+
+-  | Copyright (c) 2002-2009 The PHP Group                                |
+-  +----------------------------------------------------------------------+
+-  | This source file is subject to version 3.01 of the PHP license,      |
+-  | that is bundled with this package in the file LICENSE, and is        |
+-  | available through the world-wide-web at the following url:           |
+-  | http://www.php.net/license/3_01.txt.                                 |
+-  | If you did not receive a copy of the PHP license and are unable to   |
+-  | obtain it through the world-wide-web, please send a note to          |
+-  | license@php.net so we can mail you a copy immediately.               |
+-  +----------------------------------------------------------------------+
+-  | Author: Olivier Hill  <ohill@php.net>                                |
+-  +----------------------------------------------------------------------+
+-*/
+-
+-/* GEOIPDEF(php_func, c_func, db_type) */
+-GEOIPDEF(geoip_country_code_by_name,	GeoIP_country_code_by_name,	GEOIP_COUNTRY_EDITION)
+-GEOIPDEF(geoip_country_code3_by_name,	GeoIP_country_code3_by_name,	GEOIP_COUNTRY_EDITION)
+-GEOIPDEF(geoip_country_name_by_name,	GeoIP_country_name_by_name,	GEOIP_COUNTRY_EDITION)
+-
+-#if LIBGEOIP_VERSION >= 1004005 && FALSE
+-GEOIPDEF(geoip_country_code_by_name_v6,	GeoIP_country_code_by_name_v6,	GEOIP_COUNTRY_EDITION_V6)
+-GEOIPDEF(geoip_country_code3_by_name_v6,	GeoIP_country_code3_by_name_v6,	GEOIP_COUNTRY_EDITION_V6)
+-GEOIPDEF(geoip_country_name_by_name_v6,	GeoIP_country_name_by_name_v6,	GEOIP_COUNTRY_EDITION_V6)
+-#endif
+\ No newline at end of file
+diff --git php_geoip.h php_geoip.h
+index 41147d5..2b5919d 100644
+--- php_geoip.h
++++ php_geoip.h
+@@ -14,6 +14,7 @@
+   +----------------------------------------------------------------------+
+   | Author: Olivier Hill <ohill@php.net>                                 |
+   |         Matthew Fonda                                                |
++  |         Adam Saponara <as@php.net>                                   |
+   +----------------------------------------------------------------------+
+   Please contact support@maxmind.com with any comments
+ */
+@@ -24,7 +25,7 @@
+ extern zend_module_entry geoip_module_entry;
+ #define phpext_geoip_ptr &geoip_module_entry
+ 
+-#define PHP_GEOIP_VERSION "1.1.0"
++#define PHP_GEOIP_VERSION "1.2.0"
+ 
+ #ifdef PHP_WIN32
+ #define PHP_GEOIP_API __declspec(dllexport)
+@@ -40,26 +41,37 @@ extern zend_module_entry geoip_module_entry;
+ #include <GeoIPCity.h>
+ 
+ PHP_MINIT_FUNCTION(geoip);
+-PHP_MSHUTDOWN_FUNCTION(geoip);
+-PHP_RINIT_FUNCTION(geoip);
+ PHP_RSHUTDOWN_FUNCTION(geoip);
+ PHP_MINFO_FUNCTION(geoip);
+ 
+-
+-PHP_FUNCTION(geoip_database_info);
+-#define GEOIPDEF(php_func, c_func, db_type) \
+-PHP_FUNCTION(php_func);
+-#include "geoip.def"
+-#undef GEOIPDEF
+-PHP_FUNCTION(geoip_continent_code_by_name);
++PHP_FUNCTION(geoip_country_code_by_name);
++PHP_FUNCTION(geoip_country_code3_by_name);
++PHP_FUNCTION(geoip_country_name_by_name);
++PHP_FUNCTION(geoip_asnum_by_name);
++PHP_FUNCTION(geoip_domain_by_name);
++PHP_FUNCTION(geoip_isp_by_name);
+ PHP_FUNCTION(geoip_org_by_name);
++PHP_FUNCTION(geoip_region_by_name);
+ PHP_FUNCTION(geoip_record_by_name);
+ PHP_FUNCTION(geoip_id_by_name);
+-PHP_FUNCTION(geoip_region_by_name);
+-PHP_FUNCTION(geoip_isp_by_name);
++PHP_FUNCTION(geoip_continent_code_by_name);
++#if LIBGEOIP_VERSION >= 1004005
++PHP_FUNCTION(geoip_country_code_by_name_v6);
++PHP_FUNCTION(geoip_country_code3_by_name_v6);
++PHP_FUNCTION(geoip_country_name_by_name_v6);
++PHP_FUNCTION(geoip_asnum_by_name_v6);
++PHP_FUNCTION(geoip_domain_by_name_v6);
++PHP_FUNCTION(geoip_isp_by_name_v6);
++PHP_FUNCTION(geoip_org_by_name_v6);
++PHP_FUNCTION(geoip_region_by_name_v6);
++PHP_FUNCTION(geoip_record_by_name_v6);
++PHP_FUNCTION(geoip_id_by_name_v6);
++PHP_FUNCTION(geoip_continent_code_by_name_v6);
++#endif
+ PHP_FUNCTION(geoip_db_avail);
+-PHP_FUNCTION(geoip_db_get_all_info);
+ PHP_FUNCTION(geoip_db_filename);
++PHP_FUNCTION(geoip_db_get_all_info);
++PHP_FUNCTION(geoip_database_info);
+ #if LIBGEOIP_VERSION >= 1004001
+ PHP_FUNCTION(geoip_region_name_by_code);
+ PHP_FUNCTION(geoip_time_zone_by_country_and_region);
+@@ -67,10 +79,9 @@ PHP_FUNCTION(geoip_time_zone_by_country_and_region);
+ #ifdef HAVE_CUSTOM_DIRECTORY
+ PHP_FUNCTION(geoip_setup_custom_directory);
+ #endif
+-PHP_FUNCTION(geoip_asnum_by_name);
+-PHP_FUNCTION(geoip_domain_by_name);
+ #if LIBGEOIP_VERSION >= 1004008
+ PHP_FUNCTION(geoip_netspeedcell_by_name);
++PHP_FUNCTION(geoip_netspeedcell_by_name_v6);
+ #endif
+ 
+ ZEND_BEGIN_MODULE_GLOBALS(geoip)
+@@ -86,7 +97,6 @@ ZEND_END_MODULE_GLOBALS(geoip)
+ 
+ #endif /* PHP_GEOIP_H */
+ 
+-
+ /*
+  * Local variables:
+  * tab-width: 4
+diff --git tests/013.phpt tests/013.phpt
+index 24b27cf..3e1fc09 100644
+--- tests/013.phpt
++++ tests/013.phpt
+@@ -7,9 +7,9 @@ Checking timezone info
+ --FILE--
+ <?php
+ 
+-var_dump(geoip_time_zone_by_country_and_region('CA','QC'));
++var_dump(geoip_time_zone_by_country_and_region('CA','AB'));
+ var_dump(geoip_time_zone_by_country_and_region('JP','01'));
+ ?>
+ --EXPECT--
+-string(16) "America/Montreal"
++string(16) "America/Edmonton"
+ string(10) "Asia/Tokyo"
+diff --git tests/020.phpt tests/020.phpt
+new file mode 100644
+index 0000000..551563c
+--- /dev/null
++++ tests/020.phpt
+@@ -0,0 +1,35 @@
++--TEST--
++Checking geoip_record_by_name_v6
++--SKIPIF--
++<?php if (!extension_loaded("geoip") || !geoip_db_avail(GEOIP_CITY_EDITION_REV0_V6)) print "skip"; ?>
++--FILE--
++<?php
++
++var_dump(geoip_record_by_name_v6('2001:4860:4860::8888'));
++
++?>
++--EXPECTF--
++array(11) {
++  ["continent_code"]=>
++  string(2) "NA"
++  ["country_code"]=>
++  string(2) "US"
++  ["country_code3"]=>
++  string(3) "USA"
++  ["country_name"]=>
++  string(13) "United States"
++  ["region"]=>
++  string(0) "%S"
++  ["city"]=>
++  string(0) "%S"
++  ["postal_code"]=>
++  string(0) "%S"
++  ["latitude"]=>
++  float(%f)
++  ["longitude"]=>
++  float(%f)
++  ["dma_code"]=>
++  int(%i)
++  ["area_code"]=>
++  int(%i)
++}
