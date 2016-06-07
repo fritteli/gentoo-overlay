@@ -13,19 +13,20 @@ EAPI="5"
 
 USE_RUBY="ruby21"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
+
+MY_PKGNAME="gitlabhq"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+SRC_URI="https://github.com/${MY_PKGNAME}/${MY_PKGNAME}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+RUBY_S="${MY_PKGNAME}-${PV}"
 
 RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -52,9 +53,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-3.0.0
+	>=dev-vcs/gitlab-shell-2.7.2
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-0.7.4
+	=dev-vcs/gitlab-workhorse-0.7.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -76,8 +77,8 @@ ruby_add_bdepend "
 #     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
-	"${PN}-8.7.3-fix-sendmail-config.patch"
-	"${PN}-8.7.0-fix-redis-config-path.patch"
+	"${P}-fix-sendmail-config.patch"
+	"${P}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
@@ -91,11 +92,6 @@ TEMP_DIR="/var/tmp/${MY_NAME}"
 # When updating ebuild to newer version, check list of the queues in
 # https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
 SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths

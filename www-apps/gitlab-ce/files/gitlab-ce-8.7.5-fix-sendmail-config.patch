@@ -1,9 +1,9 @@
-diff --git a/config/environments/production.rb b/gitlab-6/environments/production.rb
-index 82eb250..10e25e5 100644
+diff --git a/config/environments/production.rb b/config/environments/production.rb
+index a9d8ac4..256770a 100644
 --- a/config/environments/production.rb
 +++ b/config/environments/production.rb
-@@ -73,11 +73,10 @@ Gitlab::Application.configure do
-   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+@@ -69,11 +69,10 @@ Rails.application.configure do
+   config.active_support.deprecation = :notify
  
    config.action_mailer.delivery_method = :sendmail
 -  # Defaults to:
@@ -17,4 +17,4 @@ index 82eb250..10e25e5 100644
 +  }
    config.action_mailer.perform_deliveries = true
    config.action_mailer.raise_delivery_errors = true
- end
+ 
