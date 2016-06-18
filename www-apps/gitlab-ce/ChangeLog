@@ -1,3 +1,10 @@
+*gitlab-ce-8.8.5 (18 Jun 2016)
+
+  18 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.8.5.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  added ebuild for version 8.8.5 and updated dependencies
+  for version 9999 (git master)
+
 *gitlab-ce-8.8.4 (13 Jun 2016)
 
   13 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.8.4.ebuild:
