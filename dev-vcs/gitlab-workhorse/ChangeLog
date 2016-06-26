@@ -1,3 +1,8 @@
+  26 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.4.patch, -gitlab-workhorse-0.7.4.ebuild:
+  dev-vcs/gitlab-workhorse:  Purged unneded version 0.7.4 of dev-vcs/gitlab-
+  workhorse
+
 *gitlab-workhorse-0.7.6 (18 Jun 2016)
 
   18 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-workhorse-0.7.6.ebuild:
@@ -5,4 +10,3 @@
 
   07 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +ChangeLog:
   Added ChangeLog
-
