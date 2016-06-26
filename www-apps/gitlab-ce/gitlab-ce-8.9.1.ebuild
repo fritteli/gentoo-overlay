@@ -53,9 +53,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-2.7.2
+	>=dev-vcs/gitlab-shell-3.0.0
 	>=dev-vcs/git-2.7.4
-	=dev-vcs/gitlab-workhorse-0.7.1
+	>=dev-vcs/gitlab-workhorse-0.7.5
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -78,7 +78,7 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.8.1-fix-redis-config-path.patch"
+	"${P}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"

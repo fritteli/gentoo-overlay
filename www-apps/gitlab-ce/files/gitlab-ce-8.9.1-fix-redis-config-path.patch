@@ -1,0 +1,13 @@
+diff --git a/config/mail_room.yml b/config/mail_room.yml
+index 7cab24b..49690d8 100644
+--- a/config/mail_room.yml
++++ b/config/mail_room.yml
+@@ -2,7 +2,7 @@
+ <%
+ require "yaml"
+ require "json"
+-require_relative "lib/gitlab/redis" unless defined?(Gitlab::Redis)
++require_relative "/opt/gitlab/lib/gitlab/redis" unless defined?(Gitlab::Redis)
+ 
+ rails_env = ENV["RAILS_ENV"] || ENV["RACK_ENV"] || "development"
+ 

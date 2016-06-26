@@ -77,7 +77,7 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.8.1-fix-redis-config-path.patch"
+	"${PN}-8.9.1-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
