@@ -5,7 +5,7 @@
   www-apps/gitlab-ce:  Purged all old versions; updated patchfile for
   gitlab-ce-9999
 
-*gitlab-ce-8.9.1 (18 Jun 2016)
+*gitlab-ce-8.9.1 (26 Jun 2016)
 
   18 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.1.ebuild:
   Added ebuild for www-apps/gitlab-ce-8.9.1
