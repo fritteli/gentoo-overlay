@@ -1,3 +1,9 @@
+*gitlab-workhorse-0.7.7 (28 Jun 2016)
+
+  28 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.7.patch, +gitlab-workhorse-0.7.7.ebuild:
+  dev-vcs/gitlab-workhorse:  Added version 0.7.7, just a minor update
+
   26 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/fix-Makefile-0.7.4.patch, -gitlab-workhorse-0.7.4.ebuild:
   dev-vcs/gitlab-workhorse:  Purged unneded version 0.7.4 of dev-vcs/gitlab-

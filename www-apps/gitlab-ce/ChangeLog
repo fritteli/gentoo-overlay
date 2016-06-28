@@ -1,3 +1,9 @@
+*gitlab-ce-8.9.2 (28 Jun 2016)
+
+  28 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.2.ebuild:
+  www-apps/gitlab-ce:  Added ebuild for www-apps/gitlab-ce-8.9.2. This is a
+  security fix.
+
   26 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/gitlab-ce-8.7.5-fix-redis-config-path.patch, -gitlab-ce-8.7.5.ebuild,
   -gitlab-ce-8.8.1.ebuild, -gitlab-ce-8.8.2.ebuild, -gitlab-ce-8.8.3.ebuild,
