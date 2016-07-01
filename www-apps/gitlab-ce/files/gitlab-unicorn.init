@@ -1,7 +1,10 @@
 #!/sbin/runscript
 
+extra_started_commands="restartsidekiq"
+
 name="GitLab"
 description="GitLab on Unicorns"
+description_restartsidekiq="Restarts Sidekiq only"
 
 : ${gitlab_user:=@USER@}
 : ${gitlab_base:="@GITLAB_BASE@"}
@@ -93,5 +96,27 @@ stop() {
 		--signal QUIT \
 		--pidfile=${server_pidfile} \
 		--exec ${server_command}
+	eend $?
+}
+
+restartsidekiq() {
+	ebegin "Restarting ${name} - Sidekiq: Stopping"
+	start-stop-daemon --stop \
+		--pidfile=${sidekiq_pidfile} \
+		--exec ${sidekiq_command} \
+		--progress \
+		--retry 180
+
+	eend $?
+
+	ebegin "Starting ${name} - Sidekiq"
+
+	start-stop-daemon --start \
+		--background --quiet \
+		--chdir "${gitlab_base}" \
+		--user=${gitlab_user} \
+		--pidfile="${sidekiq_pidfile}" \
+		--env RAILS_ENV=${rails_env} \
+		--exec ${sidekiq_command} -- ${sidekiq_command_args}
 	eend $?
 }
