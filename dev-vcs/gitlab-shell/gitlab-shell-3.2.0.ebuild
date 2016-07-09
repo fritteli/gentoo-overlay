@@ -28,7 +28,7 @@ ruby_add_bdepend "
 MERGE_TYPE="binary"
 
 RUBY_PATCHES=(
-	"${PN}-2.0.0-config-paths.patch"
+	"${P}-config-paths.patch"
 )
 
 GIT_USER="git"
