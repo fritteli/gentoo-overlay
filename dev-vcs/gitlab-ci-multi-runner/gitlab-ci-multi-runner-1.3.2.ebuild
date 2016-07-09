@@ -61,7 +61,7 @@ src_install() {
 	exeinto ${dest}
 	doexe "${S}/${PN}"
 
-	disopts -m750
+	diropts -m750
 	dodir ${conf}
 
 	dosym ${conf} ${dest}/.gitlab-runner
