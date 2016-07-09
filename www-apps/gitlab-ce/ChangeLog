@@ -1,3 +1,9 @@
+*gitlab-ce-8.9.5 (09 Jul 2016)
+
+  09 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.5.ebuild:
+  www-apps/gitlab-ce:  Added ebuild for gitlab-8.9.5. It contains a security fix
+  for CVE-2012-6684
+
 *gitlab-ce-8.9.4 (05 Jul 2016)
 
   05 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.4.ebuild:
