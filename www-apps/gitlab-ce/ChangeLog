@@ -1,3 +1,9 @@
+  09 Jul 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.9.1.ebuild,
+  gitlab-ce-8.9.2.ebuild, gitlab-ce-8.9.3.ebuild, gitlab-ce-8.9.4.ebuild,
+  gitlab-ce-8.9.5.ebuild:
+  www-apps/gitlab-ce:  fixed dependency on dev-vcs/gitlab-shell for all 8.9*
+  ebuilds (need =dev-vcs/gitlab-shell-3.0*, not >=dev-vcs/gitlab-shell-3.0.0)
+
 *gitlab-ce-8.9.5 (09 Jul 2016)
 
   09 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.5.ebuild:
