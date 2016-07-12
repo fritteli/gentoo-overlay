@@ -16,7 +16,7 @@ S="${WORKDIR}/${PN}-${MY_PV}"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 
 CDEPEND="dev-dotnet/atk-sharp
 	dev-dotnet/gdk-sharp

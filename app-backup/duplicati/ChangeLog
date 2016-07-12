@@ -1,3 +1,8 @@
+  12 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  duplicati-2.0.1.11.20160408.ebuild:
+  app-backup/duplicati: removed all keywords (~amd64) because 2.0 is an
+  experimental version
+
 *duplicati-2.0.1.11.20160408 (12 Jul 2016)
 
   12 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
