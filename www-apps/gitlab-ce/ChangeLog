@@ -1,3 +1,10 @@
+*gitlab-ce-8.10.0_rc4 (12 Jul 2016)
+
+  12 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.0_rc4.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce: Updated dependency to gitlab-workhorse in gitlab-ce-9999
+  to v0.7.8 and added ebuild for gitlab-ce-8.10.0_rc4
+
 *gitlab-ce-8.9.6 (11 Jul 2016)
 
   11 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.9.6.ebuild:
