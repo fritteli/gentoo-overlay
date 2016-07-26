@@ -35,7 +35,7 @@ RDEPEND=">=x11-libs/gtk+-3.12:3
 	net-libs/libsoup:2.4
 	dev-libs/gobject-introspection
 	dev-db/sqlite:3
-	app-crypt/libsecret
+	app-crypt/libsecret[vala]
 	x11-libs/libnotify
 	dev-libs/libxml2
 	net-libs/rest:0.7
