@@ -1,3 +1,9 @@
+  26 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.1.patch, -files/fix-Makefile-0.7.6.patch,
+  -gitlab-workhorse-0.7.1.ebuild, -gitlab-workhorse-0.7.6.ebuild:
+  dev-vcs/gitlab-workhorse:  removed all versions <0.7.7, as all available
+  ebuilds of gitlab-ce require >=gitlab-workhorse-0.7.7
+
 *gitlab-workhorse-0.7.8 (11 Jul 2016)
 
   11 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
