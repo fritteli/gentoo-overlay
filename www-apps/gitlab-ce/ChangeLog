@@ -1,3 +1,12 @@
+*gitlab-ce-8.10.1 (26 Jul 2016)
+
+  26 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.1.ebuild,
+  -files/gitlab-ce-8.8.1-fix-redis-config-path.patch, -gitlab-ce-8.8.5.ebuild,
+  -gitlab-ce-8.9.1.ebuild, -gitlab-ce-8.9.2.ebuild, -gitlab-ce-8.9.3.ebuild,
+  -gitlab-ce-8.9.4.ebuild, -gitlab-ce-8.9.5.ebuild:
+  www-apps/gitlab-ce:  - added ebuild for gitlab-ce-8.10.1 - deleted all
+  versions < 8.9.6 - removed obsolete patch file
+
 *gitlab-ce-8.10.0_rc9 (18 Jul 2016)
 
   18 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.0_rc9.ebuild,
