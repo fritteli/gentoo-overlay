@@ -1,3 +1,9 @@
+*gitlab-shell-3.2.1 (27 Jul 2016)
+
+  27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-3.2.1.ebuild:
+  dev-vcs/gitlab-shell:  Added ebuild for version 3.2.1 which is a dependency of
+  gitlab-ce-8.10.2
+
   26 Jul 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-2.7.2.ebuild:
   dev-vcs/gitlab-shell:  removed ebuild for gitlab-shell-2.7.2, as all available
   versions of gitlab-ce require >=gitlab-shell-3*
