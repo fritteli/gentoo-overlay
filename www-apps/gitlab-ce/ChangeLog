@@ -1,3 +1,6 @@
+  27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.10.1.ebuild:
+  www-apps/gitlab-ce:  Fixed config phase for gitlab-ce-8.10.1
+
 *gitlab-ce-8.10.1 (26 Jul 2016)
 
   26 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.1.ebuild,
