@@ -1,3 +1,8 @@
+*gitlab-ce-8.10.2 (27 Jul 2016)
+
+  27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for version 8.10.2 which fixes several bugs
+
   27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.10.1.ebuild:
   www-apps/gitlab-ce:  Fixed config phase for gitlab-ce-8.10.1
 
