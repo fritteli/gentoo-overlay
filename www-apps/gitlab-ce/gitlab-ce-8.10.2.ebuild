@@ -15,12 +15,13 @@ USE_RUBY="ruby21"
 
 inherit eutils ruby-ng user systemd
 
-MY_PKGNAME="gitlabhq"
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="97a7ad76ccfb08361b1a18a71b71bfec3f21eb68"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-SRC_URI="https://github.com/${MY_PKGNAME}/${MY_PKGNAME}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-RUBY_S="${MY_PKGNAME}-${PV}"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 RESTRICT="mirror"
 
@@ -53,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	=dev-vcs/gitlab-shell-3.0*
+	~dev-vcs/gitlab-shell-3.2.1
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-0.7.5
+	~dev-vcs/gitlab-workhorse-0.7.8
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -90,7 +91,7 @@ LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
 
 # When updating ebuild to newer version, check list of the queues in
-# https://gitlab.com/gitlab-org/gitlab-ce/blob/v${PV}/bin/background_jobs
+# https://gitlab.com/gitlab-org/gitlab-ce/blob/${MY_PV}/bin/background_jobs
 SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_prepare() {
@@ -282,31 +283,12 @@ pkg_postinst() {
 }
 
 pkg_config() {
-	local shell_conf='/etc/gitlab-shell.yml'
-
 	einfo "Checking configuration files"
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
 		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
-	fi
-
-	# check gitlab-shell configuration
-	if [ -r ${shell_conf} ]; then
-		local shell_repos_path="$(ryaml ${shell_conf} repos_path)"
-		local gitlab_repos_path="$(ryaml ${CONF_DIR}/gitlab.yml \
-			production gitlab_shell repos_path)"
-
-		if [ ! "${shell_repos_path}" -ef "${gitlab_repos_path}" ]; then
-			eerror "repos_path in ${CONF_DIR}/gitlab.yml and ${shell_conf}"
-			eerror "must points to the same location! Fix the repos_path location and"
-			eerror "run this again."; die
-		fi
-	else
-		ewarn "GitLab Shell checks skipped, could not find config file at"
-		ewarn "${shell_conf}. Make sure that you have gitlab-shell properly"
-		ewarn "installed and that repos_path is the same as in GitLab."
 	fi
 
 	local email_from="$(ryaml ${CONF_DIR}/gitlab.yml production gitlab email_from)"

@@ -54,7 +54,7 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	=dev-vcs/gitlab-shell-3.2*
+	~dev-vcs/gitlab-shell-3.2.1
 	>=dev-vcs/git-2.7.4
 	~dev-vcs/gitlab-workhorse-0.7.8
 	kerberos? ( !app-crypt/heimdal )
@@ -283,31 +283,12 @@ pkg_postinst() {
 }
 
 pkg_config() {
-	local shell_conf='/etc/gitlab-shell.yml'
-
 	einfo "Checking configuration files"
 
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
 		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
 		eerror "database settings for \"production\" environment."; die
-	fi
-
-	# check gitlab-shell configuration
-	if [ -r ${shell_conf} ]; then
-		local shell_repos_path="$(ryaml ${shell_conf} repos_path)"
-		local gitlab_repos_path="$(ryaml ${CONF_DIR}/gitlab.yml \
-			production gitlab_shell repos_path)"
-
-		if [ ! "${shell_repos_path}" -ef "${gitlab_repos_path}" ]; then
-			eerror "repos_path in ${CONF_DIR}/gitlab.yml and ${shell_conf}"
-			eerror "must points to the same location! Fix the repos_path location and"
-			eerror "run this again."; die
-		fi
-	else
-		ewarn "GitLab Shell checks skipped, could not find config file at"
-		ewarn "${shell_conf}. Make sure that you have gitlab-shell properly"
-		ewarn "installed and that repos_path is the same as in GitLab."
 	fi
 
 	local email_from="$(ryaml ${CONF_DIR}/gitlab.yml production gitlab email_from)"

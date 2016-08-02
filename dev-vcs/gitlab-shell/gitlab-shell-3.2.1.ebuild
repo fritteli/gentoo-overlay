@@ -1,4 +1,4 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -8,9 +8,13 @@ USE_RUBY="ruby20 ruby21"
 
 inherit eutils ruby-ng user
 
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="87b388232505b1715a1d7448dc393a383cd7a53f"
+
 DESCRIPTION="SSH access and repository management for GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-shell"
-SRC_URI="https://github.com/gitlabhq/gitlab-shell/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://gitlab.com/gitlab-org/gitlab-shell/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,7 +32,7 @@ ruby_add_bdepend "
 MERGE_TYPE="binary"
 
 RUBY_PATCHES=(
-	"${PN}-2.0.0-config-paths.patch"
+	"${PN}-3.2.0-config-paths.patch"
 )
 
 GIT_USER="git"
