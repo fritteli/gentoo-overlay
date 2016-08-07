@@ -97,7 +97,8 @@ src_prepare() {
 		-e '/pidfile/s/${id}\.pid/jabberd2-sm\.pid/' \
 		etc/sm.xml.dist.in || die
 
-	epatch "${FILESDIR}"/${PN}-2.3.4-optimization.patch
+	epatch "${FILESDIR}"/${PN}-2.3.4-optimization.patch \
+		"${FILESDIR}"/${P}-configure.patch
 
 	eautoreconf
 }
