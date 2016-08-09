@@ -16,7 +16,7 @@ USE_RUBY="ruby21"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="119368fb96d5a867d2bf62d6079852d7098de428"
+MY_GIT_COMMIT="2bb93c2aa0dd2d94001a7e68bc285d18a254711b"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"

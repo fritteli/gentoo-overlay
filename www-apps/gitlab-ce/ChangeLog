@@ -1,3 +1,8 @@
+  09 Aug 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.11.0_rc1.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated ebuild with correct commit id for version
+  8.11.0_rc1
+
 *gitlab-ce-8.10.4 (05 Aug 2016)
 
   05 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.4.ebuild:
