@@ -1,3 +1,10 @@
+*gitlab-ce-8.10.6 (18 Aug 2016)
+
+  18 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.10.6.ebuild
+  +files/gitlab-8.10.6-sidekiq.service:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.10.6 and fixed systemd-
+  sidekiq service file
+
   09 Aug 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.11.0_rc1.ebuild,
   gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  updated ebuild with correct commit id for version
