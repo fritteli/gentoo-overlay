@@ -1,3 +1,8 @@
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-ce-8.10.1.ebuild,
+  -gitlab-ce-8.10.2.ebuild, -gitlab-ce-8.10.3.ebuild, -gitlab-ce-8.10.4.ebuild,
+  -gitlab-ce-8.9.6.ebuild:
+  www-apps/gitlab-ce:  purged all versions older than gitlab-ce-8.10.6
+
 *gitlab-ce-8.11.0 (22 Aug 2016)
 
   22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
