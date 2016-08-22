@@ -1,3 +1,10 @@
+*gitlab-workhorse-0.7.10 (22 Aug 2016)
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.10.patch, +gitlab-workhorse-0.7.10.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-0.7.10. this is a
+  dependeny of gitlab-ce-9999
+
   22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/fix-Makefile-0.7.7.patch, -gitlab-workhorse-0.7.7.ebuild:
   dev-vcs/gitlab-workhorse:  purged all versions <gitlab-workhorse-0.7.8
