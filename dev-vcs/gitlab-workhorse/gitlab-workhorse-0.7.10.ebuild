@@ -9,7 +9,7 @@ inherit eutils user
 DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for GitLab >= 8.4"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
-S="${WORKDIR}/${PN}-v${PV}-4c3320e7cfa3be7a697fd2e94e02e5380b137b79"
+S="${WORKDIR}/${PN}-v${PV}-73e8288744223ef8561ab6dc090df014b024aba6"
 RESTRICT="mirror"
 
 LICENSE="MIT"

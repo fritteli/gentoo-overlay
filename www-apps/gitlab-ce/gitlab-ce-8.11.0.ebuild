@@ -16,7 +16,7 @@ USE_RUBY="ruby21"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="ee0488d18efbf4fe3103b0d83b2056c1bebc50cf"
+MY_GIT_COMMIT="346e677ef9db2a27c3ee69d420563ecc564e5afe"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,7 +54,7 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	=dev-vcs/gitlab-shell-3.2*
+	~dev-vcs/gitlab-shell-3.4.0
 	>=dev-vcs/git-2.7.4
 	~dev-vcs/gitlab-workhorse-0.7.8
 	kerberos? ( !app-crypt/heimdal )
@@ -79,7 +79,7 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.9.1-fix-redis-config-path.patch"
+	"${P}-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
@@ -206,14 +206,11 @@ all_ruby_install() {
 	rm -Rf vendor/bundle/ruby/*/cache
 	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
-	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
-
 	## RC script ##
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-8.10.6-sidekiq.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-workhorse.service"
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
@@ -233,6 +230,9 @@ all_ruby_install() {
 
 		newinitd "${T}/${rcscript}" "${MY_NAME}"
 	fi
+
+	# fix permissions
+	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
 }
 
 pkg_postinst() {

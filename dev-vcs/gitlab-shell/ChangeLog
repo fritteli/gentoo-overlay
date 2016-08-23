@@ -1,3 +1,14 @@
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-shell-2.0.0-config-paths.patch, -gitlab-shell-3.0.0.ebuild,
+  -gitlab-shell-3.2.0.ebuild:
+  dev-vcs/gitlab-shell:  purged all versions <gitlab-shell-3.2.1
+
+*gitlab-shell-3.4.0 (22 Aug 2016)
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-3.4.0.ebuild:
+  dev-vcs/gitlab-shell:  added gitlab-shell-3.4.0. this is a dependency of
+  gitlab-ce-8.11.0
+
 *gitlab-shell-3.2.1 (27 Jul 2016)
 
   27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-3.2.1.ebuild:

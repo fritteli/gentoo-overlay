@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils user
 
-DESCRIPTION="GitLab CI Multi Runner is the new build processor needed for GitLab CI >= 7.12"
+DESCRIPTION="GitLab CI Multi Runner is the build processor needed for GitLab CI 8.11"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 SRC_URI="x86? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
 	amd64?    ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
@@ -92,7 +92,7 @@ pkg_postinst() {
 
 pkg_config() {
 	einfo "You need to register the runner with your GitLab CI instance. Please"
-	einfo "Follow the instructions on"
+	einfo "Follow the instructions at"
 	einfo
 	einfo "https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-manually.md"
 	einfo
