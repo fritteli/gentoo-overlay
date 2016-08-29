@@ -1,3 +1,8 @@
+*gitlab-ce-8.11.2 (29 Aug 2016)
+
+  29 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.11.2
+
   22 Aug 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  updated ebuild for gitlab-9999 (git master)
 
