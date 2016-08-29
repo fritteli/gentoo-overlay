@@ -1,3 +1,9 @@
+*gitlab-workhorse-0.7.11 (29 Aug 2016)
+
+  29 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.11.patch, +gitlab-workhorse-0.7.11.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-0.7.11
+
 *gitlab-workhorse-0.7.10 (22 Aug 2016)
 
   22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
