@@ -23,7 +23,6 @@ KEYWORDS="~amd64"
 
 IUSE="+gnome webkit4"
 
-
 # from old ebuild 1.4.3
 #	app-text/html2text
 #	gnome? ( gnome-base/gnome-keyring )
