@@ -1,3 +1,10 @@
+*feedreader-1.6.2 (30 Aug 2016)
+
+  30 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +feedreader-1.6.2.ebuild,
+  -feedreader-1.6_beta1.ebuild:
+  net-news/feedreader:  added ebuild for version 1.6.2 and removed ebuild for
+  version 1.6_beta1
+
   29 Aug 2016; Manuel Friedli <manuel@fritteli.ch> feedreader-1.6_beta1.ebuild:
   updated all manifests
 

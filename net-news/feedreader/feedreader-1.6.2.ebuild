@@ -10,24 +10,24 @@ CMAKE_MIN_VERSION="2.6"
 VALA_MIN_API_VERSION="0.26"
 
 MY_PN="FeedReader"
-MY_PV="${PV/_beta1/-beta-1}"
-MY_P="${MY_PN}-${MY_PV}"
+MY_PV="${PV}"
+MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Simple News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
 HOMEPAGE="https://github.com/jangernert/${MY_PN}"
-SRC_URI="https://github.com/jangernert/${MY_PN}/archive/v${MY_PV}.tar.gz"
+SRC_URI="https://github.com/jangernert/${MY_PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="+gnome webkit4"
+IUSE="+gnome"
 
 # from old ebuild 1.4.3
 #	app-text/html2text
 #	gnome? ( gnome-base/gnome-keyring )
 
-RDEPEND=">=x11-libs/gtk+-3.12:3
+RDEPEND=">=x11-libs/gtk+-3.20:3
 	$(vala_depend)
 	dev-libs/json-glib
 	dev-libs/libgee:0.8
@@ -38,8 +38,9 @@ RDEPEND=">=x11-libs/gtk+-3.12:3
 	x11-libs/libnotify
 	dev-libs/libxml2
 	net-libs/rest:0.7
-	!webkit4? ( net-libs/webkit-gtk:3 )
-	webkit4? ( net-libs/webkit-gtk:4 )"
+	net-libs/webkit-gtk:4
+	media-libs/gstreamer:1.0
+	media-libs/gst-plugins-base:1.0"
 
 DEPEND="${RDEPEND}
 	dev-util/intltool
@@ -57,7 +58,7 @@ src_configure() {
 		-DVALA_EXECUTABLE="${VALAC}"
 		-DCMAKE_INSTALL_PREFIX="${PREFIX}"
 		-DGSETTINGS_LOCALINSTALL=OFF
-		$(cmake-utils_use_use webkit4 WEBKIT_4)
+		-DUSE_WEBKIT_4=ON
 	)
 	cmake-utils_src_configure
 }
