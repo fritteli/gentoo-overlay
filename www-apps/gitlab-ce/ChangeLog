@@ -1,3 +1,9 @@
+*gitlab-ce-8.11.3 (30 Aug 2016)
+
+  30 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.3.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.11.3 which contains various
+  fixes
+
 *gitlab-ce-8.11.2 (29 Aug 2016)
 
   29 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.2.ebuild:
