@@ -1,3 +1,8 @@
+  01 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-workhorse-0.7.10.ebuild, gitlab-workhorse-0.7.11.ebuild,
+  gitlab-workhorse-0.7.8.ebuild:
+  dev-vcs/gitlab-workhorse:  updated to EAPI="6"
+
 *gitlab-workhorse-0.7.11 (29 Aug 2016)
 
   29 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
