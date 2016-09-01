@@ -1,3 +1,7 @@
+  01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> jabberd2-2.3.6.ebuild,
+  jabberd2-2.4.0.ebuild:
+  net-im/jabberd2:  updated to EAPI="6"
+
 *jabberd2-2.4.0 (07 Aug 2016)
 
   07 Aug 2016; Manuel Friedli <manuel@fritteli.ch> +jabberd2-2.4.0.ebuild:
