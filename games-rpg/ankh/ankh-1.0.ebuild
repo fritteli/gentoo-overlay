@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
-inherit eutils cdrom games multilib
+inherit eutils cdrom multilib
 DESCRIPTION="Ankh a Adventure like Monkey Island"
 HOMEPAGE="http://www.ankh-game.de/ankh.html"
 LICENSE="all-rights-reserved"
@@ -51,8 +51,8 @@ RDEPEND="sys-libs/glibc
 S=${WORKDIR}
 
 GAMES_CHECK_LICENSE="no"
-dir=${GAMES_PREFIX_OPT}/ankh
-Ddir=${D}/${dir}
+dir="/opt/ankh"
+Ddir="${D}/${dir}"
 
 src_install() {
 	cdrom_get_cds data/Ankh.tar.gz
@@ -68,12 +68,11 @@ src_install() {
 	tar xzf "${CDROM_ROOT}"/data/Ankh.tar.gz -C "$Ddir"
 
 	find "${Ddir}" -exec touch '{}' \;
-	# Argh the Program saves the settings in his install dir :(
+	# Argh the Program saves the settings in its install dir :(
 	# so we have to set some dir to be writeable by the group
 	chmod g+w "${Ddir}"/media/     # the settings are saved here
 	chmod g+w "${Ddir}"/bin/release # the log-files are saved here
 	dosym "${dir}"/Ankh /usr/games/bin/ankh
 
-	prepgamesdirs
 	make_desktop_entry ankh "Ankh" "${dir}"/Ankh.xpm
 }
