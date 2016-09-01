@@ -1,3 +1,6 @@
+  01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> certbot-apache-0.8.1.ebuild:
+  app-crypt/certbot-apache:  updated to EAPI="6"
+
 *certbot-apache-0.8.1 (27 Jul 2016)
 
   27 Jul 2016; Manuel Friedli <manuel@fritteli.ch> +certbot-apache-0.8.1.ebuild,
