@@ -24,6 +24,8 @@ INSTALL_DIR="/opt/nexus"
 
 WEBAPP_DIR="${INSTALL_DIR}/nexus-oss-webapp"
 
+PATCHES=( "${FILESDIR}/nexus-wrapper-${PV}.patch" )
+
 pkg_setup() {
 	enewgroup nexus
 	enewuser nexus -1 /bin/bash /opt/nexus "nexus"
@@ -32,10 +34,6 @@ pkg_setup() {
 src_unpack() {
 	unpack ${A}
 	cd "${S}"
-}
-
-src_prepare() {
-	epatch "${FILESDIR}/nexus-wrapper-${PV}.patch"
 }
 
 src_install() {
