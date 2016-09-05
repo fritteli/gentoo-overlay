@@ -44,6 +44,7 @@ src_unpack() {
 
 src_prepare() {
 	chmod +x "${S}/${PN}"
+	eapply_user
 }
 
 src_compile() {

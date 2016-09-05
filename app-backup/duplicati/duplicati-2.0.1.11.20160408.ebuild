@@ -32,12 +32,6 @@ PATCHES=(
 
 MY_MAKE_DIR="${S}/Installer/Makefile"
 
-src_prepare() {
-	for p in "${PATCHES[@]}" ; do
-		epatch "${p}"
-	done
-}
-
 src_compile() {
 	cd "${MY_MAKE_DIR}"
 	emake build

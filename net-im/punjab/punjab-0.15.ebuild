@@ -6,6 +6,7 @@ EAPI="6"
 PYTHON_COMPAT=( python2_7 )
 
 inherit distutils-r1 eutils python-r1
+
 DESCRIPTION="BOSH connection manager for jabber implemented in python"
 HOMEPAGE="https://github.com/twonds/punjab"
 SRC_URI="https://github.com/twonds/punjab/archive/v${PV}.tar.gz -> ${P}.tar.gz"
@@ -21,10 +22,6 @@ RDEPEND="${PYTHON_DEPS}
 	tls? ( dev-python/pyopenssl[${PYTHON_USEDEP}] )
 	${DEPEND}"
 
-pkg_setup() {
-	python-r1_pkg_setup
-}
-
 src_compile() {
 	# nothing to be done here?
 	distutils-r1_src_compile
@@ -37,9 +34,6 @@ src_install() {
 	newins punjab.tac ${PN}.tac
 	fperms 600 /etc/jabber/${PN}.tac
 	fowners jabber:jabber /etc/jabber/${PN}.tac
-#	dosed \
-#		"s:<spool>[^\<]*</spool>:<spool>/var/spool/jabber</spool>:" \
-#		/etc/jabber/${PN}.xml
 
 	newinitd "${FILESDIR}/${PN}-initd" ${PN}
 #	newconfd "${FILESDIR}/${PN}-confd" ${PN}

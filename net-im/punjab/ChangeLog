@@ -1,3 +1,7 @@
+  05 Sep 2016; Manuel Friedli <manuel@fritteli.ch> punjab-0.15.ebuild,
+  punjab-9999.ebuild:
+  net-im/punjab:  fixed punjab ebuilds for EAPI="6"
+
   01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> punjab-0.15.ebuild,
   punjab-9999.ebuild:
   net-im/punjab:  updated to EAPI="6"

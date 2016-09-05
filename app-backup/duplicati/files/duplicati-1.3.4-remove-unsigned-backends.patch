@@ -1,5 +1,5 @@
---- Duplicati.sln.old	2011-12-06 18:21:00.000000000 +0100
-+++ Duplicati.sln	2011-12-06 20:15:33.000000000 +0100
+--- a/Duplicati.sln	2011-12-06 18:21:00.000000000 +0100
++++ b/Duplicati.sln	2011-12-06 20:15:33.000000000 +0100
 @@ -11,8 +11,6 @@
  EndProject
  Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Duplicati.Library.Backend.FTP", "Duplicati\Library\Backend\FTP\Duplicati.Library.Backend.FTP.csproj", "{F61679A9-E5DE-468A-B5A4-05F92D0143D2}"

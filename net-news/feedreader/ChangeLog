@@ -1,3 +1,6 @@
+  05 Sep 2016; Manuel Friedli <manuel@fritteli.ch> feedreader-1.6.2.ebuild:
+  net-news/feedreader:  fixed feedreader ebuild for EAPI="6"
+
   01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> -feedreader-1.2.1-r1.ebuild,
   -feedreader-1.4.3.ebuild, feedreader-1.6.2.ebuild, metadata.xml:
   net-news/feedreader:  updated to EAPI="6" and deleted old ebuilds

@@ -100,6 +100,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-2.3.6-configure.patch
 
 	eautoreconf
+	eapply_user
 }
 
 src_configure() {

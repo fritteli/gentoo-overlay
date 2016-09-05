@@ -21,9 +21,9 @@ RDEPEND="${PYTHON_DEPS}
 	tls? ( dev-python/pyopenssl[${PYTHON_USEDEP}] )
 	${DEPEND}"
 
-pkg_setup() {
-	python-r1_pkg_setup
-}
+#pkg_setup() {
+#	python_pkg_setup
+#}
 
 src_compile() {
 	# nothing to be done here?

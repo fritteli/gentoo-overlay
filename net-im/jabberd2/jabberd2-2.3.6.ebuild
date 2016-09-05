@@ -101,6 +101,7 @@ src_prepare() {
 		"${FILESDIR}"/${P}-configure.patch
 
 	eautoreconf
+	eapply_user
 }
 
 src_configure() {
