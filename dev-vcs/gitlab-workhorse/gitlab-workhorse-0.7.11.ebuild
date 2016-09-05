@@ -18,9 +18,7 @@ KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 DEPEND=">=dev-lang/go-1.5.1"
 
-src_prepare() {
-	epatch "${FILESDIR}/fix-Makefile-${PV}.patch"
-}
+PATCHES=( "${FILESDIR}/fix-Makefile-${PV}.patch" )
 
 src_install() {
 	local dest=/usr/bin
