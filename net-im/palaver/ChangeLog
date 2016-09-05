@@ -1,3 +1,7 @@
+  05 Sep 2016; Manuel Friedli <manuel@fritteli.ch> palaver-0.6.ebuild,
+  palaver-9999.ebuild:
+  net-im/palaver:  fixed palaver ebuilds for EAPI="6"
+
   01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> palaver-0.6.ebuild,
   palaver-9999.ebuild:
   net-im/palaver:  updated to EAPI="6"

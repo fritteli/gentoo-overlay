@@ -20,10 +20,6 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/twisted-words-0.5[${PYTHON_USEDEP}]
 	${DEPEND}"
 
-pkg_setup() {
-	python-r1_pkg_setup
-}
-
 src_compile() {
 	# nothing to be done here?
 	distutils-r1_src_compile
@@ -36,9 +32,6 @@ src_install() {
 	newins "${FILESDIR}/"palaver.conf ${PN}.conf
 	fperms 600 /etc/jabber/${PN}.conf
 	fowners jabber:jabber /etc/jabber/${PN}.conf
-#	dosed \
-#		"s:<spool>[^\<]*</spool>:<spool>/var/spool/jabber</spool>:" \
-#		/etc/jabber/${PN}.xml
 
 	newinitd "${FILESDIR}/${PN}-initd" ${PN}
 	newconfd "${FILESDIR}/${PN}-confd" ${PN}
