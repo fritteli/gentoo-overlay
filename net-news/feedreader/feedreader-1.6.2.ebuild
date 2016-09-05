@@ -50,6 +50,7 @@ S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	vala_src_prepare
+	eapply_user
 }
 
 src_configure() {
