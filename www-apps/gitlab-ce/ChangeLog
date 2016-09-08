@@ -1,3 +1,8 @@
+*gitlab-ce-8.11.5 (08 Sep 2016)
+
+  08 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.5.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.11.5
+
 *gitlab-ce-8.11.4 (02 Sep 2016)
 
   02 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.4.ebuild,
