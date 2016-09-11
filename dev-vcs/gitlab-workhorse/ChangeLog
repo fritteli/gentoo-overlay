@@ -1,3 +1,12 @@
+*gitlab-workhorse-0.8.0 (11 Sep 2016)
+*gitlab-workhorse-0.8.1 (11 Sep 2016)
+
+  11 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.8.0.patch, +files/fix-Makefile-0.8.1.patch,
+  +gitlab-workhorse-0.8.0.ebuild, +gitlab-workhorse-0.8.1.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuilds for versions 0.8.0 and 0.8.1, as
+  required by www-apps/gitlab-ce-8.12.0_rc2
+
   05 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
   gitlab-workhorse-0.7.10.ebuild, gitlab-workhorse-0.7.11.ebuild,
   gitlab-workhorse-0.7.8.ebuild:
