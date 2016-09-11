@@ -1,3 +1,10 @@
+*gitlab-ce-8.12.0_rc2 (11 Sep 2016)
+
+  11 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.12.0_rc2.ebuild,
+  -gitlab-ce-8.11.0_rc1.ebuild:
+  www-apps/gitlab-ce:  added ebuild for version 8.12.0_rc2 and deleted old
+  version 8.11.0_rc1
+
 *gitlab-ce-8.11.5 (08 Sep 2016)
 
   08 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.5.ebuild:
