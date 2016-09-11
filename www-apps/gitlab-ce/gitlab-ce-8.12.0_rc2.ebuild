@@ -16,7 +16,7 @@ USE_RUBY="ruby21"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="2bb93c2aa0dd2d94001a7e68bc285d18a254711b"
+MY_GIT_COMMIT="a6b8c4569eedecda145fc7960643c06472fb8300"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-3.2.1
+	~dev-vcs/gitlab-shell-3.4.0
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-0.7.8
+	~dev-vcs/gitlab-workhorse-0.8.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -79,7 +79,7 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.9.1-fix-redis-config-path.patch"
+	"${PN}-8.11.0-fix-redis-config-path.patch"
 )
 
 MY_NAME="gitlab"
@@ -206,14 +206,11 @@ all_ruby_install() {
 	rm -Rf vendor/bundle/ruby/*/cache
 	rm -Rf vendor/bundle/ruby/*/bundler/gems/charlock_holmes-dde194609b35/.git
 
-	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
-
 	## RC script ##
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_dounit "${FILESDIR}/gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-8.10.6-sidekiq.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-workhorse.service"
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
@@ -233,6 +230,9 @@ all_ruby_install() {
 
 		newinitd "${T}/${rcscript}" "${MY_NAME}"
 	fi
+
+	# fix permissions
+	fowners -R ${MY_USER}:${MY_USER} ${dest} ${temp} ${logs}
 }
 
 pkg_postinst() {
@@ -303,15 +303,13 @@ pkg_config() {
 			|| die "failed to setup git name and email"
 	fi
 
-	if [ ! -d "${DEST_DIR}/.git" ]; then
-		# create dummy git repo as workaround for
-		# https://github.com/bundler/bundler/issues/2039
-		einfo "Initializing dummy git repository to avoid false errors from bundler"
-		su -l ${MY_USER} -c "
-			cd ${DEST_DIR}
-			git init
-			git add README.md
-			git commit -m 'Dummy repository'" >/dev/null
+	# determine whether this is an update or a fresh install. we do this by
+	# checking whether the ${DEST_DIR}/.git directory exists or not
+	# 
+	if [ -d "${DEST_DIR}/.git" ]; then
+		local update=true
+	else
+		local update=false
 	fi
 
 	## Initialize app ##
@@ -320,11 +318,11 @@ pkg_config() {
 	local RUBY=${RUBY:-/usr/bin/ruby}
 	local BUNDLE="${RUBY} /usr/bin/bundle"
 
-	local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
+	# FIXME: this line existed in older ebuilds, but the variable is
+	# never used. what was it for!?
+	# local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
 
-	if [ -f "${DEST_DIR}/.secret" ]; then
-		local update=true
-
+	if [ "${update}" = 'true' ]; then
 		einfo "Migrating database ..."
 		exec_rake db:migrate
 
@@ -338,7 +336,14 @@ pkg_config() {
 		einfo "Cleaning cache ..."
 		exec_rake cache:clear
 	else
-		local update=false
+		# create dummy git repo as workaround for
+		# https://github.com/bundler/bundler/issues/2039
+		einfo "Initializing dummy git repository to avoid false errors from bundler"
+		su -l ${MY_USER} -c "
+			cd ${DEST_DIR}
+			git init
+			git add README.md
+			git commit -m 'Dummy repository'" >/dev/null
 
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
