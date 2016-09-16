@@ -1,3 +1,8 @@
+*gitlab-shell-3.5.0 (16 Sep 2016)
+
+  16 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-3.5.0.ebuild:
+  dev-vcs/gitlab-shell:  added ebuild for versioin 3.5.0
+
   22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/gitlab-shell-2.0.0-config-paths.patch, -gitlab-shell-3.0.0.ebuild,
   -gitlab-shell-3.2.0.ebuild:
