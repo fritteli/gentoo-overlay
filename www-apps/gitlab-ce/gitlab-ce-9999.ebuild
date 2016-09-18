@@ -52,9 +52,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-3.4.0
+	>=dev-vcs/gitlab-shell-3.5.0
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-0.7.11
+	>=dev-vcs/gitlab-workhorse-0.8.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="

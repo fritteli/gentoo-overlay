@@ -1,3 +1,10 @@
+*gitlab-ce-8.12.0_rc4 (18 Sep 2016)
+
+  18 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.12.0_rc4.ebuild,
+  -gitlab-ce-8.12.0_rc3.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.12.0_rc4 with Ruby 2.3
+  support
+
 *gitlab-ce-8.11.6 (18 Sep 2016)
 
   18 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.11.6.ebuild:

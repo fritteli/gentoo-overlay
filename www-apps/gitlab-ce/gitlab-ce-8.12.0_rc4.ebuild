@@ -11,12 +11,12 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="a6b8c4569eedecda145fc7960643c06472fb8300"
+MY_GIT_COMMIT="649683c945ce7e488132a9a66edf634b84bb7b1f"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-3.4.0
+	~dev-vcs/gitlab-shell-3.5.0
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-0.8.0
+	~dev-vcs/gitlab-workhorse-0.8.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
