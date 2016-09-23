@@ -6,7 +6,7 @@ EAPI="6"
 
 inherit eutils user
 
-DESCRIPTION="GitLab CI Multi Runner is the build processor needed for GitLab CI 8.11"
+DESCRIPTION="GitLab CI Multi Runner is the build processor needed for GitLab CI 8.12"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 SRC_URI="x86? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
 	amd64?    ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
