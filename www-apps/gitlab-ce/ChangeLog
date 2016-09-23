@@ -1,3 +1,6 @@
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated dependencies for gitlab-ce-9999
+
   23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/gitlab-ce-8.9.1-fix-redis-config-path.patch,
   -files/gitlab-sidekiq.service:
