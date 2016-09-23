@@ -1,3 +1,13 @@
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-ci-multi-runner-1.6.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  corrected description
+
+*gitlab-ci-multi-runner-1.6.0 (23 Sep 2016)
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.6.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for gitlab-ci-multi-runner-1.6.0
+
   05 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
   gitlab-ci-multi-runner-1.4.1.ebuild, gitlab-ci-multi-runner-1.5.0.ebuild:
   dev-vcs/gitlab-ci-multi-runner:  fixed gitlab-ci-multi-runner ebuilds for
