@@ -1,3 +1,8 @@
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-ce-8.9.1-fix-redis-config-path.patch,
+  -files/gitlab-sidekiq.service:
+  www-apps/gitlab-ce:  deleted obsolete auxiliary files
+
   23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-ce-8.10.6.ebuild,
   -gitlab-ce-8.11.0.ebuild, -gitlab-ce-8.11.2.ebuild, -gitlab-ce-8.11.3.ebuild,
   -gitlab-ce-8.11.4.ebuild, -gitlab-ce-8.11.5.ebuild:
