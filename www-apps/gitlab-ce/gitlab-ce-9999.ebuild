@@ -52,7 +52,7 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-3.5.0
+	>=dev-vcs/gitlab-shell-3.6.0
 	>=dev-vcs/git-2.7.4
 	>=dev-vcs/gitlab-workhorse-0.8.2
 	kerberos? ( !app-crypt/heimdal )

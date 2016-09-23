@@ -11,12 +11,12 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="6cd4edb7d869d793ee73f4eb880b900203995cec"
+MY_GIT_COMMIT="0864ff999fd77f3efedaab22a2bc549206251703"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-3.4.0
+	~dev-vcs/gitlab-shell-3.6.0
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-0.7.11
+	~dev-vcs/gitlab-workhorse-0.8.2
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -303,15 +303,13 @@ pkg_config() {
 			|| die "failed to setup git name and email"
 	fi
 
-	if [ ! -d "${DEST_DIR}/.git" ]; then
-		# create dummy git repo as workaround for
-		# https://github.com/bundler/bundler/issues/2039
-		einfo "Initializing dummy git repository to avoid false errors from bundler"
-		su -l ${MY_USER} -c "
-			cd ${DEST_DIR}
-			git init
-			git add README.md
-			git commit -m 'Dummy repository'" >/dev/null
+	# determine whether this is an update or a fresh install. we do this by
+	# checking whether the ${DEST_DIR}/.git directory exists or not
+	# 
+	if [ -d "${DEST_DIR}/.git" ]; then
+		local update=true
+	else
+		local update=false
 	fi
 
 	## Initialize app ##
@@ -320,11 +318,11 @@ pkg_config() {
 	local RUBY=${RUBY:-/usr/bin/ruby}
 	local BUNDLE="${RUBY} /usr/bin/bundle"
 
-	local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
+	# FIXME: this line existed in older ebuilds, but the variable is
+	# never used. what was it for!?
+	# local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
 
-	if [ -f "${DEST_DIR}/.secret" ]; then
-		local update=true
-
+	if [ "${update}" = 'true' ]; then
 		einfo "Migrating database ..."
 		exec_rake db:migrate
 
@@ -338,7 +336,14 @@ pkg_config() {
 		einfo "Cleaning cache ..."
 		exec_rake cache:clear
 	else
-		local update=false
+		# create dummy git repo as workaround for
+		# https://github.com/bundler/bundler/issues/2039
+		einfo "Initializing dummy git repository to avoid false errors from bundler"
+		su -l ${MY_USER} -c "
+			cd ${DEST_DIR}
+			git init
+			git add README.md
+			git commit -m 'Dummy repository'" >/dev/null
 
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup

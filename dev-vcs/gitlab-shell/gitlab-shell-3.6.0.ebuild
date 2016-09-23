@@ -4,12 +4,12 @@
 
 EAPI="5"
 
-USE_RUBY="ruby20 ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit eutils ruby-ng user
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="87b388232505b1715a1d7448dc393a383cd7a53f"
+MY_GIT_COMMIT="894d8c16866b58e74791c933968a5a08c7aeb901"
 
 DESCRIPTION="SSH access and repository management for GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-shell"

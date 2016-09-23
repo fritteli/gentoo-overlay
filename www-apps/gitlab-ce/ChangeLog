@@ -1,3 +1,24 @@
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.12.0.ebuild:
+  www-apps/gitlab-ce:  added missing keywords for version 8.12.0
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated dependencies for gitlab-ce-9999
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-ce-8.9.1-fix-redis-config-path.patch,
+  -files/gitlab-sidekiq.service:
+  www-apps/gitlab-ce:  deleted obsolete auxiliary files
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-ce-8.10.6.ebuild,
+  -gitlab-ce-8.11.0.ebuild, -gitlab-ce-8.11.2.ebuild, -gitlab-ce-8.11.3.ebuild,
+  -gitlab-ce-8.11.4.ebuild, -gitlab-ce-8.11.5.ebuild:
+  www-apps/gitlab-ce: removed old versions
+
+*gitlab-ce-8.12.0 (23 Sep 2016)
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.12.0.ebuild:
+  www-apps/gitlab-ce:  added ebuild for version 8.12.0
+
 *gitlab-ce-8.12.0_rc6 (21 Sep 2016)
 
   21 Sep 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.12.0_rc6.ebuild,
