@@ -1,3 +1,11 @@
+*gitlab-workhorse-0.8.2-r1 (26 Sep 2016)
+
+  26 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-workhorse-0.8.2.conf, +files/gitlab-workhorse-0.8.2.init,
+  +gitlab-workhorse-0.8.2-r1.ebuild:
+  dev-vcs/gitlab-workhorse:  fix pulling over HTTP(S) by fixing the path to
+  gitlab-workhorse-secret
+
   23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/fix-Makefile-0.7.8.patch, -gitlab-workhorse-0.7.8.ebuild:
   dev-vcs/gitlab-workhorse:  removed obsolete version 0.7.8

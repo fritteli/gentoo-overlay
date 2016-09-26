@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+start() {
+	ebegin "Starting gitlab-workhorse"
+	start-stop-daemon --start --exec /usr/bin/gitlab-workhorse --pidfile /run/gitlab-workhorse.pid \
+	--make-pidfile --background --user ${RUNAS_USER}:${RUNAS_GROUP} --stdout "${LOGFILE}" --stderr "${LOGFILE}" \
+	-- -authBackend=${AUTH_BACKEND} -listenAddr=${LISTEN_ADDR} -listenNetwork=${LISTEN_NETWORK} -listenUmask=${LISTEN_UMASK} \
+	-pprofListenAddr=${PPROF_LISTEN_ADDR} -secretPath=${SECRET_PATH} ${GIT_REPO_PATH}
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping gitlab-workhorse"
+	start-stop-daemon --stop --exec /usr/bin/gitlab-workhorse --pidfile /run/gitlab-workhorse.pid --user ${RUNAS_USER}:${RUNAS_GROUP}
+	eend $?
+}
