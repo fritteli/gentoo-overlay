@@ -30,7 +30,7 @@ RDEPEND="
 		dev-libs/nss[abi_x86_32]
 		media-libs/fontconfig[abi_x86_32]
 		media-libs/freetype:2[abi_x86_32]
-		=media-libs/libpng-1.5*[abi_x86_32]
+		media-libs/libpng:0/16[abi_x86_32]
 		virtual/opengl[abi_x86_32]
 		sys-apps/util-linux[abi_x86_32]
 		sys-libs/zlib[abi_x86_32]
@@ -68,7 +68,7 @@ RDEPEND="
 		dev-libs/nss
 		media-libs/fontconfig
 		media-libs/freetype:2
-		=media-libs/libpng-1.5*
+		media-libs/libpng:0/16
 		virtual/opengl
 		sys-apps/util-linux
 		sys-libs/zlib
