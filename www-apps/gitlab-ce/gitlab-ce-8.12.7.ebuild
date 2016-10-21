@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="ba8aeb7c14e2dc956b96ae01f6e78ac52e993395"
+MY_GIT_COMMIT="7429b21d3260edb25e9d3f98713d163f97b23e28"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -78,9 +78,11 @@ ruby_add_bdepend "
 #     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
-	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.11.0-fix-redis-config-path.patch"
-	"${P}-database.yml.patch"
+	"01-${PN}-8.7.5-fix-sendmail-config.patch"
+	"02-${PN}-8.11.0-fix-redis-config-path.patch"
+	"03-${P}-database.yml.patch"
+	"04-${P}-fix-check-task.patch"
+	"05-${P}-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"

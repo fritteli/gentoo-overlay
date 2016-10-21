@@ -52,7 +52,7 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-3.6.0
+	>=dev-vcs/gitlab-shell-3.6.1
 	>=dev-vcs/git-2.7.4
 	>=dev-vcs/gitlab-workhorse-0.8.2
 	kerberos? ( !app-crypt/heimdal )
@@ -76,8 +76,11 @@ ruby_add_bdepend "
 #     Point to the absolute location of redis_config.rb
 #
 RUBY_PATCHES=(
-	"${PN}-8.7.5-fix-sendmail-config.patch"
-	"${PN}-8.11.0-fix-redis-config-path.patch"
+	"01-${PN}-8.7.5-fix-sendmail-config.patch"
+	"02-${PN}-8.11.0-fix-redis-config-path.patch"
+	"03-${PN}-8.12.7-fix-database.yml.patch"
+	"04-${PN}-8.12.7-fix-check-task.patch"
+	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"
