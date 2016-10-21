@@ -11,12 +11,12 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="410d75139541ee2a2cda04debcdbb6767a9c01bc"
+MY_GIT_COMMIT="7429b21d3260edb25e9d3f98713d163f97b23e28"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-3.4.0
+	~dev-vcs/gitlab-shell-3.6.1
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-0.7.11
+	~dev-vcs/gitlab-workhorse-0.8.2
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -80,6 +80,9 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
+	"03-${P}-database.yml.patch"
+	"04-${P}-fix-check-task.patch"
+	"05-${P}-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"

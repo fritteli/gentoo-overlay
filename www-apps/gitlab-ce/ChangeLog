@@ -1,3 +1,20 @@
+*gitlab-ce-8.12.7 (21 Oct 2016)
+
+  21 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/01-gitlab-ce-8.7.5-fix-sendmail-config.patch,
+  +files/02-gitlab-ce-8.11.0-fix-redis-config-path.patch,
+  +files/03-gitlab-ce-8.12.7-database.yml.patch,
+  +files/04-gitlab-ce-8.12.7-fix-check-task.patch,
+  +files/05-gitlab-ce-8.12.7-replace-sys-filesystem.patch,
+  +gitlab-ce-8.12.7.ebuild, -files/gitlab-ce-8.11.0-fix-redis-config-path.patch,
+  -files/gitlab-ce-8.12.4-database.yml.patch,
+  -files/gitlab-ce-8.7.5-fix-sendmail-config.patch, -gitlab-ce-8.12.4.ebuild,
+  gitlab-ce-8.11.6.ebuild, gitlab-ce-8.12.0.ebuild, gitlab-ce-8.12.0_rc6.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-8.12.7 and incorporated the
+  following patches from Jakub: - 0002-default-configs.patch - 0005-fix-check-
+  task.patch - 0006-replace-sys-filesystem.patch
+
   23 Sep 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.12.0.ebuild:
   www-apps/gitlab-ce:  added missing keywords for version 8.12.0
 
