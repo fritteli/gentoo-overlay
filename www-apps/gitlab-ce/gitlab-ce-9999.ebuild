@@ -52,9 +52,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-3.6.1
+	>=dev-vcs/gitlab-shell-3.6.6
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-0.8.2
+	>=dev-vcs/gitlab-workhorse-0.8.5
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -216,21 +216,20 @@ all_ruby_install() {
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_newunit "${FILESDIR}/gitlab-8.10.6-sidekiq.service" "gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-8.13.0-sidekiq.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-workhorse.service"
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq.init
-		use unicorn && rcscript=gitlab-unicorn.init
+		local rcscript=gitlab-8.13.0-sidekiq.init
+		use unicorn && rcscript=gitlab-8.13.0-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
 			-e "s|@USER@|${MY_USER}|" \
 			-e "s|@GITLAB_BASE@|${dest}|" \
 			-e "s|@LOGS_DIR@|${logs}|" \
-			-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
 			"${T}/${rcscript}" \
 			|| die "failed to filter ${rcscript}"
 
@@ -308,6 +307,8 @@ pkg_config() {
 			git config --global user.name 'GitLab'" \
 			|| die "failed to setup git name and email"
 	fi
+
+	su -l ${MY_USER} -c "git config --global repack.writeBitmaps true"
 
 	# determine whether this is an update or a fresh install. we do this by
 	# checking whether the ${DEST_DIR}/.git directory exists or not
