@@ -11,12 +11,12 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21"
+USE_RUBY="ruby21 ruby23"
 
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="410d75139541ee2a2cda04debcdbb6767a9c01bc"
+MY_GIT_COMMIT="053a0a2ccdc74c2fd2ae400fd73675d0e14b1aba"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-3.4.0
+	~dev-vcs/gitlab-shell-3.6.6
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-0.7.11
+	~dev-vcs/gitlab-workhorse-0.8.5
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -80,6 +80,9 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
+	"03-${PN}-8.12.7-database.yml.patch"
+	"04-${PN}-8.12.7-fix-check-task.patch"
+	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"
@@ -89,10 +92,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-# When updating ebuild to newer version, check list of the queues in
-# https://gitlab.com/gitlab-org/gitlab-ce/blob/${MY_PV}/bin/background_jobs
-SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_prepare() {
 	# fix paths
@@ -210,21 +209,20 @@ all_ruby_install() {
 
 	if use systemd ; then
 		ewarn "Beware: systemd support has not been tested, use at your own risk!"
-		systemd_newunit "${FILESDIR}/gitlab-8.10.6-sidekiq.service" "gitlab-sidekiq.service"
+		systemd_newunit "${FILESDIR}/gitlab-8.13.0-sidekiq.service" "gitlab-sidekiq.service"
 		systemd_dounit "${FILESDIR}/gitlab-unicorn.service"
 		systemd_dounit "${FILESDIR}/gitlab-workhorse.service"
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-sidekiq.init
-		use unicorn && rcscript=gitlab-unicorn.init
+		local rcscript=gitlab-8.13.0-sidekiq.init
+		use unicorn && rcscript=gitlab-8.13.0-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
 			-e "s|@USER@|${MY_USER}|" \
 			-e "s|@GITLAB_BASE@|${dest}|" \
 			-e "s|@LOGS_DIR@|${logs}|" \
-			-e "s|@QUEUES@|${SIDEKIQ_QUEUES}|" \
 			"${T}/${rcscript}" \
 			|| die "failed to filter ${rcscript}"
 
@@ -302,6 +300,8 @@ pkg_config() {
 			git config --global user.name 'GitLab'" \
 			|| die "failed to setup git name and email"
 	fi
+
+	su -l ${MY_USER} -c "git config --global repack.writeBitmaps true"
 
 	# determine whether this is an update or a fresh install. we do this by
 	# checking whether the ${DEST_DIR}/.git directory exists or not
