@@ -1,3 +1,6 @@
+  22 Oct 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated dependencies for gitlab-ce-9999
+
 *gitlab-ce-8.13.0 (22 Oct 2016)
 
   22 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
