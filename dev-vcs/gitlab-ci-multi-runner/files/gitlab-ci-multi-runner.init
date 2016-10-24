@@ -1,5 +1,5 @@
 #!/sbin/openrc-run
-# Copyright 2015 Nicolas Heine
+# Copyright 2015-2016 Nicolas Heine
 
 depend() {
         after sshd

@@ -2,100 +2,64 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="6"
+EAPI=6
+inherit eutils golang-build golang-vcs-snapshot
 
-inherit eutils user
+EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner/..."
 
-DESCRIPTION="GitLab CI Multi Runner is the build processor needed for GitLab CI 8.12"
+MY_PV="v${PV/_/-}"
+MY_BRANCH="1-7-stable"
+MY_GIT_HASH="c66b00d"
+
+DESCRIPTION="Official GitLab CI Runner written in Go"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
-SRC_URI="x86? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
-	amd64?    ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
-	arm?      ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=v${PV} -> ${P}.tar.gz
+	!docker-build? (
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-x86_64.tar.xz -> ${P}-prebuilt-x86_64.tar.xz
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-arm.tar.xz -> ${P}-prebuilt-arm.tar.xz
+	)"
 
-RESTRICT="mirror"
-
+KEYWORDS="~amd64"
 LICENSE="MIT"
-SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm"
+SLOT="0/${PVR}"
+IUSE="docker-build"
 
-DEPEND="dev-vcs/git"
-RDEPEND="${DEPEND}
-	net-libs/nodejs
-	virtual/mta"
+DEPEND=">=dev-go/gox-0.3.1_alpha
+	>=dev-go/go-bindata-3.0.8_alpha
+	docker-build? ( >=app-emulation/docker-1.5 )
+	!dev-vcs/gitlab-ci-multi-runner-bin"
 
-MY_NAME="${PN}"
-MY_USER="gitlab_ci_multi_runner"
-
-DEST_DIR="/opt/${MY_NAME}"
-LOGS_DIR="/var/log/${MY_NAME}"
-TEMP_DIR="/var/tmp/${MY_NAME}"
-RUN_DIR="/run/${MY_NAME}"
-
-pkg_setup() {
-	enewgroup ${MY_USER}
-	enewuser ${MY_USER} -1 /bin/bash ${DEST_DIR} ${MY_USER}
-}
-
-src_unpack() {
-	local a="$(usev amd64)$(usev arm)$(usev x86)"
-	mkdir -p "${S}"
-	cp "${DISTDIR}/${P}-${a}" "${S}/${PN}"
-}
+RESTRICT="test"
 
 src_prepare() {
-	chmod +x "${S}/${PN}"
+	if ! use docker-build; then
+		mkdir -p src/${EGO_PN%/*}/out/docker || die
+		cp "${DISTDIR}"/${P}-prebuilt-x86_64.tar.xz src/${EGO_PN%/*}/out/docker/prebuilt-x86_64.tar.xz || die
+		cp "${DISTDIR}"/${P}-prebuilt-arm.tar.xz src/${EGO_PN%/*}/out/docker/prebuilt-arm.tar.xz || die
+	else
+		einfo "You need to have docker running on your system during build time"
+		einfo "$(docker info)"
+	fi
+
+	epatch "${FILESDIR}/0001-fix-Makefile.patch"
+	local arch="$(usev amd64)$(usev x86)$(usev arm)$(usev arm64)"
+
+	sed -i -E \
+		-e "s/@@VERSION@@/v${PV/_/-}/" \
+		-e "s/@@REVISION@@/${MY_GIT_HASH}/" \
+		-e "s/@@BRANCH@@/${MY_BRANCH}/" \
+		-e "s|@@OSARCH@@|linux/${arch}|" \
+		src/gitlab.com/gitlab-org/${PN}/Makefile
+
 	eapply_user
 }
 
 src_compile() {
-	# nothing to compile, binary all-in-one goodness! (?)
-	:
+	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} build
 }
 
 src_install() {
-	local dest=${DEST_DIR}
-	local conf="/etc/gitlab-runner"
-
-	diropts -m755
-	dodir ${dest}
-
-	exeinto ${dest}
-	doexe "${S}/${PN}"
-
-	diropts -m750
-	dodir ${conf}
-
-	dosym ${conf} ${dest}/.gitlab-runner
-
-	# fix permissions
-	fowners -R ${MY_USER}:${MY_USER} ${dest} ${conf}
-
-	## RC script ##
-
-	local rcscript="${MY_NAME}.init"
-
-	cp "${FILESDIR}/${rcscript}" "${T}" || die
-	sed -i \
-		-e "s|@USER@|${MY_USER}|" \
-		"${T}/${rcscript}" \
-		|| die "failed to filter ${rcscript}"
-
-	newinitd "${T}/${rcscript}" "${MY_NAME}"
-	newconfd "${FILESDIR}/${MY_NAME}.conf" "${MY_NAME}"
-}
-
-pkg_postinst() {
-	elog
-	elog "If this is a fresh install of GitLab CI Multi Runner, please configure it"
-	elog "with the following command:"
-	elog "        emerge --config \"=${CATEGORY}/${PF}\""
-}
-
-pkg_config() {
-	einfo "You need to register the runner with your GitLab CI instance. Please"
-	einfo "Follow the instructions at"
-	einfo
-	einfo "https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-manually.md"
-	einfo
-	einfo "Perhaps I'll improve the ebuild later ... kthxbye."
+	golang-build_src_install
+	dobin bin/*
+	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG.md
 }
