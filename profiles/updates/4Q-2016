@@ -1,0 +1,1 @@
+move dev-vcs/gitlab-ci-multi-runner dev-vcs/gitlab-ci-multi-runner-bin

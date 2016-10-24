@@ -1,0 +1,24 @@
+Title: Rename gitlab-ci-multi-runner to gitlab-ci-multi-runner-bin
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2016-10-25
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: dev-vcs/gitlab-ci-multi-runner
+Display-If-Installed: dev-vcs/gitlab-ci-multi-runner-bin
+
+The dev-vcs/gitlab-ci-multi-runner ebuild downloads the precompiled
+binary and installs it. That's not the Gentoo Way Of Life. Therefore,
+the existing ebuild is renamed to
+
+    dev-vcs/gitlab-ci-multi-runner-bin
+
+and a new source based ebuild is introduced. The new ebuild will be
+named
+
+    dev-vcs/gitlab-ci-multi-runner
+
+so don't be confused.
+
+Cheers,
+fritteli.
