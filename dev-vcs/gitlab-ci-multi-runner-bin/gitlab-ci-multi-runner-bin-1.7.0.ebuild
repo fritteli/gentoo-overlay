@@ -20,7 +20,8 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
 
-DEPEND="dev-vcs/git"
+DEPEND="dev-vcs/git
+	!dev-vcs/gitlab-ci-multi-runner"
 RDEPEND="${DEPEND}
 	net-libs/nodejs
 	virtual/mta"
