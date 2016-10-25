@@ -6,11 +6,13 @@ EAPI="6"
 
 inherit eutils user
 
-DESCRIPTION="GitLab CI Multi Runner is the build processor needed for GitLab CI 8.10"
-HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
-SRC_URI="x86? ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-386 -> ${P}-x86 )
-	amd64?    ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-amd64 -> ${P}-amd64 )
-	arm?      ( https://${PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${PN}-linux-arm -> ${P}-arm )"
+MY_PN="gitlab-ci-multi-runner"
+
+DESCRIPTION="Binary version of GitLab CI Multi Runner, the build processor for GitLab 8.10"
+HOMEPAGE="https://gitlab.com/gitlab-org/${MY_PN}"
+SRC_URI="x86?     ( https://${MY_PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${MY_PN}-linux-386 -> ${P}-x86 )
+	amd64?    ( https://${MY_PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${MY_PN}-linux-amd64 -> ${P}-amd64 )
+	arm?      ( https://${MY_PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${MY_PN}-linux-arm -> ${P}-arm )"
 
 RESTRICT="mirror"
 
@@ -18,18 +20,18 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm"
 
-DEPEND="dev-vcs/git"
+DEPEND="dev-vcs/git
+	!dev-vcs/gitlab-ci-multi-runner"
 RDEPEND="${DEPEND}
 	net-libs/nodejs
 	virtual/mta"
 
-MY_NAME="${PN}"
 MY_USER="gitlab_ci_multi_runner"
 
-DEST_DIR="/opt/${MY_NAME}"
-LOGS_DIR="/var/log/${MY_NAME}"
-TEMP_DIR="/var/tmp/${MY_NAME}"
-RUN_DIR="/run/${MY_NAME}"
+DEST_DIR="/opt/${MY_PN}"
+LOGS_DIR="/var/log/${MY_PN}"
+TEMP_DIR="/var/tmp/${MY_PN}"
+RUN_DIR="/run/${MY_PN}"
 
 pkg_setup() {
 	enewgroup ${MY_USER}
@@ -39,11 +41,11 @@ pkg_setup() {
 src_unpack() {
 	local a="$(usev amd64)$(usev arm)$(usev x86)"
 	mkdir -p "${S}"
-	cp "${DISTDIR}/${P}-${a}" "${S}/${PN}"
+	cp "${DISTDIR}/${P}-${a}" "${S}/${MY_PN}"
 }
 
 src_prepare() {
-	chmod +x "${S}/${PN}"
+	chmod +x "${S}/${MY_PN}"
 	eapply_user
 }
 
@@ -60,7 +62,7 @@ src_install() {
 	dodir ${dest}
 
 	exeinto ${dest}
-	doexe "${S}/${PN}"
+	doexe "${S}/${MY_PN}"
 
 	diropts -m750
 	dodir ${conf}
@@ -72,7 +74,7 @@ src_install() {
 
 	## RC script ##
 
-	local rcscript="${MY_NAME}.init"
+	local rcscript="${MY_PN}.init"
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
@@ -80,8 +82,8 @@ src_install() {
 		"${T}/${rcscript}" \
 		|| die "failed to filter ${rcscript}"
 
-	newinitd "${T}/${rcscript}" "${MY_NAME}"
-	newconfd "${FILESDIR}/${MY_NAME}.conf" "${MY_NAME}"
+	newinitd "${T}/${rcscript}" "${MY_PN}"
+	newconfd "${FILESDIR}/${MY_PN}.conf" "${MY_PN}"
 }
 
 pkg_postinst() {

@@ -1,0 +1,69 @@
+  24 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-ci-multi-runner-bin-1.4.1.ebuild,
+  gitlab-ci-multi-runner-bin-1.5.0.ebuild,
+  gitlab-ci-multi-runner-bin-1.6.0.ebuild,
+  gitlab-ci-multi-runner-bin-1.7.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner-bin:  prevent the simultaneous installation of
+  gitlab-ci-multi-runner and gitlab-ci-multi-runner-bin
+
+*gitlab-ci-multi-runner-1.7.0 (23 Oct 2016)
+
+  23 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.7.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for version 1.7.0
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-ci-multi-runner-1.6.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  corrected description
+
+*gitlab-ci-multi-runner-1.6.0 (23 Sep 2016)
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.6.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for gitlab-ci-multi-runner-1.6.0
+
+  05 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-ci-multi-runner-1.4.1.ebuild, gitlab-ci-multi-runner-1.5.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  fixed gitlab-ci-multi-runner ebuilds for
+  EAPI="6"
+
+  01 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-ci-multi-runner-1.4.1.ebuild, gitlab-ci-multi-runner-1.5.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  updated to EAPI="6"
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  -gitlab-ci-multi-runner-1.3.2.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  purged all ebuild versions <gitlab-ci-multi-
+  runner-1.4.1
+
+*gitlab-ci-multi-runner-1.5.0 (22 Aug 2016)
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.5.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added gitlab-ci-multi-runner-1.5.0. to be
+  used along with gitlab-ce-8.11.0
+
+*gitlab-ci-multi-runner-1.4.1 (26 Jul 2016)
+
+  26 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.4.1.ebuild, -gitlab-ci-multi-runner-1.1.4.ebuild,
+  -gitlab-ci-multi-runner-1.3.1.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  - added ebuild for version 1.4.1 - deleted
+  ebuilds for versions <1.3.2
+
+*gitlab-ci-multi-runner-1.3.2 (09 Jul 2016)
+
+  09 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.3.2.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for version 1.3.2 which contains
+  a bugfix for ARM
+
+*gitlab-ci-multi-runner-1.3.1 (26 Jun 2016)
+
+  26 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-1.3.1.ebuild, -gitlab-ci-multi-runner-1.1.3.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:
+  Added version 1.3.1 and purged old one
+
+  07 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +ChangeLog:
+  Added ChangeLog
