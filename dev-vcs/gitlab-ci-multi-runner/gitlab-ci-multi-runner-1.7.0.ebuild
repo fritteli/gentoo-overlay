@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-inherit eutils golang-build golang-vcs-snapshot
+inherit eutils golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner/..."
 
@@ -30,6 +30,14 @@ DEPEND=">=dev-go/gox-0.3.1_alpha
 	!dev-vcs/gitlab-ci-multi-runner-bin"
 
 RESTRICT="test"
+
+MY_USER="gitlab_ci_multi_runner"
+MY_HOME_DIR="/opt/gitlab-ci-multi-runner"
+
+pkg_setup() {
+	enewgroup ${MY_USER}
+	enewuser ${MY_USER} -1 /bin/bash ${MY_HOME_DIR} ${MY_USER}
+}
 
 src_prepare() {
 	if ! use docker-build; then
@@ -62,4 +70,48 @@ src_install() {
 	golang-build_src_install
 	dobin bin/*
 	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG.md
+
+	# set up dirs
+	# here be the builds
+	diropts -m755
+	dodir ${MY_HOME_DIR}
+
+	# here be my home and my castle
+	local conf="/etc/gitlab-runner"
+	diropts -m750
+	dodir ${conf}
+
+	dosym ${conf} ${MY_HOME_DIR}/.gitlab-runner
+
+	# fix permissions
+	fowners -R ${MY_USER}:${MY_USER} ${MY_HOME_DIR} ${conf}
+
+	# rc script
+	local rcscript="${PN}.init"
+
+	cp "${FILESDIR}/${rcscript}" "${T}" || die
+	sed -i \
+		-e "s|@USER@|${MY_USER}|" \
+		-e "s|@HOME@|${MY_HOME_DIR}|" \
+		"${T}/${rcscript}" \
+		|| die "failed to filter ${rcscript}"
+
+	newinitd "${T}/${rcscript}" "${PN}"
+	newconfd "${FILESDIR}/${PN}.conf" "${PN}"
+}
+
+pkg_postinst() {
+	elog
+	elog "If this is a fresh install of GitLab CI Multi Runner, please configure it"
+	elog "with the following command:"
+	elog "        emerge --config \"=${CATEGORY}/${PF}\""
+}
+
+pkg_config() {
+	einfo "You need to register the runner with your GitLab CI instance. Please"
+	einfo "Follow the instructions at"
+	einfo
+	einfo "https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-manually.md"
+	einfo
+	einfo "Perhaps I'll improve the ebuild later ... kthxbye."
 }

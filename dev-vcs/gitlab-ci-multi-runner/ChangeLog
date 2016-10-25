@@ -1,3 +1,8 @@
+  25 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  files/gitlab-ci-multi-runner.init, gitlab-ci-multi-runner-1.7.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  install init script, set up required
+  directories ... taken from gitlab-ci-multi-runner-bin
+
   24 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
   +files/0001-fix-Makefile.patch, -ChangeLog,
   -gitlab-ci-multi-runner-1.4.1.ebuild, -gitlab-ci-multi-runner-1.5.0.ebuild,
