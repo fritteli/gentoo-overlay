@@ -78,7 +78,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
-	"03-${PN}-8.12.7-fix-database.yml.patch"
+	"03-${PN}-8.12.7-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
 )
@@ -90,10 +90,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-# When updating ebuild to newer version, check list of the queues in
-# https://gitlab.com/gitlab-org/gitlab-ce/blob/master/bin/background_jobs
-SIDEKIQ_QUEUES="post_receive,mailers,archive_repo,system_hook,project_web_hook,gitlab_shell,incoming_email,runner,common,default"
 
 all_ruby_unpack() {
 	git-r3_fetch
@@ -222,8 +218,8 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-8.13.0-sidekiq.init
-		use unicorn && rcscript=gitlab-8.13.0-unicorn.init
+		local rcscript=gitlab-8.13.3-sidekiq.init
+		use unicorn && rcscript=gitlab-8.13.3-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
@@ -375,6 +371,11 @@ pkg_config() {
 	elog "    sudo -u git -H bundle exec rake gitlab:env:info RAILS_ENV=production"
 	elog "    sudo -u git -H bundle exec rake gitlab:check RAILS_ENV=production"
 	elog
+	if ! use systemd ; then
+		elog "You may also run"
+		elog "    /etc/init.d/gitlab check"
+		elog " for convenience."
+	fi
 }
 
 ryaml() {
