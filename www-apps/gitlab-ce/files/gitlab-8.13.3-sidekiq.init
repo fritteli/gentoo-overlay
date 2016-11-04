@@ -52,11 +52,13 @@ stop() {
 check() {
 	ebegin "Running sanity checks for ${name}"
 
-	${check_command} ${check_command_aregs1}
+	cd /opt/gitlab
+
+	${check_command} ${check_command_args1}
 
 	eend $?
 
-	${check_command} ${check_command_aregs2}
+	${check_command} ${check_command_args2}
 
-	eend$?
+	eend $?
 }
