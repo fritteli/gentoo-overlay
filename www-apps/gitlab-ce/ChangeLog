@@ -1,3 +1,7 @@
+  04 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  files/gitlab-8.13.3-sidekiq.init, files/gitlab-8.13.3-unicorn.init:
+  www-apps/gitlab-ce:  fixed init script for gitlab-ce-8.13.3
+
   03 Nov 2016; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  updated ebuild for gitlab-9999
 
