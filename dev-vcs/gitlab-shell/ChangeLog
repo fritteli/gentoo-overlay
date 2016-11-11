@@ -1,3 +1,9 @@
+*gitlab-shell-4.0.0 (11 Nov 2016)
+
+  11 Nov 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-4.0.0.ebuild:
+  dev-vcs/gitlab-shell:  added ebuilds for gitlab-shell-4.0.0, a dependency of
+  gitlab-ce-8.14
+
   22 Oct 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-3.4.0.ebuild,
   -gitlab-shell-3.6.0.ebuild:
   dev-vcs/gitlab-shell:  purged unneeded ebuilds

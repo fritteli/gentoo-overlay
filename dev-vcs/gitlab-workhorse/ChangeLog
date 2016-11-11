@@ -1,3 +1,10 @@
+*gitlab-workhorse-1.0.0 (11 Nov 2016)
+
+  11 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-1.0.0.patch, +gitlab-workhorse-1.0.0.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-1.0.0; dependency
+  of gitlab-ce-8.14
+
   22 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/fix-Makefile-0.7.11.patch, -files/gitlab-workhorse.conf,
   -files/gitlab-workhorse.init, -gitlab-workhorse-0.7.11.ebuild,

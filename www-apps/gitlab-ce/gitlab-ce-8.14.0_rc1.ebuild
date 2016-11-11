@@ -13,13 +13,15 @@ EAPI="5"
 
 USE_RUBY="ruby21 ruby23"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
+
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="f8ca16802ad446c48ed26ce75745035f13fa3e03"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 RESTRICT="mirror"
 
@@ -52,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-4.0.0
+	~dev-vcs/gitlab-shell-4.0.0
 	>=dev-vcs/git-2.7.4
-	>=dev-vcs/gitlab-workhorse-1.0.0
+	~dev-vcs/gitlab-workhorse-1.0.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -90,11 +92,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths
