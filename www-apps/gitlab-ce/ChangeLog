@@ -1,3 +1,10 @@
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-8.10.6-sidekiq.service, -files/gitlab-8.13.0-sidekiq.init,
+  -files/gitlab-8.13.0-unicorn.init, -gitlab-ce-8.12.7.ebuild,
+  -gitlab-ce-8.13.0.ebuild, -gitlab-ce-8.13.3.ebuild, -gitlab-ce-8.13.5.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  pruned old ebuilds
+
 *gitlab-ce-8.14.0 (23 Nov 2016)
 *gitlab-ce-8.14.0_rc4 (23 Nov 2016)
 
