@@ -78,7 +78,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
-	"03-${PN}-8.12.7-database.yml.patch"
+	"03-${PN}-8.14.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
 )
