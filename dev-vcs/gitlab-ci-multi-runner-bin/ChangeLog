@@ -1,3 +1,12 @@
+*gitlab-ci-multi-runner-bin-1.8.0 (23 Nov 2016)
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-bin-1.8.0.ebuild,
+  -gitlab-ci-multi-runner-bin-1.4.1.ebuild,
+  -gitlab-ci-multi-runner-bin-1.5.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner-bin:  added ebuild for gitlab-ci-multi-
+  runner-1.8.0 and pruned old ones
+
   24 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
   gitlab-ci-multi-runner-bin-1.4.1.ebuild,
   gitlab-ci-multi-runner-bin-1.5.0.ebuild,

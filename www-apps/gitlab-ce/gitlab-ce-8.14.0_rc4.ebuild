@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="4c97f6fa3f0201abb4635c64b4263d85c7deeb6e"
+MY_GIT_COMMIT="0262cd5cbf60f197dcecffebeaeb1771d0093906"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -80,7 +80,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
-	"03-${PN}-8.12.7-database.yml.patch"
+	"03-${PN}-8.14.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
 )

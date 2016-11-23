@@ -8,7 +8,7 @@ inherit eutils user
 
 MY_PN="gitlab-ci-multi-runner"
 
-DESCRIPTION="Binary version of GitLab CI Multi Runner, the build processor for GitLab 8.10"
+DESCRIPTION="Binary version of GitLab CI Multi Runner, the build processor for GitLab 8.14"
 HOMEPAGE="https://gitlab.com/gitlab-org/${MY_PN}"
 SRC_URI="x86?     ( https://${MY_PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${MY_PN}-linux-386 -> ${P}-x86 )
 	amd64?    ( https://${MY_PN}-downloads.s3.amazonaws.com/v${PV}/binaries/${MY_PN}-linux-amd64 -> ${P}-amd64 )

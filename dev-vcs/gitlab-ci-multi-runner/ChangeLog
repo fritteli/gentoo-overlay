@@ -1,3 +1,9 @@
+*gitlab-ci-multi-runner-1.8.0 (23 Nov 2016)
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/0001-fix-Makefile-1.8.0.patch, +gitlab-ci-multi-runner-1.8.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for gitlab-ci-multi-runner-1.8.0
+
   25 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
   files/gitlab-ci-multi-runner.init, gitlab-ci-multi-runner-1.7.0.ebuild:
   dev-vcs/gitlab-ci-multi-runner:  install init script, set up required

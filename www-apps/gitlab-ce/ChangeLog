@@ -1,3 +1,11 @@
+*gitlab-ce-8.14.0 (23 Nov 2016)
+*gitlab-ce-8.14.0_rc4 (23 Nov 2016)
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/03-gitlab-ce-8.14.0-database.yml.patch, +gitlab-ce-8.14.0.ebuild,
+  +gitlab-ce-8.14.0_rc4.ebuild, -gitlab-ce-8.14.0_rc2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.14.0
+
 *gitlab-ce-8.13.6 (17 Nov 2016)
 
   17 Nov 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.13.6.ebuild:
