@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="0262cd5cbf60f197dcecffebeaeb1771d0093906"
+MY_GIT_COMMIT="71683446a77934390038ddd450a90b80b53b990b"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-4.0.0
+	~dev-vcs/gitlab-shell-4.0.3
 	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-1.0.0
+	~dev-vcs/gitlab-workhorse-1.1.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -67,6 +67,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
+# dev-ruby/bundler should be >=1.13.6, but that doesn't exist yet in the tree.
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.0"
