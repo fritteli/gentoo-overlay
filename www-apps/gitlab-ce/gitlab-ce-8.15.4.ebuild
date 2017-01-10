@@ -67,10 +67,9 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# dev-ruby/bundler should be >=1.13.6, but that doesn't exist yet in the tree.
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.0"
+	>=dev-ruby/bundler-1.13.6"
 
 #
 # fix-sendmail-config:
