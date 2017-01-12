@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="5f118980e82dd86661d72d2c96053b1da27e048e"
+MY_GIT_COMMIT="33e94dc50e6f2502b2b65fb7c1ebfd5d4f03322a"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -55,7 +55,7 @@ CDEPEND="
 COMMON_DEPEND="
 	${GEMS_DEPEND}
 	~dev-vcs/gitlab-shell-4.1.1
-	>=dev-vcs/git-2.7.4
+	>=dev-vcs/git-2.8.4
 	~dev-vcs/gitlab-workhorse-1.2.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
@@ -67,10 +67,9 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# dev-ruby/bundler should be >=1.13.6, but that doesn't exist yet in the tree.
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.0"
+	>=dev-ruby/bundler-1.13.6"
 
 #
 # fix-sendmail-config:
