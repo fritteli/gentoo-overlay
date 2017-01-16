@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -67,7 +67,7 @@ RDEPEND="
 	systemd? ( sys-apps/systemd:0= )"
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.13.6"
+	>=dev-ruby/bundler-1.13.7"
 
 #
 # fix-sendmail-config:
@@ -80,7 +80,7 @@ RUBY_PATCHES=(
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
 	"03-${PN}-8.14.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
-	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
+	"05-${PN}-8.16.0-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"

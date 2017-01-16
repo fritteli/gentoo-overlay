@@ -1,3 +1,11 @@
+*gitlab-ce-8.16.0_rc2 (16 Jan 2017)
+
+  16 Jan 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/05-gitlab-ce-8.16.0-replace-sys-filesystem.patch,
+  +gitlab-ce-8.16.0_rc2.ebuild, -gitlab-ce-8.16.0_rc1.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce: updated lates RC ebuild
+
 *gitlab-ce-8.15.0_rc1 (16 Dec 2016)
 
   16 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.15.0_rc1.ebuild,
