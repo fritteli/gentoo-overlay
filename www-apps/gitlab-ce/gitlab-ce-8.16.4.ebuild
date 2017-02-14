@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="1f6619260193eb1e4a2d9ed20113e7590494321d"
+MY_GIT_COMMIT="f32ee822d66afcf8d6288d5e2e5660e19b18d5a7"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -27,7 +27,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -56,7 +56,7 @@ COMMON_DEPEND="
 	${GEMS_DEPEND}
 	~dev-vcs/gitlab-shell-4.1.1
 	>=dev-vcs/git-2.8.4
-	~dev-vcs/gitlab-workhorse-1.2.1
+	~dev-vcs/gitlab-workhorse-1.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="

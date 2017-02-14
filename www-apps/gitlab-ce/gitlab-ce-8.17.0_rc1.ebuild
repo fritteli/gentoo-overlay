@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -16,7 +16,7 @@ USE_RUBY="ruby21 ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="6f43aa0d606498982e2beb915ff098f3ffe513c3"
+MY_GIT_COMMIT="ba92981ff8faa36a2aa2a09adbc656c169a61620"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -27,7 +27,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
+KEYWORDS=""
 IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -54,9 +54,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-4.0.3
-	>=dev-vcs/git-2.7.4
-	~dev-vcs/gitlab-workhorse-1.1.1
+	~dev-vcs/gitlab-shell-4.1.1
+	>=dev-vcs/git-2.8.4
+	~dev-vcs/gitlab-workhorse-1.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -67,10 +67,9 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# dev-ruby/bundler should be >=1.13.6, but that doesn't exist yet in the tree.
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.0"
+	>=dev-ruby/bundler-1.13.7"
 
 #
 # fix-sendmail-config:
@@ -83,7 +82,7 @@ RUBY_PATCHES=(
 	"02-${PN}-8.11.0-fix-redis-config-path.patch"
 	"03-${PN}-8.14.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
-	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
+	"05-${PN}-8.16.0-replace-sys-filesystem.patch"
 )
 
 MY_NAME="gitlab"
@@ -360,6 +359,10 @@ pkg_config() {
 		ewarn "    https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/"
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
+		if use mysql ; then
+			ewarn "PLEASE also read this document about needed migrations on MySQL:"
+			ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		fi
 	fi
 	elog
 	elog "If you want to make sure that the install/upgrade was successful, start"

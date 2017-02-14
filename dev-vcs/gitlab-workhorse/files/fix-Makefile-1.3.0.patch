@@ -6,7 +6,7 @@ index 3f6ac91..663ffbb 100644
 -PREFIX=/usr/local
 -VERSION=$(shell git describe)-$(shell date -u +%Y%m%d.%H%M%S)
 +PREFIX=${DESTDIR}/usr
-+VERSION=v1.1.1-$(shell date -u +%Y%m%d.%H%M%S)
++VERSION=v1.3.0-$(shell date -u +%Y%m%d.%H%M%S)
  BUILD_DIR = $(shell pwd)
  export GOPATH=${BUILD_DIR}/_build
  export GO15VENDOREXPERIMENT=1

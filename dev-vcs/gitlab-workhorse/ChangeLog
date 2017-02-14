@@ -1,3 +1,7 @@
+  14 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-1.1.1.patch, -gitlab-workhorse-1.1.1.ebuild:
+  dev-vcs/gitlab-workhorse: added new ebuild, removed old one
+
 *gitlab-workhorse-1.1.1 (12 Dec 2016)
 
   12 Dec 2016; Manuel Friedli <manuel@fritteli.ch>
