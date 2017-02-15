@@ -1,3 +1,10 @@
+*gitlab-ci-multi-runner-1.10.4 (15 Feb 2017)
+
+  15 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0001-fix-Makefile-1.10.4.patch, +gitlab-ci-multi-runner-1.10.4.ebuild,
+  gitlab-ci-multi-runner-1.9.2.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  added ebuild for gitlab-ci-runner-1.10.4
+
 *gitlab-ci-multi-runner-1.8.0 (23 Nov 2016)
 
   23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>

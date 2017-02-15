@@ -8,8 +8,8 @@ inherit eutils golang-build golang-vcs-snapshot user
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner/..."
 
 MY_PV="v${PV/_/-}"
-MY_BRANCH="1-9-stable"
-MY_GIT_HASH="ade6572"
+MY_BRANCH="1-10-stable"
+MY_GIT_HASH="b32125f"
 
 DESCRIPTION="Official GitLab CI Runner written in Go"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
@@ -29,7 +29,7 @@ DEPEND=">=dev-go/gox-0.3.1_alpha
 	docker-build? ( >=app-emulation/docker-1.5 )
 	!dev-vcs/gitlab-ci-multi-runner-bin"
 
-RESTRICT="test"
+RESTRICT="test mirror"
 
 MY_USER="gitlab_ci_multi_runner"
 MY_HOME_DIR="/opt/gitlab-ci-multi-runner"
@@ -49,7 +49,7 @@ src_prepare() {
 		einfo "$(docker info)"
 	fi
 
-	epatch "${FILESDIR}/0001-fix-Makefile-1.8.0.patch"
+	epatch "${FILESDIR}/0001-fix-Makefile-${PV}.patch"
 	local arch="$(usev amd64)$(usev x86)$(usev arm)$(usev arm64)"
 
 	sed -i -E \
