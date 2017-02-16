@@ -13,16 +13,18 @@ EAPI="5"
 
 USE_RUBY="ruby21 ruby23"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
 
-DESCRIPTION="GitLab is a free project and repository management application"
-HOMEPAGE="https://about.gitlab.com/"
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="f947ed54392d77c66ff5f972b8a9d94dc8d1310b"
 
 GITLAB_SHELL_VERSION="4.1.1"
 GITLAB_WORKHORSE_VERSION="1.3.0"
+
+DESCRIPTION="GitLab is a free project and repository management application"
+HOMEPAGE="https://about.gitlab.com/"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 RESTRICT="mirror"
 
@@ -55,9 +57,9 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
+	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
-	>=dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	~dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -93,11 +95,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths
@@ -365,6 +362,10 @@ pkg_config() {
 		ewarn "    https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/"
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
+		if use mysql ; then
+			ewarn "PLEASE also read this document about needed migrations on MySQL:"
+			ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		fi
 	fi
 	elog
 	elog "If you want to make sure that the install/upgrade was successful, start"
