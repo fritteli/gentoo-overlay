@@ -88,6 +88,7 @@ RUBY_PATCHES=(
 	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-8.16.0-replace-sys-filesystem.patch"
+	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
 
 MY_NAME="gitlab"

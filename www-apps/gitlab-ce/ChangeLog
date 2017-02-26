@@ -1,3 +1,8 @@
+  26 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/06-gitlab-ce-8.17-fix-webpack-config.patch, gitlab-ce-8.17.0.ebuild:
+  www-apps/gitlab-ce:  added patch for the webpack config, hopefully fixing the
+  emerge --config phase
+
 *gitlab-ce-8.17.0 (24 Feb 2017)
 
   24 Feb 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.0.ebuild:
