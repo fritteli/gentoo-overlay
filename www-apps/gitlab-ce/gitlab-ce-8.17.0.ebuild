@@ -400,7 +400,7 @@ exec_rake() {
 
 	echo "   ${command}"
 	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
@@ -411,7 +411,7 @@ exec_npm() {
 
 	echo "   ${command}"
 	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run npm $@"
