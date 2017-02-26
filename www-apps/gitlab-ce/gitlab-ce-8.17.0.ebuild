@@ -54,13 +54,13 @@ GEMS_DEPEND="
 	kerberos? ( virtual/krb5 )"
 CDEPEND="
 	dev-util/cmake
-	>=net-libs/nodejs-4.3.0
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
 	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
 	~dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	>=net-libs/nodejs-4.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -336,7 +336,7 @@ pkg_config() {
 		einfo "Migrating iids ..."
 		exec_rake migrate_iids
 
-		einfo "Installing npm packages ..."
+		einfo "Installing npm modules ..."
 		exec_npm install
 
 		einfo "Cleaning old precompiled assets ..."
@@ -357,7 +357,7 @@ pkg_config() {
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
 
-		einfo "Initializing npm modules ..."
+		einfo "Installing npm modules ..."
 		exec_npm install
 	fi
 

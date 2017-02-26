@@ -15,14 +15,15 @@ USE_RUBY="ruby21 ruby23"
 
 inherit eutils git-r3 ruby-ng user systemd
 
-DESCRIPTION="GitLab is a free project and repository management application"
-HOMEPAGE="https://about.gitlab.com/"
 EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
 GITLAB_SHELL_VERSION="4.1.1"
 GITLAB_WORKHORSE_VERSION="1.3.0"
+
+DESCRIPTION="GitLab is a free project and repository management application"
+HOMEPAGE="https://about.gitlab.com/"
 
 RESTRICT="mirror"
 
@@ -58,6 +59,7 @@ COMMON_DEPEND="
 	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
 	>=dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	>=net-libs/nodejs-4.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
@@ -68,6 +70,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
+# required bundler >= 1.14.2
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.13.7"
@@ -84,6 +87,7 @@ RUBY_PATCHES=(
 	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-8.16.0-replace-sys-filesystem.patch"
+	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
 
 MY_NAME="gitlab"
@@ -336,8 +340,11 @@ pkg_config() {
 		einfo "Migrating iids ..."
 		exec_rake migrate_iids
 
+		einfo "Installing npm modules ..."
+		exec_npm install
+
 		einfo "Cleaning old precompiled assets ..."
-		exec_rake assets:clean
+		exec_rake gitlab:assets:clean
 
 		einfo "Cleaning cache ..."
 		exec_rake cache:clear
@@ -353,10 +360,13 @@ pkg_config() {
 
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
+
+		einfo "Installing npm modules ..."
+		exec_npm install
 	fi
 
 	einfo "Precompiling assests ..."
-	exec_rake assets:precompile
+	exec_rake gitlab:assets:compile
 
 	if [ "${update}" = 'true' ]; then
 		ewarn
@@ -365,6 +375,10 @@ pkg_config() {
 		ewarn "    https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/"
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
+		if use mysql ; then
+			ewarn "PLEASE also read this document about needed migrations on MySQL:"
+			ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		fi
 	fi
 	elog
 	elog "If you want to make sure that the install/upgrade was successful, start"
@@ -386,12 +400,23 @@ ryaml() {
 }
 
 exec_rake() {
-	local command="${BUNDLE} exec rake $@ RAILS_ENV=${RAILS_ENV}"
+	local command="${BUNDLE} exec rake $@ RAILS_ENV=${RAILS_ENV} NODE_ENV=${RAILS_ENV}"
 
 	echo "   ${command}"
 	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
+}
+
+exec_npm() {
+	local command="npm $@ --${RAILS_ENV}"
+
+	echo "   ${command}"
+	su -l ${MY_USER} -c "
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
+		cd ${DEST_DIR}
+		${command}" \
+		|| die "failed to run npm $@"
 }
