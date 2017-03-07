@@ -1,3 +1,10 @@
+*gitlab-ce-8.17.2 (07 Mar 2017)
+
+  07 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.2.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for gitlab-ce-8.17.2. This version does not
+  include support for gitlab-pages yet, as the ebuild for that is only just
+  about to be introduced to the overlay.
+
   26 Feb 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.17.0.ebuild,
   gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  Updated ebuild for the GIT version (-9999) and fixed the
