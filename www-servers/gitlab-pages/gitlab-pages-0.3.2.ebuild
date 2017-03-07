@@ -27,7 +27,7 @@ MY_USER="gitlab_pages"
 
 pkg_setup() {
 	enewgroup ${MY_USER}
-	enewuser ${MY_USER} -1 /bin/false /dev/null ${MY_USER}
+	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
 }
 
 src_prepare() {
