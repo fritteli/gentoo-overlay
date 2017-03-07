@@ -1,0 +1,16 @@
+#!/sbin/openrc-run
+
+start() {
+	ebegin "Starting gitlab-pages"
+	start-stop-daemon --start --exec /usr/bin/gitlab-pages --pidfile /run/gitlab-pages.pid \
+	--make-pidfile --background --user @USER@:@USER@ --stdout "${LOGFILE}" --stderr "${LOGFILE}" \
+	-- -listen-http "${LISTEN_HTTP}" -listen-https "${LISTEN_HTTPS}" -listen-proxy "${LISTEN_PROXY}" \
+	-pages-domain "${PAGES_DOMAIN}" -pages-root "${PAGES_ROOT}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping gitlab-workhorse"
+	start-stop-daemon --stop --exec /usr/bin/gitlab-pages --pidfile /run/gitlab-workhorse.pid --user @USER@:@USER@
+	eend $?
+}
