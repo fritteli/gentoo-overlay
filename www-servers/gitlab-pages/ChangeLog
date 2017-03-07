@@ -1,0 +1,6 @@
+*gitlab-pages-0.3.2 (07 Mar 2017)
+
+  07 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0001-fix-Makefile-0.3.2.patch, +files/gitlab-pages-0.3.2.conf,
+  +files/gitlab-pages-0.3.2.init, +gitlab-pages-0.3.2.ebuild, +metadata.xml:
+  www-servers/gitlab-pages:   added first ebuild for gitlab-pages
