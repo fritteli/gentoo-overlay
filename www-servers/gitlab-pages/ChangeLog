@@ -4,6 +4,13 @@
   +files/0001-fix-Makefile-0.4.0.patch, +gitlab-pages-0.4.0.ebuild:
   www-servers/gitlab-pages:   added ebuild for gitlab-pages-0.4.0
 
+*gitlab-pages-0.3.2-r1 (13 Mar 2017)
+
+  13 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-pages-0.3.2-r1.ebuild:
+  www-servers/gitlab-pages:   added arches ~x86, ~arm, ~arm64; otherwise repoman
+  would complain about the most recent gitlab-ce ebuilds.
+
   07 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
   files/gitlab-pages-0.3.2.conf, files/gitlab-pages-0.3.2.init:
   www-servers/gitlab-pages:   Fixed buggy configuration: - Logfile was not
