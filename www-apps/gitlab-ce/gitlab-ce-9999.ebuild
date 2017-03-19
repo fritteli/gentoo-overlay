@@ -48,7 +48,8 @@ GEMS_DEPEND="
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-util/ragel
-	net-libs/nodejs
+	>=net-libs/nodejs-4.3.0
+	>=sys-apps/yarn-0.17.0
 	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
 	kerberos? ( virtual/krb5 )"
@@ -60,7 +61,6 @@ COMMON_DEPEND="
 	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
 	>=dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
-	>=net-libs/nodejs-4.3.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )"
@@ -85,10 +85,10 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
-	"02-${PN}-8.11.0-fix-redis-config-path.patch"
+	"02-${PN}-9.0.0-fix-redis-config-path.patch"
 	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
-	"05-${PN}-8.16.0-replace-sys-filesystem.patch"
+	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
 

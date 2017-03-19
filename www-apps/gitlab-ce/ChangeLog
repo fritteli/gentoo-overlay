@@ -1,3 +1,8 @@
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0_rc4.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Updated ebuild for gitlab-ce-9999 and also cleaned
+  dependencies for gitlab-9.0.0_rc4
+
 *gitlab-ce-9.0.0_rc4 (19 Mar 2017)
 
   19 Mar 2017; Manuel Friedli <manuel@fritteli.ch>

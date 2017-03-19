@@ -49,7 +49,8 @@ GEMS_DEPEND="
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-util/ragel
-	net-libs/nodejs
+	>=net-libs/nodejs-4.3.0
+	>=sys-apps/yarn-0.17.0
 	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
 	kerberos? ( virtual/krb5 )"
@@ -61,8 +62,6 @@ COMMON_DEPEND="
 	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
 	~dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
-	>=net-libs/nodejs-4.3.0
-	>=sys-apps/yarn-0.17.0
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )"
