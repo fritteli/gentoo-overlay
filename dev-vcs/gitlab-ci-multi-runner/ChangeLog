@@ -1,3 +1,11 @@
+*gitlab-ci-multi-runner-9.0.0_rc2 (19 Mar 2017)
+
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0001-fix-Makefile-9.0.0.patch,
+  +gitlab-ci-multi-runner-9.0.0_rc2.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:   Added preliminary ebuild for gitlab-ci-
+  multi-runner-9.0.0_rc2. It still needs some love and doesn't even compile yet.
+
 *gitlab-ci-multi-runner-1.11.1 (16 Mar 2017)
 
   16 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
