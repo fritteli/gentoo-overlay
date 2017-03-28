@@ -17,6 +17,20 @@
   +gitlab-ce-9.0.0_rc4.ebuild, -gitlab-ce-8.17.0_rc3.ebuild:
   www-apps/gitlab-ce:   Added ebuild for Gitlab CE 9.0.0 RC4
 
+*gitlab-ce-8.15.8 (21 Mar 2017)
+*gitlab-ce-8.16.8 (21 Mar 2017)
+*gitlab-ce-8.17.4 (21 Mar 2017)
+
+  21 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.15.8.ebuild,
+  +gitlab-ce-8.16.8.ebuild, +gitlab-ce-8.17.4.ebuild, -gitlab-ce-8.15.4.ebuild,
+  -gitlab-ce-8.15.7.ebuild, -gitlab-ce-8.16.4.ebuild, -gitlab-ce-8.16.5.ebuild,
+  -gitlab-ce-8.16.6.ebuild, -gitlab-ce-8.17.0.ebuild, -gitlab-ce-8.17.2.ebuild,
+  -gitlab-ce-8.17.3.ebuild:
+  www-apps/gitlab-ce: Added ebuilds containing important security fixes  These
+  versions contain the security fixes: - v8.15.8 - v8.16.8 - v8.17.4  Removed
+  all older ebuilds, as they are vulnerable. For more information see:
+  https://about.gitlab.com/2017/03/20/gitlab-8-dot-17-dot-4-security-release/
+
 *gitlab-ce-8.17.3 (13 Mar 2017)
 
   13 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.3.ebuild,
