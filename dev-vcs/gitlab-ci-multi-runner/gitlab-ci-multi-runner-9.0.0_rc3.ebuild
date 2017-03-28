@@ -11,7 +11,7 @@ MY_PV="${PV/_/-}"
 MY_PV="v${MY_PV/-rc/-rc.}"
 #MY_BRANCH="9-0-stable" 
 MY_BRANCH="master"
-MY_GIT_HASH="0f9ba5fc"
+MY_GIT_HASH="35fff541"
 
 DESCRIPTION="Official GitLab CI Runner written in Go"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
@@ -65,7 +65,7 @@ src_prepare() {
 }
 
 src_compile() {
-	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} build
+	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} deps build
 }
 
 src_install() {
