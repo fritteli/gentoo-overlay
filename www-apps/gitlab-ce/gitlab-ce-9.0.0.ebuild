@@ -13,11 +13,10 @@ EAPI="5"
 
 USE_RUBY="ruby21 ruby23"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
 
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="cf020e66dff606f6ea2d2dbaeb7bef43d446c536"
 
 GITLAB_PAGES_VERSION="0.4.0"
 GITLAB_SHELL_VERSION="5.0.0"
@@ -25,12 +24,14 @@ GITLAB_WORKHORSE_VERSION="1.4.1"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="kerberos mysql +postgres +unicorn systemd pages rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -58,12 +59,12 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
+	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
-	>=dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	~dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
-	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )"
+	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -99,11 +100,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths
