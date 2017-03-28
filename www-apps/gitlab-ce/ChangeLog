@@ -1,3 +1,16 @@
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0_rc4.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Updated ebuild for gitlab-ce-9999 and also cleaned
+  dependencies for gitlab-9.0.0_rc4
+
+*gitlab-ce-9.0.0_rc4 (19 Mar 2017)
+
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/02-gitlab-ce-9.0.0-fix-redis-config-path.patch,
+  +files/05-gitlab-ce-9.0.0-replace-sys-filesystem.patch,
+  +gitlab-ce-9.0.0_rc4.ebuild, -gitlab-ce-8.17.0_rc3.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for Gitlab CE 9.0.0 RC4
+
 *gitlab-ce-8.15.8 (21 Mar 2017)
 *gitlab-ce-8.16.8 (21 Mar 2017)
 *gitlab-ce-8.17.4 (21 Mar 2017)

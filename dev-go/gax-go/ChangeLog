@@ -1,0 +1,6 @@
+*gax-go-0_pre20170306 (19 Mar 2017)
+
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gax-go-0_pre20170306.ebuild,
+  +metadata.xml:
+  dev-go/gax-go:   Added ebuild for gax-go, a dependency of gitlab-ci-multi-
+  runner-9.0.0_rc2
