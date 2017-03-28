@@ -286,6 +286,11 @@ pkg_postinst() {
 		elog "      CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 		elog "For details, see the documentation at the GitLab website."
 	fi
+	if use mysql ; then
+		ewarn "PLEASE also read this document about needed migrations on MySQL:"
+		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		ewarn "Failing to follow those instructions may make the config phase fail!"
+	fi
 }
 
 pkg_config() {
@@ -339,7 +344,7 @@ pkg_config() {
 		exec_rake migrate_iids
 
 		einfo "Installing npm modules ..."
-		exec_npm install
+		exec_yarn install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -360,7 +365,7 @@ pkg_config() {
 		exec_rake gitlab:setup
 
 		einfo "Installing npm modules ..."
-		exec_npm install
+		exec_yarn install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -373,10 +378,6 @@ pkg_config() {
 		ewarn "    https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/"
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
-		if use mysql ; then
-			ewarn "PLEASE also read this document about needed migrations on MySQL:"
-			ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
-		fi
 	fi
 	elog
 	elog "If you want to make sure that the install/upgrade was successful, start"
@@ -408,13 +409,13 @@ exec_rake() {
 		|| die "failed to run rake $@"
 }
 
-exec_npm() {
-	local command="npm $@ --${RAILS_ENV}"
+exec_yarn() {
+	local command="yarn $@ --${RAILS_ENV}"
 
 	echo "   ${command}"
 	su -l ${MY_USER} -c "
 		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
 		cd ${DEST_DIR}
 		${command}" \
-		|| die "failed to run npm $@"
+		|| die "failed to run yarn $@"
 }

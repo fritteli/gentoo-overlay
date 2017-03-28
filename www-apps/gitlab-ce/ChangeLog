@@ -1,3 +1,13 @@
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:   Moved warning about MySQL migrations to the postinst
+  phase, as the config phase might fail when the database is not updated. So the
+  message must be displayed earlier.
+
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Fixed the latest ebuild to use yarn instead of npm.
+
 *gitlab-ce-9.0.0 (28 Mar 2017)
 
   28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.0.ebuild:
