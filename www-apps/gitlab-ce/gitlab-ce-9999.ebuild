@@ -290,6 +290,11 @@ pkg_postinst() {
 		elog "      CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 		elog "For details, see the documentation at the GitLab website."
 	fi
+	if use mysql ; then
+		ewarn "PLEASE also read this document about needed migrations on MySQL:"
+		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		ewarn "Failing to follow those instructions may make the config phase fail!"
+	fi
 }
 
 pkg_config() {
@@ -377,10 +382,6 @@ pkg_config() {
 		ewarn "    https://github.com/gitlabhq/gitlabhq/blob/master/doc/update/"
 		ewarn "for any additional migration tasks specific to your previous GitLab"
 		ewarn "version."
-		if use mysql ; then
-			ewarn "PLEASE also read this document about needed migrations on MySQL:"
-			ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
-		fi
 	fi
 	elog
 	elog "If you want to make sure that the install/upgrade was successful, start"
