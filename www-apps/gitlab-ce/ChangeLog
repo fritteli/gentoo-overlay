@@ -1,3 +1,9 @@
+*gitlab-ce-9.0.0 (28 Mar 2017)
+
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.0.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for Gitlab CE 9.0.0, dropping the ~arm
+  keyword due to the dependency to yarn, which is not available on unstable arm.
+
   19 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0_rc4.ebuild,
   gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  Updated ebuild for gitlab-ce-9999 and also cleaned
