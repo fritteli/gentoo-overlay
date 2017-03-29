@@ -1,0 +1,8 @@
+*gitaly-0.3.0 (29 Mar 2017)
+
+  29 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitaly-0.3.0.ebuild,
+  +metadata.xml:
+  www-servers/gitaly:  Added dummy-ebuild for gitaly-0.3.0. This will not build,
+  but instead just show an error message upon installation. It is a mere
+  placeholder for the future. It is needed so that the gitaly USE-flag could be
+  added to the gitlab-ce-9.0.1 ebuild.
