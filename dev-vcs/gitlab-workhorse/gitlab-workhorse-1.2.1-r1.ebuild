@@ -10,7 +10,7 @@ DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for 
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
 
-MY_GIT_COMMIT="01d2f4b246adc68c7fa7236ffbd17ae812af4b56"
+MY_GIT_COMMIT="0fe5a09e85de07cae1210627f1ecbaeb38e8372b"
 S="${WORKDIR}/${PN}-v${PV}-${MY_GIT_COMMIT}"
 RESTRICT="mirror"
 
@@ -20,7 +20,11 @@ KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 DEPEND=">=dev-lang/go-1.5.1"
 
-PATCHES=( "${FILESDIR}/fix-Makefile-${PV}.patch" )
+src_prepare() {
+	epatch "${FILESDIR}/0001-fix-Makefile.patch"
+	sed -i -e "s/@@VERSION@@/${PV}/" Makefile
+	eapply_user
+}
 
 src_install() {
 	local dest=/usr/bin
