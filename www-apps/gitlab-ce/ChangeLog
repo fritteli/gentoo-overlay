@@ -1,3 +1,7 @@
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  brought the ebuild for the GIT version (9999) u pto speed
+  in terms of dependencies.
+
 *gitlab-ce-9.0.1-r1 (30 Mar 2017)
 
   30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.1-r1.ebuild,
