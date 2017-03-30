@@ -11,7 +11,7 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21 ruby23"
+USE_RUBY="ruby23"
 
 inherit eutils ruby-ng user systemd
 
