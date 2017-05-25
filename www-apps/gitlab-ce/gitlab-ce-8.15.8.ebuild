@@ -56,7 +56,7 @@ COMMON_DEPEND="
 	${GEMS_DEPEND}
 	~dev-vcs/gitlab-shell-4.1.1
 	>=dev-vcs/git-2.8.4
-	~dev-vcs/gitlab-workhorse-1.2.1
+	~www-servers/gitlab-workhorse-1.2.1
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
 DEPEND="
