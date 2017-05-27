@@ -350,7 +350,6 @@ pkg_config() {
 
 		einfo "Installing npm modules ..."
 		exec_rake yarn:install
-#		exec_yarn install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -372,7 +371,6 @@ pkg_config() {
 
 		einfo "Installing npm modules ..."
 		exec_rake yarn:install
-#		exec_yarn install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -415,14 +413,3 @@ exec_rake() {
 		${command}" \
 		|| die "failed to run rake $@"
 }
-
-#exec_yarn() {
-#	local command="yarn $@ --${RAILS_ENV}"
-#
-#	echo "   ${command}"
-#	su -l ${MY_USER} -c "
-#		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
-#		cd ${DEST_DIR}
-#		${command}" \
-#		|| die "failed to run yarn $@"
-#}
