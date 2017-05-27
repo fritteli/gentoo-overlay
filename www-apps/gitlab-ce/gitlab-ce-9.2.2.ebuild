@@ -183,6 +183,7 @@ all_ruby_install() {
 	# install the rest files
 	# using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
+	cp -Rl .??* "${D}/${dest}"/
 
 	# install logrotate config
 	dodir /etc/logrotate.d
