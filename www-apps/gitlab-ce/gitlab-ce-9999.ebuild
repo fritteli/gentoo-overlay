@@ -11,7 +11,7 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21 ruby23"
+USE_RUBY="ruby23"
 
 inherit eutils git-r3 ruby-ng user systemd
 
@@ -19,9 +19,10 @@ EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
+GITALY_VERSION="0.3.0"
 GITLAB_PAGES_VERSION="0.4.0"
 GITLAB_SHELL_VERSION="5.0.0"
-GITLAB_WORKHORSE_VERSION="1.4.1"
+GITLAB_WORKHORSE_VERSION="1.4.2"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -31,7 +32,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="kerberos mysql +postgres +unicorn systemd pages rugged_use_system_libraries"
+IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
 
 ## Gems dependencies:
 #   charlock_holmes     dev-libs/icu
@@ -60,10 +61,11 @@ COMMON_DEPEND="
 	${GEMS_DEPEND}
 	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
-	>=dev-vcs/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	>=www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
-	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )"
+	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
+	gitaly? ( >=www-servers/gitaly-${GITALY_VERSION} )"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"

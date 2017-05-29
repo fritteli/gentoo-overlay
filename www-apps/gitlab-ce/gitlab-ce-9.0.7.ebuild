@@ -11,12 +11,17 @@ EAPI="5"
 #   difficult to maintain them via ebuilds.
 #
 
-USE_RUBY="ruby21 ruby23"
+USE_RUBY="ruby23"
 
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="03782f78e91005a7ce818d6e3225d36143acec62"
+MY_GIT_COMMIT="810cc51be37e03ebbe99711a53663956e4ffde8c"
+
+GITALY_VERSION="0.3.0"
+GITLAB_PAGES_VERSION="0.4.0"
+GITLAB_SHELL_VERSION="5.0.0"
+GITLAB_WORKHORSE_VERSION="1.4.2"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -27,8 +32,8 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
-IUSE="kerberos mysql +postgres +unicorn systemd rugged_use_system_libraries"
+KEYWORDS="~amd64 ~x86 ~arm64"
+IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
 
 ## Gems dependencies:
 #   charlock_holmes     dev-libs/icu
@@ -45,7 +50,8 @@ GEMS_DEPEND="
 	dev-libs/libxml2
 	dev-libs/libxslt
 	dev-util/ragel
-	net-libs/nodejs
+	>=net-libs/nodejs-4.3.0
+	>=sys-apps/yarn-0.17.0
 	postgres? ( >=dev-db/postgresql-9.1:* )
 	mysql? ( virtual/mysql )
 	kerberos? ( virtual/krb5 )"
@@ -54,11 +60,13 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	~dev-vcs/gitlab-shell-4.1.1
+	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
-	~www-servers/gitlab-workhorse-1.2.1
+	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )"
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
+	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
+	gitaly? ( ~www-servers/gitaly-${GITALY_VERSION} )"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -67,9 +75,10 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
+# required bundler >= 1.14.2
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.13.6"
+	>=dev-ruby/bundler-1.13.7"
 
 #
 # fix-sendmail-config:
@@ -79,10 +88,11 @@ ruby_add_bdepend "
 #
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
-	"02-${PN}-8.11.0-fix-redis-config-path.patch"
-	"03-${PN}-8.14.0-database.yml.patch"
+	"02-${PN}-9.0.0-fix-redis-config-path.patch"
+	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
-	"05-${PN}-8.12.7-replace-sys-filesystem.patch"
+	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
+	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
 
 MY_NAME="gitlab"
@@ -278,6 +288,11 @@ pkg_postinst() {
 		elog "      CREATE EXTENSION IF NOT EXISTS pg_trgm;"
 		elog "For details, see the documentation at the GitLab website."
 	fi
+	if use mysql ; then
+		ewarn "PLEASE also read this document about needed migrations on MySQL:"
+		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		ewarn "Failing to follow those instructions may make the config phase fail!"
+	fi
 }
 
 pkg_config() {
@@ -330,8 +345,11 @@ pkg_config() {
 		einfo "Migrating iids ..."
 		exec_rake migrate_iids
 
+		einfo "Installing npm modules ..."
+		exec_yarn install
+
 		einfo "Cleaning old precompiled assets ..."
-		exec_rake assets:clean
+		exec_rake gitlab:assets:clean
 
 		einfo "Cleaning cache ..."
 		exec_rake cache:clear
@@ -347,10 +365,13 @@ pkg_config() {
 
 		einfo "Initializing database ..."
 		exec_rake gitlab:setup
+
+		einfo "Installing npm modules ..."
+		exec_yarn install
 	fi
 
 	einfo "Precompiling assests ..."
-	exec_rake assets:precompile
+	exec_rake gitlab:assets:compile
 
 	if [ "${update}" = 'true' ]; then
 		ewarn
@@ -380,12 +401,23 @@ ryaml() {
 }
 
 exec_rake() {
-	local command="${BUNDLE} exec rake $@ RAILS_ENV=${RAILS_ENV}"
+	local command="${BUNDLE} exec rake $@ RAILS_ENV=${RAILS_ENV} NODE_ENV=${RAILS_ENV}"
 
 	echo "   ${command}"
 	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
+}
+
+exec_yarn() {
+	local command="yarn $@ --${RAILS_ENV}"
+
+	echo "   ${command}"
+	su -l ${MY_USER} -c "
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
+		cd ${DEST_DIR}
+		${command}" \
+		|| die "failed to run yarn $@"
 }

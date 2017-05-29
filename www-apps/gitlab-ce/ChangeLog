@@ -1,3 +1,32 @@
+*gitlab-ce-9.0.7 (25 May 2017)
+
+  25 May 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.7.ebuild:
+  www-apps/gitlab-ce:  added ebuild for Gitlab CE 9.0.7
+
+*gitlab-ce-9.0.2 (30 Mar 2017)
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for Gitlab CE 9.0.2
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  brought the ebuild for the GIT version (9999) up to speed
+  in terms of dependencies.
+
+*gitlab-ce-9.0.1-r1 (30 Mar 2017)
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.1-r1.ebuild,
+  -gitlab-ce-9.0.0.ebuild, -gitlab-ce-9.0.1.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated dependency on Ruby to ruby-2.3 for Gitlab CE >=9;
+  removed ebuild for version 9.0.0, as version 9.0.1 is out.
+
+*gitlab-ce-9.0.1 (29 Mar 2017)
+
+  29 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.1.ebuild,
+  metadata.xml:
+  www-apps/gitlab-ce:  Added ebuild for Gitlab CE 9.0.1; this is the first one
+  with the gitaly USE flag; though that is not supported yet, it must therefore
+  be disabled at the moment.
+
   28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0.ebuild,
   gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:   Moved warning about MySQL migrations to the postinst

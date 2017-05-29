@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -10,7 +10,7 @@ DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for 
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
 
-MY_GIT_COMMIT="b30cda2218572674082636d9851086eeee9a971f"
+MY_GIT_COMMIT="97d3583a6b36f8c267680c826bced98a43ba95f7"
 S="${WORKDIR}/${PN}-v${PV}-${MY_GIT_COMMIT}"
 RESTRICT="mirror"
 
@@ -20,7 +20,11 @@ KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
 DEPEND=">=dev-lang/go-1.5.1"
 
-PATCHES=( "${FILESDIR}/fix-Makefile-${PV}.patch" )
+src_prepare() {
+	epatch "${FILESDIR}/0001-fix-Makefile.patch"
+	sed -i -e "s/@@VERSION@@/${PV}/" Makefile
+	eapply_user
+}
 
 src_install() {
 	local dest=/usr/bin
