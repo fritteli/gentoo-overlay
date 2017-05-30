@@ -1,0 +1,156 @@
+*gitlab-workhorse-1.2.1-r1 (29 Mar 2017)
+*gitlab-workhorse-1.3.0-r1 (29 Mar 2017)
+*gitlab-workhorse-1.4.1-r1 (29 Mar 2017)
+*gitlab-workhorse-1.4.2 (29 Mar 2017)
+
+  29 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0001-fix-Makefile.patch, +gitlab-workhorse-1.2.1-r1.ebuild,
+  +gitlab-workhorse-1.3.0-r1.ebuild, +gitlab-workhorse-1.4.1-r1.ebuild,
+  +gitlab-workhorse-1.4.2.ebuild, -files/fix-Makefile-1.2.1.patch,
+  -files/fix-Makefile-1.3.0.patch, -files/fix-Makefile-1.4.1.patch,
+  -gitlab-workhorse-1.2.1.ebuild, -gitlab-workhorse-1.3.0.ebuild,
+  -gitlab-workhorse-1.4.1.ebuild:
+  dev-vcs/gitlab-workhorse:  Added ebuild for gitlab-workhorse-1.4.2 and finally
+  cleaned up the fix-makefile-patch mess.
+
+*gitlab-workhorse-1.4.1 (13 Mar 2017)
+
+  13 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-1.4.1.patch, +gitlab-workhorse-1.4.1.ebuild:
+  dev-vcs/gitlab-workhorse:   added ebuild for gitlab-workhorse-1.4.1
+
+  14 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-1.1.1.patch, -gitlab-workhorse-1.1.1.ebuild:
+  dev-vcs/gitlab-workhorse: added new ebuild, removed old one
+
+*gitlab-workhorse-1.1.1 (12 Dec 2016)
+
+  12 Dec 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-1.1.1.patch, +gitlab-workhorse-1.1.1.ebuild,
+  -files/fix-Makefile-1.1.0.patch, -gitlab-workhorse-1.1.0.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-1.1.1, a
+  dependency of gitlab-ce-8.14.4
+
+*gitlab-workhorse-1.0.1 (05 Dec 2016)
+*gitlab-workhorse-1.1.0 (05 Dec 2016)
+
+  05 Dec 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-1.0.1.patch, +files/fix-Makefile-1.1.0.patch,
+  +gitlab-workhorse-1.0.1.ebuild, +gitlab-workhorse-1.1.0.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuilds for versions 1.0.1 (dependency of
+  gitlab-ce-8.14.2) and 1.1.0 (probably dependency of future gitlab-ce versions)
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.8.2.patch, -gitlab-workhorse-0.8.2-r1.ebuild:
+  dev-vcs/gitlab-workhorse:  pruned old ebuilds
+
+*gitlab-workhorse-1.0.0 (11 Nov 2016)
+
+  11 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-1.0.0.patch, +gitlab-workhorse-1.0.0.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-1.0.0; dependency
+  of gitlab-ce-8.14
+
+  22 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.11.patch, -files/gitlab-workhorse.conf,
+  -files/gitlab-workhorse.init, -gitlab-workhorse-0.7.11.ebuild,
+  -gitlab-workhorse-0.8.2.ebuild:
+  dev-vcs/gitlab-workhorse:  purged obsolete ebuilds
+
+*gitlab-workhorse-0.8.5 (22 Oct 2016)
+
+  22 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.8.5.patch, +gitlab-workhorse-0.8.5.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for version 0.8.5 which is a
+  dependency of gitlab-ce-8.13.0
+
+*gitlab-workhorse-0.8.2-r1 (26 Sep 2016)
+
+  26 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-workhorse-0.8.2.conf, +files/gitlab-workhorse-0.8.2.init,
+  +gitlab-workhorse-0.8.2-r1.ebuild:
+  dev-vcs/gitlab-workhorse:  fix pulling over HTTP(S) by fixing the path to
+  gitlab-workhorse-secret
+
+  23 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.8.patch, -gitlab-workhorse-0.7.8.ebuild:
+  dev-vcs/gitlab-workhorse:  removed obsolete version 0.7.8
+
+*gitlab-workhorse-0.8.2 (21 Sep 2016)
+
+  21 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.8.2.patch, +gitlab-workhorse-0.8.2.ebuild,
+  -files/fix-Makefile-0.8.1.patch, -gitlab-workhorse-0.8.1.ebuild:
+  dev-vcs/gitlab-workhorse:  updated ebuild for 0.8.1 to 0.8.2
+
+  16 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.10.patch, -files/fix-Makefile-0.8.0.patch,
+  -gitlab-workhorse-0.7.10.ebuild, -gitlab-workhorse-0.8.0.ebuild:
+  dev-vcs/gitlab-workhorse:  deleted unneeded ebuilds
+
+*gitlab-workhorse-0.8.0 (11 Sep 2016)
+*gitlab-workhorse-0.8.1 (11 Sep 2016)
+
+  11 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.8.0.patch, +files/fix-Makefile-0.8.1.patch,
+  +gitlab-workhorse-0.8.0.ebuild, +gitlab-workhorse-0.8.1.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuilds for versions 0.8.0 and 0.8.1, as
+  required by www-apps/gitlab-ce-8.12.0_rc2
+
+  05 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-workhorse-0.7.10.ebuild, gitlab-workhorse-0.7.11.ebuild,
+  gitlab-workhorse-0.7.8.ebuild:
+  dev-vcs/gitlab-workhorse:  fixed ebuilds for gitlab-workhorse for EAPI="6"
+
+  01 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
+  gitlab-workhorse-0.7.10.ebuild, gitlab-workhorse-0.7.11.ebuild,
+  gitlab-workhorse-0.7.8.ebuild:
+  dev-vcs/gitlab-workhorse:  updated to EAPI="6"
+
+*gitlab-workhorse-0.7.11 (29 Aug 2016)
+
+  29 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.11.patch, +gitlab-workhorse-0.7.11.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-0.7.11
+
+*gitlab-workhorse-0.7.10 (22 Aug 2016)
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.10.patch, +gitlab-workhorse-0.7.10.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for gitlab-workhorse-0.7.10. this is a
+  dependeny of gitlab-ce-9999
+
+  22 Aug 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.7.patch, -gitlab-workhorse-0.7.7.ebuild:
+  dev-vcs/gitlab-workhorse:  purged all versions <gitlab-workhorse-0.7.8
+
+  26 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.1.patch, -files/fix-Makefile-0.7.6.patch,
+  -gitlab-workhorse-0.7.1.ebuild, -gitlab-workhorse-0.7.6.ebuild:
+  dev-vcs/gitlab-workhorse:  removed all versions <0.7.7, as all available
+  ebuilds of gitlab-ce require >=gitlab-workhorse-0.7.7
+
+*gitlab-workhorse-0.7.8 (11 Jul 2016)
+
+  11 Jul 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.8.patch, +gitlab-workhorse-0.7.8.ebuild:
+  dev-vcs/gitlab-workhorse:  added ebuild for version 0.7.8
+
+*gitlab-workhorse-0.7.7 (28 Jun 2016)
+
+  28 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/fix-Makefile-0.7.7.patch, +gitlab-workhorse-0.7.7.ebuild:
+  dev-vcs/gitlab-workhorse:  Added version 0.7.7, just a minor update
+
+  26 Jun 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/fix-Makefile-0.7.4.patch, -gitlab-workhorse-0.7.4.ebuild:
+  dev-vcs/gitlab-workhorse:  Purged unneded version 0.7.4 of dev-vcs/gitlab-
+  workhorse
+
+*gitlab-workhorse-0.7.6 (18 Jun 2016)
+
+  18 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-workhorse-0.7.6.ebuild:
+  Added ebuild for dev-vcs/gitlab-workhorse-0.7.6 and deleted obsolete patch file
+
+  07 Jun 2016; Manuel Friedli <manuel@fritteli.ch> +ChangeLog:
+  Added ChangeLog

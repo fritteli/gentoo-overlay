@@ -1,3 +1,185 @@
+*gitlab-ce-9.0.7 (25 May 2017)
+
+  25 May 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.7.ebuild:
+  www-apps/gitlab-ce:  added ebuild for Gitlab CE 9.0.7
+
+*gitlab-ce-9.0.2 (30 Mar 2017)
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for Gitlab CE 9.0.2
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  brought the ebuild for the GIT version (9999) up to speed
+  in terms of dependencies.
+
+*gitlab-ce-9.0.1-r1 (30 Mar 2017)
+
+  30 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.1-r1.ebuild,
+  -gitlab-ce-9.0.0.ebuild, -gitlab-ce-9.0.1.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  updated dependency on Ruby to ruby-2.3 for Gitlab CE >=9;
+  removed ebuild for version 9.0.0, as version 9.0.1 is out.
+
+*gitlab-ce-9.0.1 (29 Mar 2017)
+
+  29 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.1.ebuild,
+  metadata.xml:
+  www-apps/gitlab-ce:  Added ebuild for Gitlab CE 9.0.1; this is the first one
+  with the gitaly USE flag; though that is not supported yet, it must therefore
+  be disabled at the moment.
+
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:   Moved warning about MySQL migrations to the postinst
+  phase, as the config phase might fail when the database is not updated. So the
+  message must be displayed earlier.
+
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Fixed the latest ebuild to use yarn instead of npm.
+
+*gitlab-ce-9.0.0 (28 Mar 2017)
+
+  28 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.0.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for Gitlab CE 9.0.0, dropping the ~arm
+  keyword due to the dependency to yarn, which is not available on unstable arm.
+
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.0_rc4.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Updated ebuild for gitlab-ce-9999 and also cleaned
+  dependencies for gitlab-9.0.0_rc4
+
+*gitlab-ce-9.0.0_rc4 (19 Mar 2017)
+
+  19 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/02-gitlab-ce-9.0.0-fix-redis-config-path.patch,
+  +files/05-gitlab-ce-9.0.0-replace-sys-filesystem.patch,
+  +gitlab-ce-9.0.0_rc4.ebuild, -gitlab-ce-8.17.0_rc3.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for Gitlab CE 9.0.0 RC4
+
+*gitlab-ce-8.15.8 (21 Mar 2017)
+*gitlab-ce-8.16.8 (21 Mar 2017)
+*gitlab-ce-8.17.4 (21 Mar 2017)
+
+  21 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.15.8.ebuild,
+  +gitlab-ce-8.16.8.ebuild, +gitlab-ce-8.17.4.ebuild, -gitlab-ce-8.15.4.ebuild,
+  -gitlab-ce-8.15.7.ebuild, -gitlab-ce-8.16.4.ebuild, -gitlab-ce-8.16.5.ebuild,
+  -gitlab-ce-8.16.6.ebuild, -gitlab-ce-8.17.0.ebuild, -gitlab-ce-8.17.2.ebuild,
+  -gitlab-ce-8.17.3.ebuild:
+  www-apps/gitlab-ce: Added ebuilds containing important security fixes  These
+  versions contain the security fixes: - v8.15.8 - v8.16.8 - v8.17.4  Removed
+  all older ebuilds, as they are vulnerable. For more information see:
+  https://about.gitlab.com/2017/03/20/gitlab-8-dot-17-dot-4-security-release/
+
+*gitlab-ce-8.17.3 (13 Mar 2017)
+
+  13 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.3.ebuild,
+  gitlab-ce-9999.ebuild, metadata.xml:
+  www-apps/gitlab-ce:   added ebuild for gitlab-ce-8.17.3, which is the initial
+  ebuild to contain a USE flag for gitlab-pages
+
+*gitlab-ce-8.17.2 (07 Mar 2017)
+
+  07 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.2.ebuild:
+  www-apps/gitlab-ce:   Added ebuild for gitlab-ce-8.17.2. This version does not
+  include support for gitlab-pages yet, as the ebuild for that is only just
+  about to be introduced to the overlay.
+
+  26 Feb 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-8.17.0.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Updated ebuild for the GIT version (-9999) and fixed the
+  dependency to nodejs in the 8.17.0 version.
+
+  26 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/06-gitlab-ce-8.17-fix-webpack-config.patch, gitlab-ce-8.17.0.ebuild:
+  www-apps/gitlab-ce:  added patch for the webpack config, hopefully fixing the
+  emerge --config phase
+
+*gitlab-ce-8.17.0 (24 Feb 2017)
+
+  24 Feb 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.17.0.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.17.0. This is the first
+  version to depend on npm
+
+*gitlab-ce-8.16.6 (24 Feb 2017)
+
+  24 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ce-8.16.6.ebuild:
+  www-apps/gitlab-ce: Added ebuild for gitlab-ce-8.16.6
+
+*gitlab-ce-8.15.7 (16 Feb 2017)
+*gitlab-ce-8.16.5 (16 Feb 2017)
+*gitlab-ce-8.17.0_rc3 (16 Feb 2017)
+
+  16 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/03-gitlab-ce-8.17.0-database.yml.patch, +gitlab-ce-8.15.7.ebuild,
+  +gitlab-ce-8.16.5.ebuild, +gitlab-ce-8.17.0_rc3.ebuild,
+  -gitlab-ce-8.17.0_rc1.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Added ebuilds for the lates patch versions of the 8.15
+  and 8.16 branch, and also for the lates release candidate of the 8.17 branch.
+
+*gitlab-ce-8.16.4 (14 Feb 2017)
+*gitlab-ce-8.17.0_rc1 (14 Feb 2017)
+
+  14 Feb 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.16.4.ebuild,
+  +gitlab-ce-8.17.0_rc1.ebuild, -gitlab-ce-8.14.5.ebuild,
+  -gitlab-ce-8.16.0_rc2.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce: added ebuild for gitlab-ce-8.16.4
+
+*gitlab-ce-8.16.0_rc2 (16 Jan 2017)
+
+  16 Jan 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/05-gitlab-ce-8.16.0-replace-sys-filesystem.patch,
+  +gitlab-ce-8.16.0_rc2.ebuild, -gitlab-ce-8.16.0_rc1.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce: updated lates RC ebuild
+
+*gitlab-ce-8.15.0_rc1 (16 Dec 2016)
+
+  16 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.15.0_rc1.ebuild,
+  -gitlab-ce-8.14.0_rc4.ebuild:
+  www-apps/gitlab-ce:  added ebuild for latest release candidate (8.15.0_rc1).
+  This is, as always, untested.
+
+*gitlab-ce-8.14.5 (16 Dec 2016)
+
+  16 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.14.5.ebuild:
+  www-apps/gitlab-ce:  added ebuild for version 8.14.5, latest bugfix release
+
+*gitlab-ce-8.14.4 (12 Dec 2016)
+
+  12 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.14.4.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.14.4, latest bugfix release
+
+*gitlab-ce-8.14.3 (08 Dec 2016)
+
+  08 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.14.3.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab 8.14.3
+
+*gitlab-ce-8.14.2 (05 Dec 2016)
+
+  05 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.14.2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for latest bugfix release v8.14.2
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-8.10.6-sidekiq.service, -files/gitlab-8.13.0-sidekiq.init,
+  -files/gitlab-8.13.0-unicorn.init, -gitlab-ce-8.12.7.ebuild,
+  -gitlab-ce-8.13.0.ebuild, -gitlab-ce-8.13.3.ebuild, -gitlab-ce-8.13.5.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  pruned old ebuilds
+
+*gitlab-ce-8.14.0 (23 Nov 2016)
+*gitlab-ce-8.14.0_rc4 (23 Nov 2016)
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
+  +files/03-gitlab-ce-8.14.0-database.yml.patch, +gitlab-ce-8.14.0.ebuild,
+  +gitlab-ce-8.14.0_rc4.ebuild, -gitlab-ce-8.14.0_rc2.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.14.0
+
+*gitlab-ce-8.13.6 (17 Nov 2016)
+
+  17 Nov 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-8.13.6.ebuild:
+  www-apps/gitlab-ce:  added ebuild for gitlab-ce-8.13.6
+
 *gitlab-ce-8.13.5 (11 Nov 2016)
 *gitlab-ce-8.14.0_rc1 (11 Nov 2016)
 

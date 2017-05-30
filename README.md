@@ -5,12 +5,28 @@ Gentoo overlay with some ebuilds that I found either outdated or missing in the 
 
 Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/tree/master), as seen by `repoman -p -x`: [![build status](https://gittr.ch/ci/projects/10/status.png?ref=master)](https://gittr.ch/ci/projects/10?ref=master)
 
+Using with plain (recent) Portage
+---------------------------------
+
+Create a new config file under `/etc/portage/repos.conf/fritteli.conf` with the following contents:
+
+	[fritteli]
+	auto-sync = yes
+	location = /usr/local/portage/overlays/fritteli
+	sync-type = git
+	sync-uri = https://gittr.ch/linux/gentoo-overlay.git
+
+
+You may adapt the `location` attribute to your system's own setup.
+
+If you prefer to use the overlay hostet at GitHub (which tends to be more stable but less up-to-date than the one hosted at gittr.ch), you may use `https://github.com/fritteli/gentoo-overlay.git` for the `sync-uri`.
+
 Using with Layman
 -----------------
 
-Use layman to easily install and update overlays over time.
+You may also use `layman` to manage this overlay, although that requires some more setup and manual sync'ing.
 
-If you haven't used layman yet, just run these commands:
+If you haven't used layman yet, just installing running these commands:
 
 	USE=git emerge -va layman
 	echo PORTDIR_OVERLAY=\"\" > /var/lib/layman/make.conf

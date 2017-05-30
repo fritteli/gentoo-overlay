@@ -1,3 +1,20 @@
+stages:
+  - check
+  - deploy
+
 Repoman:
+  stage: check
   script:
     - repoman -x -p
+
+pages:
+  stage: deploy
+  only:
+    - master
+  script:
+    - chmod +x .gitlab-pages-generator.sh
+    - ./.gitlab-pages-generator.sh . .public
+    - mv .public public
+  artifacts:
+    paths:
+      - public

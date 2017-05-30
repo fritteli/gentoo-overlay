@@ -1,3 +1,23 @@
+*gitlab-shell-5.0.0 (13 Mar 2017)
+
+  13 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.0.0.ebuild:
+  dev-vcs/gitlab-shell:   added ebuild for gitlab-shell-5.0.0; support for git-
+  annex has been removed.
+
+  14 Feb 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/gitlab-shell-3.2.0-config-paths.patch, -gitlab-shell-4.0.3.ebuild:
+  dev-vcs/gitlab-shell: deleted old ebuild
+
+*gitlab-shell-4.0.3 (12 Dec 2016)
+
+  12 Dec 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-4.0.3.ebuild:
+  dev-vcs/gitlab-shell:  added ebuild for gitlab-shell-4.0.3, a dependency of
+  gitlab-ce-8.14.4
+
+  23 Nov 2016; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-3.5.0.ebuild,
+  -gitlab-shell-3.6.1.ebuild:
+  dev-vcs/gitlab-shell:  pruned old ebuilds
+
 *gitlab-shell-4.0.0 (11 Nov 2016)
 
   11 Nov 2016; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-4.0.0.ebuild:

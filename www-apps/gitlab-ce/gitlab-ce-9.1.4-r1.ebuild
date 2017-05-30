@@ -13,27 +13,28 @@ EAPI="5"
 
 USE_RUBY="ruby23"
 
-inherit eutils git-r3 ruby-ng user systemd
+inherit eutils ruby-ng user systemd
 
-EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
-EGIT_BRANCH="master"
-EGIT_CHECKOUT_DIR="${WORKDIR}/all"
+MY_PV="v${PV/_/-}"
+MY_GIT_COMMIT="fed799ae87ba5a95cf46d8426e96ad621940d0a7"
 
-# Gitaly is optional in Gitlab as of yet, and it is not yet supported by
-# this ebuild. But the version declaration is already here.
-GITALY_VERSION="0.10.0"
-GITLAB_PAGES_VERSION="0.4.2"
-GITLAB_SHELL_VERSION="5.0.4"
-GITLAB_WORKHORSE_VERSION="2.0.0"
+# Gitaly is optional in Gitlab 9.1, and it is not yet supported by this
+# ebuild. But the version declaration is already here.
+GITALY_VERSION="0.6.0"
+GITLAB_PAGES_VERSION="0.4.1"
+GITLAB_SHELL_VERSION="5.0.2"
+GITLAB_WORKHORSE_VERSION="1.4.3"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=${MY_PV} -> ${P}.tar.gz"
+RUBY_S="${PN}-${MY_PV}-${MY_GIT_COMMIT}"
 
 RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -61,13 +62,13 @@ CDEPEND="
 	virtual/pkgconfig"
 COMMON_DEPEND="
 	${GEMS_DEPEND}
-	>=dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
+	~dev-vcs/gitlab-shell-${GITLAB_SHELL_VERSION}
 	>=dev-vcs/git-2.8.4
-	>=www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
+	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
-	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
-	gitaly? ( >=www-servers/gitaly-${GITALY_VERSION} )"
+	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
+	gitaly? ( ~www-servers/gitaly-${GITALY_VERSION} )"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -90,7 +91,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
-	"03-${PN}-9.2.2-database.yml.patch"
+	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
@@ -103,11 +104,6 @@ DEST_DIR="/opt/${MY_NAME}"
 CONF_DIR="/etc/${MY_NAME}"
 LOGS_DIR="/var/log/${MY_NAME}"
 TEMP_DIR="/var/tmp/${MY_NAME}"
-
-all_ruby_unpack() {
-	git-r3_fetch
-	git-r3_checkout
-}
 
 all_ruby_prepare() {
 	# fix paths
@@ -353,7 +349,7 @@ pkg_config() {
 		exec_rake migrate_iids
 
 		einfo "Installing npm modules ..."
-		exec_rake yarn:install
+		exec_yarn install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -374,7 +370,7 @@ pkg_config() {
 		exec_rake gitlab:setup
 
 		einfo "Installing npm modules ..."
-		exec_rake yarn:install
+		exec_yarn install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -416,4 +412,15 @@ exec_rake() {
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
+}
+
+exec_yarn() {
+	local command="yarn $@ --${RAILS_ENV}"
+
+	echo "   ${command}"
+	su -l ${MY_USER} -c "
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
+		cd ${DEST_DIR}
+		${command}" \
+		|| die "failed to run yarn $@"
 }

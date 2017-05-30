@@ -1,0 +1,21 @@
+#!/sbin/openrc-run
+
+start() {
+	ebegin "Starting gitlab-pages"
+
+	checkpath -f -m 0640 -o @USER@:@USER@ /var/log/gitlab-pages.log
+
+	start-stop-daemon --start --exec /usr/bin/gitlab-pages --pidfile /run/gitlab-pages.pid \
+	--make-pidfile --background --user @USER@:@USER@ --stdout "${LOGFILE}" --stderr "${LOGFILE}" \
+	-- ${LISTEN_HTTP:+-listen-http }${LISTEN_HTTP} \
+	${LISTEN_HTTPS:+-listen-https }${LISTEN_HTTPS} \
+	${LISTEN_PROXY:+-listen-proxy }${LISTEN_PROXY} \
+	-pages-domain "${PAGES_DOMAIN}" -pages-root "${PAGES_ROOT}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping gitlab-pages"
+	start-stop-daemon --stop --exec /usr/bin/gitlab-pages --pidfile /run/gitlab-pages.pid --user @USER@:@USER@
+	eend $?
+}
