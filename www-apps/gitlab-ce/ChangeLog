@@ -1,3 +1,10 @@
+*gitlab-ce-9.3.0_rc2 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/04-gitlab-ce-9.3.0-fix-check-task.patch, +gitlab-ce-9.3.0_rc2.ebuild,
+  -gitlab-ce-9.2.0_rc7.ebuild:
+  www-apps/gitlab-ce:  Update 9.2.0_rc7 -> 9.3.0_rc2
+
 *gitlab-ce-9.2.6 (17 Jun 2017)
 
   17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.2.6.ebuild,

@@ -16,13 +16,11 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="add9abadbdfac7e4c03b06b47d3afc296e00ac97"
+MY_GIT_COMMIT="fcd47b1a510a0dd78e9f8435191a0c7ddbf59755"
 
-# Gitaly is optional in Gitlab 9.2, and it is not yet supported by this
-# ebuild. But the version declaration is already here.
-GITALY_VERSION="0.10.0"
-GITLAB_PAGES_VERSION="0.4.2"
-GITLAB_SHELL_VERSION="5.0.3"
+GITALY_VERSION="0.11.0"
+GITLAB_PAGES_VERSION="0.4.3"
+GITLAB_SHELL_VERSION="5.0.5"
 GITLAB_WORKHORSE_VERSION="2.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
@@ -35,7 +33,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
+IUSE="kerberos mysql +postgres +unicorn systemd pages rugged_use_system_libraries"
 
 ## Gems dependencies:
 #   charlock_holmes     dev-libs/icu
@@ -68,7 +66,7 @@ COMMON_DEPEND="
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
-	gitaly? ( ~www-servers/gitaly-${GITALY_VERSION} )"
+	~www-servers/gitaly-${GITALY_VERSION}"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -92,7 +90,7 @@ RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
 	"03-${PN}-9.2.2-database.yml.patch"
-	"04-${PN}-8.12.7-fix-check-task.patch"
+	"04-${PN}-9.3.0-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
