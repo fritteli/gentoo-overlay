@@ -16,14 +16,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="add9abadbdfac7e4c03b06b47d3afc296e00ac97"
+MY_GIT_COMMIT="c538b4ff8ead7ab2a24faf2bafce0c93a32c8ec8"
 
-# Gitaly is optional in Gitlab 9.2, and it is not yet supported by this
-# ebuild. But the version declaration is already here.
-GITALY_VERSION="0.10.0"
-GITLAB_PAGES_VERSION="0.4.2"
-GITLAB_SHELL_VERSION="5.0.3"
-GITLAB_WORKHORSE_VERSION="2.0.0"
+GITALY_VERSION="0.3.0"
+GITLAB_PAGES_VERSION="0.4.0"
+GITLAB_SHELL_VERSION="5.0.0"
+GITLAB_WORKHORSE_VERSION="1.4.2"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -34,7 +32,7 @@ RESTRICT="mirror"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~arm64"
 IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
 
 ## Gems dependencies:
@@ -91,7 +89,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
-	"03-${PN}-9.2.2-database.yml.patch"
+	"03-${PN}-8.17.0-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
@@ -183,7 +181,6 @@ all_ruby_install() {
 	# install the rest files
 	# using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
-	cp -Rl .??* "${D}/${dest}"/
 
 	# install logrotate config
 	dodir /etc/logrotate.d
@@ -349,7 +346,7 @@ pkg_config() {
 		exec_rake migrate_iids
 
 		einfo "Installing npm modules ..."
-		exec_rake yarn:install
+		exec_yarn install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -370,7 +367,7 @@ pkg_config() {
 		exec_rake gitlab:setup
 
 		einfo "Installing npm modules ..."
-		exec_rake yarn:install
+		exec_yarn install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -412,4 +409,15 @@ exec_rake() {
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
+}
+
+exec_yarn() {
+	local command="yarn $@ --${RAILS_ENV}"
+
+	echo "   ${command}"
+	su -l ${MY_USER} -c "
+		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
+		cd ${DEST_DIR}
+		${command}" \
+		|| die "failed to run yarn $@"
 }
