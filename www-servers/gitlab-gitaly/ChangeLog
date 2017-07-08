@@ -1,3 +1,7 @@
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  files/gitlab-gitaly-0.11.2-r1.init:
+  www-servers/gitlab-gitaly:  Fix silly, *silly* typo.
+
 *gitlab-gitaly-0.11.2-r1 (08 Jul 2017)
 
   08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
