@@ -1,67 +1,34 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+# $Header: $
 
-EAPI=6
-inherit eutils golang-build golang-vcs-snapshot user
+EAPI="5"
 
-EGO_PN="gitlab.com/gitlab-org/gitlab-pages/..."
+EGIT_REPO_URI="https://gitlab.com/gitlab-org/gitaly.git"
+EGIT_COMMIT="v${PV}"
 
-MY_PV="v${PV/_/-}"
-MY_GIT_HASH="e8f0485"
+inherit eutils git-2 user
 
-DESCRIPTION="Stop relying on NFS for horizontal scaling. Speed up Git access using caching."
+DESCRIPTION="Gitaly is a Git RPC service for handling all the git calls made by GitLab."
 HOMEPAGE="https://gitlab.com/gitlab-org/gitaly"
-SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
-
-KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 LICENSE="MIT"
-SLOT="0/${PVR}"
+SLOT="0"
+KEYWORDS="~amd64 ~x86 ~arm"
 
 DEPEND=">=dev-lang/go-1.8.3"
+RDEPEND="${DEPEND}"
 
-RESTRICT="test mirror"
-
-#MY_USER="gitlab_pages"
-
-pkg_setup() {
-	eerror "This ebuild is but a dummy placeholder. Gitaly is not yet supported."
-	die "Gitaly is not yet supported."
+src_prepare() {
+	epatch "${FILESDIR}/0001-${PN}-0.10.0-fix-Makefile.patch"
+	epatch "${FILESDIR}/0002-${PN}-0.10.0-fix-config.toml.example.patch"
 }
 
-#pkg_setup() {
-#	enewgroup ${MY_USER}
-#	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
-#}
-
-#src_prepare() {
-#	epatch "${FILESDIR}/0001-fix-Makefile-${PV}.patch"
-#
-#	sed -i -E \
-#		-e "s/@@REVISION@@/${MY_GIT_HASH}/" \
-#		src/gitlab.com/gitlab-org/${PN}/Makefile
-#
-#	eapply_user
-#}
-
-#src_compile() {
-#	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} all
-#}
-
-#src_install() {
-#	golang-build_src_install
-#	dobin bin/*
-#	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG
-#
-#	# rc script
-#	local rcscript="${PN}-0.3.2.init"
-#
-#	cp "${FILESDIR}/${rcscript}" "${T}" || die
-#	sed -i \
-#		-e "s|@USER@|${MY_USER}|g" \
-#		"${T}/${rcscript}" \
-#		|| die "failed to filter ${rcscript}"
-#
-#	newinitd "${T}/${rcscript}" "${PN}"
-#	newconfd "${FILESDIR}/${PN}-0.3.2.conf" "${PN}"
-#}
+src_install() {
+	# TODO fowners, fperms on config.toml.example
+	insinto "/etc/gitlab"
+	newins "config.toml.example" "gitaly-config.toml"
+	newconfd "${FILESDIR}/${PN}-0.10.0.conf" "gitlab-gitaly"
+	newinitd "${FILESDIR}/${PN}-0.10.0.init" "gitlab-gitaly"
+	into "/usr"
+	newbin "gitaly" "gitlab-gitaly"
+}
