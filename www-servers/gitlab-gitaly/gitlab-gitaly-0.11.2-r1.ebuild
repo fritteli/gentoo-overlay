@@ -20,15 +20,15 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}/0001-${PN}-0.10.0-fix-Makefile.patch"
-	epatch "${FILESDIR}/0002-${PN}-0.10.0-fix-config.toml.example.patch"
+	epatch "${FILESDIR}/0002-${PN}-0.11.2-fix-config.toml.example.patch"
 }
 
 src_install() {
 	# TODO fowners, fperms on config.toml.example
 	insinto "/etc/gitlab"
 	newins "config.toml.example" "gitaly-config.toml"
-	newconfd "${FILESDIR}/${PN}-0.10.0.conf" "gitlab-gitaly"
-	newinitd "${FILESDIR}/${PN}-0.11.2-r1.init" "gitlab-gitaly"
+	newconfd "${FILESDIR}/${PN}-0.11.2.conf" "gitlab-gitaly"
+	newinitd "${FILESDIR}/${PN}-0.11.2.init" "gitlab-gitaly"
 	into "/usr"
 	newbin "gitaly" "gitlab-gitaly"
 }
