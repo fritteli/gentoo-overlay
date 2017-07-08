@@ -4,7 +4,7 @@ start() {
 	ebegin "Starting gitlab-gitaly"
 
 	checkpath -f -m 640 -o ${RUNAS_USER}:${RUNAS_GROUP} ${LOGFILE}
-	[ -z "${SOCKETDIR}" ] || checkpath -d -m 755 -o ${RUNAS_USER}:${RUNAS_GROUP} ${SOCKETDIR}
+	[ -z "${SOCKETDIR}" ] || checkpath -d -m 700 -o ${RUNAS_USER}:${RUNAS_GROUP} ${SOCKETDIR}
 
 	start-stop-daemon --start --exec /usr/bin/gitlab-gitaly --pidfile /run/gitlab-gitaly.pid \
 	--make-pidfile --background --user ${RUNAS_USER}:${RUNAS_GROUP} --stdout "${LOGFILE}" --stderr "${LOGFILE}" \
