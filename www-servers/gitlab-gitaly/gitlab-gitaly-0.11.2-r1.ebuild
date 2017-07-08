@@ -28,7 +28,7 @@ src_install() {
 	insinto "/etc/gitlab"
 	newins "config.toml.example" "gitaly-config.toml"
 	newconfd "${FILESDIR}/${PN}-0.10.0.conf" "gitlab-gitaly"
-	newinitd "${FILESDIR}/${PN}-0.10.0.init" "gitlab-gitaly"
+	newinitd "${FILESDIR}/${PN}-0.11.2-r1.init" "gitlab-gitaly"
 	into "/usr"
 	newbin "gitaly" "gitlab-gitaly"
 }

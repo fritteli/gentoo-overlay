@@ -1,3 +1,10 @@
+*gitlab-gitaly-0.11.2-r1 (08 Jul 2017)
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-gitaly-0.11.2-r1.init, +gitlab-gitaly-0.11.2-r1.ebuild,
+  -gitlab-gitaly-0.11.2.ebuild:
+  www-servers/gitlab-gitaly:  Fix bug in checkpath in init script
+
   08 Jul 2017; Manuel Friedli <manuel@fritteli.ch> -gitaly-0.10.0-r1.ebuild,
   gitaly-0.11.2.ebuild:
   www-servers/gitaly:  Add ebuid for gitaly-0.11.2
