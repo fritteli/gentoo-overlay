@@ -68,7 +68,7 @@ COMMON_DEPEND="
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
-	gitaly? ( ~www-servers/gitaly-${GITALY_VERSION} )"
+	gitaly? ( ~www-servers/gitlab-gitaly-${GITALY_VERSION} )"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"

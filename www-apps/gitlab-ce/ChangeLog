@@ -4,6 +4,11 @@
   -gitlab-ce-9.2.6.ebuild:
   www-apps/gitlab-ce:  Add ebuild for GitLab 9.2.7
 
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.10.ebuild,
+  gitlab-ce-9.1.7.ebuild, gitlab-ce-9.2.6.ebuild, gitlab-ce-9.3.0_rc2.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Follow rename of gitaly -> gitlab-gitaly
+
   17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
   www-apps/gitlab-ce:  Update version 9999
 
