@@ -1,3 +1,10 @@
+*gitaly-0.11.0 (17 Jun 2017)
+*gitaly-0.11.2 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitaly-0.11.0.ebuild,
+  +gitaly-0.11.2.ebuild:
+  www-servers/gitaly:  Add versions 0.11.0 and 0.11.2
+
 *gitaly-0.3.0 (29 Mar 2017)
 
   29 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitaly-0.3.0.ebuild,

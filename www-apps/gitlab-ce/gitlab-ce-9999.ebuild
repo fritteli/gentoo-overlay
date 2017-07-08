@@ -19,12 +19,10 @@ EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
-# Gitaly is optional in Gitlab as of yet, and it is not yet supported by
-# this ebuild. But the version declaration is already here.
-GITALY_VERSION="0.10.0"
-GITLAB_PAGES_VERSION="0.4.2"
-GITLAB_SHELL_VERSION="5.0.4"
-GITLAB_WORKHORSE_VERSION="2.0.0"
+GITALY_VERSION="0.11.2"
+GITLAB_PAGES_VERSION="0.4.3"
+GITLAB_SHELL_VERSION="5.0.5"
+GITLAB_WORKHORSE_VERSION="2.1.1"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -34,7 +32,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
+IUSE="kerberos mysql +postgres +unicorn systemd pages rugged_use_system_libraries"
 
 ## Gems dependencies:
 #   charlock_holmes     dev-libs/icu
@@ -67,7 +65,7 @@ COMMON_DEPEND="
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
-	gitaly? ( >=www-servers/gitaly-${GITALY_VERSION} )"
+	>=www-servers/gitaly-${GITALY_VERSION}"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -91,7 +89,7 @@ RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
 	"03-${PN}-9.2.2-database.yml.patch"
-	"04-${PN}-8.12.7-fix-check-task.patch"
+	"04-${PN}-9.3.0-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
