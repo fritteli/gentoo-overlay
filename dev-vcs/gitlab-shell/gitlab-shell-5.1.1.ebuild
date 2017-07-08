@@ -21,6 +21,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 IUSE=""
 
+CDEPEND=">=dev-lang/go-1.8.3"
 DEPEND=""
 RDEPEND="
 	>=dev-vcs/git-2.7.4
@@ -32,7 +33,8 @@ ruby_add_bdepend "
 MERGE_TYPE="binary"
 
 RUBY_PATCHES=(
-	"${PN}-4.1.1-config-paths.patch"
+	"0001-${PN}-4.1.1-config-paths.patch"
+	"0002-${PN}-5.1.1-Makefile.patch"
 )
 
 GIT_USER="git"
@@ -67,6 +69,10 @@ all_ruby_prepare() {
 		lib/gitlab_config.rb || die "failed to filter gitlab_config.rb"
 }
 
+all_ruby_compile() {
+	emake all
+}
+
 all_ruby_install() {
 	# install lib
 	insinto ${DEST_DIR}; doins -r lib LICENSE README.md VERSION
@@ -87,7 +93,11 @@ all_ruby_install() {
 	# create symlink for .gitlab_shell_secret
 	einfo "creating symlink for .gitlab_shell_secret"
 	TOKEN_FILE="${DEST_DIR}/.gitlab_shell_secret"
-	dosym /opt/gitlab/.gitlab_shell_secret "$TOKEN_FILE"
+	dosym /opt/gitlab/.gitlab_shell_secret "${TOKEN_FILE}"
+
+	# Gitaly stupidly hardcodes the path to config.yml :(
+	MY_CONF_FILE="${DEST_DIR}/config.yml"
+	dosym "${CONF_FILE}" "${MY_CONF_FILE}"
 
 	# prepare directories
 	diropts -m750; dodir ${DATA_DIR}
