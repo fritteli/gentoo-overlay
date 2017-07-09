@@ -1,4 +1,7 @@
   09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.3.5.ebuild:
+  www-apps/gitlab-ce:  Fix last bug in the ebuild.
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.3.5.ebuild:
   www-apps/gitlab-ce:  Fix some bugs in the ebuild.
 
 *gitlab-ce-9.3.5 (08 Jul 2017)

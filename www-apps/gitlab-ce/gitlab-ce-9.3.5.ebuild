@@ -108,15 +108,17 @@ all_ruby_prepare() {
 	local satellites_path="${TEMP_DIR}/repo_satellites"
 	local repos_path=/var/lib/git/repositories
 	local shell_path=/usr/share/gitlab-shell
+	local run_path=/run/${MY_NAME}
+
 	sed -i -E \
 		-e "/satellites:$/,/\w:$/   s|(\s*path:\s).*|\1${satellites_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*path:\s).*|\1${shell_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*repos_path:\s).*|\1${repos_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*hooks_path:\s).*|\1${shell_path}/hooks/|" \
+		-e "/path: \\/home\\/git\\/repositories\\/$/ s|/home/git/repositories/|/var/lib/git/repositories/|" \
 		-e "/gitaly_address:/ s|/home/git/gitlab/tmp/sockets/private/|${run_path}/sockets/|" \
 		config/gitlab.yml.example || die "failed to filter gitlab.yml.example"
 
-	local run_path=/run/${MY_NAME}
 	sed -i -E \
 		-e "s|/home/git/gitlab/tmp|${run_path}|g" \
 		-e "s|/home/git/gitlab/log|${LOGS_DIR}|g" \
