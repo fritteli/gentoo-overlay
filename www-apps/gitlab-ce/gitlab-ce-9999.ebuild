@@ -19,12 +19,10 @@ EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
-# Gitaly is optional in Gitlab as of yet, and it is not yet supported by
-# this ebuild. But the version declaration is already here.
-GITALY_VERSION="0.10.0"
-GITLAB_PAGES_VERSION="0.4.2"
-GITLAB_SHELL_VERSION="5.0.4"
-GITLAB_WORKHORSE_VERSION="2.0.0"
+GITALY_VERSION="0.16.0"
+GITLAB_PAGES_VERSION="0.5.0"
+GITLAB_SHELL_VERSION="5.1.1"
+GITLAB_WORKHORSE_VERSION="2.3.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -34,7 +32,7 @@ RESTRICT="mirror"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS=""
-IUSE="kerberos mysql +postgres +unicorn systemd pages -gitaly rugged_use_system_libraries"
+IUSE="kerberos mysql +postgres +unicorn systemd pages rugged_use_system_libraries"
 
 ## Gems dependencies:
 #   charlock_holmes     dev-libs/icu
@@ -67,7 +65,7 @@ COMMON_DEPEND="
 	kerberos? ( !app-crypt/heimdal )
 	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
 	pages? ( >=www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
-	gitaly? ( >=www-servers/gitaly-${GITALY_VERSION} )"
+	>=www-servers/gitlab-gitaly-${GITALY_VERSION}"
 DEPEND="
 	${CDEPEND}
 	${COMMON_DEPEND}"
@@ -76,7 +74,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.14.2
+# required bundler >= 1.15.0
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.13.7"
@@ -91,7 +89,7 @@ RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
 	"03-${PN}-9.2.2-database.yml.patch"
-	"04-${PN}-8.12.7-fix-check-task.patch"
+	"04-${PN}-9.3.0-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
 )
@@ -114,22 +112,25 @@ all_ruby_prepare() {
 	local satellites_path="${TEMP_DIR}/repo_satellites"
 	local repos_path=/var/lib/git/repositories
 	local shell_path=/usr/share/gitlab-shell
+	local run_path=/run/${MY_NAME}
+
 	sed -i -E \
 		-e "/satellites:$/,/\w:$/   s|(\s*path:\s).*|\1${satellites_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*path:\s).*|\1${shell_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*repos_path:\s).*|\1${repos_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*hooks_path:\s).*|\1${shell_path}/hooks/|" \
+		-e "/path: \\/home\\/git\\/repositories\\/$/ s|/home/git/repositories/|/var/lib/git/repositories/|" \
+		-e "/gitaly_address:/ s|/home/git/gitlab/tmp/sockets/private/|${run_path}/sockets/|" \
 		config/gitlab.yml.example || die "failed to filter gitlab.yml.example"
 
-	local run_path=/run/${MY_NAME}
 	sed -i -E \
-		-e "s|/home/git/gitlab/tmp/(pids\|sockets)|${run_path}|" \
-		-e "s|/home/git/gitlab/log|${LOGS_DIR}|" \
-		-e "s|/home/git/gitlab|${DEST_DIR}|" \
+		-e "s|/home/git/gitlab/tmp|${run_path}|g" \
+		-e "s|/home/git/gitlab/log|${LOGS_DIR}|g" \
+		-e "s|/home/git/gitlab|${DEST_DIR}|g" \
 		config/unicorn.rb.example || die "failed to filter unicorn.rb.example"
 
 	sed -i \
-		-e "s|/home/git/gitlab/tmp/sockets|${run_path}|" \
+		-e "s|/home/git/gitlab/tmp|${run_path}|g" \
 		lib/support/nginx/gitlab || die "failed to filter nginx/gitlab"
 
 	# modify default database settings for PostgreSQL
@@ -232,14 +233,14 @@ all_ruby_install() {
 		systemd_dounit "${FILESDIR}/gitlab-mailroom.service"
 		systemd_dotmpfilesd "${FILESDIR}/gitlab.conf"
 	else
-		local rcscript=gitlab-8.13.3-sidekiq.init
-		use unicorn && rcscript=gitlab-8.13.3-unicorn.init
+		local rcscript=gitlab-9.3.5-sidekiq.init
+		use unicorn && rcscript=gitlab-9.3.5-unicorn.init
 
 		cp "${FILESDIR}/${rcscript}" "${T}" || die
 		sed -i \
-			-e "s|@USER@|${MY_USER}|" \
-			-e "s|@GITLAB_BASE@|${dest}|" \
-			-e "s|@LOGS_DIR@|${logs}|" \
+			-e "s|@USER@|${MY_USER}|g" \
+			-e "s|@GITLAB_BASE@|${dest}|g" \
+			-e "s|@LOGS_DIR@|${logs}|g" \
 			"${T}/${rcscript}" \
 			|| die "failed to filter ${rcscript}"
 
@@ -296,8 +297,13 @@ pkg_postinst() {
 		elog "For details, see the documentation at the GitLab website."
 	fi
 	if use mysql ; then
+		ewarn "You must grant the GitLab user permissions the following on the database:"
+		ewarn "     mysql -u root -p -e \\"
+		ewarn "     \"GRANT TRIGGER ON \`gitlab\`.* TO 'gitlab'@'localhost';\""
 		ewarn "PLEASE also read this document about needed migrations on MySQL:"
+		ewarn
 		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		ewarn
 		ewarn "Failing to follow those instructions may make the config phase fail!"
 	fi
 }
@@ -308,7 +314,8 @@ pkg_config() {
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
 		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
-		eerror "database settings for \"production\" environment."; die
+		eerror "database settings for \"production\" environment."
+		die
 	fi
 
 	local email_from="$(ryaml ${CONF_DIR}/gitlab.yml production gitlab email_from)"
@@ -332,6 +339,17 @@ pkg_config() {
 		local update=true
 	else
 		local update=false
+	fi
+
+	if use mysql ; then
+		ewarn "Please only proceed if you've read and understood the following page:"
+		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		if [ "${update}" = 'true' ]; then
+			ewarn "Failing to follow those instructions may cause the upgrade to fail"
+		fi
+		ewarn
+		ewarn "Press any key to continue, or abort with Ctrl+C"
+		read
 	fi
 
 	## Initialize app ##

@@ -1,3 +1,66 @@
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Update ebuild for gitlab-ce-9999
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/02-gitlab-ce-8.11.0-fix-redis-config-path.patch,
+  -files/03-gitlab-ce-8.14.0-database.yml.patch,
+  -files/05-gitlab-ce-8.12.7-replace-sys-filesystem.patch,
+  -files/05-gitlab-ce-8.16.0-replace-sys-filesystem.patch,
+  -gitlab-ce-8.15.8.ebuild, -gitlab-ce-8.16.9.ebuild, -gitlab-ce-8.17.6.ebuild:
+  www-apps/gitlab-ce:  Purge versions <9.0.0.
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.3.5.ebuild:
+  www-apps/gitlab-ce:  Fix last bug in the ebuild.
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.3.5.ebuild:
+  www-apps/gitlab-ce:  Fix some bugs in the ebuild.
+
+*gitlab-ce-9.3.5 (08 Jul 2017)
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-9.3.5-sidekiq.init, +files/gitlab-9.3.5-unicorn.init,
+  +gitlab-ce-9.3.5.ebuild:
+  www-apps/gitlab-ce:  Add ebuild for gitlab-ce-9.3.5
+
+*gitlab-ce-9.2.7 (08 Jul 2017)
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.2.7.ebuild,
+  -gitlab-ce-9.2.6.ebuild:
+  www-apps/gitlab-ce:  Add ebuild for GitLab 9.2.7
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.10.ebuild,
+  gitlab-ce-9.1.7.ebuild, gitlab-ce-9.2.6.ebuild, gitlab-ce-9.3.0_rc2.ebuild,
+  gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Follow rename of gitaly -> gitlab-gitaly
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Update version 9999
+
+*gitlab-ce-9.3.0_rc2 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/04-gitlab-ce-9.3.0-fix-check-task.patch, +gitlab-ce-9.3.0_rc2.ebuild,
+  -gitlab-ce-9.2.0_rc7.ebuild:
+  www-apps/gitlab-ce:  Update 9.2.0_rc7 -> 9.3.0_rc2
+
+*gitlab-ce-9.2.6 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.2.6.ebuild,
+  -gitlab-ce-9.2.2.ebuild:
+  www-apps/gitlab-ce:  Update 9.2.2 -> 9.2.6
+
+*gitlab-ce-9.1.7 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.1.7.ebuild,
+  -gitlab-ce-9.1.4-r1.ebuild:
+  www-apps/gitlab-ce:  Update 9.1.4-r1 -> 9.1.7
+
+*gitlab-ce-9.0.10 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.10.ebuild,
+  -gitlab-ce-9.0.7.ebuild:
+  www-apps/gitlab-ce:  Update 9.0.7 -> 9.0.10
+
 *gitlab-ce-9.0.7 (25 May 2017)
 
   25 May 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.7.ebuild:

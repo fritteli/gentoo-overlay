@@ -8,8 +8,7 @@ inherit eutils golang-build golang-vcs-snapshot user
 EGO_PN="gitlab.com/gitlab-org/gitlab-pages/..."
 
 MY_PV="v${PV/_/-}"
-MY_BRANCH="1-10-stable"
-MY_GIT_HASH="7285dc6"
+MY_GIT_HASH="34a68fc"
 
 DESCRIPTION="Simple HTTP server written in Go made to serve GitLab Pages with CNAMEs and SNI"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-pages"
@@ -19,7 +18,7 @@ KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 LICENSE="MIT"
 SLOT="0/${PVR}"
 
-DEPEND=">=dev-lang/go-1.5"
+DEPEND=">=dev-lang/go-1.8.3"
 
 RESTRICT="test mirror"
 
@@ -31,7 +30,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/0001-fix-Makefile-${PV}.patch"
+	epatch "${FILESDIR}/0001-fix-Makefile-0.3.2.patch"
 
 	sed -i -E \
 		-e "s/@@REVISION@@/${MY_GIT_HASH}/" \
@@ -60,20 +59,4 @@ src_install() {
 
 	newinitd "${T}/${rcscript}" "${PN}"
 	newconfd "${FILESDIR}/${PN}-0.3.2.conf" "${PN}"
-}
-
-pkg_postinst() {
-	elog
-	elog "If this is a fresh install of GitLab CI Multi Runner, please configure it"
-	elog "with the following command:"
-	elog "        emerge --config \"=${CATEGORY}/${PF}\""
-}
-
-pkg_config() {
-	einfo "You need to register the runner with your GitLab CI instance. Please"
-	einfo "Follow the instructions at"
-	einfo
-	einfo "https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/blob/master/docs/install/linux-manually.md"
-	einfo
-	einfo "Perhaps I'll improve the ebuild later ... kthxbye."
 }

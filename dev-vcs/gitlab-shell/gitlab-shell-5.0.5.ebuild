@@ -1,15 +1,15 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI="5"
 
-USE_RUBY="ruby21 ruby23"
+USE_RUBY="ruby23"
 
 inherit eutils ruby-ng user
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="a3712cc18de8283b25c3a8a034ecc8c9b7feca48"
+MY_GIT_COMMIT="e1e347070e94cf139738166171cc35b21b278dda"
 
 DESCRIPTION="SSH access and repository management for GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-shell"

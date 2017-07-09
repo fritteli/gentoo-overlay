@@ -10,7 +10,7 @@ DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for 
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
 
-MY_GIT_COMMIT="b30cda2218572674082636d9851086eeee9a971f"
+MY_GIT_COMMIT="23e62f5114c7427917f9e1ef336ba227f1543192"
 S="${WORKDIR}/${PN}-v${PV}-${MY_GIT_COMMIT}"
 RESTRICT="mirror"
 
@@ -18,7 +18,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 
-DEPEND=">=dev-lang/go-1.5.1"
+DEPEND=">=dev-lang/go-1.8.3"
 
 src_prepare() {
 	epatch "${FILESDIR}/0001-fix-Makefile.patch"

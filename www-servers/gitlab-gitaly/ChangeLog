@@ -1,0 +1,42 @@
+*gitlab-gitaly-0.16.0 (09 Jul 2017)
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-gitaly-0.16.0.ebuild:
+  www-servers/gitlab-gitaly:  Add ebuild for gitlab-gitaly-0.16.0
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0002-gitlab-gitaly-0.11.2-fix-config.toml.example.patch,
+  +files/gitlab-gitaly-0.11.2.conf, +files/gitlab-gitaly-0.11.2.init,
+  -files/gitlab-gitaly-0.11.2-r1.init, gitlab-gitaly-0.11.2-r1.ebuild:
+  www-servers/gitlab-gitaly:  Update ebuild for gitlab-gitaly-0.11.2 in
+  preparation of the addition of gitlab-ce-9.3.5
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  files/gitlab-gitaly-0.11.2-r1.init:
+  www-servers/gitlab-gitaly:  Fix silly, *silly* typo.
+
+*gitlab-gitaly-0.11.2-r1 (08 Jul 2017)
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-gitaly-0.11.2-r1.init, +gitlab-gitaly-0.11.2-r1.ebuild,
+  -gitlab-gitaly-0.11.2.ebuild:
+  www-servers/gitlab-gitaly:  Fix bug in checkpath in init script
+
+  08 Jul 2017; Manuel Friedli <manuel@fritteli.ch> -gitaly-0.10.0-r1.ebuild,
+  gitaly-0.11.2.ebuild:
+  www-servers/gitaly:  Add ebuid for gitaly-0.11.2
+
+*gitaly-0.11.0 (17 Jun 2017)
+*gitaly-0.11.2 (17 Jun 2017)
+
+  17 Jun 2017; Manuel Friedli <manuel@fritteli.ch> +gitaly-0.11.0.ebuild,
+  +gitaly-0.11.2.ebuild:
+  www-servers/gitaly:  Add versions 0.11.0 and 0.11.2
+
+*gitaly-0.3.0 (29 Mar 2017)
+
+  29 Mar 2017; Manuel Friedli <manuel@fritteli.ch> +gitaly-0.3.0.ebuild,
+  +metadata.xml:
+  www-servers/gitaly:  Added dummy-ebuild for gitaly-0.3.0. This will not build,
+  but instead just show an error message upon installation. It is a mere
+  placeholder for the future. It is needed so that the gitaly USE-flag could be
+  added to the gitlab-ce-9.0.1 ebuild.
