@@ -113,6 +113,7 @@ all_ruby_prepare() {
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*path:\s).*|\1${shell_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*repos_path:\s).*|\1${repos_path}/|" \
 		-e "/gitlab_shell:$/,/\w:$/ s|(\s*hooks_path:\s).*|\1${shell_path}/hooks/|" \
+		-e "/gitaly_address:/ s|/home/git/gitlab/tmp/sockets/private/|${run_path}/sockets/|" \
 		config/gitlab.yml.example || die "failed to filter gitlab.yml.example"
 
 	local run_path=/run/${MY_NAME}
@@ -290,8 +291,13 @@ pkg_postinst() {
 		elog "For details, see the documentation at the GitLab website."
 	fi
 	if use mysql ; then
+		ewarn "You must grant the GitLab user permissions the following on the database:"
+		ewarn "     mysql -u root -p -e \\"
+		ewarn "     \"GRANT TRIGGER ON \`gitlab\`.* TO 'gitlab'@'localhost';\""
 		ewarn "PLEASE also read this document about needed migrations on MySQL:"
+		ewarn
 		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		ewarn
 		ewarn "Failing to follow those instructions may make the config phase fail!"
 	fi
 }
@@ -302,7 +308,8 @@ pkg_config() {
 	if [ ! -r "${CONF_DIR}/database.yml" ]; then
 		eerror "Copy ${CONF_DIR}/database.yml.* to"
 		eerror "${CONF_DIR}/database.yml and edit this file in order to configure your"
-		eerror "database settings for \"production\" environment."; die
+		eerror "database settings for \"production\" environment."
+		die
 	fi
 
 	local email_from="$(ryaml ${CONF_DIR}/gitlab.yml production gitlab email_from)"
@@ -326,6 +333,17 @@ pkg_config() {
 		local update=true
 	else
 		local update=false
+	fi
+
+	if use mysql ; then
+		ewarn "Please only proceed if you've read and understood the following page:"
+		ewarn "https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/install/database_mysql.md"
+		if [ "${update}" = 'true' ]; then
+			ewarn "Failing to follow those instructions may cause the upgrade to fail"
+		fi
+		ewarn
+		ewarn "Press any key to continue, or abort with Ctrl+C"
+		read
 	fi
 
 	## Initialize app ##
