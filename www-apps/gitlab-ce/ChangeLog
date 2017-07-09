@@ -1,3 +1,11 @@
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/02-gitlab-ce-8.11.0-fix-redis-config-path.patch,
+  -files/03-gitlab-ce-8.14.0-database.yml.patch,
+  -files/05-gitlab-ce-8.12.7-replace-sys-filesystem.patch,
+  -files/05-gitlab-ce-8.16.0-replace-sys-filesystem.patch,
+  -gitlab-ce-8.15.8.ebuild, -gitlab-ce-8.16.9.ebuild, -gitlab-ce-8.17.6.ebuild:
+  www-apps/gitlab-ce:  Purge versions <9.0.0.
+
   09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.3.5.ebuild:
   www-apps/gitlab-ce:  Fix last bug in the ebuild.
 
