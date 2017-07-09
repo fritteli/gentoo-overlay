@@ -1,3 +1,7 @@
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-4.1.1.ebuild,
+  -gitlab-shell-5.0.3.ebuild:
+  dev-vcs/gitlab-shell:  Purge obsolete versions
+
   08 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
   +files/0001-gitlab-shell-4.1.1-config-paths.patch,
   +files/0002-gitlab-shell-5.1.1-Makefile.patch, gitlab-shell-5.1.1.ebuild:
