@@ -1,3 +1,6 @@
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Update ebuild for gitlab-ce-9999
+
   09 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
   -files/02-gitlab-ce-8.11.0-fix-redis-config-path.patch,
   -files/03-gitlab-ce-8.14.0-database.yml.patch,

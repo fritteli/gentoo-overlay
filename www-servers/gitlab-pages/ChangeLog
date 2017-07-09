@@ -1,3 +1,8 @@
+*gitlab-pages-0.5.0 (09 Jul 2017)
+
+  09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-pages-0.5.0.ebuild:
+  www-servers/gitlab-pages:  Add ebuild for gitlab-pages-0.5.0
+
   09 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
   -gitlab-pages-0.3.2-r1.ebuild:
   www-servers/gitlab-pages:  Purge obsolete versions
