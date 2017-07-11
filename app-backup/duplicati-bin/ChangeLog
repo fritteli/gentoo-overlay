@@ -1,0 +1,6 @@
+*duplicati-bin-2.0.1.61.20170530 (11 Jul 2017)
+
+  11 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.1.61.20170530.ebuild, +metadata.xml:
+  app-backup/duplicati-bin:  Add initial ebuild for duplicati-bin, version
+  2.0.1.61
