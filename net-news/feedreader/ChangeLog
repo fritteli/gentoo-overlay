@@ -1,3 +1,8 @@
+*feedreader-2.0.2 (15 Jul 2017)
+
+  15 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.0.2.ebuild:
+  net-news/feedreader:  Add ebuild for version 2.0.2
+
   05 Sep 2016; Manuel Friedli <manuel@fritteli.ch> feedreader-1.6.2.ebuild:
   net-news/feedreader:  fixed feedreader ebuild for EAPI="6"
 
