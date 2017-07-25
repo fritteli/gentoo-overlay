@@ -1,3 +1,10 @@
+*gitlab-ci-multi-runner-9.3.0 (25 Jul 2017)
+
+  25 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-9.3.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  Add ebuild for version 9.3.0; copied from the
+  mrueg overlay.
+
 *gitlab-ci-multi-runner-1.11.1 (16 Mar 2017)
 
   16 Mar 2017; Manuel Friedli <manuel@fritteli.ch>
