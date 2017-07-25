@@ -1,3 +1,8 @@
+  16 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-shell-5.0.0.ebuild,
+  gitlab-shell-5.0.2.ebuild, gitlab-shell-5.0.4.ebuild,
+  gitlab-shell-5.0.5.ebuild, gitlab-shell-5.1.1.ebuild:
+  dev-vcs/gitlab-shell:  Switch to EAPI 6; this fixes #46.
+
   09 Jul 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-4.1.1.ebuild,
   -gitlab-shell-5.0.3.ebuild:
   dev-vcs/gitlab-shell:  Purge obsolete versions
