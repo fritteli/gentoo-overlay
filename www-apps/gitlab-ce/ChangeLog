@@ -1,3 +1,8 @@
+  25 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.12.ebuild,
+  gitlab-ce-9.1.9.ebuild, gitlab-ce-9.2.9.ebuild, gitlab-ce-9.3.9.ebuild:
+  www-apps/gitlab-ce:  Emergency fix: After the upgrade to EAPI 6, RUBY_PATCHES
+  stopped working the way it did before. use PATCHES instead.
+
 *gitlab-ce-9.4.0 (25 Jul 2017)
 
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
