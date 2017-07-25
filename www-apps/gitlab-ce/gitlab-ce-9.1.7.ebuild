@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI="6"
 
 # Maintainer notes:
 # - This ebuild uses Bundler to download and install all gems in deployment mode
