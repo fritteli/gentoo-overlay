@@ -51,6 +51,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
+	dev-libs/re2
 	dev-util/ragel
 	>=net-libs/nodejs-4.3.0
 	>=sys-apps/yarn-0.17.0
@@ -77,10 +78,9 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.14.2
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.13.7"
+	>=dev-ruby/bundler-1.14.6"
 
 #
 # fix-sendmail-config:
