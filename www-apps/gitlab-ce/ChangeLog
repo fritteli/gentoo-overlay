@@ -1,3 +1,10 @@
+*gitlab-ce-9.4.0 (25 Jul 2017)
+
+  25 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/03-gitlab-ce-9.4.0-database.yml.patch, +gitlab-ce-9.4.0.ebuild,
+  gitlab-ce-9.4.0_rc6.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Add ebuild for version 9.4.0 and update dev versions
+
 *gitlab-ce-9.4.0_rc6 (25 Jul 2017)
 
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.4.0_rc6.ebuild,
