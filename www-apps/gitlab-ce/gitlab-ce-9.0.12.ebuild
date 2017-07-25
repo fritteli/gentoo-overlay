@@ -16,7 +16,7 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="c538b4ff8ead7ab2a24faf2bafce0c93a32c8ec8"
+MY_GIT_COMMIT="2ee1ada26230bccab3b03249f917f48216923875"
 
 GITALY_VERSION="0.3.0"
 GITLAB_PAGES_VERSION="0.4.0"
