@@ -16,14 +16,14 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="92faf2ad098697a28f56cb5881e3351498a838bf"
+MY_GIT_COMMIT="dd4c4432d572d78b263867e4ef131c4f6e9f363b"
 
-# Gitaly is optional in Gitlab 9.1, and it is not yet supported by this
+# Gitaly is optional in Gitlab 9.2, and it is not yet supported by this
 # ebuild. But the version declaration is already here.
-GITALY_VERSION="0.6.0"
-GITLAB_PAGES_VERSION="0.4.1"
-GITLAB_SHELL_VERSION="5.0.2"
-GITLAB_WORKHORSE_VERSION="1.4.3"
+GITALY_VERSION="0.10.0"
+GITLAB_PAGES_VERSION="0.4.2"
+GITLAB_SHELL_VERSION="5.0.4"
+GITLAB_WORKHORSE_VERSION="2.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -51,6 +51,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
+	dev-libs/re2
 	dev-util/ragel
 	>=net-libs/nodejs-4.3.0
 	>=sys-apps/yarn-0.17.0
@@ -66,7 +67,7 @@ COMMON_DEPEND="
 	>=dev-vcs/git-2.8.4
 	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/25 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
 	gitaly? ( ~www-servers/gitlab-gitaly-${GITALY_VERSION} )"
 DEPEND="
@@ -77,10 +78,9 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.14.2
 ruby_add_bdepend "
 	virtual/rubygems
-	>=dev-ruby/bundler-1.13.7"
+	>=dev-ruby/bundler-1.14.6"
 
 #
 # fix-sendmail-config:
@@ -91,7 +91,7 @@ ruby_add_bdepend "
 RUBY_PATCHES=(
 	"01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"02-${PN}-9.0.0-fix-redis-config-path.patch"
-	"03-${PN}-8.17.0-database.yml.patch"
+	"03-${PN}-9.2.2-database.yml.patch"
 	"04-${PN}-8.12.7-fix-check-task.patch"
 	"05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"06-${PN}-8.17.0-fix-webpack-config.patch"
@@ -349,7 +349,7 @@ pkg_config() {
 		exec_rake migrate_iids
 
 		einfo "Installing npm modules ..."
-		exec_yarn install
+		exec_rake yarn:install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -370,7 +370,7 @@ pkg_config() {
 		exec_rake gitlab:setup
 
 		einfo "Installing npm modules ..."
-		exec_yarn install
+		exec_rake yarn:install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -412,15 +412,4 @@ exec_rake() {
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
-}
-
-exec_yarn() {
-	local command="yarn $@ --${RAILS_ENV}"
-
-	echo "   ${command}"
-	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
-		cd ${DEST_DIR}
-		${command}" \
-		|| die "failed to run yarn $@"
 }
