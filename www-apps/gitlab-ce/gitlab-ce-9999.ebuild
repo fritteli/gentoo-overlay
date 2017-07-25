@@ -19,10 +19,10 @@ EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
-GITALY_VERSION="0.16.0"
+GITALY_VERSION="0.23.0"
 GITLAB_PAGES_VERSION="0.5.0"
-GITLAB_SHELL_VERSION="5.1.1"
-GITLAB_WORKHORSE_VERSION="2.3.0"
+GITLAB_SHELL_VERSION="5.4.0"
+GITLAB_WORKHORSE_VERSION="3.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -48,6 +48,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
+	dev-libs/re2
 	dev-util/ragel
 	>=net-libs/nodejs-4.3.0
 	>=sys-apps/yarn-0.17.0

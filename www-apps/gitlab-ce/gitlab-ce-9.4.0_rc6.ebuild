@@ -16,12 +16,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="fcd47b1a510a0dd78e9f8435191a0c7ddbf59755"
+MY_GIT_COMMIT="10818692da2d4573b8587221bcb904159272585b"
 
-GITALY_VERSION="0.11.0"
-GITLAB_PAGES_VERSION="0.4.3"
-GITLAB_SHELL_VERSION="5.0.5"
-GITLAB_WORKHORSE_VERSION="2.0.0"
+GITALY_VERSION="0.21.2"
+GITLAB_PAGES_VERSION="0.5.0"
+GITLAB_SHELL_VERSION="5.3.1"
+GITLAB_WORKHORSE_VERSION="2.3.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -49,6 +49,7 @@ GEMS_DEPEND="
 	dev-libs/icu
 	dev-libs/libxml2
 	dev-libs/libxslt
+	dev-libs/re2
 	dev-util/ragel
 	>=net-libs/nodejs-4.3.0
 	>=sys-apps/yarn-0.17.0

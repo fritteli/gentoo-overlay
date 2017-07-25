@@ -1,3 +1,9 @@
+*gitlab-ce-9.4.0_rc6 (25 Jul 2017)
+
+  25 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.4.0_rc6.ebuild,
+  -gitlab-ce-9.3.0_rc2.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Update dev versions of gitlab-ce
+
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.12.ebuild,
   gitlab-ce-9.1.9.ebuild, gitlab-ce-9.2.9.ebuild, gitlab-ce-9.3.9.ebuild:
   www-apps/gitlab-ce:  Fix build errors due to missing dependency on dev-
