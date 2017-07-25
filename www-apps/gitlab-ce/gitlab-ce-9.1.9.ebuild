@@ -16,7 +16,7 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="92faf2ad098697a28f56cb5881e3351498a838bf"
+MY_GIT_COMMIT="d532439bd8670e91899188a290f31ed88079f4b4"
 
 # Gitaly is optional in Gitlab 9.1, and it is not yet supported by this
 # ebuild. But the version declaration is already here.
