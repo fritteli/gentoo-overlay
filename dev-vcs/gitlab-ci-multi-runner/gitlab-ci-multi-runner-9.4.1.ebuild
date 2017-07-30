@@ -63,7 +63,7 @@ src_compile() {
 }
 
 src_install() {
-	newbin src/${EGO_PN}/out/binaries/gitlab-ci-multi-runner gitlab-runner
+	dobin src/${EGO_PN}/out/binaries/gitlab-ci-multi-runner
 	dodoc src/${EGO_PN}/README.md src/${EGO_PN}/CHANGELOG.md
 
 	# rc script
