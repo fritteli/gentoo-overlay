@@ -63,7 +63,7 @@ src_install() {
 	dodoc src/${EGO_PN}/README.md src/${EGO_PN}/CHANGELOG.md
 
 	# rc script
-	local rcscript="${PN}.init"
+	local rcscript="${PN}-9.3.0.init"
 
 	cp "${FILESDIR}/${rcscript}" "${T}" || die
 	sed -i \
