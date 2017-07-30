@@ -2,17 +2,21 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit golang-build golang-vcs-snapshot
+inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 
 GITLAB_COMMIT="d24b11c4"
 
+MY_PV="v${PV/_/-}"
+
 DESCRIPTION="Official GitLab CI Runner written in Go"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=v${PV} -> ${P}.tar.gz
-	!docker-build? ( https://dev.gentoo.org/~mrueg/files/${P}-prebuilt-x86_64.tar.xz
-		https://dev.gentoo.org/~mrueg/files/${P}-prebuilt-arm.tar.xz )"
+	!docker-build? (
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-x86_64.tar.xz -> ${P}-prebuilt-x86_64.tar.xz
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-arm.tar.xz -> ${P}-prebuilt-arm.tar.xz
+	)"
 
 KEYWORDS="~amd64"
 LICENSE="MIT"
@@ -24,6 +28,14 @@ DEPEND="dev-go/gox
 	docker-build? ( >=app-emulation/docker-1.5 )"
 
 RESTRICT="test"
+
+MY_USER="gitlab_ci_multi_runner"
+MY_HOME_DIR="/opt/gitlab-ci-multi-runner"
+
+pkg_setup() {
+	enewgroup ${MY_USER}
+	enewuser ${MY_USER} -1 /bin/bash ${MY_HOME_DIR} ${MY_USER}
+}
 
 src_prepare() {
 	default
@@ -53,4 +65,18 @@ src_compile() {
 src_install() {
 	newbin src/${EGO_PN}/out/binaries/gitlab-ci-multi-runner gitlab-runner
 	dodoc src/${EGO_PN}/README.md src/${EGO_PN}/CHANGELOG.md
+
+	# rc script
+	local rcscript="${PN}.init"
+
+	cp "${FILESDIR}/${rcscript}" "${T}" || die
+	sed -i \
+		-e "s|@USER@|${MY_USER}|" \
+		-e "s|@HOME@|${MY_HOME_DIR}|" \
+		"${T}/${rcscript}" \
+		|| die "failed to filter ${rcscript}"
+
+	newinitd "${T}/${rcscript}" "${PN}"
+	newconfd "${FILESDIR}/${PN}.conf" "${PN}"
+
 }

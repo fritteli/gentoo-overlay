@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit golang-build golang-vcs-snapshot
+inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 
@@ -24,6 +24,14 @@ DEPEND="dev-go/gox
 	docker-build? ( >=app-emulation/docker-1.5 )"
 
 RESTRICT="test"
+
+MY_USER="gitlab_ci_multi_runner"
+MY_HOME_DIR="/opt/gitlab-ci-multi-runner"
+
+pkg_setup() {
+	enewgroup ${MY_USER}
+	enewuser ${MY_USER} -1 /bin/bash ${MY_HOME_DIR} ${MY_USER}
+}
 
 src_prepare() {
 	default
@@ -53,4 +61,18 @@ src_compile() {
 src_install() {
 	newbin src/${EGO_PN}/out/binaries/gitlab-ci-multi-runner gitlab-runner
 	dodoc src/${EGO_PN}/README.md src/${EGO_PN}/CHANGELOG.md
+
+	# rc script
+	local rcscript="${PN}.init"
+
+	cp "${FILESDIR}/${rcscript}" "${T}" || die
+	sed -i \
+		-e "s|@USER@|${MY_USER}|" \
+		-e "s|@HOME@|${MY_HOME_DIR}|" \
+		"${T}/${rcscript}" \
+		|| die "failed to filter ${rcscript}"
+
+	newinitd "${T}/${rcscript}" "${PN}"
+	newconfd "${FILESDIR}/${PN}.conf" "${PN}"
+
 }

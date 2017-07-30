@@ -1,3 +1,11 @@
+*gitlab-ci-multi-runner-9.3.0-r1 (30 Jul 2017)
+
+  30 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-9.3.0-r1.ebuild, -gitlab-ci-multi-runner-9.3.0.ebuild,
+  gitlab-ci-multi-runner-9.4.1.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  Fix missing install of init script and add
+  ebuild for version 9.4.1.
+
 *gitlab-ci-multi-runner-9.3.0 (25 Jul 2017)
 
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
