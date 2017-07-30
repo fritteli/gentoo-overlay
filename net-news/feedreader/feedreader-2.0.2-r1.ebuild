@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -21,26 +21,23 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="+gnome"
-
-# from old ebuild 1.4.3
-#	app-text/html2text
-#	gnome? ( gnome-base/gnome-keyring )
-
-RDEPEND=">=x11-libs/gtk+-3.20:3
-	$(vala_depend)
+RDEPEND="$(vala_depend)
+	app-crypt/libsecret[vala]
+	dev-db/sqlite:3
+	dev-libs/gobject-introspection
 	dev-libs/json-glib
 	dev-libs/libgee:0.8
-	net-libs/libsoup:2.4
-	dev-libs/gobject-introspection
-	dev-db/sqlite:3
-	app-crypt/libsecret[vala]
-	x11-libs/libnotify
+	dev-libs/libpeas
 	dev-libs/libxml2
-	net-libs/rest:0.7
-	net-libs/webkit-gtk:4
 	media-libs/gstreamer:1.0
-	media-libs/gst-plugins-base:1.0"
+	media-libs/gst-plugins-base:1.0
+	net-libs/gnome-online-accounts
+	net-libs/libsoup:2.4
+	net-libs/rest
+	net-libs/webkit-gtk:4
+	net-misc/curl
+	>=x11-libs/gtk+-3.22:3
+	x11-libs/libnotify"
 
 DEPEND="${RDEPEND}
 	dev-util/intltool
@@ -54,6 +51,7 @@ src_prepare() {
 }
 
 src_configure() {
+	local PREFIX=/usr
 	local mycmakeargs=(
 		-DWITH_LIBUNITY=OFF
 		-DVALA_EXECUTABLE="${VALAC}"
