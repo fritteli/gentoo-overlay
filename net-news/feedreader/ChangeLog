@@ -1,3 +1,11 @@
+*feedreader-1.6.2-r1 (30 Jul 2017)
+*feedreader-2.0.2-r1 (30 Jul 2017)
+
+  30 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +feedreader-1.6.2-r1.ebuild,
+  +feedreader-2.0.2-r1.ebuild, -feedreader-1.6.2.ebuild,
+  -feedreader-2.0.2.ebuild:
+  net-news/feedreader:  Fix installation target for feedreader ebuilds.
+
 *feedreader-2.0.2 (15 Jul 2017)
 
   15 Jul 2017; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.0.2.ebuild:
