@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+# Copyright 2015-2017 Nicolas Heine
+
+depend() {
+        after sshd
+        need net
+        need localmount
+}
+
+start() {
+        ebegin "Starting gitlab-ci-multi-runner"
+        checkpath -d /var/run
+        checkpath -f -o @USER@ -m640 "${LOGFILE}"
+        start-stop-daemon --start -b -u @USER@ --chdir @HOME@ --pidfile /var/run/gitlab-ci-multi-runner.pid -1 "${LOGFILE}" -2 "${LOGFILE}" --make-pidfile \
+                --exec /usr/bin/gitlab-ci-multi-runner -- run --config /etc/gitlab-runner/config.toml
+        eend $?
+}
+
+stop() {
+        ebegin "Stopping gitlab-ci-multi-runner"
+        start-stop-daemon --stop --pidfile /var/run/gitlab-ci-multi-runner.pid
+        eend $?
+}
