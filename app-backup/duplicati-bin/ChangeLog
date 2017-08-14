@@ -1,3 +1,10 @@
+*duplicati-bin-2.0.2.1_beta20170801-r1 (14 Aug 2017)
+
+  14 Aug 2017; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.2.1_beta20170801-r1.ebuild:
+  app-backup/duplicati-bin:  Add dev-dotnet/gtk-sharp as a dependency; without
+  it, the tray icon won't work.
+
 *duplicati-bin-2.0.2.1_beta20170801 (01 Aug 2017)
 
   01 Aug 2017; Manuel Friedli <manuel@fritteli.ch>
