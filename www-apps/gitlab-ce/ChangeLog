@@ -1,3 +1,16 @@
+*gitlab-ce-9.0.13 (17 Aug 2017)
+*gitlab-ce-9.1.10 (17 Aug 2017)
+*gitlab-ce-9.2.10 (17 Aug 2017)
+*gitlab-ce-9.3.10 (17 Aug 2017)
+*gitlab-ce-9.4.5 (17 Aug 2017)
+
+  17 Aug 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.0.13.ebuild,
+  +gitlab-ce-9.1.10.ebuild, +gitlab-ce-9.2.10.ebuild, +gitlab-ce-9.3.10.ebuild,
+  +gitlab-ce-9.4.5.ebuild, -gitlab-ce-9.0.12.ebuild, -gitlab-ce-9.1.9.ebuild,
+  -gitlab-ce-9.2.9.ebuild, -gitlab-ce-9.3.9.ebuild, -gitlab-ce-9.4.0.ebuild:
+  www-apps/gitlab-ce:  Update versions 9.0 through 9.4 to their respective
+  latest patch releases.
+
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9.0.12.ebuild,
   gitlab-ce-9.1.9.ebuild, gitlab-ce-9.2.9.ebuild, gitlab-ce-9.3.9.ebuild:
   www-apps/gitlab-ce:  Emergency fix: After the upgrade to EAPI 6, RUBY_PATCHES
