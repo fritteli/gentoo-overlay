@@ -16,12 +16,14 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="2ee1ada26230bccab3b03249f917f48216923875"
+MY_GIT_COMMIT="7586e82714a6479bc3581532e11d03bead1cc982"
 
-GITALY_VERSION="0.3.0"
-GITLAB_PAGES_VERSION="0.4.0"
-GITLAB_SHELL_VERSION="5.0.0"
-GITLAB_WORKHORSE_VERSION="1.4.2"
+# Gitaly is optional in Gitlab 9.2, and it is not yet supported by this
+# ebuild. But the version declaration is already here.
+GITALY_VERSION="0.10.0"
+GITLAB_PAGES_VERSION="0.4.2"
+GITLAB_SHELL_VERSION="5.0.4"
+GITLAB_WORKHORSE_VERSION="2.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -65,7 +67,7 @@ COMMON_DEPEND="
 	>=dev-vcs/git-2.8.4
 	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/24 )
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/25 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
 	gitaly? ( ~www-servers/gitlab-gitaly-${GITALY_VERSION} )"
 DEPEND="
@@ -89,7 +91,7 @@ ruby_add_bdepend "
 PATCHES=(
 	"${FILESDIR}/01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"${FILESDIR}/02-${PN}-9.0.0-fix-redis-config-path.patch"
-	"${FILESDIR}/03-${PN}-8.17.0-database.yml.patch"
+	"${FILESDIR}/03-${PN}-9.2.2-database.yml.patch"
 	"${FILESDIR}/04-${PN}-8.12.7-fix-check-task.patch"
 	"${FILESDIR}/05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"${FILESDIR}/06-${PN}-8.17.0-fix-webpack-config.patch"
@@ -181,6 +183,7 @@ all_ruby_install() {
 	# install the rest files
 	# using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
+	cp -Rl .??* "${D}/${dest}"/
 
 	# install logrotate config
 	dodir /etc/logrotate.d
@@ -346,7 +349,7 @@ pkg_config() {
 		exec_rake migrate_iids
 
 		einfo "Installing npm modules ..."
-		exec_yarn install
+		exec_rake yarn:install
 
 		einfo "Cleaning old precompiled assets ..."
 		exec_rake gitlab:assets:clean
@@ -367,7 +370,7 @@ pkg_config() {
 		exec_rake gitlab:setup
 
 		einfo "Installing npm modules ..."
-		exec_yarn install
+		exec_rake yarn:install
 	fi
 
 	einfo "Precompiling assests ..."
@@ -409,15 +412,4 @@ exec_rake() {
 		cd ${DEST_DIR}
 		${command}" \
 		|| die "failed to run rake $@"
-}
-
-exec_yarn() {
-	local command="yarn $@ --${RAILS_ENV}"
-
-	echo "   ${command}"
-	su -l ${MY_USER} -c "
-		export LANG=en_US.UTF-8; export LC_ALL=en_US.UTF-8; export NODE_PATH=${DEST_DIR}/node_modules
-		cd ${DEST_DIR}
-		${command}" \
-		|| die "failed to run yarn $@"
 }

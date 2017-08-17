@@ -16,14 +16,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="d532439bd8670e91899188a290f31ed88079f4b4"
+MY_GIT_COMMIT="2377923e89968997a13db6e009b8a48c5bf6f00a"
 
-# Gitaly is optional in Gitlab 9.1, and it is not yet supported by this
-# ebuild. But the version declaration is already here.
-GITALY_VERSION="0.6.0"
-GITLAB_PAGES_VERSION="0.4.1"
-GITLAB_SHELL_VERSION="5.0.2"
-GITLAB_WORKHORSE_VERSION="1.4.3"
+GITALY_VERSION="0.3.0"
+GITLAB_PAGES_VERSION="0.4.0"
+GITLAB_SHELL_VERSION="5.0.0"
+GITLAB_WORKHORSE_VERSION="1.4.2"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -183,7 +181,6 @@ all_ruby_install() {
 	# install the rest files
 	# using cp 'cause doins is slow
 	cp -Rl * "${D}/${dest}"/
-	cp -Rl .??* "${D}/${dest}"/
 
 	# install logrotate config
 	dodir /etc/logrotate.d
