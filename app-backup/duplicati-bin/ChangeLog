@@ -1,3 +1,8 @@
+  18 Aug 2017; Manuel Friedli <manuel@fritteli.ch>
+  -duplicati-bin-2.0.1.61.20170530.ebuild,
+  -duplicati-bin-2.0.2.1_beta20170801.ebuild:
+  app-backup/duplicati-bin:  Purge old versions.
+
 *duplicati-bin-2.0.2.1_beta20170801-r1 (14 Aug 2017)
 
   14 Aug 2017; Manuel Friedli <manuel@fritteli.ch>
