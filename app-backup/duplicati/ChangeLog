@@ -1,3 +1,9 @@
+  18 Aug 2017; Manuel Friedli <manuel@fritteli.ch>
+  -duplicati-2.0.1.11.20160408.ebuild, -duplicati-2.0.1.30.20161103.ebuild,
+  -files/duplicati-2.0.1.11.20160408-fix-Makefile.patch:
+  app-backup/duplicati:  Purge duplicati-2.* versions, as they depend on non-
+  existent packages.
+
   05 Sep 2016; Manuel Friedli <manuel@fritteli.ch> duplicati-1.3.4.ebuild,
   duplicati-2.0.1.11.20160408.ebuild,
   files/duplicati-1.3.4-remove-unsigned-backends.patch:
