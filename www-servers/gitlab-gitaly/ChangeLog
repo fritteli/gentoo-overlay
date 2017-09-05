@@ -1,3 +1,11 @@
+*gitlab-gitaly-0.35.0 (05 Sep 2017)
+
+  05 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0002-gitlab-gitaly-0.35.0-fix-config.toml.example.patch,
+  +gitlab-gitaly-0.35.0.ebuild:
+  www-servers/gitlab-gitaly:  Add ebuild for version 0.35.0; dependency of
+  gitlab-ce-9.5.3.
+
 *gitlab-gitaly-0.21.2 (25 Jul 2017)
 *gitlab-gitaly-0.23.0 (25 Jul 2017)
 

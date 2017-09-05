@@ -1,3 +1,9 @@
+*gitlab-shell-5.8.0 (05 Sep 2017)
+
+  05 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.8.0.ebuild:
+  dev-vcs/gitlab-shell:  Add ebuild for version 5.8.0; a dependency of gitlab-
+  ce-9.5.3.
+
 *gitlab-shell-5.3.1 (25 Jul 2017)
 *gitlab-shell-5.4.0 (25 Jul 2017)
 
