@@ -1,3 +1,9 @@
+  06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  -gitlab-ci-multi-runner-bin-1.6.0.ebuild,
+  -gitlab-ci-multi-runner-bin-1.7.0.ebuild,
+  -gitlab-ci-multi-runner-bin-1.8.0.ebuild:
+  dev-vcs/gitlab-ci-multi-runner-bin:  Prune versions <9.2.0
+
 *gitlab-ci-multi-runner-bin-1.8.0 (23 Nov 2016)
 
   23 Nov 2016; Manuel Friedli <manuel@fritteli.ch>
