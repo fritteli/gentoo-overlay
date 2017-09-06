@@ -23,46 +23,7 @@ DEPEND=">=dev-lang/go-1.5"
 
 RESTRICT="test mirror"
 
-#MY_USER="gitlab_pages"
-
 pkg_setup() {
 	eerror "This ebuild is but a dummy placeholder. Gitaly is not yet supported."
 	die "Gitaly is not yet supported."
 }
-
-#pkg_setup() {
-#	enewgroup ${MY_USER}
-#	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
-#}
-
-#src_prepare() {
-#	epatch "${FILESDIR}/0001-fix-Makefile-${PV}.patch"
-#
-#	sed -i -E \
-#		-e "s/@@REVISION@@/${MY_GIT_HASH}/" \
-#		src/gitlab.com/gitlab-org/${PN}/Makefile
-#
-#	eapply_user
-#}
-
-#src_compile() {
-#	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} all
-#}
-
-#src_install() {
-#	golang-build_src_install
-#	dobin bin/*
-#	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG
-#
-#	# rc script
-#	local rcscript="${PN}-0.3.2.init"
-#
-#	cp "${FILESDIR}/${rcscript}" "${T}" || die
-#	sed -i \
-#		-e "s|@USER@|${MY_USER}|g" \
-#		"${T}/${rcscript}" \
-#		|| die "failed to filter ${rcscript}"
-#
-#	newinitd "${T}/${rcscript}" "${PN}"
-#	newconfd "${FILESDIR}/${PN}-0.3.2.conf" "${PN}"
-#}

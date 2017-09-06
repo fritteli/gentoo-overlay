@@ -1,3 +1,9 @@
+  06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/0002-gitlab-gitaly-0.10.0-fix-config.toml.example.patch,
+  -gitlab-gitaly-0.11.0.ebuild, gitlab-gitaly-0.10.0.ebuild,
+  gitlab-gitaly-0.3.0.ebuild, gitlab-gitaly-0.6.0.ebuild:
+  www-servers/gitlab-gitaly:  Prune version 0.11.0 and cleanup other versions
+
 *gitlab-gitaly-0.35.0-r1 (06 Sep 2017)
 
   06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
