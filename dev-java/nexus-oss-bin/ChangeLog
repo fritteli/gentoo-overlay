@@ -1,3 +1,7 @@
+  06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  -files/nexus-wrapper-2.11.4.patch, -nexus-oss-bin-2.11.4.ebuild:
+  dev-java/nexus-oss-bin:  Prune old ebuild.
+
   05 Sep 2016; Manuel Friedli <manuel@fritteli.ch>
   -files/nexus-wrapper-2.11.2.patch, nexus-oss-bin-2.11.4.ebuild:
   dev-java/nexus-oss-bin:  fixed nexus ebuild for EAPI="6"
