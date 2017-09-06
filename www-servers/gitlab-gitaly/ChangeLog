@@ -1,3 +1,11 @@
+*gitlab-gitaly-0.35.0-r1 (06 Sep 2017)
+
+  06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-gitaly-0.35.0-r1.ebuild, -gitlab-gitaly-0.35.0.ebuild,
+  files/0002-gitlab-gitaly-0.35.0-fix-config.toml.example.patch:
+  www-servers/gitlab-gitaly:  Emergency fix: Use correct installation path of
+  gitlab-shell in the config file.
+
 *gitlab-gitaly-0.35.0 (05 Sep 2017)
 
   05 Sep 2017; Manuel Friedli <manuel@fritteli.ch>

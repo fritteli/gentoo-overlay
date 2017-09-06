@@ -1,5 +1,5 @@
 diff --git a/config.toml.example b/config.toml.example
-index 5fe3942..dd78c46 100644
+index 5fe3942..d7fab3a 100644
 --- a/config.toml.example
 +++ b/config.toml.example
 @@ -1,6 +1,6 @@
@@ -29,4 +29,4 @@ index 5fe3942..dd78c46 100644
  [gitlab-shell]
  # The directory where gitlab-shell is installed
 -dir = "/home/git/gitlab-shell"
-+dir = "/var/lib/gitlab-shell"
++dir = "/usr/share/gitlab-shell"
