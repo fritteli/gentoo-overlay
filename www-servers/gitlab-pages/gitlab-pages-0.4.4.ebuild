@@ -8,7 +8,7 @@ inherit eutils golang-build golang-vcs-snapshot user
 EGO_PN="gitlab.com/gitlab-org/gitlab-pages/..."
 
 MY_PV="v${PV/_/-}"
-MY_GIT_HASH="34a68fc"
+MY_GIT_HASH="36f16fd"
 
 DESCRIPTION="Simple HTTP server written in Go made to serve GitLab Pages with CNAMEs and SNI"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-pages"
