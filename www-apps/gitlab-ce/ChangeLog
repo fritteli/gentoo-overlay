@@ -1,3 +1,6 @@
+  08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Update ebuild for version 9999 (master branch).
+
 *gitlab-ce-9.5.4 (08 Sep 2017)
 
   08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.5.4.ebuild,

@@ -19,9 +19,9 @@ EGIT_REPO_URI="https://gitlab.com/gitlab-org/${PN}.git"
 EGIT_BRANCH="master"
 EGIT_CHECKOUT_DIR="${WORKDIR}/all"
 
-GITALY_VERSION="0.23.0"
-GITLAB_PAGES_VERSION="0.5.0"
-GITLAB_SHELL_VERSION="5.4.0"
+GITALY_VERSION="0.38.0"
+GITLAB_PAGES_VERSION="0.5.1"
+GITLAB_SHELL_VERSION="5.9.0"
 GITLAB_WORKHORSE_VERSION="3.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
@@ -75,7 +75,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.15.1
+# required bundler >= 1.15.3
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.14.6"
