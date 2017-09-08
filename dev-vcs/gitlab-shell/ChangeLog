@@ -1,3 +1,8 @@
+*gitlab-shell-5.9.0 (08 Sep 2017)
+
+  08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.9.0.ebuild:
+  dev-vcs/gitlab-shell:  Add version 5.9.0.
+
 *gitlab-shell-5.8.0 (05 Sep 2017)
 
   05 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.8.0.ebuild:

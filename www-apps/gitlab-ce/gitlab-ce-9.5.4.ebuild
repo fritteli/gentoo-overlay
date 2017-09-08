@@ -16,10 +16,10 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="789cc6787fff872693625565732cbbc18009ed2f"
+MY_GIT_COMMIT="fbffc274b5df7e79222aeaf55bf5b3b9a466f4cc"
 
 GITALY_VERSION="0.35.0"
-GITLAB_PAGES_VERSION="0.5.0"
+GITLAB_PAGES_VERSION="0.5.1"
 GITLAB_SHELL_VERSION="5.8.0"
 GITLAB_WORKHORSE_VERSION="3.0.0"
 
@@ -76,7 +76,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.15.1
+# required bundler >= 1.15.3
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.14.6"

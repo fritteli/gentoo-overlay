@@ -16,12 +16,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="c8796f57943f2d1b8231fd37764c88173c755377"
+MY_GIT_COMMIT="23ec1ec7078959e8b04f22d132a26e1d9e6e52b3"
 
-GITALY_VERSION="0.11.2"
-GITLAB_PAGES_VERSION="0.4.3"
-GITLAB_SHELL_VERSION="5.1.1"
-GITLAB_WORKHORSE_VERSION="2.1.1"
+GITALY_VERSION="0.21.2"
+GITLAB_PAGES_VERSION="0.5.1"
+GITLAB_SHELL_VERSION="5.3.1"
+GITLAB_WORKHORSE_VERSION="2.3.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -76,7 +76,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.15.0
+# required bundler >= 1.15.1
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.14.6"
@@ -90,7 +90,7 @@ ruby_add_bdepend "
 PATCHES=(
 	"${FILESDIR}/01-${PN}-8.7.5-fix-sendmail-config.patch"
 	"${FILESDIR}/02-${PN}-9.0.0-fix-redis-config-path.patch"
-	"${FILESDIR}/03-${PN}-9.2.2-database.yml.patch"
+	"${FILESDIR}/03-${PN}-9.4.0-database.yml.patch"
 	"${FILESDIR}/04-${PN}-9.3.0-fix-check-task.patch"
 	"${FILESDIR}/05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"${FILESDIR}/06-${PN}-8.17.0-fix-webpack-config.patch"
@@ -331,7 +331,7 @@ pkg_config() {
 
 	# determine whether this is an update or a fresh install. we do this by
 	# checking whether the ${DEST_DIR}/.git directory exists or not
-	# 
+	#
 	if [ -d "${DEST_DIR}/.git" ]; then
 		local update=true
 	else
@@ -354,10 +354,6 @@ pkg_config() {
 	local RAILS_ENV="production"
 	local RUBY=${RUBY:-/usr/bin/ruby}
 	local BUNDLE="${RUBY} /usr/bin/bundle"
-
-	# FIXME: this line existed in older ebuilds, but the variable is
-	# never used. what was it for!?
-	# local dbname="$(ryaml ${CONF_DIR}/database.yml production database)"
 
 	if [ "${update}" = 'true' ]; then
 		einfo "Migrating database ..."
