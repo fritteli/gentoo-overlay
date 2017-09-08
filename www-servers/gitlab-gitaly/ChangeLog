@@ -1,3 +1,8 @@
+*gitlab-gitaly-0.38.0 (08 Sep 2017)
+
+  08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-gitaly-0.38.0.ebuild:
+  www-servers/gitlab-gitaly:  Add version 0.38.0.
+
   06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
   -files/gitlab-gitaly-0.10.0.conf, -files/gitlab-gitaly-0.10.0.init,
   -gitlab-gitaly-0.16.0.ebuild:
