@@ -1,3 +1,9 @@
+*gitlab-ce-9.3.11 (08 Sep 2017)
+
+  08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.3.11.ebuild,
+  -gitlab-ce-9.3.10.ebuild:
+  www-apps/gitlab-ce:  Update 9.3: 9.3.10 => 9.3.11: Security fixes.
+
 *gitlab-ce-9.5.3 (05 Sep 2017)
 
   05 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.5.3.ebuild:
