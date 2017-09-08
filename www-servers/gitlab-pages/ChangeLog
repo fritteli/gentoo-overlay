@@ -1,3 +1,8 @@
+*gitlab-pages-0.5.1 (08 Sep 2017)
+
+  08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-pages-0.5.1.ebuild:
+  www-servers/gitlab-pages:  Add version 0.5.1, dependency of gitlab-ce-9.4.6.
+
 *gitlab-pages-0.4.4 (08 Sep 2017)
 
   08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-pages-0.4.4.ebuild,
