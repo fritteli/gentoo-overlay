@@ -65,7 +65,7 @@ COMMON_DEPEND="
 	>=dev-vcs/git-2.8.4
 	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/25 )
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/26 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
 	~www-servers/gitlab-gitaly-${GITALY_VERSION}"
 DEPEND="
