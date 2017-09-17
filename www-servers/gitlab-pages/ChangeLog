@@ -1,3 +1,6 @@
+  17 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-pages-0.5.0.ebuild:
+  www-servers/gitlab-pages:  Prune unneeded ebuild.
+
 *gitlab-pages-0.5.1 (08 Sep 2017)
 
   08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-pages-0.5.1.ebuild:
