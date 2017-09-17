@@ -1,3 +1,7 @@
+  17 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-5.0.5.ebuild,
+  -gitlab-shell-5.4.0.ebuild:
+  dev-vcs/gitlab-shell:  Prune unneeded versions.
+
 *gitlab-shell-5.9.0 (08 Sep 2017)
 
   08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.9.0.ebuild:
