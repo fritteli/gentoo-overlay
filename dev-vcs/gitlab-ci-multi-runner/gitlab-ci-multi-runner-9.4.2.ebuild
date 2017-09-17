@@ -6,13 +6,17 @@ inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 
-GITLAB_COMMIT="3df822b2"
+GITLAB_COMMIT="6d06f2ec"
+
+MY_PV="v${PV/_/-}"
 
 DESCRIPTION="Official GitLab CI Runner written in Go"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.gz?ref=v${PV} -> ${P}.tar.gz
-	!docker-build? ( https://dev.gentoo.org/~mrueg/files/${P}-prebuilt-x86_64.tar.xz
-		https://dev.gentoo.org/~mrueg/files/${P}-prebuilt-arm.tar.xz )"
+	!docker-build? (
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-x86_64.tar.xz -> ${P}-prebuilt-x86_64.tar.xz
+		https://${PN}-downloads.s3.amazonaws.com/${MY_PV}/docker/prebuilt-arm.tar.xz -> ${P}-prebuilt-arm.tar.xz
+	)"
 
 KEYWORDS="~amd64"
 LICENSE="MIT"
@@ -23,7 +27,7 @@ DEPEND="dev-go/gox
 	dev-go/go-bindata
 	docker-build? ( >=app-emulation/docker-1.5 )"
 
-RESTRICT="test"
+RESTRICT="mirror test"
 
 MY_USER="gitlab_ci_multi_runner"
 MY_HOME_DIR="/opt/gitlab-ci-multi-runner"

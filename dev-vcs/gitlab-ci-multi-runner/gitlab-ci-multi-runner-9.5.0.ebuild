@@ -6,7 +6,7 @@ inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-ci-multi-runner"
 
-GITLAB_COMMIT="d24b11c4"
+GITLAB_COMMIT="413da38a"
 
 MY_PV="v${PV/_/-}"
 
@@ -27,7 +27,7 @@ DEPEND="dev-go/gox
 	dev-go/go-bindata
 	docker-build? ( >=app-emulation/docker-1.5 )"
 
-RESTRICT="test"
+RESTRICT="mirror test"
 
 MY_USER="gitlab_ci_multi_runner"
 MY_HOME_DIR="/opt/gitlab-ci-multi-runner"
