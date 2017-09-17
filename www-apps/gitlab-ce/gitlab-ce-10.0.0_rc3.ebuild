@@ -16,12 +16,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="10818692da2d4573b8587221bcb904159272585b"
+MY_GIT_COMMIT="e1836b8fb3ee021cbbef96f3a8b00323b1f0d6e2"
 
-GITALY_VERSION="0.21.2"
-GITLAB_PAGES_VERSION="0.5.0"
-GITLAB_SHELL_VERSION="5.3.1"
-GITLAB_WORKHORSE_VERSION="2.3.0"
+GITALY_VERSION="0.38.0"
+GITLAB_PAGES_VERSION="0.5.1"
+GITLAB_SHELL_VERSION="5.9.0"
+GITLAB_WORKHORSE_VERSION="3.0.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -76,7 +76,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.15.1
+# required bundler >= 1.15.3
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.14.6"
