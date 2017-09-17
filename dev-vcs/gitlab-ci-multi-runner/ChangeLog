@@ -1,3 +1,11 @@
+*gitlab-ci-multi-runner-9.4.2 (17 Sep 2017)
+*gitlab-ci-multi-runner-9.5.0 (17 Sep 2017)
+
+  17 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-ci-multi-runner-9.4.2.ebuild, +gitlab-ci-multi-runner-9.5.0.ebuild,
+  -gitlab-ci-multi-runner-9.3.0-r1.ebuild, -gitlab-ci-multi-runner-9.4.1.ebuild:
+  dev-vcs/gitlab-ci-multi-runner:  Update gitlab-ci-multi-runner ebuilds.
+
   06 Sep 2017; Manuel Friedli <manuel@fritteli.ch>
   -files/0001-fix-Makefile-1.10.4.patch, -files/0001-fix-Makefile-1.11.1.patch,
   -files/0001-fix-Makefile-1.8.0.patch, -files/0001-fix-Makefile.patch,
