@@ -1,3 +1,6 @@
+  17 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-gitaly-0.23.0.ebuild:
+  www-servers/gitlab-gitaly:  Prune unneeded version.
+
 *gitlab-gitaly-0.38.0 (08 Sep 2017)
 
   08 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-gitaly-0.38.0.ebuild:
