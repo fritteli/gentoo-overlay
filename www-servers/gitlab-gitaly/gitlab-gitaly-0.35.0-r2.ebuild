@@ -21,6 +21,9 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	epatch "${FILESDIR}/0001-${PN}-0.23.0-fix-Makefile.patch"
 	epatch "${FILESDIR}/0002-${PN}-0.35.0-fix-config.toml.example.patch"
+
+	# see https://gitlab.com/gitlab-org/gitaly/issues/493
+	sed -s 's#LDFLAGS#GO_LDFLAGS#g' -i Makefile || die
 }
 
 src_install() {
@@ -35,4 +38,5 @@ src_install() {
 	# install gitaly-ruby
 	insinto "/var/lib/gitlab-gitaly"
 	doins -r "ruby"
+	fperms 0755 /var/lib/gitlab-gitaly/ruby/bin/*
 }
