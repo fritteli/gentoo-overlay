@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
@@ -16,7 +15,7 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="23ec1ec7078959e8b04f22d132a26e1d9e6e52b3"
+MY_GIT_COMMIT="3bc2f22845a4144882fa343beac99edb43c321a8"
 
 GITALY_VERSION="0.21.2"
 GITLAB_PAGES_VERSION="0.5.1"
