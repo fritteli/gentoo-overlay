@@ -15,7 +15,7 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="2417795bf3d3b0893df9c53e145a3b0b9838f693"
+MY_GIT_COMMIT="8ebd2dd93d0b01a60bcbd5cefce0fb049cee2ee6"
 
 GITALY_VERSION="0.38.0"
 GITLAB_PAGES_VERSION="0.5.1"
@@ -52,7 +52,7 @@ GEMS_DEPEND="
 	dev-util/ragel
 	>=net-libs/nodejs-4.3.0
 	>=sys-apps/yarn-0.17.0
-	postgres? ( >=dev-db/postgresql-9.1:* )
+	postgres? ( >=dev-db/postgresql-9.6:* )
 	mysql? ( virtual/mysql )
 	kerberos? ( virtual/krb5 )"
 CDEPEND="
