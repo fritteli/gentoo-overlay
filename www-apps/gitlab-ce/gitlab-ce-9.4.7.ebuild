@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
@@ -16,12 +15,12 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user systemd
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="2417795bf3d3b0893df9c53e145a3b0b9838f693"
+MY_GIT_COMMIT="3bc2f22845a4144882fa343beac99edb43c321a8"
 
-GITALY_VERSION="0.38.0"
+GITALY_VERSION="0.21.2"
 GITLAB_PAGES_VERSION="0.5.1"
-GITLAB_SHELL_VERSION="5.9.0"
-GITLAB_WORKHORSE_VERSION="3.0.0"
+GITLAB_SHELL_VERSION="5.3.1"
+GITLAB_WORKHORSE_VERSION="2.3.0"
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/"
@@ -65,7 +64,7 @@ COMMON_DEPEND="
 	>=dev-vcs/git-2.8.4
 	~www-servers/gitlab-workhorse-${GITLAB_WORKHORSE_VERSION}
 	kerberos? ( !app-crypt/heimdal )
-	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/26 )
+	rugged_use_system_libraries? ( net-libs/http-parser dev-libs/libgit2:0/25 )
 	pages? ( ~www-servers/gitlab-pages-${GITLAB_PAGES_VERSION} )
 	~www-servers/gitlab-gitaly-${GITALY_VERSION}"
 DEPEND="
@@ -76,7 +75,7 @@ RDEPEND="
 	>=dev-db/redis-2.8
 	virtual/mta
 	systemd? ( sys-apps/systemd:0= )"
-# required bundler >= 1.15.3
+# required bundler >= 1.15.1
 ruby_add_bdepend "
 	virtual/rubygems
 	>=dev-ruby/bundler-1.14.6"

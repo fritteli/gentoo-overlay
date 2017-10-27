@@ -1,3 +1,23 @@
+*gitlab-ce-10.0.4 (27 Oct 2017)
+
+  27 Oct 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.0.4.ebuild,
+  -gitlab-ce-10.0.1.ebuild:
+  www-apps/gitlab-ce:  Version 10.0.4
+
+*gitlab-ce-9.5.9 (27 Oct 2017)
+
+  27 Oct 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.5.9.ebuild,
+  -gitlab-ce-9.5.4.ebuild:
+  www-apps/gitlab-ce:  Version 9.5.9
+
+*gitlab-ce-9.4.7 (27 Oct 2017)
+
+  27 Oct 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.4.7.ebuild,
+  -gitlab-ce-9.4.6.ebuild, gitlab-ce-10.0.0_rc3.ebuild, gitlab-ce-10.0.1.ebuild,
+  gitlab-ce-9.0.13.ebuild, gitlab-ce-9.1.10.ebuild, gitlab-ce-9.2.10.ebuild,
+  gitlab-ce-9.3.11.ebuild, gitlab-ce-9.5.4.ebuild, gitlab-ce-9999.ebuild:
+  www-apps/gitlab-ce:  Version 9.4.7
+
 *gitlab-ce-10.0.1 (25 Sep 2017)
 
   25 Sep 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.0.1.ebuild:
