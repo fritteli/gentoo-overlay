@@ -1,3 +1,6 @@
+  05 Nov 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-runner-10.0.2.ebuild:
+  dev-vcs/gitlab-runner:  Fix user and group creation.
+
 *gitlab-runner-10.0.2 (05 Nov 2017)
 
   05 Nov 2017; Manuel Friedli <manuel@fritteli.ch>
