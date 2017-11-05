@@ -85,5 +85,5 @@ src_install() {
 	local config_dir="/etc/${PN}"
 	diropts -m750
 	dodir "${config_dir}"
-	fowners -R ${MY_USER}:${MY_USER} "${config_dir}"
+	fowners -R ${MY_USER}:${MY_USER} "${config_dir}" "${MY_HOME_DIR}"
 }
