@@ -32,6 +32,12 @@ RESTRICT="mirror test"
 MY_USER="gitlab_runner"
 MY_HOME_DIR="/var/lib/gitlab-runner"
 
+pkg_setup() {
+	# add required user
+	enewgroup ${MY_USER}
+	enewuser ${MY_USER} -1 /bin/bash "${MY_HOME_DIR}" ${MY_USER}
+}
+
 src_prepare() {
 	default
 	pushd src/${EGO_PN} || die
@@ -55,12 +61,6 @@ src_prepare() {
 
 src_compile() {
 	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN} build_current
-}
-
-pkg_preinst() {
-	# add required user
-	enewgroup ${MY_USER}
-	enewuser ${MY_USER} -1 /bin/bash "${MY_HOME_DIR}" ${MY_USER}
 }
 
 src_install() {
