@@ -1,0 +1,28 @@
+Title: Rename gitlab-ci-multi-runner to gitlab-runner
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2017-11-05
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: dev-vcs/gitlab-ci-multi-runner
+
+Upstream renamed gitlab-ci-multi-runner to gitlab-runner. We want to
+follow upstream as closely as possible. Therefore:
+- A new ebuild dev-vcs/gitlab-runner is introduced for versions
+  >= 10.0.2.
+- The old ebuilds (dev-vcs/gitlab-ci-multi-runner) remain, but will
+  probably not compile anymore, because the source files may have
+  moved. Runner ebuilds for versions < 10.0.2 will consequently be
+  removed from the overlay at some later point.
+- The home directory is now at /var/lib/gitlab-runner instead of
+  /opt/gitlab-ci-multi-runner. Please note that no files are moved
+  from the old to the new location.
+
+The new ebuilds will add a new user (gitlab_runner) to the system.
+The old ebuilds used gitlab_ci_multi_runner as their user, which you
+will have to remove by hand if you want to clean up.
+
+There will be no automatic migration from the old to the new ebuild.
+
+Have fun,
+fritteli.
