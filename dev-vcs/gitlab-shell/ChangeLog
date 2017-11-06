@@ -1,3 +1,13 @@
+*gitlab-shell-5.9.3 (06 Nov 2017)
+
+  06 Nov 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-shell-5.9.3.ebuild,
+  gitlab-shell-5.0.0.ebuild, gitlab-shell-5.0.2.ebuild,
+  gitlab-shell-5.0.4.ebuild, gitlab-shell-5.1.1.ebuild,
+  gitlab-shell-5.3.1.ebuild, gitlab-shell-5.8.0.ebuild,
+  gitlab-shell-5.9.0.ebuild:
+  dev-vcs/gitlab-shell:  Add ebuild for version 5.9.3 and fix deprecated ebuild
+  headers and symlink locations.
+
   17 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-5.0.5.ebuild,
   -gitlab-shell-5.4.0.ebuild:
   dev-vcs/gitlab-shell:  Prune unneeded versions.

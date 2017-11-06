@@ -8,7 +8,7 @@ USE_RUBY="ruby23"
 inherit eutils ruby-ng user
 
 MY_PV="v${PV/_/-}"
-MY_GIT_COMMIT="5f1ab2100c2e520785a46da6d759685a65849d51"
+MY_GIT_COMMIT="bbda5bd1dd2e841410d73a68fa8cd3a8425159c5"
 
 DESCRIPTION="SSH access and repository management for GitLab"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-shell"
@@ -35,6 +35,8 @@ RUBY_PATCHES=(
 	"0001-${PN}-4.1.1-config-paths.patch"
 	"0002-${PN}-5.1.1-Makefile.patch"
 )
+
+RESTRICT="mirror"
 
 GIT_USER="git"
 DEST_DIR="/usr/share/${PN}"
