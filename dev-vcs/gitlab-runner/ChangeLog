@@ -1,3 +1,8 @@
+*gitlab-runner-10.1.0 (06 Nov 2017)
+
+  06 Nov 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-runner-10.1.0.ebuild:
+  dev-vcs/gitlab-runner:  Add ebuild for version 10.1.0.
+
   05 Nov 2017; Manuel Friedli <manuel@fritteli.ch> gitlab-runner-10.0.2.ebuild:
   dev-vcs/gitlab-runner:  Final fix.
 
