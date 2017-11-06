@@ -9,7 +9,7 @@ DESCRIPTION="This is the new backend for Git-over-HTTP communication needed for 
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-workhorse"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
 
-MY_GIT_COMMIT="e6cfe0c0c6aafe639cdf2c362eab860053bc07cb"
+MY_GIT_COMMIT="bf1d9467b9cc938d149690f6ea25d72441221311"
 S="${WORKDIR}/${PN}-v${PV}-${MY_GIT_COMMIT}"
 RESTRICT="mirror"
 
