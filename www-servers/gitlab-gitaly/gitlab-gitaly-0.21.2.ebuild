@@ -1,13 +1,12 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="5"
 
 EGIT_REPO_URI="https://gitlab.com/gitlab-org/gitaly.git"
 EGIT_COMMIT="v${PV}"
 
-inherit eutils git-2 user
+inherit eutils git-r3 user
 
 DESCRIPTION="Gitaly is a Git RPC service for handling all the git calls made by GitLab."
 HOMEPAGE="https://gitlab.com/gitlab-org/gitaly"
