@@ -30,7 +30,7 @@ src_compile() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/CVE-2013-6395-fix-xss.patch
+	return 0
 }
 
 src_install() {
