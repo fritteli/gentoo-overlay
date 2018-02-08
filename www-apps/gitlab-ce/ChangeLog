@@ -1,3 +1,8 @@
+  08 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
+  +files/07-gitlab-ce-10.0.7-yarn.patch, gitlab-ce-10.0.7.ebuild:
+  www-apps/gitlab-ce:  Add patch for package.json and yarn.lock in order to fix
+  dependency errors that cause emerge --config gitlab-ce to fail
+
 *gitlab-ce-9.5.10 (08 Feb 2018)
 
   08 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-9.5.10.ebuild,
