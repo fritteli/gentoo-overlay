@@ -1,3 +1,9 @@
+*gitlab-ce-10.0.7 (08 Feb 2018)
+
+  08 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.0.7.ebuild:
+  www-apps/gitlab-ce:  Add ebuild for version 10.0.7, the latest version for the
+  10.0 branch.
+
 *gitlab-ce-10.0.4 (27 Oct 2017)
 
   27 Oct 2017; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.0.4.ebuild,
