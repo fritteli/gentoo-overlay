@@ -1,3 +1,10 @@
+  09 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
+  -files/0001-fix-Makefile-0.6.0.patch, -gitlab-pages-0.6.0.ebuild.bak,
+  gitlab-pages-0.4.0.ebuild, gitlab-pages-0.4.1.ebuild,
+  gitlab-pages-0.4.2-r1.ebuild, gitlab-pages-0.4.4.ebuild,
+  gitlab-pages-0.5.1.ebuild, gitlab-pages-0.6.0.ebuild:
+  www-servers/gitlab-pages:  Add working ebuild for version 0.6.0. Finally!
+
   17 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -gitlab-pages-0.5.0.ebuild:
   www-servers/gitlab-pages:  Prune unneeded ebuild.
 

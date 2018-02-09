@@ -1,6 +1,5 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 EGO_PN="gitlab.com/gitlab-org/gitlab-pages/..."
@@ -9,7 +8,7 @@ EGIT_COMMIT="15c938ca"
 MY_PV="v${PV/_/-}"
 SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${MY_PV} -> ${P}.tar.bz2"
 
-EGO_BUILD_FLAGS="-ldflags '-X main.Version ${PV} -X main.REVISION ${EGIT_COMMIT}'"
+EGO_BUILD_FLAGS="-ldflags '-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}'"
 
 inherit eutils golang-build golang-vcs-snapshot user
 
@@ -31,26 +30,26 @@ pkg_setup() {
 	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
 }
 
-#src_prepare() {
-#	epatch "${FILESDIR}/0001-fix-Makefile-0.6.0.patch"
-#
-#	sed -i -E \
-#		-e "s/@@REVISION@@/${EGIT_COMMIT}/" \
-#		src/gitlab.com/gitlab-org/${PN}/Makefile.internal.mk
-#
-#	eapply_user
-#}
-
 src_compile() {
-#	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} all
 	# silly golang-build_src_compile doesn't work. some crap about
 	# escaping ...
 	ego_pn_check
-	env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" go build -v -work -x -ldflags "-X main.Version=${PV} -X main.REVISION=${EGIT_COMMIT}" "${EGO_PN}" || die
+	set -- env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		go build -v -work -x -ldflags "-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}" "${EGO_PN}"
+	echo "$@"
+	"$@" || die
 }
 
 src_install() {
-	golang-build_src_install
+	# silly golang-build_src_install doesn't work. some crap about
+	# escaping ...
+	ego_pn_check
+	set -- env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		go install -v -work -x -ldflags "-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}" "${EGO_PN}"
+	echo "$@"
+	"$@" || die
+	golang_install_pkgs
+
 	dobin bin/*
 	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG
 
