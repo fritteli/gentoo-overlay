@@ -1,0 +1,35 @@
+diff --git a/config.toml.example b/config.toml.example
+index 69c813c..9d650c3 100644
+--- a/config.toml.example
++++ b/config.toml.example
+@@ -1,6 +1,6 @@
+ # Example Gitaly configuration file
+ 
+-socket_path = "/home/git/gitlab/tmp/sockets/private/gitaly.socket"
++socket_path = "/run/gitlab/sockets/gitaly.socket"
+ 
+ # # Optional: listen on a TCP socket. This is insecure (no authentication)
+ # listen_addr = "localhost:9999"
+@@ -16,7 +16,7 @@ socket_path = "/home/git/gitlab/tmp/sockets/private/gitaly.socket"
+ 
+ [[storage]]
+ name = "default"
+-path = "/home/git/repositories"
++path = "/var/lib/git/repositories"
+ 
+ # # You can optionally configure more storages for this Gitaly instance to serve up
+ #
+@@ -37,11 +37,11 @@ path = "/home/git/repositories"
+ 
+ [gitaly-ruby]
+ # The directory where gitaly-ruby is installed
+-dir = "/home/git/gitaly/ruby"
++dir = "/var/lib/gitlab-gitaly/ruby"
+ 
+ [gitlab-shell]
+ # The directory where gitlab-shell is installed
+-dir = "/home/git/gitlab-shell"
++dir = "/usr/share/gitlab-shell"
+ 
+ # # You can adjust the concurrency of each RPC endpoint
+ # [[concurrency]]

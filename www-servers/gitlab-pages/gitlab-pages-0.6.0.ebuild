@@ -2,16 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit eutils golang-build golang-vcs-snapshot user
-
 EGO_PN="gitlab.com/gitlab-org/gitlab-pages/..."
 
+EGIT_COMMIT="15c938ca"
 MY_PV="v${PV/_/-}"
-MY_GIT_HASH="36f16fd"
+SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=${MY_PV} -> ${P}.tar.bz2"
+
+EGO_BUILD_FLAGS="-ldflags '-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}'"
+
+inherit eutils golang-build golang-vcs-snapshot user
 
 DESCRIPTION="Simple HTTP server written in Go made to serve GitLab Pages with CNAMEs and SNI"
 HOMEPAGE="https://gitlab.com/gitlab-org/gitlab-pages"
-SRC_URI="https://gitlab.com/gitlab-org/${PN}/repository/archive.tar.bz2?ref=v${PV} -> ${P}.tar.bz2"
 
 KEYWORDS="~amd64 ~x86 ~arm ~arm64"
 LICENSE="MIT"
@@ -28,22 +30,26 @@ pkg_setup() {
 	enewuser ${MY_USER} -1 -1 -1 ${MY_USER}
 }
 
-src_prepare() {
-	epatch "${FILESDIR}/0001-fix-Makefile-0.3.2.patch"
-
-	sed -i -E \
-		-e "s/@@REVISION@@/${MY_GIT_HASH}/" \
-		src/gitlab.com/gitlab-org/${PN}/Makefile
-
-	eapply_user
-}
-
 src_compile() {
-	emake GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" RELEASE=true -C src/${EGO_PN%/*} all
+	# silly golang-build_src_compile doesn't work. some crap about
+	# escaping ...
+	ego_pn_check
+	set -- env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		go build -v -work -x -ldflags "-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}" "${EGO_PN}"
+	echo "$@"
+	"$@" || die
 }
 
 src_install() {
-	golang-build_src_install
+	# silly golang-build_src_install doesn't work. some crap about
+	# escaping ...
+	ego_pn_check
+	set -- env GOPATH="${WORKDIR}/${P}:$(get_golibdir_gopath)" \
+		go install -v -work -x -ldflags "-X main.VERSION=${PV} -X main.REVISION=${EGIT_COMMIT}" "${EGO_PN}"
+	echo "$@"
+	"$@" || die
+	golang_install_pkgs
+
 	dobin bin/*
 	dodoc src/${EGO_PN%/*}/README.md src/${EGO_PN%/*}/CHANGELOG
 

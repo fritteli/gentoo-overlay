@@ -1,3 +1,14 @@
+*gitlab-gitaly-0.43.1 (06 Nov 2017)
+
+  06 Nov 2017; Manuel Friedli <manuel@fritteli.ch>
+  +files/0002-gitlab-gitaly-0.43.1-fix-config.toml.example.patch,
+  +gitlab-gitaly-0.43.1.ebuild, gitlab-gitaly-0.10.0.ebuild,
+  gitlab-gitaly-0.11.2-r1.ebuild, gitlab-gitaly-0.21.2.ebuild,
+  gitlab-gitaly-0.3.0.ebuild, gitlab-gitaly-0.35.0-r2.ebuild,
+  gitlab-gitaly-0.38.0-r1.ebuild, gitlab-gitaly-0.6.0.ebuild:
+  www-servers/gitlab-gitaly:  Add version 0.43.1, fix obsolete inheritance and
+  header.
+
 *gitlab-gitaly-0.35.0-r2 (25 Sep 2017)
 *gitlab-gitaly-0.38.0-r1 (25 Sep 2017)
 

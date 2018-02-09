@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 
@@ -87,7 +86,7 @@ all_ruby_install() {
 	# create symlink for .gitlab_shell_secret
 	einfo "creating symlink for .gitlab_shell_secret"
 	TOKEN_FILE="${DEST_DIR}/.gitlab_shell_secret"
-	dosym /opt/gitlab/.gitlab_shell_secret "$TOKEN_FILE"
+	dosym ../../../opt/gitlab/.gitlab_shell_secret "$TOKEN_FILE"
 
 	# prepare directories
 	diropts -m750; dodir ${DATA_DIR}

@@ -1,3 +1,12 @@
+*gitlab-workhorse-3.2.0 (06 Nov 2017)
+
+  06 Nov 2017; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-workhorse-3.2.0.ebuild, gitlab-workhorse-1.4.2.ebuild,
+  gitlab-workhorse-1.4.3.ebuild, gitlab-workhorse-2.0.0.ebuild,
+  gitlab-workhorse-2.1.1.ebuild, gitlab-workhorse-2.3.0.ebuild,
+  gitlab-workhorse-3.0.0.ebuild:
+  www-servers/gitlab-workhorse:  Add version 3.2.0.
+
 *gitlab-workhorse-3.0.0 (25 Jul 2017)
 
   25 Jul 2017; Manuel Friedli <manuel@fritteli.ch>
