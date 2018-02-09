@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -6,7 +6,7 @@ inherit golang-build golang-vcs-snapshot user
 
 EGO_PN="gitlab.com/gitlab-org/gitlab-runner"
 
-GITLAB_COMMIT="c1ecf97f"
+GITLAB_COMMIT="a0152c4c"
 
 MY_PV="v${PV/_/-}"
 
