@@ -93,6 +93,7 @@ PATCHES=(
 	"${FILESDIR}/04-${PN}-9.3.0-fix-check-task.patch"
 	"${FILESDIR}/05-${PN}-9.0.0-replace-sys-filesystem.patch"
 	"${FILESDIR}/06-${PN}-8.17.0-fix-webpack-config.patch"
+	"${FILESDIR}/07-${PN}-10.0.7-yarn.patch"
 )
 
 MY_NAME="gitlab"
