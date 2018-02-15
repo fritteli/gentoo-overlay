@@ -7,7 +7,7 @@ inherit eutils
 DESCRIPTION="A free replacement for the Garmin browser plugin"
 HOMEPAGE="http://www.andreas-diesner.de/garminplugin/"
 
-SRC_URI="http://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
 MY_S="adiesner-GarminPlugin-c610187"
 S="${WORKDIR}/${MY_S}/src"
 
