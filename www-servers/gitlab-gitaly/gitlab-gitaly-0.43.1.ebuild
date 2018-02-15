@@ -35,5 +35,5 @@ src_install() {
 	# install gitaly-ruby
 	insinto "/var/lib/gitlab-gitaly"
 	doins -r "ruby"
-	fperms 0755 /var/lib/gitlab-gitaly/ruby/bin/*
+	fperms 0755 /var/lib/gitlab-gitaly/ruby/bin/{gitaly-ruby,ruby-cd}
 }
