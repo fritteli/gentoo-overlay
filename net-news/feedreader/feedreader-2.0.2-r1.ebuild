@@ -20,6 +20,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 
+RESTRICT="mirror"
+
 RDEPEND="$(vala_depend)
 	app-crypt/libsecret[vala]
 	dev-db/sqlite:3
