@@ -1,3 +1,6 @@
+  15 Feb 2018; Manuel Friedli <manuel@fritteli.ch> gitlab-gitaly-0.43.1.ebuild:
+  www-servers/gitlab-gitaly:  Add dev-ruby/bundler to DEPENDS.
+
 *gitlab-gitaly-0.43.1 (06 Nov 2017)
 
   06 Nov 2017; Manuel Friedli <manuel@fritteli.ch>
