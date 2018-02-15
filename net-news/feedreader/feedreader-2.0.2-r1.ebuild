@@ -46,6 +46,7 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
+	epatch "${FILESDIR}/0001-Add-webkit2gtk-vapi.patch"
 	vala_src_prepare
 	eapply_user
 }
