@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="6"
 inherit eutils
@@ -8,7 +7,7 @@ inherit eutils
 DESCRIPTION="A free replacement for the Garmin browser plugin"
 HOMEPAGE="http://www.andreas-diesner.de/garminplugin/"
 
-SRC_URI="http://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/adiesner/GarminPlugin/tarball/V${PV} -> ${P}.tar.gz"
 MY_S="adiesner-GarminPlugin-c610187"
 S="${WORKDIR}/${MY_S}/src"
 
