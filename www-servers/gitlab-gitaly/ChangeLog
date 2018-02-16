@@ -1,3 +1,8 @@
+*gitlab-gitaly-0.52.1 (16 Feb 2018)
+
+  16 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-gitaly-0.52.1.ebuild:
+  www-servers/gitlab-gitaly:  Add ebuild for version 0.52.1.
+
   15 Feb 2018; Manuel Friedli <manuel@fritteli.ch> gitlab-gitaly-0.43.1.ebuild:
   www-servers/gitlab-gitaly:  Fix github issue #49, hopefully.
 
