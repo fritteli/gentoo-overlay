@@ -1,3 +1,9 @@
+*gitlab-ce-10.2.8 (16 Feb 2018)
+
+  16 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
+  +files/03-gitlab-ce-10.2.8-database.yml.patch, +gitlab-ce-10.2.8.ebuild:
+  www-apps/gitlab-ce:  Add ebuild for version 10.2.8.
+
   08 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
   +files/07-gitlab-ce-10.0.7-yarn.patch, gitlab-ce-10.0.7.ebuild:
   www-apps/gitlab-ce:  Add patch for package.json and yarn.lock in order to fix
