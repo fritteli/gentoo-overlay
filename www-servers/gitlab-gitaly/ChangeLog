@@ -1,3 +1,11 @@
+*gitlab-gitaly-0.66.0 (19 Feb 2018)
+
+  19 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
+  +files/0002-gitlab-gitaly-0.66.0-fix-config.toml.example.patch,
+  +files/gitlab-gitaly-0.66.0.conf, +files/gitlab-gitaly-0.66.0.init,
+  +gitlab-gitaly-0.66.0.ebuild:
+  www-servers/gitlab-gitaly:  Add ebuild for version 0.66.0
+
 *gitlab-gitaly-0.59.2 (17 Feb 2018)
 
   17 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
