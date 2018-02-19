@@ -1,3 +1,11 @@
+*gitlab-ce-10.4.4 (19 Feb 2018)
+
+  19 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
+  +files/08-gitlab-ce-10.4.4-general-config.patch,
+  +files/gitlab-10.4.4-sidekiq.init, +files/gitlab-10.4.4-unicorn.init,
+  +gitlab-ce-10.4.4.ebuild:
+  www-apps/gitlab-ce: Add ebuild for version 10.4.4.
+
 *gitlab-ce-10.3.7 (17 Feb 2018)
 
   17 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.3.7.ebuild:
