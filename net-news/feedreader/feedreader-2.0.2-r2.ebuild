@@ -9,7 +9,6 @@ CMAKE_MIN_VERSION="2.6"
 VALA_MIN_API_VERSION="0.26"
 
 MY_PN="FeedReader"
-MY_PV="${PV}"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Simple News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
@@ -47,7 +46,7 @@ DEPEND="${RDEPEND}
 S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
-	epatch "${FILESDIR}/0001-Add-webkit2gtk-vapi.patch"
+	epatch "${FILESDIR}/0001-fix-webkit2gtk-vapi.patch"
 	vala_src_prepare
 	eapply_user
 }
