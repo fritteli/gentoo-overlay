@@ -1,0 +1,130 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9c59cfb..fe22f3e 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -125,7 +125,7 @@ set(UI_PACKAGES
+ 	libsecret-1
+ 	libnotify
+ 	rest-0.7
+-	WebKit2-4.0
++	webkit2gtk-4.0
+ 	gstreamer-1.0
+ 	gstreamer-pbutils-1.0
+ 	libpeas-1.0
+diff --git a/plugins/backend/demo/CMakeLists.txt b/plugins/backend/demo/CMakeLists.txt
+index d6d018c..87bc5d4 100644
+--- a/plugins/backend/demo/CMakeLists.txt
++++ b/plugins/backend/demo/CMakeLists.txt
+@@ -47,7 +47,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/feedbin/CMakeLists.txt b/plugins/backend/feedbin/CMakeLists.txt
+index 35361e9..1d25652 100644
+--- a/plugins/backend/feedbin/CMakeLists.txt
++++ b/plugins/backend/feedbin/CMakeLists.txt
+@@ -52,7 +52,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/feedly/CMakeLists.txt b/plugins/backend/feedly/CMakeLists.txt
+index a0cdabd..d314eb8 100644
+--- a/plugins/backend/feedly/CMakeLists.txt
++++ b/plugins/backend/feedly/CMakeLists.txt
+@@ -52,7 +52,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/fresh/CMakeLists.txt b/plugins/backend/fresh/CMakeLists.txt
+index 0ca5511..dd6b7de 100644
+--- a/plugins/backend/fresh/CMakeLists.txt
++++ b/plugins/backend/fresh/CMakeLists.txt
+@@ -52,7 +52,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/inoreader/CMakeLists.txt b/plugins/backend/inoreader/CMakeLists.txt
+index ff2d8ef..7b051f5 100644
+--- a/plugins/backend/inoreader/CMakeLists.txt
++++ b/plugins/backend/inoreader/CMakeLists.txt
+@@ -50,7 +50,7 @@ PACKAGES
+     json-glib-1.0
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/local/CMakeLists.txt b/plugins/backend/local/CMakeLists.txt
+index 3ec5a7a..36cb3f4 100644
+--- a/plugins/backend/local/CMakeLists.txt
++++ b/plugins/backend/local/CMakeLists.txt
+@@ -61,7 +61,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+     posix
+ 
+ OPTIONS
+diff --git a/plugins/backend/oldreader/CMakeLists.txt b/plugins/backend/oldreader/CMakeLists.txt
+index 4a5aca9..3005191 100644
+--- a/plugins/backend/oldreader/CMakeLists.txt
++++ b/plugins/backend/oldreader/CMakeLists.txt
+@@ -51,7 +51,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/owncloud/CMakeLists.txt b/plugins/backend/owncloud/CMakeLists.txt
+index ca5b9c9..30352bd 100644
+--- a/plugins/backend/owncloud/CMakeLists.txt
++++ b/plugins/backend/owncloud/CMakeLists.txt
+@@ -51,7 +51,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32
+diff --git a/plugins/backend/ttrss/CMakeLists.txt b/plugins/backend/ttrss/CMakeLists.txt
+index e80d489..c738ed3 100644
+--- a/plugins/backend/ttrss/CMakeLists.txt
++++ b/plugins/backend/ttrss/CMakeLists.txt
+@@ -51,7 +51,7 @@ PACKAGES
+     libsecret-1
+     sqlite3
+     libsoup-2.4
+-    WebKit2-4.0
++    webkit2gtk-4.0
+ 
+ OPTIONS
+     --target-glib=2.32

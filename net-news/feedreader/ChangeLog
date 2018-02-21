@@ -1,3 +1,11 @@
+*feedreader-2.0.2-r2 (21 Feb 2018)
+
+  21 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.0.2-r2.ebuild,
+  +files/0001-fix-webkit2gtk-vapi.patch, -feedreader-2.0.2-r1.ebuild,
+  -files/0001-Add-webkit2gtk-vapi.patch:
+  net-news/feedreader:  Replace that huge patch with a smaller one, based on
+  github pullrequest no. 622: https://github.com/jangernert/FeedReader/pull/622
+
   06 Sep 2017; Manuel Friedli <manuel@fritteli.ch> -feedreader-1.6.2-r1.ebuild:
   net-news/feedreader:  Prune version 1.6.2-r1
 
