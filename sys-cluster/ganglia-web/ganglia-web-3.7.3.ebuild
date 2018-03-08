@@ -1,17 +1,18 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=4
+EAPI=6
 WEBAPP_MANUAL_SLOT="yes"
 inherit webapp eutils
 
 DESCRIPTION="Web frontend for sys-cluster/ganglia"
 HOMEPAGE="http://ganglia.sourceforge.net"
-SRC_URI="mirror://sourceforge/ganglia/${PN}/${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/ganglia/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="vhosts"
+RESTRICT="mirror"
 
 DEPEND="net-misc/rsync"
 RDEPEND="
@@ -30,6 +31,7 @@ src_compile() {
 }
 
 src_prepare() {
+	eapply_user
 	return 0
 }
 
