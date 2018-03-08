@@ -1,0 +1,2 @@
+  08 Mar 2018; Manuel Friedli <manuel@fritteli.ch> ganglia-web-3.7.3.ebuild:
+  sys-cluster/ganglia-web:  Add ebuild for version 3.7.3
