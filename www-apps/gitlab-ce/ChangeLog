@@ -1,3 +1,14 @@
+  08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  -files/03-gitlab-ce-8.17.0-database.yml.patch,
+  -files/03-gitlab-ce-9.2.2-database.yml.patch,
+  -files/04-gitlab-ce-8.12.7-fix-check-task.patch,
+  -files/gitlab-8.13.3-sidekiq.init, -files/gitlab-8.13.3-unicorn.init,
+  -gitlab-ce-10.0.0_rc3.ebuild, -gitlab-ce-10.0.4.ebuild,
+  -gitlab-ce-9.0.13.ebuild, -gitlab-ce-9.1.10.ebuild, -gitlab-ce-9.2.10.ebuild,
+  -gitlab-ce-9.3.11.ebuild, -gitlab-ce-9.4.7.ebuild, -gitlab-ce-9999.ebuild,
+  metadata.xml:
+  www-apps/gitlab-ce:  Purge all versions depending on <libgit2:0/26
+
 *gitlab-ce-10.4.4 (19 Feb 2018)
 
   19 Feb 2018; Manuel Friedli <manuel@fritteli.ch>

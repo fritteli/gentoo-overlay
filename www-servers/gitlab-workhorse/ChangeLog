@@ -1,3 +1,9 @@
+  08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  -gitlab-workhorse-1.4.2.ebuild, -gitlab-workhorse-1.4.3.ebuild,
+  -gitlab-workhorse-2.0.0.ebuild, -gitlab-workhorse-2.1.1.ebuild,
+  -gitlab-workhorse-2.3.0.ebuild:
+  www-servers/gitlab-workhorse:  Purge obsolete versions of gitlab-workhorse
+
 *gitlab-workhorse-3.3.1 (16 Feb 2018)
 
   16 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
