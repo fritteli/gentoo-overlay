@@ -8,7 +8,6 @@
 	<use>
 		<flag name="unicorn">Use the Unicorn web server. Never tested the package without it, so disable at your own risk.</flag>
 		<flag name="pages">Use the GitLab Pages feature. See https://gitlab.com/gitlab-org/gitlab-pages/</flag>
-		<flag name="gitaly">Use Gitaly Server to speed up git operations. Not yet supported. See https://gitlab.com/gitlab-org/gitaly/</flag>
 		<flag name="rugged_use_system_libraries">Use dev-libs/libgit2 from the system instead of the bundled libgit. The bundled library sometimes causes build breakages.</flag>
 	</use>
 </pkgmetadata>

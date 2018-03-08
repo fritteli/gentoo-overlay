@@ -1,3 +1,9 @@
+  08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  -files/0001-fix-Makefile-0.4.0.patch, -gitlab-pages-0.4.0.ebuild,
+  -gitlab-pages-0.4.1.ebuild, -gitlab-pages-0.4.2-r1.ebuild,
+  -gitlab-pages-0.4.4.ebuild:
+  www-servers/gitlab-pages:  Purge obsolete versions of gitlab-pages
+
   09 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
   -files/0001-fix-Makefile-0.6.0.patch, -gitlab-pages-0.6.0.ebuild.bak,
   gitlab-pages-0.4.0.ebuild, gitlab-pages-0.4.1.ebuild,

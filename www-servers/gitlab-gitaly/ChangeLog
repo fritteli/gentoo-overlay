@@ -1,3 +1,11 @@
+  08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  -files/0001-gitlab-gitaly-0.10.0-fix-Makefile.patch,
+  -files/0002-gitlab-gitaly-0.11.2-fix-config.toml.example.patch,
+  -gitlab-gitaly-0.10.0.ebuild, -gitlab-gitaly-0.11.2-r1.ebuild,
+  -gitlab-gitaly-0.21.2.ebuild, -gitlab-gitaly-0.3.0.ebuild,
+  -gitlab-gitaly-0.6.0.ebuild:
+  www-servers/gitlab-gitaly:  Purge obsolete versions of gitlab-gitaly
+
 *gitlab-gitaly-0.59.2 (17 Feb 2018)
 
   17 Feb 2018; Manuel Friedli <manuel@fritteli.ch>
