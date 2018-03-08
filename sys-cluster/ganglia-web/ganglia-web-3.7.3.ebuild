@@ -12,6 +12,7 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="vhosts"
+RESTRICT="mirror"
 
 DEPEND="net-misc/rsync"
 RDEPEND="
@@ -30,6 +31,7 @@ src_compile() {
 }
 
 src_prepare() {
+	eapply_user
 	return 0
 }
 
