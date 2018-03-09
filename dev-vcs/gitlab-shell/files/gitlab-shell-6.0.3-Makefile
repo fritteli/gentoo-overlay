@@ -1,0 +1,3 @@
+all:
+	bin/compile
+	strip -s bin/gitaly-*
