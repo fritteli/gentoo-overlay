@@ -1,3 +1,10 @@
+*gitlab-workhorse-3.6.0 (09 Mar 2018)
+
+  09 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  +gitlab-workhorse-3.6.0.ebuild:
+  www-servers/gitlab-workhorse:  Add ebuild for version 3.6.0, dependency of
+  gitlab-ce-10.5.4
+
   08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
   -gitlab-workhorse-1.4.2.ebuild, -gitlab-workhorse-1.4.3.ebuild,
   -gitlab-workhorse-2.0.0.ebuild, -gitlab-workhorse-2.1.1.ebuild,
