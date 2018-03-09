@@ -1,3 +1,9 @@
+*gitlab-ce-10.4.5 (09 Mar 2018)
+
+  09 Mar 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.4.5.ebuild,
+  -gitlab-ce-10.4.4.ebuild:
+  www-apps/gitlab-ce:  v10.4.4 -> v10.4.5
+
   08 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
   -files/03-gitlab-ce-8.17.0-database.yml.patch,
   -files/03-gitlab-ce-9.2.2-database.yml.patch,
