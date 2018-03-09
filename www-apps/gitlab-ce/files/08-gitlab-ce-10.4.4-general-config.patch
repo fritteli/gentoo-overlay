@@ -82,7 +82,7 @@ index cc10da2..3c80d44 100644
  
  # feel free to point this anywhere accessible on the filesystem
 -pid "/home/git/gitlab/tmp/pids/unicorn.pid"
-+pid "/run/gitlab/pids/unicorn.pid"
++pid "/run/gitlab/unicorn.pid"
  
  # By default, the Unicorn logger will write to stderr.
  # Additionally, some applications/frameworks log to stderr or stdout,
