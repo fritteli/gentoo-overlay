@@ -49,7 +49,7 @@ GEMS_DEPEND="
 	dev-libs/libxslt
 	dev-libs/re2
 	dev-util/ragel
-	>=net-libs/nodejs-4.3.0
+	>=net-libs/nodejs-6.0.0
 	>=sys-apps/yarn-0.17.0
 	postgres? ( >=dev-db/postgresql-9.6:* )
 	mysql? ( virtual/mysql )

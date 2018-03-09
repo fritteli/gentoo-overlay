@@ -38,7 +38,7 @@ check_command="sudo -u ${gitlab_user} -H /usr/bin/bundle"
 check_command_args1="exec rake gitlab:env:info RAILS_ENV=${rails_env}"
 check_command_args2="exec rake gitlab:check RAILS_ENV=${rails_env}"
 
-backup_command="sudo -u ${gitlab:user} -H /usr/bin/bundle"
+backup_command="sudo -u ${gitlab_user} -H /usr/bin/bundle"
 backup_args=" exec rake gitlab:backup:create RAILS_ENV=${rails_env}"
 
 depend() {
