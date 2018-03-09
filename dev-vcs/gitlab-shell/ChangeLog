@@ -1,3 +1,10 @@
+*gitlab-shell-6.0.3 (09 Mar 2018)
+
+  09 Mar 2018; Manuel Friedli <manuel@fritteli.ch>
+  +files/gitlab-shell-6.0.3-Makefile, +gitlab-shell-6.0.3.ebuild:
+  dev-vcs/gitlab-shell:  Add ebuild for version 6.0.3, dependency of gitlab-
+  ce-10.5.4
+
   08 Mar 2018; Manuel Friedli <manuel@fritteli.ch> -gitlab-shell-5.0.0.ebuild,
   -gitlab-shell-5.0.2.ebuild, -gitlab-shell-5.0.4.ebuild,
   -gitlab-shell-5.1.1.ebuild, -gitlab-shell-5.3.1.ebuild:
