@@ -1,3 +1,6 @@
+  09 Mar 2018; Manuel Friedli <manuel@fritteli.ch> gitlab-ce-10.4.5.ebuild:
+  www-apps/gitlab-ce:  Fix dependency on nodejs: >=6.0.0
+
 *gitlab-ce-10.4.5 (09 Mar 2018)
 
   09 Mar 2018; Manuel Friedli <manuel@fritteli.ch> +gitlab-ce-10.4.5.ebuild,
