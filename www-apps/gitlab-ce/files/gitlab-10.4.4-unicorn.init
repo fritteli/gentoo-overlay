@@ -42,7 +42,6 @@ backup_command="sudo -u ${gitlab_user} -H /usr/bin/bundle"
 backup_args=" exec rake gitlab:backup:create RAILS_ENV=${rails_env}"
 
 depend() {
-	provide gitlab
 	need redis gitlab-workhorse gitlab-gitaly
 	use net
 }

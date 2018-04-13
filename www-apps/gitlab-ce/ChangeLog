@@ -1,3 +1,6 @@
+  13 Apr 2018;  <manuel@gentoo.org> files/gitlab-10.4.4-unicorn.init:
+  www-apps/gitlab-ce:  Fix init script: Remove "provide gitlab" instruction
+
 *gitlab-ce-10.4.7 (13 Apr 2018)
 
   13 Apr 2018;  <manuel@gentoo.org> +gitlab-ce-10.4.7.ebuild:
