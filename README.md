@@ -3,7 +3,7 @@ fritteli's Gentoo overlay
 
 Gentoo overlay with some ebuilds that I found either outdated or missing in the official repository or in other overlays. Ebuilds are usually removed from this overlay whenever I find a version available in the official tree or in another overlay (provided I'm satisfied with them).
 
-Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/tree/master), as seen by `repoman -p -x`: [![build status](https://gittr.ch/linux/gentoo-overlay/badges/master/build.svg)](https://gittr.ch/linux/gentoo-overlay/pipelines?scope=branches&page=1)
+Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/src/branch/master), as seen by `repoman -p -x`: Currently unavailable.
 
 Using with plain (recent) Portage
 ---------------------------------
@@ -24,9 +24,9 @@ If you prefer to use the overlay hostet at GitHub (which tends to be more stable
 Using with Layman
 -----------------
 
-You may also use `layman` to manage this overlay, although that requires some more setup and manual sync'ing.
+You may also use [`layman`](https://wiki.gentoo.org/wiki/Layman) to manage this overlay. If you choose this method, you will be using the overlay hosted at GitHub.
 
-If you haven't used layman yet, just installing running these commands:
+If you haven't used layman yet, just install it running these commands:
 
 	USE=git emerge -va layman
 	echo PORTDIR_OVERLAY=\"\" > /var/lib/layman/make.conf
@@ -35,16 +35,26 @@ If you haven't used layman yet, just installing running these commands:
 
 Then you can add this overlay wih:
 
-	layman -o https://gittr.ch/linux/gentoo-overlay/raw/master/layman.xml -f -a fritteli
+	layman -a fritteli
 
-Alternatively, you may use the overlay hosted on GitHub. That may not be quite as up-to-date as the one on gittr.ch. To use the GitHub version, use this command:
-
-	layman -o https://raw.githubusercontent.com/fritteli/gentoo-overlay/master/layman.xml -f -a fritteli
+You will be prompted for confirmation because this is an experimental overlay. Just continue by hitting `y`.
 
 Keep the overlay up to date from Git:
 
 	layman -s fritteli
 
+
+Bug reports and ebuild requests
+--------------------------------
+
+If you find a bug in an ebuild, encounter a build error or would like me to add a new ebuild, please open an issue on [GitHub](https://github.com/fritteli/gentoo-overlay/issues) or on [gittr.ch](https://gittr.ch/linux/gentoo-overlay/issues).
+
+Contributing
+------------
+
+I gladly accept pull requests for bugs or new ebuilds. Before opening a pull request, please make sure your changes don't upset [`repoman`](https://wiki.gentoo.org/wiki/Repoman). Run the following command and fix warnings and errors:
+
+	repoman -x -p
 
 Maintainers
 -----------
@@ -55,3 +65,4 @@ Acknowledgements
 ----------------
 
 Thanks go to Jakub Jirutka, the maintainer of the [CVUT Overlay](https://github.com/cvut/gentoo-overlay), from whom I shamelessly copied this README.md for a start.
+
