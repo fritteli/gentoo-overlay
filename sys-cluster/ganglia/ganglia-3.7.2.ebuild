@@ -6,7 +6,7 @@ EAPI=5
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_OPTIONAL=1
 
-inherit distutils-r1 eutils multilib systemd
+inherit autotools distutils-r1 eutils multilib systemd
 
 DESCRIPTION="A scalable distributed monitoring system for clusters and grids"
 HOMEPAGE="http://ganglia.sourceforge.net/"
@@ -21,6 +21,7 @@ DEPEND="dev-libs/confuse
 	dev-libs/expat
 	>=dev-libs/apr-1.0
 	net-libs/libnsl:0=
+	net-libs/libtirpc
 	!dev-db/firebird
 	pcre? ( dev-libs/libpcre )
 	python? ( ${PYTHON_DEPS} )"
@@ -32,11 +33,14 @@ RDEPEND="
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 src_prepare() {
+	epatch "${FILESDIR}/01-${PV}-use-tirpc-instead-of-sunrpc.patch"
+
 	if use python && ! use minimal; then
 		pushd gmetad-python >/dev/null || die
 		distutils-r1_src_prepare
 		popd >/dev/null || die
 	fi
+	eautoreconf
 }
 
 src_configure() {
