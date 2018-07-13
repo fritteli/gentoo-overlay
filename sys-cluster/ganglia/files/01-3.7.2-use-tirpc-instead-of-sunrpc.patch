@@ -12,10 +12,10 @@ index 95d0807..105222b 100644
  AUTOMAKE_OPTIONS = dist-bzip2 dist-tarZ dist-zip
  ACLOCAL_AMFLAGS = -I m4
 diff --git a/configure.ac b/configure.ac
-index fe7983b..984c70b 100644
+index fe7983b..597f0ca 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -606,13 +606,13 @@ AC_CHECK_HEADER([sys/mount.h], [], [],
+@@ -606,13 +606,20 @@ AC_CHECK_HEADER([sys/mount.h], [], [],
  #endif
  ])
  
@@ -26,13 +26,20 @@ index fe7983b..984c70b 100644
 -# include <rpc/types.h>
 -#endif
 -])
-+PKG_CHECK_MODULES([TIRPC],
-+                  [libtirpc],
-+                  [RPC_CFLAGS=$TIRPC_CFLAGS; RPC_LIBS=$TIRPC_LIBS;],
-+                  [AC_MSG_ERROR([libtirpc requested, but library not found.])]
-+)
-+AC_SUBST(RPC_CFLAGS)
-+AC_SUBST(RPC_LIBS)
++dnl ##################################################################
++dnl Checks for TIRPC
++PKG_CHECK_MODULES([TIRPC],[libtirpc])
++dnl LDFLAGS="$LDFLAGS $LIBS $APR_LIBS"
++LDFLAGS="$LDFLAGS $TIRPC_LIBS"
++RPC_CFLAGS="$TIRPC_CFLAGS"
++
++dnl PKG_CHECK_MODULES([TIRPC],
++dnl                   [libtirpc],
++dnl                   [RPC_CFLAGS=$TIRPC_CFLAGS; RPC_LIBS=$TIRPC_LIBS;],
++dnl                   [AC_MSG_ERROR([libtirpc requested, but library not found.])]
++dnl )
++nl AC_SUBST(RPC_CFLAGS)
++dnl AC_SUBST(RPC_LIBS)
  
  dnl ##################################################################
  dnl Checks for typedefs.
@@ -182,10 +189,10 @@ index 935c514..6e0499f 100644
  
  include_HEADERS = gm_protocol.h
 diff --git a/scripts/fixconfig b/scripts/fixconfig
-index 5be7982..6e3d710 100755
+index 5be7982..707f62d 100755
 --- a/scripts/fixconfig
 +++ b/scripts/fixconfig
-@@ -36,7 +36,7 @@ fi
+@@ -35,7 +35,7 @@ fi
  
  # Additional variables set by configure
  CFLAGS="`echo '-g -O2 -fno-strict-aliasing -Wall -D_REENTRANT' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
