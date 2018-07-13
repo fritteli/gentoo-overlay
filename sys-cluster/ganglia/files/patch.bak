@@ -186,11 +186,11 @@ index 5be7982..6e3d710 100755
 --- a/scripts/fixconfig
 +++ b/scripts/fixconfig
 @@ -36,7 +36,7 @@ fi
- 
  # Additional variables set by configure
  CFLAGS="`echo '-g -O2 -fno-strict-aliasing -Wall -D_REENTRANT' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
--LDFLAGS="`echo ' -lpthread  -lapr-1  ' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
-+LDFLAGS="`echo ' -lpthread  -lapr-1 -ltirpc  ' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
- LIBS="-ldl -lnsl -lnsl -lz -lpcre -lexpat -lconfuse -lpthread "
+ LDFLAGS="`echo ' -lpthread  -lapr-1  ' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
+-LIBS="-ldl -lnsl -lnsl -lz -lpcre -lexpat -lconfuse -lpthread "
++LIBS="-ldl -lnsl -lnsl -lz -lpcre -lexpat -lconfuse -lpthread -ltirpc "
  VERSION="3.7.2"
  host_cpu="x86_64"
+ 

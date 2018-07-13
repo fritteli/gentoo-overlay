@@ -33,7 +33,7 @@ RDEPEND="
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 src_prepare() {
-	epatch "${FILESDIR}/01-${PV}-use-tirpc-instead-of-sunrpc.patch"
+	epatch "${FILESDIR}/02-${PV}-use-tirpc-instead-of-sunrpc.patch"
 
 	if use python && ! use minimal; then
 		pushd gmetad-python >/dev/null || die
