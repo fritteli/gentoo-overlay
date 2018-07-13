@@ -7,7 +7,7 @@ index 95d0807..105222b 100644
  
  EXTRA_SUBDIRS = "gmetad-python contrib solaris"
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  
  AUTOMAKE_OPTIONS = dist-bzip2 dist-tarZ dist-zip
  ACLOCAL_AMFLAGS = -I m4
@@ -15,7 +15,7 @@ diff --git a/configure.ac b/configure.ac
 index fe7983b..597f0ca 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -606,13 +606,20 @@ AC_CHECK_HEADER([sys/mount.h], [], [],
+@@ -606,13 +606,12 @@ AC_CHECK_HEADER([sys/mount.h], [], [],
  #endif
  ])
  
@@ -29,17 +29,9 @@ index fe7983b..597f0ca 100644
 +dnl ##################################################################
 +dnl Checks for TIRPC
 +PKG_CHECK_MODULES([TIRPC],[libtirpc])
-+dnl LDFLAGS="$LDFLAGS $LIBS $APR_LIBS"
 +LDFLAGS="$LDFLAGS $TIRPC_LIBS"
-+RPC_CFLAGS="$TIRPC_CFLAGS"
-+
-+dnl PKG_CHECK_MODULES([TIRPC],
-+dnl                   [libtirpc],
-+dnl                   [RPC_CFLAGS=$TIRPC_CFLAGS; RPC_LIBS=$TIRPC_LIBS;],
-+dnl                   [AC_MSG_ERROR([libtirpc requested, but library not found.])]
-+dnl )
-+nl AC_SUBST(RPC_CFLAGS)
-+dnl AC_SUBST(RPC_LIBS)
++TIRPC_INCLUDES="$TIRPC_CFLAGS"
++AC_SUBST(TIRPC_INCLUDES)
  
  dnl ##################################################################
  dnl Checks for typedefs.
@@ -52,7 +44,7 @@ index 0a4e360..874d448 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  AM_CFLAGS = -I$(top_builddir)/lib -I$(top_builddir)/gmond -I$(top_builddir)/libmetrics -I$(top_builddir)/include $(GCFLAGS) @PROTOBUF_C_CFLAGS@
  
  sbin_PROGRAMS = gmetad
@@ -65,7 +57,7 @@ index bc7807c..d9bf585 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  
  AM_CFLAGS = -I../lib -I../include $(GCFLAGS)
  
@@ -78,7 +70,7 @@ index 256fee3..d6f5f07 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  AM_CFLAGS = -I$(top_builddir)/lib -I$(top_builddir)/include/ -I$(top_builddir)/libmetrics $(GCFLAGS)
  
  sbin_PROGRAMS = gmond
@@ -91,7 +83,7 @@ index fd7457e..99ddb83 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/disk/Makefile.am b/gmond/modules/disk/Makefile.am
 index 0c78689..2f5a2f0 100644
 --- a/gmond/modules/disk/Makefile.am
@@ -101,7 +93,7 @@ index 0c78689..2f5a2f0 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/example/Makefile.am b/gmond/modules/example/Makefile.am
 index e3bff6a..18b4e3b 100644
 --- a/gmond/modules/example/Makefile.am
@@ -111,7 +103,7 @@ index e3bff6a..18b4e3b 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  
  install:
  	@echo
@@ -124,7 +116,7 @@ index 82336db..06ad430 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/network/Makefile.am b/gmond/modules/network/Makefile.am
 index 72a4faf..c370d88 100644
 --- a/gmond/modules/network/Makefile.am
@@ -134,7 +126,7 @@ index 72a4faf..c370d88 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/perl/Makefile.am b/gmond/modules/perl/Makefile.am
 index b7b095c..f1d0fb9 100644
 --- a/gmond/modules/perl/Makefile.am
@@ -144,7 +136,7 @@ index b7b095c..f1d0fb9 100644
  	  $(INSTALL_DATA) ../conf.d/modperl.conf $(DESTDIR)$(sysconfdir)/conf.d/modperl.conf
  
 -INCLUDES = @APR_INCLUDES@ @PERL_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @PERL_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @PERL_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/python/Makefile.am b/gmond/modules/python/Makefile.am
 index f535b07..c8fcac0 100644
 --- a/gmond/modules/python/Makefile.am
@@ -154,7 +146,7 @@ index f535b07..c8fcac0 100644
  	  $(INSTALL_DATA) ../conf.d/modpython.conf $(DESTDIR)$(sysconfdir)/conf.d/modpython.conf
  
 -INCLUDES = @APR_INCLUDES@ @PYTHON_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @PYTHON_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @PYTHON_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/status/Makefile.am b/gmond/modules/status/Makefile.am
 index cd84069..53968fd 100644
 --- a/gmond/modules/status/Makefile.am
@@ -164,7 +156,7 @@ index cd84069..53968fd 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/gmond/modules/system/Makefile.am b/gmond/modules/system/Makefile.am
 index 5fc7fb3..566469e 100644
 --- a/gmond/modules/system/Makefile.am
@@ -174,7 +166,7 @@ index 5fc7fb3..566469e 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
 diff --git a/lib/Makefile.am b/lib/Makefile.am
 index 935c514..6e0499f 100644
 --- a/lib/Makefile.am
@@ -184,20 +176,7 @@ index 935c514..6e0499f 100644
  endif
  
 -INCLUDES = @APR_INCLUDES@
-+INCLUDES = @APR_INCLUDES@ @RPC_CFLAGS@
++INCLUDES = @APR_INCLUDES@ @TIRPC_INCLUDES@
  AM_CFLAGS = -I.. -I. -I$(top_builddir)/include/ $(GCFLAGS) -DSYSCONFDIR='"$(sysconfdir)"'
  
  include_HEADERS = gm_protocol.h
-diff --git a/scripts/fixconfig b/scripts/fixconfig
-index 5be7982..707f62d 100755
---- a/scripts/fixconfig
-+++ b/scripts/fixconfig
-@@ -35,7 +35,7 @@ fi
- 
- # Additional variables set by configure
- CFLAGS="`echo '-g -O2 -fno-strict-aliasing -Wall -D_REENTRANT' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
--LDFLAGS="`echo ' -lpthread  -lapr-1  ' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
-+LDFLAGS="`echo ' -lpthread  -lapr-1 -ltirpc  ' | $AWK '{ gsub(/,/, "\\\\,"); print }'`"
- LIBS="-ldl -lnsl -lnsl -lz -lpcre -lexpat -lconfuse -lpthread "
- VERSION="3.7.2"
- host_cpu="x86_64"
