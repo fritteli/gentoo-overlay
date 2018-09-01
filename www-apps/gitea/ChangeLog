@@ -1,0 +1,6 @@
+*gitea-1.5.0 (01 Sep 2018)
+
+  01 Sep 2018;  <manuel@gentoo.org> +files/app.ini, +files/gitea.confd,
+  +files/gitea.initd-r1, +files/gitea.logrotated, +files/gitea.service,
+  +gitea-1.5.0.ebuild, +metadata.xml:
+  www-apps/gitea:  Add ebuild for version 1.5.0.
