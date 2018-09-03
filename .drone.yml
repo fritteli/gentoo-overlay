@@ -1,0 +1,5 @@
+pipeline:
+  build:
+    image: aegypius/repoman
+    commands:
+      - repoman -x -p
