@@ -1,3 +1,8 @@
+*gitea-1.5.1 (05 Sep 2018)
+
+  05 Sep 2018;  <manuel@gentoo.org> +gitea-1.5.1.ebuild:
+  www-apps/gitea: Add ebuild for version 1.5.1.
+
 *gitea-1.5.0 (01 Sep 2018)
 
   01 Sep 2018;  <manuel@gentoo.org> +files/app.ini, +files/gitea.confd,
