@@ -1,0 +1,39 @@
+Title: Gitlab to be removed from this overlay
+Author: Manuel Friedli <manuel@fritteli.ch>
+Content-Type: text/plain
+Posted: 2018-09-05
+Revision: 1
+News-Item-Format: 1.0
+Display-If-Installed: dev-vcs/gitlab-ci-multi-runner
+Display-If-Installed: dev-vcs/gitlab-runner
+Display-If-Installed: dev-vcs/gitlab-shell
+Display-If-Installed: www-apps/gitlab-ce
+Display-If-Installed: www-servers/gitlab-gitaly
+Display-If-Installed: www-servers/gitlab-pages
+Display-If-Installed: www-servers/gitlab-workhorse
+
+The Gitlab CE ebuild, including its dependencies, is very much out of
+date. As of this writing, the latest release is 11.2.3, yet the most
+recent ebuild is still at 10.5.4.
+
+Since I lack the time and infrastructure to keep up with the fast-paced
+releases of Gitlab, I am forced to give up maintainership of those
+ebuilds. As a consequence, the following ebuilds will be removed from
+this overlay by December 1st, 2018:
+
+ - dev-vcs/gitlab-ci-multi-runner
+ - dev-vcs/gitlab-runner
+ - dev-vcs/gitlab-shell
+ - www-apps/gitlab-ce
+ - www-servers/gitlab-gitaly
+ - www-servers/gitlab-pages
+ - www-servers/gitlab-workhorse
+
+If you're looking for a resource-friendly alternative, why not try out
+Gitea [1] in combination with Drone CI [2]?
+
+Thanks for your understanding,
+fritteli
+
+[1]: www-apps/gitea; https://gitea.io/
+[2]: dev-util/drone; https://drone.io/
