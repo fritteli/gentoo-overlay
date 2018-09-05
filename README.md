@@ -3,7 +3,7 @@ fritteli's Gentoo overlay
 
 Gentoo overlay with some ebuilds that I found either outdated or missing in the official repository or in other overlays. Ebuilds are usually removed from this overlay whenever I find a version available in the official tree or in another overlay (provided I'm satisfied with them).
 
-Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/src/branch/master), as seen by `repoman -p -x`: ![Build status](https://ci.gittr.ch/api/badges/linux/gentoo-overlay/status.svg)
+Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/src/branch/master), as seen by `repoman -p -x`: [![Build status](https://ci.gittr.ch/api/badges/linux/gentoo-overlay/status.svg?branch=master)](https://ci.gittr.ch/linux/gentoo-overlay)
 
 Using with plain (recent) Portage
 ---------------------------------
