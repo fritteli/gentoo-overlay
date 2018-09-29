@@ -1,3 +1,8 @@
+*feedreader-2.3.0 (29 Sep 2018)
+
+  29 Sep 2018; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.3.0.ebuild:
+  net-news/feedreader: Add ebuild for feedreader 2.3.0
+
 *feedreader-2.0.2-r2 (21 Feb 2018)
 
   21 Feb 2018; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.0.2-r2.ebuild,
