@@ -1,5 +1,0 @@
-*iochan-0.0.1_alpha (24 Oct 2016)
-
-  24 Oct 2016; Manuel Friedli <manuel@fritteli.ch> +iochan-0.0.1_alpha.ebuild,
-  +metadata.xml:
-  dev-go/iochan:  added tagged version (0.0.1-alpha)

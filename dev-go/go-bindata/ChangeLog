@@ -1,7 +1,0 @@
-*go-bindata-3.0.8_alpha (24 Oct 2016)
-
-  24 Oct 2016; Manuel Friedli <manuel@fritteli.ch>
-  +files/0001-github-path.patch, +go-bindata-3.0.8_alpha.ebuild, +metadata.xml:
-  dev-go/go-bindata:  added ebuild for go-bindata, which is simply copied from
-  the mrueg overlay, but references the forked go-bindata of fritteli that has a
-  tag instead of referencing an arbitrary commit hash
