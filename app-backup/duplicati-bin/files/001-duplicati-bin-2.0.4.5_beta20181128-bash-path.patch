@@ -1,0 +1,30 @@
+diff --git a/usr/bin/duplicati b/usr/bin/duplicati
+index ca57686..f408fec 100755
+--- a/usr/bin/duplicati
++++ b/usr/bin/duplicati
+@@ -1,4 +1,4 @@
+-#!/usr/bin/bash
++#!/usr/bin/env bash
+ INSTALLDIR=/usr/lib/duplicati
+ export LD_LIBRARY_PATH="${INSTALLDIR}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+ export MONO_PATH=$MONO_PATH:${INSTALLDIR}
+diff --git a/usr/bin/duplicati-cli b/usr/bin/duplicati-cli
+index 4bea938..3fea689 100755
+--- a/usr/bin/duplicati-cli
++++ b/usr/bin/duplicati-cli
+@@ -1,4 +1,4 @@
+-#!/usr/bin/bash
++#!/usr/bin/env bash
+ INSTALLDIR=/usr/lib/duplicati
+ export LD_LIBRARY_PATH="${INSTALLDIR}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+ export MONO_PATH=$MONO_PATH:${INSTALLDIR}
+diff --git a/usr/bin/duplicati-server b/usr/bin/duplicati-server
+index 62d6808..31c3550 100755
+--- a/usr/bin/duplicati-server
++++ b/usr/bin/duplicati-server
+@@ -1,4 +1,4 @@
+-#!/usr/bin/bash
++#!/usr/bin/env bash
+ INSTALLDIR=/usr/lib/duplicati
+ export LD_LIBRARY_PATH="${INSTALLDIR}${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+ export MONO_PATH=$MONO_PATH:${INSTALLDIR}

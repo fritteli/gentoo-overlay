@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="7"
 
 inherit eutils rpm
 
@@ -28,9 +28,18 @@ LICENSE="LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
 
+PATCHES=(
+	"${FILESDIR}/001-${P}-bash-path.patch"
+)
+
 RDEPEND=""
 
-src_install() {
+src_prepare() {
+	eapply ${PATCHES}
+	eapply_user
 	mv "${S}/usr/share/doc/duplicati" "${S}/usr/share/doc/${P}"
+}
+
+src_install() {
 	cp -R "${S}/usr/" "${D}/" || die "install failed"
 }
