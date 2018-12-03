@@ -1,3 +1,9 @@
+*duplicati-bin-2.0.4.5_beta20181128 (03 Dec 2018)
+
+  03 Dec 2018; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.4.5_beta20181128.ebuild:
+  app-backup/duplicati-bin: Add ebuild for latest beta version (2.0.4.5).
+
 *duplicati-bin-2.0.3.3_beta20180402 (03 Apr 2018)
 
   03 Apr 2018; Manuel Friedli <manuel@fritteli.ch>
