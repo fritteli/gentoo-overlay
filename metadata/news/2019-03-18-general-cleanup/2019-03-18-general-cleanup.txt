@@ -1,0 +1,24 @@
+Title: General cleanup of old ebuilds
+Author: Manuel Friedli <manuel@fritteli.ch>
+Posted: 2019-03-18
+Revision: 1
+News-Item-Format: 2.0
+Display-If-Installed: app-backup/duplicati::fritteli
+Display-If-Installed: dev-java/nexus-oss-bin::fritteli
+Display-If-Installed: net-im/palaver::fritteli
+Display-If-Installed: net-im/punjab::fritteli
+
+There are four ebuilds that have been removed from this overlay, as
+they were very old and unmaintained. Namely, they are:
+ - app-backup/duplicati
+ - dev-java/nexus-oss-bin
+ - net-im/palaver
+ - net-im/punjab
+
+Except for app-backup/duplicati, which has been superseded by
+app-backup/duplicati-bin, there are no replacements for the ebuilds
+in this overlay. If you're lucky, you'll find some ebuilds in another
+overlay.
+
+Thanks for your understanding,
+fritteli

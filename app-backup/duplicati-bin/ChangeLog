@@ -1,3 +1,8 @@
+  18 Mar 2019; Manuel Friedli <manuel@fritteli.ch>
+  -duplicati-bin-2.0.2.1_beta20170801-r1.ebuild,
+  -duplicati-bin-2.0.3.3_beta20180402.ebuild:
+  app-backup/duplicati-bin: Purge old versions.
+
   03 Dec 2018; Manuel Friedli <manuel@fritteli.ch>
   +files/001-duplicati-bin-2.0.4.5_beta20181128-bash-path.patch,
   duplicati-bin-2.0.4.5_beta20181128.ebuild:
