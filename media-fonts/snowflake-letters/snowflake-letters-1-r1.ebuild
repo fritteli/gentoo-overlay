@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -10,11 +10,11 @@ MY_P="${MY_PN}"
 S="${WORKDIR}"
 DESCRIPTION="Snowflake Letters Truetype Font"
 HOMEPAGE="http://www.fontstock.net/9746/Snowflake-Letters.html"
-SRC_URI="http://www.fontstock.net/font/9746/Snowflake-Letters.zip"
+SRC_URI="http://www.fontstock.net/font/9746/Snowflake-Letters.zip -> snowflakeletters.zip"
 LICENSE="all-rights-reserved"
 
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="~amd64 ~x86"
 RESTRICT="fetch"
 IUSE=""
 
