@@ -20,11 +20,11 @@ If you prefer to use the overlay hostet at GitHub (which tends to be more stable
 
 You may also use [`layman`](https://wiki.gentoo.org/wiki/Layman) to manage this overlay. If you choose this method, you will be using the overlay hosted at GitHub.
 
-If you haven't used layman yet, just install it running these commands:
+For detailed information regarding layman, please refer to the [official documentation](https://wiki.gentoo.org/wiki/Layman). This section only covers the process in a very brief manner.
 
-	USE=git emerge -va layman
-	echo PORTDIR_OVERLAY=\"\" > /var/lib/layman/make.conf
-	echo "source /var/lib/layman/make.conf" >> /etc/make.conf
+If you haven't used layman yet, just install it running this command:
+
+	USE="git sync-plugin-portage" emerge layman
 
 Then you can add this overlay wih:
 
