@@ -3,6 +3,6 @@ name: default
 
 steps:
 - name: run-repoman
-  image: aegypius/repoman
+  image: aegypius/repoman:latest
   commands:
   - repoman -x -p
