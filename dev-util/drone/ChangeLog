@@ -1,0 +1,5 @@
+*drone-1.1.0 (03 May 2019)
+
+  03 May 2019;  <manuel@gentoo.org> +drone-1.1.0.ebuild,
+  +files/drone-1.1.0.confd, +files/drone-1.1.0.initd, +metadata.xml:
+  dev-util/drone: Add ebuild for version 1.1.0
