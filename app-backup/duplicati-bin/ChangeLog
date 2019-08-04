@@ -1,3 +1,10 @@
+*duplicati-bin-2.0.4.23_beta20190714 (04 Aug 2019)
+
+  04 Aug 2019; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.4.23_beta20190714.ebuild,
+  +files/001-duplicati-bin-2.0.4.23_beta20190714-bash-path.patch:
+  app-backup/duplicati-bin: Add ebuild for latest beta version.
+
   18 Mar 2019; Manuel Friedli <manuel@fritteli.ch>
   -duplicati-bin-2.0.2.1_beta20170801-r1.ebuild,
   -duplicati-bin-2.0.3.3_beta20180402.ebuild:
