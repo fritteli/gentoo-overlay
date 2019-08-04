@@ -1,3 +1,11 @@
+*drone-1.2.3 (04 Aug 2019)
+
+  04 Aug 2019; Manuel Friedli <manuel@fritteli.ch> +drone-1.2.3.ebuild,
+  +files/drone-1.2.3.confd, +files/drone-1.2.3.initd, files/drone-1.1.0.confd,
+  files/drone-1.1.0.initd:
+  dev-util/drone: Add ebuild for version 1.2.3  Also, make all files in files/
+  non-executable.
+
 *drone-1.1.0 (03 May 2019)
 
   03 May 2019;  <manuel@gentoo.org> +drone-1.1.0.ebuild,
