@@ -5,6 +5,7 @@
 description="Drone CI - Automate software testing and delivery"
 
 container_name_file=/var/run/drone-container.name
+drone_version=1.2.3
 
 : ${DRONE_GITEA_SERVER:=http://localhost/
 : ${DRONE_SERVER_HOST:=localhost}
@@ -27,7 +28,7 @@ depend() {
 }
 
 pre_start() {
-	docker pull drone/drone:1.1.0
+	docker pull drone/drone:${drone_version}
 }
 
 start() {
@@ -48,7 +49,7 @@ start() {
 	  --restart=always \
 	  --detach=true \
 	  --name=drone \
-	  drone/drone:1.1.0 \
+	  drone/drone:${drone_version} \
 	> ${container_name_file}
 }
 
