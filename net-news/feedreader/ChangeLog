@@ -1,3 +1,8 @@
+*feedreader-2.10.0 (04 Aug 2019)
+
+  04 Aug 2019; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.10.0.ebuild:
+  net-news/feedreader: Add ebuild for version 2.10.0.
+
   02 May 2019;  <manuel@gentoo.org> -feedreader-2.3.0.ebuild:
   net-news/feedreader: Remove obsolete ebuild.
 
