@@ -1,3 +1,10 @@
+*drone-1.5.1 (01 Oct 2019)
+
+  01 Oct 2019;  <manuel@gentoo.org> +drone-1.5.1.ebuild,
+  +files/drone-1.5.1.confd, +files/drone-1.5.1.initd, -drone-1.1.0.ebuild,
+  -files/drone-1.1.0.confd, -files/drone-1.1.0.initd:
+  dev-util/drone:  Add ebuild for version 1.5.1, purge ebuild for versoin 1.1.0.
+
 *drone-1.2.3 (04 Aug 2019)
 
   04 Aug 2019; Manuel Friedli <manuel@fritteli.ch> +drone-1.2.3.ebuild,
