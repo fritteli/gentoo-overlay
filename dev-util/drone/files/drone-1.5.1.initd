@@ -27,7 +27,7 @@ depend() {
 }
 
 pre_start() {
-	docker pull drone/drone:1.1.0
+	docker pull drone/drone:1.5.1
 }
 
 start() {
@@ -48,7 +48,7 @@ start() {
 	  --restart=always \
 	  --detach=true \
 	  --name=drone \
-	  drone/drone:1.1.0 \
+	  drone/drone:1.5.1 \
 	> ${container_name_file}
 }
 
