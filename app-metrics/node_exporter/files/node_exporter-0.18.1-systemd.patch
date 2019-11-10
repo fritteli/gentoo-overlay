@@ -1,0 +1,15 @@
+Index: node_exporter-0.18.1/src/github.com/prometheus/node_exporter/examples/systemd/node_exporter.service
+===================================================================
+--- node_exporter-0.18.1.orig/src/github.com/prometheus/node_exporter/examples/systemd/node_exporter.service
++++ node_exporter-0.18.1/src/github.com/prometheus/node_exporter/examples/systemd/node_exporter.service
+@@ -3,8 +3,8 @@ Description=Node Exporter
+ 
+ [Service]
+ User=node_exporter
+-EnvironmentFile=/etc/sysconfig/node_exporter
+-ExecStart=/usr/sbin/node_exporter $OPTIONS
++EnvironmentFile=/etc/sysconfig/node_exporter/sysconfig.node_exporter
++ExecStart=/usr/bin/node_exporter $OPTIONS
+ 
+ [Install]
+ WantedBy=multi-user.target
