@@ -1,0 +1,15 @@
+# Timer for calculating host statistics for prometheus
+# Written by Manuel Friedli
+# Changelog:
+# 2019-11-10: Inception
+
+[Unit]
+Description=Timer for calculating CPU/Memory stats for prometheus
+
+[Timer]
+OnBootSec=1s
+OnUnitInactiveSec=10s
+AccuracySec=1s
+
+[Install]
+WantedBy=multi-user.target
