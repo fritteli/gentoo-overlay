@@ -1,0 +1,10 @@
+[Unit]
+Description=MySqld Exporter
+
+[Service]
+User=mysqld_exporter
+EnvironmentFile=/etc/conf.d/mysqld_exporter
+ExecStart=/usr/bin/mysqld_exporter $EXPORTER_FLAGS
+
+[Install]
+WantedBy=multi-user.target
