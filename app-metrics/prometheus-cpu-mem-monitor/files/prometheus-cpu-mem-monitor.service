@@ -1,0 +1,11 @@
+# Calculate host statistics for prometheus
+# Written by Manuel Friedli
+# Changelog:
+# 2019-11-10: Inception
+
+[Unit]
+Description=Calculate CPU/Memory stats for prometheus
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/prometheus-cpu-mem-monitor.sh
