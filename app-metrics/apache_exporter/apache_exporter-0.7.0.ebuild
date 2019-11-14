@@ -21,8 +21,8 @@ DEPEND=">=dev-lang/go-1.12
 	>=dev-util/promu-0.3.0"
 
 pkg_setup() {
-echo	enewgroup ${PN}
-echo	enewuser ${PN} -1 -1 -1 ${PN}
+	enewgroup ${PN}
+	enewuser ${PN} -1 -1 -1 ${PN}
 }
 
 src_prepare() {
@@ -33,7 +33,7 @@ src_prepare() {
 src_compile() {
 	pushd src/${EGO_PN} || die
 	mkdir -p bin || die
-	GO111MODULE=on GOPATH="${S}" GOCACHE="${T}"/go-cache promu build -v --prefix apache_exporter || die
+	GOPATH="${S}" GOCACHE="${T}"/go-cache promu build -v --prefix apache_exporter || die
 	popd || die
 }
 
@@ -46,7 +46,7 @@ src_install() {
 	doins "${FILESDIR}/sysconfig.apache_exporter"
 	popd || die
 	keepdir /var/log/apache_exporter
-echo	fowners ${PN}:${PN} /var/lib/apache_exporter /var/log/apache_exporter
+	fowners ${PN}:${PN} /var/lib/apache_exporter /var/log/apache_exporter
 	newinitd "${FILESDIR}"/${PN}.initd ${PN}
 	newconfd "${FILESDIR}"/${PN}.confd ${PN}
 }

@@ -1,3 +1,6 @@
+  14 Nov 2019;  <manuel@gentoo.org> apache_exporter-0.7.0.ebuild:
+  app-metrics/apache_exporter: Fix ebuild for apache_exporter.
+
 *node_exporter-0.18.1 (10 Nov 2019)
 
   10 Nov 2019;  <manuel@gentoo.org> +files/node_exporter-0.18.1-systemd.patch,
