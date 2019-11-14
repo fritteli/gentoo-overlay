@@ -1,0 +1,6 @@
+*prometheus-2.13.1 (14 Nov 2019)
+
+  14 Nov 2019;  <manuel@gentoo.org> +files/prometheus-3.initd,
+  +files/prometheus.confd, +files/prometheus.initd, +files/prometheus.service,
+  +metadata.xml, +prometheus-2.13.1.ebuild:
+  app-metrics/prometheus: Add ebuild with systemd service file.
