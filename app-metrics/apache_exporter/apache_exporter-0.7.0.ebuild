@@ -46,7 +46,7 @@ src_install() {
 	doins "${FILESDIR}/sysconfig.apache_exporter"
 	popd || die
 	keepdir /var/log/apache_exporter
-	fowners ${PN}:${PN} /var/lib/apache_exporter /var/log/apache_exporter
+	fowners ${PN}:${PN} /var/log/apache_exporter
 	newinitd "${FILESDIR}"/${PN}.initd ${PN}
 	newconfd "${FILESDIR}"/${PN}.confd ${PN}
 }
