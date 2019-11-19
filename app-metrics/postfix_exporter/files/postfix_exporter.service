@@ -1,0 +1,10 @@
+[Unit]
+Description=Postfix Exporter
+
+[Service]
+User=postfix_exporter
+EnvironmentFile=/etc/conf.d/postfix_exporter
+ExecStart=/usr/bin/postfix_exporter $command_args
+
+[Install]
+WantedBy=multi-user.target
