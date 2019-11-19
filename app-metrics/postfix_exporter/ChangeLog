@@ -1,3 +1,9 @@
+*postfix_exporter-0.2.0 (19 Nov 2019)
+
+  19 Nov 2019;  <manuel@gentoo.org> +files/postfix_exporter-1.confd,
+  +postfix_exporter-0.2.0.ebuild:
+  app-metrics/postfix_exporter: Add ebuild for version 0.2.0.
+
 *postfix_exporter-0.1.2 (19 Nov 2019)
 
   19 Nov 2019;  <manuel@gentoo.org> +files/postfix_exporter.confd,
