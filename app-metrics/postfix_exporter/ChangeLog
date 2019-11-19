@@ -1,0 +1,7 @@
+*postfix_exporter-0.1.2 (19 Nov 2019)
+
+  19 Nov 2019;  <manuel@gentoo.org> +files/postfix_exporter.confd,
+  +files/postfix_exporter.initd, +files/postfix_exporter.logrotated,
+  +files/postfix_exporter.service, +metadata.xml,
+  +postfix_exporter-0.1.2.ebuild:
+  app-metrics/postfix_exporter: Add ebuild with systemd unit file.
