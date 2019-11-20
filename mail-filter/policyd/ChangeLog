@@ -1,3 +1,6 @@
+  20 Nov 2019;  <manuel@gentoo.org> files/policyd.service:
+  mail-filter/policyd: Fix user/group in systemd unit file.
+
 *policyd-1.82-r3 (20 Nov 2019)
 
   20 Nov 2019;  <manuel@gentoo.org> +files/policyd-cleanup.cron,
