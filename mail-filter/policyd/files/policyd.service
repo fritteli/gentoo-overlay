@@ -2,7 +2,8 @@
 Description=Policyd
 
 [Service]
-User=policyd
+User=nobody
+Group=nobody
 EnvironmentFile=/etc/conf.d/policyd
 ExecStart=/usr/sbin/policyd -c ${POLICYD_CONFIG}
 
