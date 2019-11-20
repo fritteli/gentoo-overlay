@@ -2,10 +2,7 @@
 Description=Policyd
 
 [Service]
-User=nobody
-Group=nobody
-EnvironmentFile=/etc/conf.d/policyd
-ExecStart=/usr/sbin/policyd -c ${POLICYD_CONFIG}
+ExecStart=/usr/sbin/policyd -c /etc/policyd.conf
 
 [Install]
 WantedBy=multi-user.target
