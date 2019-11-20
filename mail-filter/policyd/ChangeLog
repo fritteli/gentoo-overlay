@@ -1,0 +1,7 @@
+*policyd-1.82-r3 (20 Nov 2019)
+
+  20 Nov 2019;  <manuel@gentoo.org> +files/policyd-cleanup.cron,
+  +files/policyd-makefile.patch, +files/policyd-post182.patch,
+  +files/policyd.confd, +files/policyd.rc, +files/policyd.service,
+  +metadata.xml, +policyd-1.82-r3.ebuild:
+  mail-filter/policyd: Add ebuild with systemd unit file.
