@@ -12,7 +12,7 @@ DESCRIPTION="Get stock and mutual fund quotes from various exchanges"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
@@ -30,7 +30,10 @@ RDEPEND="
 	dev-perl/HTTP-Cookies
 	dev-perl/HTTP-Message
 	dev-perl/JSON
+	dev-perl/JSON-Parse
 	dev-perl/LWP-Protocol-https
+	dev-perl/String-Util
+	dev-perl/Text-Template
 	dev-perl/libwww-perl
 	dev-perl/Mozilla-CA
 	virtual/perl-Time-Piece
