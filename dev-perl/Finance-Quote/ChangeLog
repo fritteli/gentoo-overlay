@@ -1,0 +1,5 @@
+*Finance-Quote-1.490.0 (07 Mar 2020)
+
+  07 Mar 2020; Manuel Friedli <manuel@fritteli.ch>
+  +Finance-Quote-1.490.0.ebuild, +metadata.xml:
+  dev-perl/Finance-Quote: Add version 1.490 that contains MorningstarCH.
