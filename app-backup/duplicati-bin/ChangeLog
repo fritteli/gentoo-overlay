@@ -1,3 +1,10 @@
+*duplicati-bin-2.0.5.1_beta20200118-r1 (18 Mar 2020)
+
+  18 Mar 2020; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.5.1_beta20200118-r1.ebuild,
+  -duplicati-bin-2.0.5.1_beta20200118.ebuild:
+  app-backup/duplicati-bin: Add ~x86 keyword.
+
 *duplicati-bin-2.0.4.23_beta20190714 (04 Aug 2019)
 
   04 Aug 2019; Manuel Friedli <manuel@fritteli.ch>
