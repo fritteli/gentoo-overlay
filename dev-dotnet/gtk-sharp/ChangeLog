@@ -1,0 +1,5 @@
+*gtk-sharp-2.12.45 (19 Mar 2020)
+
+  19 Mar 2020; Manuel Friedli <manuel@fritteli.ch> +gtk-sharp-2.12.45.ebuild,
+  +metadata.xml:
+  dev-dotnet/gtk-sharp: Add ebuild for version 2.12.45
