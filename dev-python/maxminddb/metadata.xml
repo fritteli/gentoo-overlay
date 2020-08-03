@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="pypi">maxminddb</remote-id>
+		<remote-id type="github">maxmind/MaxMind-DB-Reader-python</remote-id>
+	</upstream>
+</pkgmetadata>
