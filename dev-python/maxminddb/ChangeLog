@@ -1,0 +1,5 @@
+*maxminddb-2.0.2 (03 Aug 2020)
+
+  03 Aug 2020; Manuel Friedli <manuel@fritteli.ch> +maxminddb-2.0.2.ebuild,
+  +metadata.xml:
+  dev-python/maxminddb: Add ebuild for current version.
