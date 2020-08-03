@@ -1,0 +1,5 @@
+*geoip2-4.0.2 (03 Aug 2020)
+
+  03 Aug 2020; Manuel Friedli <manuel@fritteli.ch> +geoip2-4.0.2.ebuild,
+  +metadata.xml:
+  dev-python/geoip2: Add ebuild for latest version.
