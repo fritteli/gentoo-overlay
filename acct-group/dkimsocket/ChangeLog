@@ -1,0 +1,6 @@
+*dkimsocket-0 (07 Sep 2020)
+
+  07 Sep 2020; Manuel Friedli <manuel@fritteli.ch> +dkimsocket-0.ebuild,
+  +metadata.xml:
+  acct-group/dkimsocket: Add ebuild.  As per
+  https://wiki.gentoo.org/wiki/OpenDKIM
