@@ -1,0 +1,5 @@
+*ddos-mitigator-2.1.0 (17 Sep 2020)
+
+  17 Sep 2020; Manuel Friedli <manuel@gentoo.org> +ddos-mitigator-2.1.0.ebuild,
+  +metadata.xml:
+  net-analyzer/ddos-mitigator: Add ebuild for version 2.1.0.
