@@ -1,0 +1,5 @@
+*drone-0 (25 Sep 2020)
+
+  25 Sep 2020; Manuel Friedli <manuel@gentoo.org> +drone-0.ebuild,
+  +metadata.xml:
+  acct-user/drone: Initial add.
