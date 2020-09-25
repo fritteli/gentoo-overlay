@@ -38,6 +38,9 @@ src_install() {
 
 	insinto "/etc/drone"
 	doins "${FILESDIR}/app.ini"
+
+	fowners drone:drone /etc/drone
+	fperms 0700 /etc/drone
 	fowners drone:drone /etc/drone/app.ini
 	fperms 0600 /etc/drone/app.ini
 }

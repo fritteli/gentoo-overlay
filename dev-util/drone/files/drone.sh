@@ -8,21 +8,19 @@ fi
 
 . "${DRONE_CONFIG_FILE}"
 
-publishes=""
+docker_args=""
+
+for var in "${!DRONE_@}" ; do
+	docker_args="${docker_args} --env=${var}=${!var} "
+done
 
 for p in ${DOCKER_PUBLISH} ; do
-	publishes="${publishes} --publish=${p}"
+	docker_args="${docker_args} --publish=${p}"
 done
 
 docker run \
   --volume=/var/lib/drone:/data \
-  --env=DRONE_GITEA_SERVER=${DRONE_GITEA_SERVER} \
-  --env=DRONE_GITEA_CLIENT_ID=${DRONE_GITEA_CLIENT_ID} \
-  --env=DRONE_GITEA_CLIENT_SECRET=${DRONE_GITEA_CLIENT_SECRET} \
-  --env=DRONE_RPC_SECRET=${DRONE_RPC_SECRET} \
-  --env=DRONE_SERVER_HOST=${DRONE_SERVER_HOST} \
-  --env=DRONE_SERVER_PROTO=${DRONE_SERVER_PROTO} \
-  ${publishes} \
+  ${docker_args}
   --restart=always \
   --detach=true \
   --name=drone \
