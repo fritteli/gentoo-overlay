@@ -43,4 +43,8 @@ src_install() {
 	fperms 0700 /etc/drone
 	fowners drone:drone /etc/drone/app.ini
 	fperms 0600 /etc/drone/app.ini
+
+	keepdir /var/lib/drone
+	fowners drone:drone /var/lib/drone
+	fperms 0700 /var/lib/drone
 }
