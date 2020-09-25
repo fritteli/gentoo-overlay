@@ -1,3 +1,13 @@
+  25 Sep 2020; Manuel Friedli <manuel@gentoo.org> drone-1.9.1.ebuild,
+  files/drone.sh:
+  dev-util/drone: Handle all variables in config file generically.
+
+*drone-1.9.1 (25 Sep 2020)
+
+  25 Sep 2020; Manuel Friedli <manuel@gentoo.org> +drone-1.9.1.ebuild,
+  +files/app.ini, +files/drone.service, +files/drone.sh:
+  dev-util/drone: Add ebuild for drone 1.9.1; targeted at systemd.
+
 *drone-1.5.1 (01 Oct 2019)
 
   01 Oct 2019;  <manuel@gentoo.org> +drone-1.5.1.ebuild,
