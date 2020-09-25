@@ -1,0 +1,21 @@
+[Unit]
+Description=drone.io docker runner
+Documentation=https://docs.drone.io/
+
+After=network.target
+Requires=network.target
+
+[Service]
+User=drone-runner-docker
+Group=drone-runner-docker
+
+Environment="RUNNER_CONFIG_FILE=/etc/drone-runner-docker/app.ini"
+
+ExecStart=drone-runner-docker.sh
+ExecStop=docker container stop drone-runner
+ExecStop=docker container rm drone-runner
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
