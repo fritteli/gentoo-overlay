@@ -1,0 +1,7 @@
+*drone-runner-docker-1.5.2 (25 Sep 2020)
+
+  25 Sep 2020; Manuel Friedli <manuel@gentoo.org>
+  +drone-runner-docker-1.5.2.ebuild, +files/app.ini,
+  +files/drone-runner-docker.service, +files/drone-runner-docker.sh,
+  +metadata.xml:
+  dev-util/drone-runner-docker: Initial add
