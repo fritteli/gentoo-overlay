@@ -18,10 +18,12 @@ for p in ${DOCKER_PUBLISH} ; do
 	docker_args="${docker_args} --publish=${p}"
 done
 
+docker_args="${docker_args} ${DOCKER_DRONE_EXTRA_ARGS}"
+
 docker run \
   --volume=/var/lib/drone:/data \
   ${docker_args} \
   --restart=always \
-  --detach=true \
+  --detach=false \
   --name=drone \
   drone/drone:<VERSION>
