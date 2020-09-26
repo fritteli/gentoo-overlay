@@ -10,7 +10,5 @@
 			<name>Manuel Friedli</name>
 		</owner>
 		<source type="git">https://gittr.ch/linux/gentoo-overlay.git</source>
-		<feed>https://gittr.ch/linux/gentoo-overlay/commits/master.atom</feed>
-		<feed>https://gittr.ch/linux/gentoo-overlay/issues.atom</feed>
 	</repo>
 </repositories>
