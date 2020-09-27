@@ -1,3 +1,8 @@
+  27 Sep 2020; Manuel Friedli <manuel@gentoo.org> -drone-1.2.3.ebuild,
+  -drone-1.5.1.ebuild, -files/drone-1.2.3.confd, -files/drone-1.2.3.initd,
+  -files/drone-1.5.1.confd, -files/drone-1.5.1.initd:
+  dev-util/drone: Purge old ebuilds.
+
   25 Sep 2020; Manuel Friedli <manuel@gentoo.org> drone-1.9.1.ebuild,
   files/drone.sh:
   dev-util/drone: Handle all variables in config file generically.
