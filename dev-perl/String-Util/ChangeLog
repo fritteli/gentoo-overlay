@@ -1,5 +1,0 @@
-*String-Util-1.260.0 (07 Mar 2020)
-
-  07 Mar 2020; Manuel Friedli <manuel@fritteli.ch> +String-Util-1.260.0.ebuild,
-  +metadata.xml:
-  dev-perl/String-Util: Add ebuild  It's a dependency of dev-perl/Finance-Quote.
