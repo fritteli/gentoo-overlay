@@ -1,3 +1,0 @@
-  13 Jul 2018;  <manuel@gentoo.org> ganglia-3.7.2.ebuild:
-  sys-cluster/ganglia:   Add ebuild for ganglia-3.7.2 with a patch to use tirpc
-  instead of Sun RPC.
