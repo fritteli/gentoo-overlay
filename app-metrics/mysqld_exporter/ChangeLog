@@ -1,3 +1,7 @@
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org>
+  -mysqld_exporter-0.11.0.ebuild:
+  app-metrics/mysqld_exporter: Purge old ebuild
+
 *mysqld_exporter-0.12.1_p20200622 (27 Sep 2020)
 
   27 Sep 2020; Manuel Friedli <manuel@gentoo.org>
