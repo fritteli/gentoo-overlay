@@ -39,8 +39,8 @@ src_install() {
 	dobin apache_exporter/apache_exporter
 	dodoc README.md
 	systemd_dounit "${FILESDIR}/${PN}.service"
-	insinto /etc/sysconfig/apache_exporter
-	doins "${FILESDIR}/sysconfig.apache_exporter"
+	insinto /etc/sysconfig
+	newins "${FILESDIR}/sysconfig.apache_exporter" apache_exporter
 	popd || die
 	keepdir /var/log/apache_exporter
 	fowners apache_exporter:apache_exporter /var/log/apache_exporter
