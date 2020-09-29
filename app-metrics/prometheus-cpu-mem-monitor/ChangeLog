@@ -1,3 +1,10 @@
+*prometheus-cpu-mem-monitor-0.0.0.1-r1 (29 Sep 2020)
+
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org>
+  +prometheus-cpu-mem-monitor-0.0.0.1-r1.ebuild,
+  -prometheus-cpu-mem-monitor-0.0.0.1.ebuild:
+  app-metrics/prometheus-cpu-mem-monitor: GLEP 81 compatible
+
 *prometheus-cpu-mem-monitor-0.0.0.1 (11 Nov 2019)
 
   11 Nov 2019;  <manuel@gentoo.org> +files/prometheus-cpu-mem-monitor.service,
