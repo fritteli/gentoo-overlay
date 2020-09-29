@@ -1,3 +1,9 @@
+*postfix_exporter-0.2.0-r1 (29 Sep 2020)
+
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org>
+  +postfix_exporter-0.2.0-r1.ebuild, -postfix_exporter-0.2.0.ebuild:
+  app-metrics/postfix_exporter: Make v0.2.0 GLEP 81 conformant
+
 *postfix_exporter-0.2.0 (19 Nov 2019)
 
   19 Nov 2019;  <manuel@gentoo.org> +files/postfix_exporter-1.confd,

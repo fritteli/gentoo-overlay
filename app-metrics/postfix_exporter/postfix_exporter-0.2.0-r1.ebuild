@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 EGO_VENDOR=( "github.com/coreos/go-systemd bebb2b01b0473b183e4624aaf8e23ae6f4b22417"
 	"github.com/coreos/pkg 97fdf19511ea361ae1c100dd393cc47f8dcfa1e1"
@@ -17,7 +17,7 @@ EGO_VENDOR=( "github.com/coreos/go-systemd bebb2b01b0473b183e4624aaf8e23ae6f4b22
 	"github.com/alecthomas/units f65c72e2690dc4b403c8bd637baf4611cd4c069b"
 	"github.com/hpcloud/tail a30252cb686a21eb2d0b98132633053ec2f7f1e5" )
 
-inherit user golang-build golang-vcs-snapshot systemd
+inherit golang-build golang-vcs-snapshot systemd
 
 EGO_PN="github.com/kumina/postfix_exporter"
 ARCHIVE_URI="https://${EGO_PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
@@ -33,12 +33,9 @@ IUSE="systemd"
 
 DEPEND="systemd? ( sys-apps/systemd )"
 
-RESTRICT="test"
+RDEPEND="acct-user/postfix_exporter"
 
-pkg_setup() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 -1 ${PN}
-}
+RESTRICT="test"
 
 src_compile() {
 	pushd src/${EGO_PN} || die
@@ -53,7 +50,7 @@ src_install() {
 	local dir
 	for dir in /var/{lib,log}/${PN}; do
 		keepdir "${dir}"
-		fowners ${PN}:${PN} "${dir}"
+		fowners postfix_exporter:postfix_exporter "${dir}"
 	done
 	newinitd "${FILESDIR}"/${PN}.initd ${PN}
 	newconfd "${FILESDIR}"/${PN}-1.confd ${PN}
