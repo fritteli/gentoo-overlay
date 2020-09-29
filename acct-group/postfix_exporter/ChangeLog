@@ -1,0 +1,5 @@
+*postfix_exporter-0 (29 Sep 2020)
+
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org> +metadata.xml,
+  +postfix_exporter-0.ebuild:
+  acct-group/postfix_exporter: Add postfix_exporter group

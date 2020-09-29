@@ -1,3 +1,8 @@
+*prometheus-2.19.1 (29 Sep 2020)
+
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org> +prometheus-2.19.1.ebuild:
+  app-metrics/prometheus: GLEP 81 conformant prometheus 2.19.1
+
 *prometheus-2.13.1 (14 Nov 2019)
 
   14 Nov 2019;  <manuel@gentoo.org> +files/prometheus-3.initd,
