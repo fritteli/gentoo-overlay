@@ -1,3 +1,9 @@
+*apache_exporter-0.8.0 (29 Sep 2020)
+
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org> +apache_exporter-0.8.0.ebuild:
+  app-metrics/apache_exporter: Add ebuild for versin 0.8.0.  This is conforming
+  to GLEP 81.
+
   14 Nov 2019;  <manuel@gentoo.org> apache_exporter-0.7.0.ebuild:
   app-metrics/apache_exporter: Fix ebuild again.
 
