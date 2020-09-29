@@ -3,7 +3,7 @@ Description=Apache Exporter
 
 [Service]
 User=apache_exporter
-EnvironmentFile=/etc/sysconfig/apache_exporter/sysconfig.apache_exporter
+EnvironmentFile=/etc/sysconfig/apache_exporter
 ExecStart=/usr/bin/apache_exporter $OPTIONS
 
 [Install]
