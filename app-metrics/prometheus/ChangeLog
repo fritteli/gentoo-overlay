@@ -1,3 +1,6 @@
+  29 Sep 2020; Manuel Friedli <manuel@gentoo.org> -prometheus-2.13.1.ebuild:
+  app-metrics/prometheus: Purge old ebuild
+
   29 Sep 2020; Manuel Friedli <manuel@gentoo.org> prometheus-2.19.1.ebuild:
   app-metrics/prometheus: Add forgotten service file
 

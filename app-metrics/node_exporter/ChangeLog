@@ -1,6 +1,0 @@
-*node_exporter-0.18.1 (10 Nov 2019)
-
-  10 Nov 2019;  <manuel@gentoo.org> +files/node_exporter-0.18.1-systemd.patch,
-  +files/node_exporter-1.initd, +files/node_exporter.confd, +metadata.xml,
-  +node_exporter-0.18.1.ebuild:
-  app-metrics/node_exporter: Add systemd-patched ebuild fpr version 0.18.1.
