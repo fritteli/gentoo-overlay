@@ -45,6 +45,7 @@ src_install() {
 	dosym ../../usr/share/prometheus/console_libraries /etc/prometheus/console_libraries
 	dosym ../../usr/share/prometheus/consoles /etc/prometheus/consoles
 
+	systemd_dounit "${FILESDIR}"/prometheus.service
 	newinitd "${FILESDIR}"/prometheus.initd prometheus
 	newconfd "${FILESDIR}"/prometheus.confd prometheus
 	keepdir /var/log/prometheus
