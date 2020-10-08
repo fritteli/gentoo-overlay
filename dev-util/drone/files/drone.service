@@ -24,7 +24,7 @@ Environment="DOCKER_DRONE_CONFIG_FILE=/etc/drone/app.ini"
 
 ExecStart=drone.sh
 ExecStop=docker container stop drone
-ExecStop=docker container rm drone
+ExecStopPost=docker container rm drone
 
 Restart=on-failure
 
