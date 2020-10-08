@@ -1,0 +1,24 @@
+[Unit]
+Description=Reposilite Maven Repository hosting server
+Documentation=https://reposilite.com/docs/about
+
+AssertPathIsDirectory=/var/lib/reposilite-data
+AssertPathIsReadWrite=/var/lib/reposilite-data
+
+After=network.target
+Requires=network.target
+
+[Service]
+User=reposilite
+Group=reposilite
+
+Environment="DOCKER_REPOSILITE_CONFIG_FILE=/etc/reposilite/app.ini"
+
+ExecStart=reposilite.sh
+ExecStop=docker container stop reposilite
+ExecStopPost=docker container rm reposilite
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

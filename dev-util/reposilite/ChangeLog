@@ -1,0 +1,6 @@
+*reposilite-2.9.1 (08 Oct 2020)
+
+  08 Oct 2020; Manuel Friedli <manuel@gentoo.org> +files/app.ini,
+  +files/reposilite-2.9.1.cdn, +files/reposilite.service, +files/reposilite.sh,
+  +metadata.xml, +reposilite-2.9.1.ebuild:
+  dev-util/reposilite: Add untested ebuild for version 2.9.1
