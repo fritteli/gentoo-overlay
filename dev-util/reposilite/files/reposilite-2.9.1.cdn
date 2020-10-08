@@ -26,7 +26,6 @@ diskQuota: 10GB
 repositories [
   releases
   snapshots
-  .private
 ]
 # Allow to omit name of the main repository in request
 # e.g. /org/panda-lang/reposilite will be redirected to /releases/org/panda-lang/reposilite
