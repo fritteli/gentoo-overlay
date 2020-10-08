@@ -1,0 +1,5 @@
+*reposilite-0 (08 Oct 2020)
+
+  08 Oct 2020; Manuel Friedli <manuel@gentoo.org> +metadata.xml,
+  +reposilite-0.ebuild:
+  acct-group/reposilite: Ad group for dev-util/reposilite
