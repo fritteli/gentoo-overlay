@@ -13,7 +13,7 @@ Environment="RUNNER_CONFIG_FILE=/etc/drone-runner-docker/app.ini"
 
 ExecStart=drone-runner-docker.sh
 ExecStop=docker container stop drone-runner
-ExecStop=docker container rm drone-runner
+ExecStopPost=docker container rm drone-runner
 
 Restart=on-failure
 
