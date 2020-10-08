@@ -8,8 +8,8 @@ fi
 
 . "${DOCKER_REPOSILITE_CONFIG_FILE}"
 
-docker_args="--environment=REPOSILITE_OPTS='${REPOSILITE_OPTS}'"
-docker_args="${docker_args} --environment=JAVA_OPTS='${JAVA_OPTS}'"
+docker_args="--env=REPOSILITE_OPTS=${REPOSILITE_OPTS}"
+docker_args="${docker_args} --env=JAVA_OPTS=${JAVA_OPTS}"
 
 for p in ${DOCKER_PUBLISH} ; do
 	docker_args="${docker_args} --publish=${p}"
@@ -18,8 +18,8 @@ done
 docker_args="${docker_args} ${DOCKER_REPOSILITE_EXTRA_ARGS}"
 
 docker run \
-  --mount type=bind,source=/etc/reposilite/reposilite.cdn,target=/app/reposilite-host.cdn
-  --volume=/var/lib/reposilite-data:/app/data \
+  --mount type=bind,source=/etc/reposilite/reposilite.cdn,target=/app/reposilite-host.cdn \
+  --volume=reposilite-data:/app/data \
   ${docker_args} \
   --restart=always \
   --detach=false \

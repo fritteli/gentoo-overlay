@@ -36,14 +36,10 @@ src_install() {
 
 	insinto "/etc/reposilite"
 	doins "${FILESDIR}/app.ini"
-	newins "${FILESDIR}/reposilite-2.9.1.cdn" "reposilite.cdn"
+	newins "${FILESDIR}/reposilite-2.9.1.cdn" reposilite.cdn
 
 	fowners reposilite /etc/reposilite
 	fperms 0700 /etc/reposilite
 	fowners reposilite:reposilite /etc/reposilite/app.ini /etc/reposilite/reposilite.cdn
 	fperms 0600 /etc/reposilite/app.ini /etc/reposilite/reposilite.cdn
-
-	keepdir /var/lib/reposilite-data
-	fowners reposilite:reposilite /var/lib/reposilite-data
-	fperms 0700 /var/lib/reposilite-data
 }
