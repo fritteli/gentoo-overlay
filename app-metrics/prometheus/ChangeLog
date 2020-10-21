@@ -1,3 +1,8 @@
+*prometheus-2.21.0 (21 Oct 2020)
+
+  21 Oct 2020; Manuel Friedli <manuel@gentoo.org> +prometheus-2.21.0.ebuild:
+  app-metrics/prometheus: Add latest ebuild with systemd support.
+
   29 Sep 2020; Manuel Friedli <manuel@gentoo.org> -prometheus-2.13.1.ebuild:
   app-metrics/prometheus: Purge old ebuild
 
