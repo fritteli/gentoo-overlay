@@ -1,3 +1,8 @@
+*maxminddb-2.0.3 (14 Nov 2020)
+
+  14 Nov 2020; Manuel Friedli <manuel@gentoo.org> +maxminddb-2.0.3.ebuild:
+  dev-python/maxminddb: Add latest available version.
+
 *maxminddb-2.0.2 (03 Aug 2020)
 
   03 Aug 2020; Manuel Friedli <manuel@fritteli.ch> +maxminddb-2.0.2.ebuild,
