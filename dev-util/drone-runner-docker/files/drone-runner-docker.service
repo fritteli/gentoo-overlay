@@ -2,7 +2,9 @@
 Description=drone.io docker runner
 Documentation=https://docs.drone.io/
 
+After=docker.service
 After=network.target
+Requires=docker.service
 Requires=network.target
 
 [Service]
