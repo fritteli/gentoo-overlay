@@ -1,3 +1,7 @@
+  14 Nov 2020; Manuel Friedli <manuel@gentoo.org>
+  drone-runner-docker-1.6.0.ebuild:
+  dev-util/drone-runner-docker: Fixes #67
+
 *drone-runner-docker-1.6.0 (14 Nov 2020)
 
   14 Nov 2020; Manuel Friedli <manuel@gentoo.org>

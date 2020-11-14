@@ -28,7 +28,7 @@ src_prepare() {
 }
 
 src_install() {
-	exeinto /usr/bin
+	exeinto /usr/sbin
 	doexe "${T}/drone-runner-docker.sh"
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
