@@ -1,3 +1,9 @@
+*drone-1.9.2 (14 Nov 2020)
+
+  14 Nov 2020; Manuel Friedli <manuel@gentoo.org> +drone-1.9.2.ebuild,
+  files/drone.service:
+  dev-util/drone: Fixes #66
+
 *drone-1.9.1-r1 (08 Oct 2020)
 
   08 Oct 2020; Manuel Friedli <manuel@gentoo.org> +drone-1.9.1-r1.ebuild,

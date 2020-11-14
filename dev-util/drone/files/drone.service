@@ -5,9 +5,9 @@ Documentation=https://docs.drone.io/
 AssertPathIsDirectory=/var/lib/drone
 AssertPathIsReadWrite=/var/lib/drone
 
-After=network.target
-Requires=network.target
+After=docker.service
 After=mysqld.target
+After=network.target
 After=postgresql-9.3.service
 After=postgresql-9.4.service
 After=postgresql-9.5.service
@@ -15,6 +15,8 @@ After=postgresql-9.6.service
 After=postgresql-10.service
 After=postgresql-11.service
 After=postgresql-12.service
+Requires=docker.service
+Requires=network.target
 
 [Service]
 User=drone
