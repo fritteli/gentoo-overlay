@@ -1,3 +1,9 @@
+*reposilite-2.9.4 (14 Nov 2020)
+
+  14 Nov 2020; Manuel Friedli <manuel@gentoo.org> +files/reposilite-2.9.4.cdn,
+  +reposilite-2.9.4.ebuild, files/reposilite.service:
+  dev-util/reposilite: Fixes #66
+
   08 Oct 2020; Manuel Friedli <manuel@gentoo.org> files/reposilite-2.9.1.cdn,
   files/reposilite.sh, reposilite-2.9.1.ebuild:
   dev-util/reposilite: Apply some fixes
