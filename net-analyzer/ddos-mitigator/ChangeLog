@@ -1,3 +1,9 @@
+*ddos-mitigator-3.0.0 (24 Nov 2020)
+
+  24 Nov 2020; Manuel Friedli <manuel@gentoo.org> +ddos-mitigator-3.0.0.ebuild:
+  net-analyzer/ddos-mitigator: Add version 3.0.0.  No cronjob or systemd-timer
+  file included yet.
+
 *ddos-mitigator-2.1.0 (17 Sep 2020)
 
   17 Sep 2020; Manuel Friedli <manuel@gentoo.org> +ddos-mitigator-2.1.0.ebuild,
