@@ -1,3 +1,6 @@
+  24 Nov 2020; Manuel Friedli <manuel@gentoo.org> files/reposilite.service:
+  dev-util/reposilite: Fixes #63.
+
 *reposilite-2.9.6 (24 Nov 2020)
 
   24 Nov 2020; Manuel Friedli <manuel@gentoo.org> +reposilite-2.9.6.ebuild:

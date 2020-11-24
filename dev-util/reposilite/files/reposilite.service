@@ -2,9 +2,6 @@
 Description=Reposilite Maven Repository hosting server
 Documentation=https://reposilite.com/docs/about
 
-AssertPathIsDirectory=/var/lib/reposilite-data
-AssertPathIsReadWrite=/var/lib/reposilite-data
-
 After=docker.service
 After=network.target
 Requires=docker.service
