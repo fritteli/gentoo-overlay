@@ -540,7 +540,7 @@ fi
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="mysql sqlite"
+IUSE="enterprise mysql sqlite"
 
 RESTRICT="mirror"
 DEPEND="!dev-util/drone"
@@ -551,19 +551,28 @@ RDEPEND="acct-user/drone
 
 src_compile() {
 	pushd "${P}" || die
-	# OSS variant
-	go build -tags "oss nolimit" github.com/drone/drone/cmd/drone-server || die
 
-	# Enterprise variant (not supported as of now)
-	# go build github.com/drone/drone/cmd/drone-server || die
-	# go build github.com/drone/drone/cmd/drone-agent || die
-	# go build github.com/drone/drone/cmd/drone-controller || die
+	if use enterprise ; then
+		go build github.com/drone/drone/cmd/drone-server || die
+		go build github.com/drone/drone/cmd/drone-agent || die
+		go build github.com/drone/drone/cmd/drone-controller || die
+	else
+		go build -tags "oss nolimit" github.com/drone/drone/cmd/drone-server || die
+	fi
+
 	popd || die
 }
 
 src_install() {
 	pushd "${P}" || die
+
 	dosbin drone-server
+
+	if use enterprise ; then
+		dosbin drone-agent
+		dosbin drone-controller
+	fi
+
 	popd || die
 
 	systemd_dounit "${FILESDIR}/${PN}.service"
