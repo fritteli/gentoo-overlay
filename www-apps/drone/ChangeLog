@@ -1,0 +1,5 @@
+*drone-1.10.1 (02 Jan 2021)
+
+  02 Jan 2021; Manuel Friedli <manuel@gentoo.org> +drone-1.10.1.ebuild,
+  +files/app.ini, +files/drone.service, +files/gomod.patch, +metadata.xml:
+  www-apps/drone: Add ebuild for self-build drone.io server.
