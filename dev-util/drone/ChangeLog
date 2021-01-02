@@ -1,3 +1,9 @@
+*drone-1.9.2-r1 (02 Jan 2021)
+
+  02 Jan 2021; Manuel Friedli <manuel@gentoo.org> +drone-1.9.2-r1.ebuild,
+  -drone-1.9.1-r1.ebuild, -drone-1.9.2.ebuild:
+  dev-util/drone: Add !www-apps/drone as a dependency.
+
   14 Nov 2020; Manuel Friedli <manuel@gentoo.org> drone-1.9.2.ebuild:
   dev-util/drone: Fixes #67
 
