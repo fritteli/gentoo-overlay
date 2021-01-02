@@ -1,0 +1,33 @@
+# Drone configuration file. See https://docs.drone.io/server/reference/ for a
+# complete list of configuration options.
+
+# Required string value provides your Gitea oauth Client ID.
+DRONE_GITEA_CLIENT_ID="gitea-client-id"
+# Required string value provides your Gitea oauth Client Secret.
+DRONE_GITEA_CLIENT_SECRET="gitea-client-secret"
+# Required string value provides your Gitea server address. For example
+# https://gitea.company.com
+DRONE_GITEA_SERVER="https://gitea.example.com/"
+
+# Required string value provides the shared secret generated in the previous
+# step. This is used to authenticate the rpc connection between the server and
+# runners. The server and runner must be provided the same secret value.
+DRONE_RPC_SECRET="rpc-secret"
+
+# Required string value provides your external hostname or IP address. If using
+# an IP address you may include the port. For example drone.company.com.
+DRONE_SERVER_HOST="drone.example.com"
+# Required string value provides your external protocol scheme. This value
+# should be set to http or https. This field defaults to https if you configure
+# ssl or acme.
+DRONE_SERVER_PROTO="https"
+# The port to listen to. Defaults to :8080. NB: Don't forget the leading colon (:)!
+DRONE_SERVER_PORT=":8080"
+
+# Database settings. If commented, use SQLite by default.
+#DRONE_DATABASE_DRIVER="mysql"
+#DRONE_DATABASE_DATASOURCE="db-user:db-password@unix(/run/mysqld/mysqld.sock)/db-name?parseTime=true"
+
+# Optional boolean value configures Drone to authenticate when cloning public
+# repositories.
+# DRONE_GIT_ALWAYS_AUTH=true

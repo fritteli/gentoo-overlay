@@ -15,7 +15,6 @@ KEYWORDS="~amd64"
 IUSE="sqlite mysql"
 
 RESTRICT="mirror"
-DEPEND="!www-apps/drone"
 RDEPEND="acct-user/drone
 	app-emulation/docker
 	sqlite? ( dev-db/sqlite:3 )
