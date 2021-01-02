@@ -1,0 +1,12 @@
+Title: Drone no longer started as a docker container
+Author: Manuel Friedli <manuel@fritteli.ch>
+Posted: 2021-01-02
+Revision: 1
+News-Item-Format: 2.0
+Display-If-Installed: dev-util/drone::fritteli
+
+As of version 1.10.1, dev-util/drone is no longer started as a
+docker container. Instead, it is built and run like an ordinary
+application. Therefore, the configuration in /etc/drone/app.ini
+needs to be adapted. Please refer to the official documentation.
+Also, the comments in the aforementioned file might help.
