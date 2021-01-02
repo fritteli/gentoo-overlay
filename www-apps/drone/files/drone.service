@@ -18,7 +18,7 @@ Requires=network.target
 User=drone
 Group=drone
 
-ExecStart=/usr/sbin/drone -env-file /etc/drone/app.ini
+ExecStart=/usr/sbin/drone-server -env-file /etc/drone/app.ini
 
 Restart=on-failure
 
