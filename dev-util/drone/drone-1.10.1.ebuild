@@ -543,7 +543,6 @@ KEYWORDS="~amd64"
 IUSE="enterprise mysql sqlite"
 
 RESTRICT="mirror"
-DEPEND="!dev-util/drone"
 RDEPEND="acct-user/drone
 	sqlite? ( dev-db/sqlite:3 )
 	mysql? ( dev-db/mysql )
@@ -575,10 +574,10 @@ src_install() {
 
 	popd || die
 
-	systemd_dounit "${FILESDIR}/${PN}.service"
+	systemd_newunit "${FILESDIR}/${PN}.service-1.10.1" "${PN}.service"
 
 	insinto "/etc/drone"
-	doins "${FILESDIR}/app.ini"
+	newins "${FILESDIR}/app.ini-1.10.1" app.ini
 
 	fowners drone:drone /etc/drone
 	fperms 0700 /etc/drone
