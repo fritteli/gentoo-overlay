@@ -1,0 +1,26 @@
+[Unit]
+Description=drone.io build server
+Documentation=https://docs.drone.io/
+
+After=mysqld.target
+After=network.target
+After=postgresql-9.3.service
+After=postgresql-9.4.service
+After=postgresql-9.5.service
+After=postgresql-9.6.service
+After=postgresql-10.service
+After=postgresql-11.service
+After=postgresql-12.service
+#Requires=docker.service
+Requires=network.target
+
+[Service]
+User=drone
+Group=drone
+
+ExecStart=/usr/sbin/drone -env-file /etc/drone/app.ini
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

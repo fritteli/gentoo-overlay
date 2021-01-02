@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<use>
+		<flag name="enterprise">Build the enterprise version used in the official docker image, instead of the OSS version.</flag>
+	</use>
+</pkgmetadata>
