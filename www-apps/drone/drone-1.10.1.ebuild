@@ -563,7 +563,6 @@ src_compile() {
 
 src_install() {
 	pushd "${P}" || die
-	strip -s drone-server || die
 	dosbin drone-server
 	popd || die
 
@@ -577,22 +576,3 @@ src_install() {
 	fowners drone:drone /etc/drone/app.ini
 	fperms 0600 /etc/drone/app.ini
 }
-
-#src_install() {
-#	exeinto /usr/sbin
-#	doexe "${T}/drone.sh"
-#
-#	systemd_dounit "${FILESDIR}/${PN}.service"
-#
-#	insinto "/etc/drone"
-#	doins "${FILESDIR}/app.ini"
-#
-#	fowners drone:drone /etc/drone
-#	fperms 0700 /etc/drone
-#	fowners drone:drone /etc/drone/app.ini
-#	fperms 0600 /etc/drone/app.ini
-#
-#	keepdir /var/lib/drone
-#	fowners drone:drone /var/lib/drone
-#	fperms 0700 /var/lib/drone
-#}

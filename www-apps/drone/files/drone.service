@@ -2,10 +2,6 @@
 Description=drone.io build server
 Documentation=https://docs.drone.io/
 
-#AssertPathIsDirectory=/var/lib/drone
-#AssertPathIsReadWrite=/var/lib/drone
-
-#After=docker.service
 After=mysqld.target
 After=network.target
 After=postgresql-9.3.service
