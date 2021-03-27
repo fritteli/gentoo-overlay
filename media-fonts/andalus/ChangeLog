@@ -1,3 +1,9 @@
+*andalus-1-r2 (27 Mar 2021)
+
+  27 Mar 2021; Manuel Friedli <manuel@fritteli.ch> +andalus-1-r2.ebuild,
+  -andalus-1-r1.ebuild:
+  media-fonts/andalus: Fix the ebuild (EAPI=7).
+
   01 Sep 2016; Manuel Friedli <manuel@fritteli.ch> andalus-1-r1.ebuild:
   media-fonts/andalus:  updated to EAPI="6"
 
