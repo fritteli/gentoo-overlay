@@ -1,3 +1,10 @@
+*maxminddb-2.0.2-r1 (29 Mar 2021)
+*maxminddb-2.0.3-r1 (29 Mar 2021)
+
+  29 Mar 2021; Manuel Friedli <manuel@fritteli.ch> +maxminddb-2.0.2-r1.ebuild,
+  +maxminddb-2.0.3-r1.ebuild, -maxminddb-2.0.2.ebuild, -maxminddb-2.0.3.ebuild:
+  dev-python/maxminddb: Add support for python 3.9
+
 *maxminddb-2.0.3 (14 Nov 2020)
 
   14 Nov 2020; Manuel Friedli <manuel@gentoo.org> +maxminddb-2.0.3.ebuild:
