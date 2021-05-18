@@ -1,3 +1,13 @@
+*duplicati-bin-2.0.6.1_beta20210503 (18 May 2021)
+
+  18 May 2021; Manuel Friedli <manuel@fritteli.ch>
+  +duplicati-bin-2.0.6.1_beta20210503.ebuild,
+  -duplicati-bin-2.0.4.23_beta20190714.ebuild,
+  -duplicati-bin-2.0.4.5_beta20181128.ebuild,
+  -files/001-duplicati-bin-2.0.4.23_beta20190714-bash-path.patch,
+  -files/001-duplicati-bin-2.0.4.5_beta20181128-bash-path.patch:
+  app-backup/duplicati-bin: Add ebuild for latest beta version.
+
 *duplicati-bin-2.0.5.1_beta20200118-r1 (18 Mar 2020)
 
   18 Mar 2020; Manuel Friedli <manuel@fritteli.ch>
