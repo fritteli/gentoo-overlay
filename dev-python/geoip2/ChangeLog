@@ -1,3 +1,10 @@
+*geoip2-4.0.2-r1 (29 Mar 2021)
+*geoip2-4.1.0-r1 (29 Mar 2021)
+
+  29 Mar 2021; Manuel Friedli <manuel@fritteli.ch> +geoip2-4.0.2-r1.ebuild,
+  +geoip2-4.1.0-r1.ebuild, -geoip2-4.0.2.ebuild, -geoip2-4.1.0.ebuild:
+  dev-python/geoip2: Add support for python 3.9
+
 *geoip2-4.1.0 (14 Nov 2020)
 
   14 Nov 2020; Manuel Friedli <manuel@gentoo.org> +geoip2-4.1.0.ebuild:
