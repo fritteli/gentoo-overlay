@@ -1,3 +1,9 @@
+*policyd-1.82-r5 (04 Jun 2021)
+
+  04 Jun 2021; Manuel Friedli <manuel@fritteli.ch> +policyd-1.82-r5.ebuild,
+  -policyd-1.82-r4.ebuild:
+  mail-filter/policyd: Bring it up to speed with the official ebuild.
+
 *policyd-1.82-r4 (20 Nov 2019)
 
   20 Nov 2019;  <manuel@gentoo.org> +policyd-1.82-r4.ebuild,
