@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_8 )
+PYTHON_COMPAT=( python3_{7,8,9} )
 inherit python-single-r1
 
 DESCRIPTION="Script for blocking IP addresses with many concurrent connections"
@@ -21,15 +21,30 @@ S="${WORKDIR}/${PN}"
 RDEPEND="
 	${PYTHON_DEPS}
 	app-admin/sudo
+	$(python_gen_cond_dep '
+		dev-python/geoip2[${PYTHON_USEDEP}]
+	')
 	net-analyzer/fail2ban
 	sys-apps/coreutils
 	sys-apps/grep
+	sys-apps/iproute2
 	sys-apps/moreutils
-	sys-apps/net-tools
 	sys-apps/util-linux
 "
 
 src_install() {
-	dobin ddos-mitigator.sh
-	dobin geoip-lookup.py
+	dosbin ddos-mitigator.sh
+	dosbin geoip-lookup.py
+
+	insinto /etc
+	doins ddos-mitigator.conf
+}
+
+pkg_postinst() {
+	ewarn "Please note that you will need a GeoIP2 country- or"
+	ewarn "city-database in order to use this package."
+	elog "It is out of scope for this package to give detailed"
+	elog "instructions on how to install such a database. Just"
+	elog "google it."
+	elog "net-misc/geoipupdate might help, too ..."
 }

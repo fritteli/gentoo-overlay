@@ -1,3 +1,9 @@
+*ddos-mitigator-3.0.1 (08 Jun 2021)
+
+  08 Jun 2021; Manuel Friedli <manuel@gentoo.org> +ddos-mitigator-3.0.1.ebuild,
+  ddos-mitigator-2.1.0.ebuild, ddos-mitigator-3.0.0.ebuild:
+  net-analyzer/ddos-mitigator: Handle different python versions better.
+
 *ddos-mitigator-3.0.0 (24 Nov 2020)
 
   24 Nov 2020; Manuel Friedli <manuel@gentoo.org> +ddos-mitigator-3.0.0.ebuild:
