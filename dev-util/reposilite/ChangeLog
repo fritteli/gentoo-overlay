@@ -1,3 +1,9 @@
+*reposilite-2.9.23 (24 Jul 2021)
+
+  24 Jul 2021; Manuel Friedli <manuel@gentoo.org> +files/reposilite-2.9.23.cdn,
+  +reposilite-2.9.23.ebuild:
+  dev-util/reposilite: Add version 2.9.23
+
   08 Mar 2021; Manuel Friedli <manuel@gentoo.org> -files/reposilite-2.9.4.cdn,
   -reposilite-2.9.6.ebuild, -reposilite-2.9.8.ebuild:
   dev-util/reposilite: Prune very old ebuilds.
