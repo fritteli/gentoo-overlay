@@ -21,12 +21,12 @@ IUSE="atk cairo gdk +gtk pango"
 S="${WORKDIR}/${MY_P}"
 
 RDEPEND="
-	>=dev-lang/mono-6.12
 	>=dev-libs/glib-2.32
 	x11-libs/gtk+:3
 "
 
 DEPEND="${RDEPEND}
+	>=dev-lang/mono-6.12
 	atk? ( dev-libs/atk )
 	cairo? ( x11-libs/cairo )
 	gdk? ( x11-libs/gdk-pixbuf )
