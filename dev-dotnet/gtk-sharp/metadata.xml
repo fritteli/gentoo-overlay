@@ -5,4 +5,9 @@
 		<email>manuel@fritteli.ch</email>
 		<name>Manuel Friedli</name>
 	</maintainer>
+	<use>
+		<flag name="atk">Build the ATK bindings.</flag>
+		<flag name="gdk">Build the GDK bindings.</flag>
+		<flag name="pango">Build the Pango bindings.</flag>
+	</use>
 </pkgmetadata>
