@@ -18,6 +18,12 @@ SRC_URI="https://github.com/GLibSharp/GtkSharp/archive/refs/tags/${PV}.tar.gz ->
 
 IUSE="atk cairo gdk +gtk pango"
 
+REQUIRED_USE="
+	gdk? ( atk cairo pango )
+	gtk? ( atk cairo gdk pango )
+	pango? ( cairo )
+"
+
 S="${WORKDIR}/${MY_P}"
 
 RDEPEND="
