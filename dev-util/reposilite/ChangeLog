@@ -1,3 +1,8 @@
+*reposilite-2.9.26 (16 Nov 2021)
+
+  16 Nov 2021; Manuel Friedli <manuel@gentoo.org> +reposilite-2.9.26.ebuild:
+  dev-util/reposilite: Add version 2.9.26
+
 *reposilite-2.9.23 (24 Jul 2021)
 
   24 Jul 2021; Manuel Friedli <manuel@gentoo.org> +files/reposilite-2.9.23.cdn,
