@@ -16,7 +16,7 @@ IUSE=""
 RESTRICT="mirror"
 DEPEND=""
 RDEPEND="acct-user/reposilite
-	app-emulation/docker
+	app-containers/docker
 "
 
 S="${WORKDIR}"
@@ -35,7 +35,7 @@ src_install() {
 
 	insinto "/etc/reposilite"
 	doins "${FILESDIR}/app.ini"
-	newins "${FILESDIR}/reposilite-2.9.18.cdn" reposilite.cdn
+	newins "${FILESDIR}/reposilite-2.9.26.cdn" reposilite.cdn
 
 	fowners reposilite /etc/reposilite
 	fperms 0700 /etc/reposilite
