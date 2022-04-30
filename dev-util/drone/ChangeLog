@@ -1,3 +1,10 @@
+*drone-2.11.1 (30 Apr 2022)
+
+  30 Apr 2022; Manuel Friedli <manuel@gentoo.org> +drone-2.11.1.ebuild,
+  +files/drone-server.confd, +files/drone-server.initd,
+  +files/drone-server.service:
+  dev-util/drone: Add systemd-enabled version of the official ebuild.
+
 *drone-2.4.0 (15 Nov 2021)
 
   15 Nov 2021; Manuel Friedli <manuel@gentoo.org> +drone-2.4.0.ebuild,
