@@ -1,0 +1,20 @@
+[Unit]
+Description=Drone CI Docker Runner
+Documentation=https://docs.drone.io/
+
+After=docker.service
+After=network.target
+Requires=docker.service
+Requires=network.target
+
+[Service]
+User=drone-runner-docker
+Group=drone-runner-docker
+
+EnvironmentFile=/etc/conf.d/drone-runner-docker
+ExecStart=/usr/bin/drone-runner-docker daemon
+
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

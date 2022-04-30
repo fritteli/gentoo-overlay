@@ -1,0 +1,14 @@
+#!/sbin/openrc-run
+# Copyright 2016-2022 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+description="Drone CI Docker Runner"
+pidfile=${pidfile:-"/run/${SVCNAME}/${SVCNAME}.pid"}
+user=${user:-drone-runner-docker}
+group=${group:-drone-runner-docker}
+
+command="/usr/bin/drone-runner-docker daemon"
+command_background="true"
+start_stop_daemon_args="--user ${user} --group ${group} \
+	--stdout /var/log/${SVCNAME}/${SVCNAME}.log \
+	--stderr /var/log/${SVCNAME}/${SVCNAME}.log"
