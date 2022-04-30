@@ -1,3 +1,9 @@
+*feedreader-2.11.0 (30 Apr 2022)
+
+  30 Apr 2022; Manuel Friedli <manuel@gentoo.org> +feedreader-2.11.0.ebuild,
+  -feedreader-2.10.0.ebuild, -feedreader-2.8.2.ebuild:
+  net-news/feedreader: Update version.
+
 *feedreader-2.10.0 (04 Aug 2019)
 
   04 Aug 2019; Manuel Friedli <manuel@fritteli.ch> +feedreader-2.10.0.ebuild:
