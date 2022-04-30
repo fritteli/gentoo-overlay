@@ -1,18 +1,18 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=8
 
 inherit gnome2 meson vala
 
-VALA_MIN_API_VERSION="0.36"
+VALA_MIN_API_VERSION="0.50"
 
 MY_PN="FeedReader"
 MY_P="${MY_PN}-${PV}"
 
 DESCRIPTION="Simple News Feed Reader for feeds aggregated by Tiny Tiny RSS or feedly"
-HOMEPAGE="https://github.com/jangernert/${MY_PN}"
-SRC_URI="https://github.com/jangernert/${MY_PN}/archive/v${PV}.tar.gz"
+HOMEPAGE="https://github.com/jangernert/FeedReader"
+SRC_URI="https://github.com/jangernert/FeedReader/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -46,9 +46,16 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${MY_P}"
 
-src_prepare() {
-	vala_src_prepare
-	eapply_user
+pkg_setup() {
+	vala_setup
+}
+
+src_configure() {
+	meson_src_configure
+}
+
+src_compile() {
+	meson_src_compile
 }
 
 pkg_preinst() {
