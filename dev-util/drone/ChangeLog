@@ -1,3 +1,7 @@
+  30 Apr 2022; Manuel Friedli <manuel@gentoo.org> -drone-2.4.0.ebuild,
+  -files/app.ini-1.10.1, -files/drone.service-2.4.0, metadata.xml:
+  dev-util/drone: Prune old version.
+
 *drone-2.11.1 (30 Apr 2022)
 
   30 Apr 2022; Manuel Friedli <manuel@gentoo.org> +drone-2.11.1.ebuild,

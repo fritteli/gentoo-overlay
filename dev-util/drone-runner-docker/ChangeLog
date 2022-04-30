@@ -1,3 +1,8 @@
+  30 Apr 2022; Manuel Friedli <manuel@gentoo.org>
+  -drone-runner-docker-1.6.3.ebuild, -files/app.ini-1.6.2,
+  -files/drone-runner-docker.service-1.6.2:
+  dev-util/drone-runner-docker: Prune old version.
+
 *drone-runner-docker-1.8.1 (30 Apr 2022)
 
   30 Apr 2022; Manuel Friedli <manuel@gentoo.org>
