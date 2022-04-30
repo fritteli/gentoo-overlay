@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,7 +6,7 @@ inherit golang-build golang-vcs-snapshot systemd
 
 EGO_PN="github.com/Lusitaniae/apache_exporter"
 EGIT_COMMIT="v${PV/_rc/-rc.}"
-APACHE_EXPORTER_COMMIT="c441bd3"
+APACHE_EXPORTER_COMMIT="f4fd9dd"
 ARCHIVE_URI="https://${EGO_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="~amd64"
 
@@ -17,7 +17,7 @@ LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
-DEPEND=">=dev-lang/go-1.12
+DEPEND=">=dev-lang/go-1.14
 	>=dev-util/promu-0.3.0"
 
 RDEPEND="acct-user/apache_exporter"
