@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<use>
+		<flag name="staticfont">Install the static fonts.</flag>
+		<flag name="variablefont">Install the variable font (may cause problems with Libreoffice and printing/PDF export).</flag>
+	</use>
+</pkgmetadata>
