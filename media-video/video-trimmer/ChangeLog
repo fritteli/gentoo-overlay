@@ -1,3 +1,6 @@
+  19 Jun 2022; Manuel Friedli <manuel@gentoo.org> video-trimmer-0.7.1.ebuild:
+  media-video/video-trimmer:   Try restricting the network-sandbox.
+
 *video-trimmer-0.7.1 (19 Jun 2022)
 
   19 Jun 2022; Manuel Friedli <manuel@gentoo.org> +metadata.xml,

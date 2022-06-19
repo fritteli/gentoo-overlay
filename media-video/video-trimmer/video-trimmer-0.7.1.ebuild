@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit gnome2 meson
+inherit gnome2 meson # cargo
 
 DESCRIPTION="Trim videos quickly"
 HOMEPAGE="https://apps.gnome.org/de/app/org.gnome.gitlab.YaLTeR.VideoTrimmer/"
@@ -13,7 +13,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RESTRICT="mirror"
+RESTRICT="mirror network-sandbox"
 
 RDEPEND="gui-libs/gtk
 	gui-libs/libadwaita"
