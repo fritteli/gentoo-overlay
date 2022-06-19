@@ -1,0 +1,5 @@
+*blueprint-compiler-0.2.0 (19 Jun 2022)
+
+  19 Jun 2022; Manuel Friedli <manuel@gentoo.org>
+  +blueprint-compiler-0.2.0.ebuild, +metadata.xml:
+  gui-libs/blueprint-compiler:   Add ebuild for version 0.2.0
