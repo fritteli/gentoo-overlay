@@ -1,0 +1,5 @@
+*video-trimmer-0.7.1 (19 Jun 2022)
+
+  19 Jun 2022; Manuel Friedli <manuel@gentoo.org> +metadata.xml,
+  +video-trimmer-0.7.1.ebuild:
+  media-video/video-trimmer:   Add video-trimmer ebuild v0.7.1
