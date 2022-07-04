@@ -1,3 +1,9 @@
+*geoip2-4.6.0 (04 Jul 2022)
+
+  04 Jul 2022; Manuel Friedli <manuel@gentoo.org> +geoip2-4.6.0.ebuild,
+  geoip2-4.0.2-r2.ebuild, geoip2-4.1.0-r2.ebuild:
+  dev-python/geoip2: Add v4.6.0
+
 *geoip2-4.0.2-r1 (29 Mar 2021)
 *geoip2-4.1.0-r1 (29 Mar 2021)
 
