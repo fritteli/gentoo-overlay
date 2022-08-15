@@ -9,7 +9,7 @@ Requires=network.target
 User=reposilite
 Group=reposilite
 WorkingDirectory=/opt/reposilite
-ExecStart=java -jar reposilite.jar --config=/etc/reposilite/reposilite.cdn
+ExecStart=java -jar reposilite.jar --local-config=/etc/reposilite/reposilite.cdn
 SuccessExitStatus=0
 TimeoutStopSec=10
 Restart=on-failure
