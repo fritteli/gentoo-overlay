@@ -1,3 +1,6 @@
+  15 Aug 2022; Manuel Friedli <manuel@gentoo.org> files/reposilite-3.service:
+  dev-util/reposilite: Fix start parameters
+
   15 Aug 2022; Manuel Friedli <manuel@gentoo.org> reposilite-3.0.1.ebuild:
   dev-util/reposilite: Dep on user >=1
 
