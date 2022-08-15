@@ -1,3 +1,6 @@
+  15 Aug 2022; Manuel Friedli <manuel@gentoo.org> reposilite-0.ebuild:
+  acct-group/reposilite: Cosmetics.
+
 *reposilite-0 (08 Oct 2020)
 
   08 Oct 2020; Manuel Friedli <manuel@gentoo.org> +metadata.xml,
