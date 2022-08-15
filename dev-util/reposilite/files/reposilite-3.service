@@ -1,0 +1,19 @@
+[Unit]
+Description=Reposilite Maven Repository hosting server
+Documentation=https://reposilite.com/guide/about
+
+After=network.target
+Requires=network.target
+
+[Service]
+User=reposilite
+Group=reposilite
+WorkingDirectory=/opt/reposilite
+ExecStart=java -jar reposilite.jar --config=/etc/reposilite/reposilite.cdn
+SuccessExitStatus=0
+TimeoutStopSec=10
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
