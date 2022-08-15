@@ -16,7 +16,7 @@ IUSE=""
 
 RESTRICT="mirror"
 DEPEND=""
-RDEPEND="acct-user/reposilite
+RDEPEND=">=acct-user/reposilite-1
 	|| ( >=virtual/jdk-11 >=virtual/jre-11 )
 "
 
