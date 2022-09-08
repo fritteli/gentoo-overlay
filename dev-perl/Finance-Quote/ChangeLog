@@ -1,0 +1,5 @@
+*Finance-Quote-1.520.0 (08 Sep 2022)
+
+  08 Sep 2022; Manuel Friedli <manuel@gentoo.org> +Finance-Quote-1.520.0.ebuild,
+  +files/alphavantage-currency.patch, +metadata.xml:
+  dev-perl/Finance-Quote: Add v1.520 with AlphaVantage patch.
