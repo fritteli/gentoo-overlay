@@ -32,7 +32,7 @@ index b6c4d7f..47b9393 100644
 +  } else {
 +    my $target = substr($json_data->{'Meta Data'}->{'5. Last Refreshed'}, 0, 10);
 +    $rate =
-+      $json_data->{'Time Series FX (Daily)'}->{target}->{'4. close'};
++      $json_data->{'Time Series FX (Daily)'}->{$target}->{'4. close'};
 +  }
 +
 +  ### Rate from JSON: $rate
