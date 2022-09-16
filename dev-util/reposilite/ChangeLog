@@ -1,3 +1,8 @@
+*reposilite-3.0.3 (16 Sep 2022)
+
+  16 Sep 2022; Manuel Friedli <manuel@gentoo.org> +reposilite-3.0.3.ebuild:
+  dev-util/reposilite: Add v3.0.3
+
   15 Aug 2022; Manuel Friedli <manuel@gentoo.org> files/reposilite-3.service:
   dev-util/reposilite: Fix start parameters
 
