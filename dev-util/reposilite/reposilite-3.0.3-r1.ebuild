@@ -7,7 +7,7 @@ inherit systemd
 
 DESCRIPTION="Reposilite - Simple Maven Repository hosting"
 HOMEPAGE="https://reposilite.com/"
-SRC_URI="https://maven.reposilite.com/releases/com/reposilite/reposilite/${PV}/reposilite-${PV}-all.jar -> reposilite.jar"
+SRC_URI="https://maven.reposilite.com/releases/com/reposilite/reposilite/${PV}/reposilite-${PV}-all.jar -> reposilite-${PV}.jar"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -28,7 +28,7 @@ src_unpack() {
 
 src_install() {
 	insinto /opt/reposilite
-	doins "${WORKDIR}/reposilite.jar"
+	newins "${WORKDIR}/reposilite-${PV}.jar" reposilite.jar
 
 	systemd_newunit "${FILESDIR}/${PN}-3.service" "${PN}.service"
 

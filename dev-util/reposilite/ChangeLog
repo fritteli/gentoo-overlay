@@ -1,3 +1,9 @@
+*reposilite-3.0.3-r1 (16 Sep 2022)
+
+  16 Sep 2022; Manuel Friedli <manuel@gentoo.org> +reposilite-3.0.3-r1.ebuild,
+  -reposilite-3.0.3.ebuild:
+  dev-util/reposilite: 3.0.3-r1: Fix installing the correct version.
+
 *reposilite-3.0.3 (16 Sep 2022)
 
   16 Sep 2022; Manuel Friedli <manuel@gentoo.org> +reposilite-3.0.3.ebuild:
