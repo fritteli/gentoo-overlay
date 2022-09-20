@@ -8,7 +8,7 @@ inherit meson
 MY_PN="news_flash_gtk"
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="NewsFlash is a program designed to complement an already existing web-based RSS reader account."
+DESCRIPTION="Simple News Feed Reader for feeds aggregated by an online RSS reader account."
 HOMEPAGE="https://gitlab.com/news-flash/news_flash_gtk"
 SRC_URI="https://gitlab.com/${PN}/${MY_PN}/-/archive/${PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
 
