@@ -3,7 +3,7 @@ type: docker
 name: default
 
 steps:
-- name: run-repoman
+- name: run-pkgcheck
   image: tastytea/pkgcheck:latest
   commands:
   - pkgcheck scan --exit error,warning,style --net .
