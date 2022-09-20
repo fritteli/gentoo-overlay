@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/GLibSharp/GtkSharp"
 KEYWORDS="~amd64 ~arm64 ~ppc ~x86"
 SRC_URI="https://github.com/GLibSharp/GtkSharp/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
 
-IUSE="atk cairo gdk +gtk pango"
+IUSE="+atk +cairo +gdk +gtk +pango"
 
 REQUIRED_USE="
 	gdk? ( atk cairo pango )
