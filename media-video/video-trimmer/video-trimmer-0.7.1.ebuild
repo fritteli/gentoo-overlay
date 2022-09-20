@@ -13,7 +13,8 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-RESTRICT="mirror network-sandbox"
+#RESTRICT="mirror network-sandbox"
+RESTRICT="mirror"
 
 RDEPEND="gui-libs/gtk
 	gui-libs/libadwaita"
@@ -23,3 +24,7 @@ DEPEND="${RDEPEND}
 	virtual/rust"
 
 S="${WORKDIR}/${PN}-v${PV}"
+
+PATCHES=(
+	"${FILESDIR}/fix-amp-entity-in-de-po.patch"
+)

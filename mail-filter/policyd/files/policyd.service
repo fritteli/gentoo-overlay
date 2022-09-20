@@ -1,8 +1,0 @@
-[Unit]
-Description=Policyd
-
-[Service]
-ExecStart=/usr/sbin/policyd -c /etc/policyd.conf
-
-[Install]
-WantedBy=multi-user.target

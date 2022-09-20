@@ -1,0 +1,15 @@
+BDEPEND=>=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=compile install unpack
+DEPEND=acct-group/apache_exporter acct-user/apache_exporter
+DESCRIPTION=Prometheus exporter for apache metrics
+EAPI=8
+HOMEPAGE=https://github.com/Lusitaniae/apache_exporter
+INHERIT=go-module systemd
+KEYWORDS=~amd64
+LICENSE=MIT
+RDEPEND=acct-group/apache_exporter acct-user/apache_exporter
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/Lusitaniae/apache_exporter/archive/v0.11.0.tar.gz -> apache_exporter-0.11.0.tar.gz https://manuel.friedli.info/gentoo-overlay/apache_exporter-0.11.0-deps.tar.xz
+_eclasses_=go-module	05668e36c51c78c9681fdf4aefa0abec	toolchain-funcs	1542e649be915f43f6908a9e93909961	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	2736b403a83f194b59b767f3b344c2c1
+_md5_=305a8bf25a413a444513e4e022024995

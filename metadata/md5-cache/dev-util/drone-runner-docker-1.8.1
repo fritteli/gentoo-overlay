@@ -1,0 +1,15 @@
+BDEPEND=>=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=compile install unpack
+DEPEND=acct-group/drone-runner-docker acct-user/drone-runner-docker
+DESCRIPTION=Drone CI - Docker Runner
+EAPI=8
+HOMEPAGE=https://drone.io/ https://github.com/drone-runners/drone-runner-docker
+INHERIT=go-module systemd
+KEYWORDS=~amd64
+LICENSE=|| ( PolyForm-Small-Business-1.0.0 PolyForm-Free-Trial-1.0.0 )
+RDEPEND=acct-group/drone-runner-docker acct-user/drone-runner-docker app-containers/docker
+RESTRICT=mirror strip
+SLOT=0
+SRC_URI=https://github.com/drone-runners/drone-runner-docker/archive/v1.8.1.tar.gz -> drone-runner-docker-1.8.1.tar.gz https://manuel.friedli.info/gentoo-overlay/drone-runner-docker-1.8.1-deps.tar.xz
+_eclasses_=go-module	05668e36c51c78c9681fdf4aefa0abec	toolchain-funcs	1542e649be915f43f6908a9e93909961	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	2736b403a83f194b59b767f3b344c2c1
+_md5_=961ae6b55782b6823b7e0d915dd99c1f

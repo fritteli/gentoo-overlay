@@ -1,0 +1,22 @@
+diff --git a/po/de.po b/po/de.po
+index e007785..ec8da36 100644
+--- a/po/de.po
++++ b/po/de.po
+@@ -134,7 +134,7 @@ msgstr "Fügt ein --output oder -o Argument um den Ausgabevideopfad zu spezifizi
+ 
+ #: data/org.gnome.gitlab.YaLTeR.VideoTrimmer.metainfo.xml.in.in:127
+ msgid "Added support for opening videos with DnD, although it doesn't work on Flatpak unless Video Trimmer is given filesystem access."
+-msgstr "Fügt das Öffnen von Videos via Drag & Drop hinzu. Dies funktioniert aber nicht mit Flatpak, solange Video Trimmer keinen Dateisystemzugriff hat."
++msgstr "Fügt das Öffnen von Videos via Drag &amp; Drop hinzu. Dies funktioniert aber nicht mit Flatpak, solange Video Trimmer keinen Dateisystemzugriff hat."
+ 
+ #: data/org.gnome.gitlab.YaLTeR.VideoTrimmer.metainfo.xml.in.in:128
+ msgid "Replaced the Done dialog with an in-app notification to better follow the GNOME HIG."
+@@ -404,7 +404,7 @@ msgid "Please enter the start and end timestamps manually.\n"
+ "If you're running Video Trimmer under Flatpak, note that opening files by drag-and-drop may not work."
+ msgstr "Bitte gib Start- und Ende-Zeitstempel manuell an.\n"
+ "\n"
+-"Falls Video Trimmer via Flatpak läuft, dann kann es sein, dass Drag & Drop nicht funktioniert."
++"Falls Video Trimmer via Flatpak läuft, dann kann es sein, dass Drag &amp; Drop nicht funktioniert."
+ 
+ #: data/org.gnome.gitlab.YaLTeR.VideoTrimmer.metainfo.xml.in.in:45
+ msgid "This release adds an accurate trimming with re-encoding option and refreshes the design a bit."
