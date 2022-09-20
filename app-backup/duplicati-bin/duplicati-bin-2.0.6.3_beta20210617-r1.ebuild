@@ -16,7 +16,7 @@ MY_PV_1="v${MY_BASE_PV}_${MY_BUILDDATE}"
 MY_PV_2="${MY_PN}-${MY_BASE_PV}_${MY_BUILDDATE//-/}"
 
 DESCRIPTION="A backup client that securely stores encrypted, incremental, compressed backups."
-HOMEPAGE="http://www.duplicati.com/"
+HOMEPAGE="https://www.duplicati.com/"
 SRC_URI="https://github.com/${MY_PN}/${MY_PN}/releases/download/${MY_PV_1}/${MY_PV_2}.noarch.rpm -> ${P}.rpm"
 
 RDEPEND="!app-backup/duplicati

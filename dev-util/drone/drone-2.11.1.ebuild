@@ -5,8 +5,8 @@ EAPI=8
 inherit go-module systemd
 
 DESCRIPTION="A Continuous Delivery platform built on Docker, written in Go"
-HOMEPAGE="https://github.com/drone/drone"
-SRC_URI="https://github.com/drone/drone/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/harness/drone"
+SRC_URI="https://github.com/harness/drone/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 SRC_URI+=" https://dev.gentoo.org/~williamh/dist/${P}-deps.tar.xz"
 
 LICENSE="Apache-2.0"
