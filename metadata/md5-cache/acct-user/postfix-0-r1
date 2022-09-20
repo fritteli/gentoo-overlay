@@ -1,9 +1,0 @@
-DEFINED_PHASES=install postinst preinst prerm pretend
-DESCRIPTION=user for postfix daemon
-EAPI=7
-INHERIT=acct-user
-KEYWORDS=~amd64
-RDEPEND=acct-group/postfix acct-group/mail acct-group/dkimsocket
-SLOT=0
-_eclasses_=user-info	69a1ed744ec33cf2c910ff2bd6084d11	user	1f6dd43c7e925ba0272de52bcd326972	acct-user	38e6655114f60cacc969baf808da755b
-_md5_=b53b5cb50b16d6705b97d00ffb383073

@@ -42,9 +42,9 @@ If you find a bug in an ebuild, encounter a build error or would like me to add 
 
 ## Contributing
 
-I gladly accept pull requests for bugs or new ebuilds. Before opening a pull request, please make sure your changes don't upset [`repoman`](https://wiki.gentoo.org/wiki/Repoman). Run the following command and fix warnings and errors:
+I gladly accept pull requests for bugs or new ebuilds. Before opening a pull request, please make sure your changes don't upset [`pkgcheck`](https://wiki.gentoo.org/wiki/Pkgcheck). Run the following command and fix warnings and errors:
 
-	repoman -x -p
+	pkgcheck scan --net .
 
 ## Maintainers
 

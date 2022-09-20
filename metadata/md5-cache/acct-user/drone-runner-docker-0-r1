@@ -1,0 +1,9 @@
+DEFINED_PHASES=install postinst preinst prerm pretend
+DESCRIPTION=User for the drone.io docker runner
+EAPI=8
+INHERIT=acct-user
+KEYWORDS=~amd64
+RDEPEND=acct-group/drone-runner-docker acct-group/docker
+SLOT=0
+_eclasses_=user-info	69a1ed744ec33cf2c910ff2bd6084d11	user	1f6dd43c7e925ba0272de52bcd326972	acct-user	38e6655114f60cacc969baf808da755b
+_md5_=9dcba758136bb67a167f1c51b60ed5d0
