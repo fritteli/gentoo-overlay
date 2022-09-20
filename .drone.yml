@@ -4,6 +4,6 @@ name: default
 
 steps:
 - name: run-repoman
-  image: tastytea/repoman:latest
+  image: tastytea/pkgcheck:latest
   commands:
-  - repoman -p -v -x
+  - pkgcheck scan --exit error,warning,style --net .
