@@ -10,6 +10,8 @@ inherit perl-module
 
 DESCRIPTION="Get stock and mutual fund quotes from various exchanges"
 
+HOMEPAGE="https://metacpan.org/dist/Finance-Quote"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm64 ~ppc ~ppc64 ~riscv ~x86"

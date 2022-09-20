@@ -5,7 +5,7 @@ EAPI=8
 inherit go-module systemd
 
 DESCRIPTION="Drone CI - Docker Runner"
-HOMEPAGE="https://drone.io/ https://github.com/drone-runners/drone-runner-docker"
+HOMEPAGE="https://www.drone.io/ https://github.com/drone-runners/drone-runner-docker"
 SRC_URI="https://github.com/drone-runners/drone-runner-docker/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/drone-runner-docker-1.8.1-deps.tar.xz"
 
