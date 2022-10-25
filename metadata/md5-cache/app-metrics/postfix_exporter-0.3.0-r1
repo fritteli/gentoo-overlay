@@ -12,5 +12,5 @@ RDEPEND=acct-user/postfix_exporter
 RESTRICT=test strip
 SLOT=0
 SRC_URI=https://github.com/kumina/postfix_exporter/archive/0.3.0.tar.gz -> postfix_exporter-0.3.0.tar.gz https://manuel.friedli.info/gentoo-overlay/postfix_exporter-0.3.0-vendor.tar.xz
-_eclasses_=go-module	05668e36c51c78c9681fdf4aefa0abec	toolchain-funcs	1542e649be915f43f6908a9e93909961	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	2736b403a83f194b59b767f3b344c2c1
-_md5_=374060cb2319b90f450e845f9df56c35
+_eclasses_=go-module	15312495dc4fd84f8c37bbe228ea2abd	toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=ec27d9889241012ba02a1799e3ecd671

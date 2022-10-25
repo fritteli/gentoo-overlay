@@ -33,7 +33,7 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	>=dev-lang/mono-6.12
-	atk? ( dev-libs/atk )
+	atk? ( app-accessibility/at-spi2-core )
 	cairo? ( x11-libs/cairo )
 	gdk? ( x11-libs/gdk-pixbuf )
 	gtk? ( x11-libs/gtk+:3 )

@@ -7,7 +7,7 @@ inherit go-module systemd
 DESCRIPTION="Prometheus exporter for apache metrics"
 HOMEPAGE="https://github.com/Lusitaniae/apache_exporter"
 SRC_URI="https://github.com/Lusitaniae/apache_exporter/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/apache_exporter-0.11.0-deps.tar.xz"
+SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/${P}-deps.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
