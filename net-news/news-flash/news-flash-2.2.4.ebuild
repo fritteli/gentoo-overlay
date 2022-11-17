@@ -6,11 +6,12 @@ EAPI=8
 inherit meson
 
 MY_PN="news_flash_gtk"
-MY_P="${MY_PN}-${PV}"
+MY_PV="v.${PV}"
+MY_P="${MY_PN}-${MY_PV}"
 
 DESCRIPTION="Simple News Feed Reader for feeds aggregated by an online RSS reader account."
 HOMEPAGE="https://gitlab.com/news-flash/news_flash_gtk"
-SRC_URI="https://gitlab.com/${PN}/${MY_PN}/-/archive/${PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
+SRC_URI="https://gitlab.com/${PN}/${MY_PN}/-/archive/${MY_PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -26,7 +27,7 @@ DEPEND="${RDEPEND}
 	dev-libs/openssl
 	dev-util/meson
 	gui-libs/libhandy
-	net-libs/webkit-gtk
+	net-libs/webkit-gtk:5
 	sys-devel/gettext
 	x11-libs/gtk+:3
 	x11-misc/xdg-utils"
