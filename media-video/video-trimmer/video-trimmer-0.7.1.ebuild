@@ -7,7 +7,7 @@ inherit gnome2 meson # cargo
 
 DESCRIPTION="Trim videos quickly"
 HOMEPAGE="https://apps.gnome.org/de/app/org.gnome.gitlab.YaLTeR.VideoTrimmer/"
-SRC_URI="https://gitlab.gnome.org/YaLTeR/video-trimmer/-/archive/v${PV}/${PN}-v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://gitlab.gnome.org/YaLTeR/video-trimmer/-/archive/v${PV}/${PN}-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="GPL-3"
 SLOT="0"

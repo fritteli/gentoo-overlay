@@ -6,6 +6,6 @@
 		<name>Manuel Friedli</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">drone-runners/drone-runner-docker</remote-id>
+		<remote-id type="gitlab">news-flash/news_flash_gtk</remote-id>
 	</upstream>
 </pkgmetadata>

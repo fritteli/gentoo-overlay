@@ -11,7 +11,7 @@ MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="A markup language for GTK user interface files."
 HOMEPAGE="https://gitlab.gnome.org/jwestman/blueprint-compiler"
-SRC_URI="https://gitlab.gnome.org/jwestman/${PN}/-/archive/${MY_PV}/${MY_P}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://gitlab.gnome.org/jwestman/${PN}/-/archive/${MY_PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
 
 LICENSE="LGPL-3"
 SLOT="0"
