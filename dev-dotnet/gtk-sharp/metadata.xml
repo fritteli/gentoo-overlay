@@ -10,4 +10,7 @@
 		<flag name="gdk">Build the GDK bindings.</flag>
 		<flag name="pango">Build the Pango bindings.</flag>
 	</use>
+	<upstream>
+		<remote-id type="github">GLibSharp/GtkSharp</remote-id>
+	</upstream>
 </pkgmetadata>

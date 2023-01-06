@@ -5,5 +5,5 @@ INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/postfix acct-group/mail acct-group/dkimsocket
 SLOT=0
-_eclasses_=user-info	69a1ed744ec33cf2c910ff2bd6084d11	acct-user	ce2d3878b49fe819717a68300f633480
+_eclasses_=user-info	83547b4df3e1ba5a6bf91a0837eaa664	acct-user	bdca122e03cd10755e7ed12b03562501
 _md5_=c4dcf0148b71c0a201cb0d53185b53f1
