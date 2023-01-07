@@ -32,7 +32,7 @@ RDEPEND="$(vala_depend)
 	media-libs/gst-plugins-base:1.0
 	>=net-libs/gnome-online-accounts-3.20
 	net-libs/libsoup:2.4
-	net-libs/rest
+	net-libs/rest:0.7
 	>=net-libs/webkit-gtk-2.20:4
 	net-misc/curl
 	>=x11-libs/gtk+-3.22:3
