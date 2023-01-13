@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit meson
+inherit meson xdg-utils
 
 MY_PN="news_flash_gtk"
 MY_PV="v.${PV}"
