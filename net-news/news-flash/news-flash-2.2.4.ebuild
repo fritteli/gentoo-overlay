@@ -33,3 +33,11 @@ DEPEND="${RDEPEND}
 	x11-misc/xdg-utils"
 
 S="${WORKDIR}/${MY_P}"
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
+}
