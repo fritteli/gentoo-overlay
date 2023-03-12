@@ -3,13 +3,13 @@ DESCRIPTION=Script for blocking IP addresses with many concurrent connections
 EAPI=8
 HOMEPAGE=https://gittr.ch/linux/ddos-mitigator
 INHERIT=python-single-r1
-IUSE=python_single_target_python3_8 python_single_target_python3_9 python_single_target_python3_10 python_single_target_python3_11
+IUSE=python_single_target_python3_9 python_single_target_python3_10 python_single_target_python3_11
 KEYWORDS=~amd64
 LICENSE=GPL-2
-RDEPEND=python_single_target_python3_8? ( >=dev-lang/python-3.8.16:3.8 ) python_single_target_python3_9? ( >=dev-lang/python-3.9.16:3.9 ) python_single_target_python3_10? ( >=dev-lang/python-3.10.9:3.10 ) python_single_target_python3_11? ( >=dev-lang/python-3.11.1:3.11 ) app-admin/sudo python_single_target_python3_8? ( dev-python/geoip2[python_targets_python3_8(-)] ) python_single_target_python3_9? ( dev-python/geoip2[python_targets_python3_9(-)] ) python_single_target_python3_10? ( dev-python/geoip2[python_targets_python3_10(-)] ) python_single_target_python3_11? ( dev-python/geoip2[python_targets_python3_11(-)] ) net-analyzer/fail2ban sys-apps/coreutils sys-apps/grep sys-apps/iproute2 sys-apps/moreutils sys-apps/util-linux
-REQUIRED_USE=^^ ( python_single_target_python3_8 python_single_target_python3_9 python_single_target_python3_10 python_single_target_python3_11 )
+RDEPEND=python_single_target_python3_9? ( >=dev-lang/python-3.9.16-r1:3.9 ) python_single_target_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_single_target_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) app-admin/sudo python_single_target_python3_9? ( dev-python/geoip2[python_targets_python3_9(-)] ) python_single_target_python3_10? ( dev-python/geoip2[python_targets_python3_10(-)] ) python_single_target_python3_11? ( dev-python/geoip2[python_targets_python3_11(-)] ) net-analyzer/fail2ban sys-apps/coreutils sys-apps/grep sys-apps/iproute2 sys-apps/moreutils sys-apps/util-linux
+REQUIRED_USE=^^ ( python_single_target_python3_9 python_single_target_python3_10 python_single_target_python3_11 )
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://gittr.ch/linux/ddos-mitigator/archive/v3.0.1.tar.gz -> ddos-mitigator-3.0.1.tar.gz
-_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	ec8bbc28394c7305b43ea07164bd8f5f	multilib	5ca4e49abed8e3a2f7b56920eadee157	python-utils-r1	1d1b325c00c1d24c564a1b49327ec3c5	python-single-r1	75118e916668a74c660a13b0ecb22562
-_md5_=aab53164b2840f4738f5850bf24b722c
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	python-utils-r1	429bfd4e8d8e39db5385ba5744f30788	python-single-r1	75118e916668a74c660a13b0ecb22562
+_md5_=beeb3436ee111dfc756e4afdf9b407a2
