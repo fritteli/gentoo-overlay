@@ -27,9 +27,9 @@ DEPEND="${RDEPEND}
 	dev-libs/openssl
 	dev-util/meson
 	gui-libs/libhandy
-	net-libs/webkit-gtk:5
+	net-libs/webkit-gtk:6
 	sys-devel/gettext
-	x11-libs/gtk+:3
+	gui-libs/gtk:4
 	x11-misc/xdg-utils"
 
 S="${WORKDIR}/${MY_P}"
