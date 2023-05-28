@@ -5,5 +5,5 @@ INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/dkimsocket acct-group/opendkim
 SLOT=0
-_eclasses_=user-info	83547b4df3e1ba5a6bf91a0837eaa664	acct-user	bdca122e03cd10755e7ed12b03562501
+_eclasses_=user-info	83547b4df3e1ba5a6bf91a0837eaa664	acct-user	c2c51a8d8c646fbdbb4ae481366fca8c
 _md5_=77a98ba90e1aa8b0337269f304143155
