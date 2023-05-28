@@ -2,17 +2,30 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
 inherit go-module systemd
 # uncomment the first setting of MY_PV for a normal release
 # MY_PV="v${PV/_rc/-rc.}"
 # set MY_PV to the full commit hash for a snapshot release
-MY_PV=f5d5289f7627016d8b53b0b3fa7615da8a73b56a
-MYSQLD_EXPORTER_COMMIT=f5d5289f
+MY_PV_HASH=fad2c0ccd8c0df8fed91a81463e930e4485fdfee
+: ${MY_PV_HASH_FOR_VENDOR:=${MY_PV_HASH}}
+if [[ -n "${MY_PV_HASH}" ]]; then
+	MY_PV=${MY_PV_HASH}
+	MYSQLD_EXPORTER_COMMIT=${MY_PV_HASH:0:8}
+	SRC_URI_UPSTREAM="https://github.com/prometheus/mysqld_exporter/archive/${MY_PV}.tar.gz"
+else
+	MY_PV=$PV
+	MYSQLD_EXPORTER_COMMIT=
+	SRC_URI_UPSTREAM="https://github.com/prometheus/mysqld_exporter/archive/refs/tags/v${PV}.tar.gz"
+fi
+MY_P=${PN}-${MY_PV}
+SRC_URI_VENDOR="https://dev.gentoo.org/~robbat2/distfiles/${MY_P}-vendor.tar.xz"
 
 DESCRIPTION="Prometheus exporter for MySQL server metrics"
 HOMEPAGE="https://github.com/prometheus/mysqld_exporter"
-SRC_URI="https://github.com/prometheus/mysqld_exporter/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="
+	${SRC_URI_UPSTREAM} -> ${P}.tar.gz
+	${SRC_URI_VENDOR}
+	"
 
 LICENSE="Apache-2.0 BSD BSD-2 MIT MPL-2.0"
 SLOT="0"
@@ -34,7 +47,9 @@ PATCHES=( "${FILESDIR}"/${PN}-0.12.1-skip-tests.patch )
 src_prepare() {
 	default
 
-	sed -i -e "s/{{.Revision}}/${MYSQLD_EXPORTER_COMMIT}/" .promu.yml || die
+	if [[ -n $MYSQLD_EXPORTER_COMMIT ]]; then
+		sed -i -e "s/{{.Revision}}/${MYSQLD_EXPORTER_COMMIT}/" .promu.yml || die
+	fi
 }
 
 src_compile() {

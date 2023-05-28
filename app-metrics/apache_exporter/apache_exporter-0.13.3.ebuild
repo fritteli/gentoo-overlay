@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,7 @@ inherit go-module systemd
 DESCRIPTION="Prometheus exporter for apache metrics"
 HOMEPAGE="https://github.com/Lusitaniae/apache_exporter"
 SRC_URI="https://github.com/Lusitaniae/apache_exporter/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/${P}-deps.tar.xz"
+SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/${P}-vendor.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
