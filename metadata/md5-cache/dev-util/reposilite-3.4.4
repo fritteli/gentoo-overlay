@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=install postinst unpack
+DESCRIPTION=Reposilite - Simple Maven Repository hosting
+EAPI=8
+HOMEPAGE=https://reposilite.com/
+INHERIT=systemd
+KEYWORDS=~amd64
+LICENSE=Apache-2.0
+RDEPEND=>=acct-user/reposilite-1 || ( >=virtual/jdk-11 >=virtual/jre-11 )
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://maven.reposilite.com/releases/com/reposilite/reposilite/3.4.4/reposilite-3.4.4-all.jar -> reposilite-3.4.4.jar
+_eclasses_=toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	104e1332efb829e2f7cbf89307a474f1	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=6e3c58d23fb8ec4ae1a233e00e96fe96
