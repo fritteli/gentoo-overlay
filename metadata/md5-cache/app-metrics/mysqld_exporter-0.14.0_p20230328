@@ -1,0 +1,15 @@
+BDEPEND=dev-util/promu >=dev-lang/go-1.18 app-arch/unzip virtual/pkgconfig
+DEFINED_PHASES=compile install postinst prepare unpack
+DEPEND=acct-group/mysqld_exporter acct-user/mysqld_exporter
+DESCRIPTION=Prometheus exporter for MySQL server metrics
+EAPI=8
+HOMEPAGE=https://github.com/prometheus/mysqld_exporter
+INHERIT=go-module systemd
+KEYWORDS=~amd64
+LICENSE=Apache-2.0 BSD BSD-2 MIT MPL-2.0
+RDEPEND=acct-group/mysqld_exporter acct-user/mysqld_exporter
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/prometheus/mysqld_exporter/archive/fad2c0ccd8c0df8fed91a81463e930e4485fdfee.tar.gz -> mysqld_exporter-0.14.0_p20230328.tar.gz https://dev.gentoo.org/~robbat2/distfiles/mysqld_exporter-fad2c0ccd8c0df8fed91a81463e930e4485fdfee-vendor.tar.xz
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	104e1332efb829e2f7cbf89307a474f1	go-module	9c75e51a48520b2f01471c1f91762882	systemd	5f4bb0758df2e483babf68cd517078ca
+_md5_=3ff4c2be3ebc2f673a7e8c96c4a51bb7
