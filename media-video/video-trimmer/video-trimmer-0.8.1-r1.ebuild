@@ -13,8 +13,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-#RESTRICT="mirror network-sandbox"
-RESTRICT="mirror"
+RESTRICT="mirror network-sandbox"
 
 RDEPEND="gui-libs/gtk
 	gui-libs/libadwaita"
