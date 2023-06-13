@@ -6,9 +6,9 @@ EAPI=8
 inherit rpm
 
 MY_PN="duplicati"
-MY_PV="2.0.6.3"
+MY_PV="2.0.7.1"
 MY_BUILDTYPE="beta"
-MY_BUILDDATE="2021-06-17"
+MY_BUILDDATE="2023-05-25"
 
 MY_BASE_PV="${MY_PV}-${MY_PV}_${MY_BUILDTYPE}"
 
