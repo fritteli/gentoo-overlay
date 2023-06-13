@@ -6,11 +6,11 @@ EAPI=8
 HOMEPAGE=https://github.com/GLibSharp/GtkSharp
 INHERIT=meson
 IUSE=+atk +cairo +gdk +gtk +pango
-KEYWORDS=~amd64 ~arm64 ~ppc ~x86
+KEYWORDS="~amd64 ~arm64 ~ppc ~x86"
 LICENSE=GPL-2
 RDEPEND=>=dev-libs/glib-2.32 x11-libs/gtk+:3
 REQUIRED_USE=gdk? ( atk cairo pango ) gtk? ( atk cairo gdk pango ) pango? ( cairo )
 SLOT=3
 SRC_URI=https://github.com/GLibSharp/GtkSharp/archive/refs/tags/3.22.2.tar.gz -> gtk-sharp-3.22.2.tar.gz
-_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	104e1332efb829e2f7cbf89307a474f1	python-utils-r1	d676fb844e9408f4290d20bc7312f8bb	meson	915ec7c25e08d7886558215e6809ca1e
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	python-utils-r1	ba15b8b81f30ca448294d759a9f7902c	meson	18d046bdb14e1bdb22cce6e5d953e364
 _md5_=2e9e6896f208c03ed07e6e6474c1809c
