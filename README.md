@@ -1,7 +1,7 @@
 # fritteli's Gentoo overlay
 Gentoo overlay with some ebuilds that I found either outdated or missing in the official repository or in other overlays. Ebuilds are usually removed from this overlay whenever I find a version available in the official tree or in another overlay (provided I'm satisfied with them).
 
-Build status of the [master branch](https://gittr.ch/linux/gentoo-overlay/src/branch/master), as seen by `pkgcheck scan --exit error,warning,style --net .`: [![Build Status](https://ci.gittr.ch/api/badges/linux/gentoo-overlay/status.svg?ref=refs/heads/master)](https://ci.gittr.ch/linux/gentoo-overlay)
+Build status of the [main branch](https://gittr.ch/linux/gentoo-overlay/src/branch/main), as seen by `pkgcheck scan --exit error --net .`: [![Build Status](https://ci.gittr.ch/api/badges/linux/gentoo-overlay/status.svg?ref=refs/heads/main)](https://ci.gittr.ch/linux/gentoo-overlay)
 
 ## Using with plain (recent) Portage
 Create a new config file under `/etc/portage/repos.conf/fritteli.conf` with the following contents:
