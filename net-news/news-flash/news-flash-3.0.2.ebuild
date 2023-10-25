@@ -515,7 +515,6 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND=">=dev-libs/glib-2.70
-	>=dev-libs/gobject-introspection-2.70
 	>=gui-libs/gtk-4.12
 	>=gui-libs/libadwaita-1.4.0
 	>=net-libs/webkit-gtk-2.42:6"
