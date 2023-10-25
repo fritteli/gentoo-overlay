@@ -497,7 +497,7 @@ declare -A GIT_CRATES=(
 	[news-flash]="https://gitlab.com/news-flash/news_flash;1e1ae1d7a8750ba23053de7bef84110bca805725;news_flash-%commit%/"
 )
 
-inherit cargo
+inherit cargo meson xdg-utils
 
 MY_PN="news_flash_gtk"
 MY_PV="v.${PV}"
@@ -514,16 +514,24 @@ LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD Boost-1.0 GPL-3+ IS
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND=">=gui-libs/gtk-4.12"
+DEPEND=">=dev-libs/glib-2.70
+	>=dev-libs/gobject-introspection-2.70
+	>=gui-libs/gtk-4.12
+	>=gui-libs/libadwaita-1.4.0
+	>=net-libs/webkit-gtk-2.42:6"
 RDEPEND="${DEPEND}"
 BDEPEND=""
-
-PATCHES=(
-	"${FILESDIR}/00-Cargo-toml-3.0.2.patch"
-)
 
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /
 QA_FLAGS_IGNORED="usr/bin/${PN}"
 
 S="${WORKDIR}/${MY_P}"
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
+}
