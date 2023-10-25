@@ -313,7 +313,7 @@ LICENSE="0BSD AGPL-3+ Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD Boost-1.0 I
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND=""
+DEPEND=">=media-libs/gst-rtsp-server-1.16"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
