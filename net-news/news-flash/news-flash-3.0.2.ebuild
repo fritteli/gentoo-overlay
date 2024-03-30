@@ -519,7 +519,6 @@ DEPEND=">=dev-libs/glib-2.70
 	>=gui-libs/libadwaita-1.4.0
 	>=net-libs/webkit-gtk-2.42:6"
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /

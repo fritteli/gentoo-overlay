@@ -19,8 +19,6 @@ KEYWORDS="~amd64"
 
 RESTRICT="mirror network-sandbox"
 
-RDEPEND=""
-
 DEPEND="${RDEPEND}
 	dev-db/sqlite
 	dev-lang/rust

@@ -370,7 +370,6 @@ https://gitlab.com/famedly/conduit/-/archive/9176474513481a035c63c85b7dc6c0025b9
 # use cargo-license for a more accurate license picture
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-1 BSD-2 Boost-1.0 CC0-1.0 ISC MIT MIT-0 MPL-2.0 Unicode-DFS-2016 Unlicense ZLIB"
 SLOT="0"
-KEYWORDS="-*"
 
 RDEPEND="${DEPEND}
 	acct-user/conduit"

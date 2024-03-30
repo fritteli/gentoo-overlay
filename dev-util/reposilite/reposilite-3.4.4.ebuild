@@ -12,10 +12,8 @@ SRC_URI="https://maven.reposilite.com/releases/com/reposilite/reposilite/${PV}/r
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE=""
 
 RESTRICT="mirror"
-DEPEND=""
 RDEPEND=">=acct-user/reposilite-1
 	|| ( >=virtual/jdk-11 >=virtual/jre-11 )
 "
