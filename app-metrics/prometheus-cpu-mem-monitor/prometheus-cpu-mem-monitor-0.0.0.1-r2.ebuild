@@ -11,7 +11,6 @@ DESCRIPTION="CPU and memory monitoring for prometheus"
 HOMEPAGE="https://gittr.ch/linux/gentoo-overlay"
 LICENSE="GPL-2"
 SLOT="0"
-IUSE=""
 
 DEPEND="sys-process/procps"
 

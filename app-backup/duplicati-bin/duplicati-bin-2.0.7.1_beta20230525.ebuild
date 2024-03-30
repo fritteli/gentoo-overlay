@@ -33,8 +33,6 @@ PATCHES=(
 	"${FILESDIR}/001-${PN}-2.0.5.1_beta20200118-bash-path.patch"
 )
 
-RDEPEND=""
-
 src_prepare() {
 	eapply ${PATCHES}
 	eapply_user

@@ -315,7 +315,6 @@ KEYWORDS="~amd64"
 
 DEPEND=">=media-libs/gst-rtsp-server-1.16"
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /
