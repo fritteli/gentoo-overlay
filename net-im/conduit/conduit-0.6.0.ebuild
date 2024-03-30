@@ -362,17 +362,17 @@ CRATES="
 "
 
 declare -A GIT_CRATES=(
-	[ruma]="https://github.com/ruma/ruma;3bd58e3c899457c2d55c45268dcb8a65ae682d54"
+	[ruma]="https://github.com/ruma/ruma;3bd58e3c899457c2d55c45268dcb8a65ae682d54;ruma-%commit%/crates/ruma"
 	[reqwest]="https://github.com/timokoesters/reqwest;57b7cf4feb921573dfafad7d34b9ac6e44ead0bd"
-	[heed]="https://github.com/timokoesters/heed;f6f825da7fb2c758867e05ad973ef800a6fe1d5d"
+	[heed]="https://github.com/timokoesters/heed;f6f825da7fb2c758867e05ad973ef800a6fe1d5d;heed-%commit%/heed"
 )
 
-inherit cargo
+inherit cargo systemd
 
 DESCRIPTION="A Matrix homeserver written in Rust"
 # Double check the homepage as the cargo_metadata crate
 # does not provide this value so instead repository is used
-HOMEPAGE="https://gitlab.com/famedly/conduit"
+HOMEPAGE="https://gitlab.com/famedly/conduit https://famedly.gitlab.io/conduit/"
 SRC_URI="${CARGO_CRATE_URIS}
 https://gitlab.com/famedly/conduit/-/archive/v${PV}/conduit-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
@@ -382,12 +382,36 @@ LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-2 Boost-1.0 CC0
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
+RDEPEND="${DEPEND}
+	acct-user/conduit"
 
 S="${WORKDIR}/conduit-v${PV}"
 
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /
 QA_FLAGS_IGNORED="usr/bin/${PN}"
+
+src_install() {
+	systemd_dounit "${FILESDIR}/${PN}.service"
+
+	insinto /etc/matrix-conduit
+	newins "${FILESDIR}/conduit-example.toml" conduit.toml
+	fowners conduit:conduit /etc/matrix-conduit
+	fperms 0750 /etc/matrix-conduit
+
+	keepdir /var/lib/matrix-conduit
+	fowners conduit:conduit /var/lib/matrix-conduit
+	fperms 0700 /var/lib/matrix-conduit
+}
+
+pkg_postinst() {
+	elog "Check the configuration file at /etc/matrix-conduit/conduit.toml"
+	elog "and adapt it to your needs. Consult the documentation at"
+	elog "https://famedly.gitlab.io/conduit/deploying/generic.html"
+	elog "for information and configuration options. Also, do not forget"
+	elog "to set up a reverse proxy (Apache, Nginx or the like)."
+	elog "Additionally, you may want to install net-im/coturn for"
+	elog "TURN/STUN support."
+	elog
+	elog "Have fun!"
+}
