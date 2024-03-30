@@ -14,7 +14,7 @@ Create a new config file under `/etc/portage/repos.conf/fritteli.conf` with the 
 
 You may adapt the `location` attribute to your system's own setup.
 
-If you prefer to use the overlay hostet at GitHub (which tends to be more stable but less up-to-date than the one hosted at gittr.ch), you may use `https://github.com/fritteli/gentoo-overlay.git` for the `sync-uri`.
+If you prefer to use the overlay hosted at GitHub (which tends to be more stable but less up-to-date than the one hosted at gittr.ch), you may use `https://github.com/fritteli/gentoo-overlay.git` for the `sync-uri`.
 
 ## Using with Layman
 
