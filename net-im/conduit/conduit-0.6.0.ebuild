@@ -384,6 +384,7 @@ KEYWORDS="~amd64"
 
 RDEPEND="${DEPEND}
 	acct-user/conduit"
+BDEPEND="sys-devel/clang"
 
 S="${WORKDIR}/conduit-v${PV}"
 
