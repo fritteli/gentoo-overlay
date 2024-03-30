@@ -374,6 +374,7 @@ KEYWORDS="-*"
 
 RDEPEND="${DEPEND}
 	acct-user/conduit"
+BDEPEND="sys-devel/clang"
 
 S="${WORKDIR}/${PN}-9176474513481a035c63c85b7dc6c0025b950dcf"
 
