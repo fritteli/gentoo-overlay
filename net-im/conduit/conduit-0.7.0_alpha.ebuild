@@ -382,6 +382,7 @@ S="${WORKDIR}/${PN}-9176474513481a035c63c85b7dc6c0025b950dcf"
 QA_FLAGS_IGNORED="usr/bin/${PN}"
 
 src_install() {
+	newbin target/release/conduit matrix-conduit
 	systemd_dounit "${FILESDIR}/${PN}.service"
 
 	insinto /etc/matrix-conduit
