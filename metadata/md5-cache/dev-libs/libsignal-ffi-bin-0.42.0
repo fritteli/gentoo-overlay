@@ -1,10 +1,10 @@
 DEFINED_PHASES=compile install prepare unpack
 DESCRIPTION=libsignal-ffi prebuilt binary package
 EAPI=8
-HOMEPAGE=homepage field in Cargo.toml inaccessible to cargo metadata
+HOMEPAGE=https://github.com/signalapp/libsignal
 KEYWORDS=~amd64
 LICENSE=AGPL-3
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://gentoo-overlay.friedli.info/libsignal_ffi-0.42.0.a -> libsignal-ffi-bin-0.42.0.a
-_md5_=95e27b9bc668e2f9a77c30d8fe274d54
+_md5_=aa8c84b50b3e9740dcbf0056f7c4f999

@@ -4,16 +4,14 @@
 EAPI=8
 
 DESCRIPTION="libsignal-ffi prebuilt binary package"
-HOMEPAGE="homepage field in Cargo.toml inaccessible to cargo metadata"
+HOMEPAGE="https://github.com/signalapp/libsignal"
 SRC_URI="https://gentoo-overlay.friedli.info/libsignal_ffi-${PV}.a -> ${P}.a"
 
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND=""
 RDEPEND="${DEPEND}"
-BDEPEND=""
 
 RESTRICT="mirror"
 
