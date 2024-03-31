@@ -1,0 +1,8 @@
+DEFINED_PHASES=install preinst pretend
+DESCRIPTION=Group used for the mautrix signal Matrix bridge
+EAPI=8
+INHERIT=acct-group
+KEYWORDS=~amd64
+SLOT=0
+_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-group	1ba28b31fccef7f4ff1cebfad243a633
+_md5_=089facd8e5589fcd1780ea802a3e0acb
