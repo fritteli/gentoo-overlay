@@ -35,6 +35,6 @@ src_install() {
 	systemd_dounit "${FILESDIR}"/mautrix-signal.service
 
 	fowners mautrix-signal-bin:mautrix-signal-bin /opt/mautrix-signal/mautrix-signal
-	fowners mautrix-signal-bin:mautrix-signal-bin /opt/mautris-signal/example-config.yaml
-	fperms 0640 /opt/mautris-signal/example-config.yaml
+	fowners mautrix-signal-bin:mautrix-signal-bin /opt/mautrix-signal/example-config.yaml
+	fperms 0640 /opt/mautrix-signal/example-config.yaml
 }
