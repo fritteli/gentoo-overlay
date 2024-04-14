@@ -8,12 +8,15 @@ DESCRIPTION="A Matrix-Signal puppeting bridge."
 HOMEPAGE="https://docs.mau.fi/bridges/go/signal/index.html"
 SRC_URI="https://github.com/mautrix/signal/releases/download/v${PV}/mautrix-signal-amd64 -> ${P}"
 
+IUSE="+ffmpeg"
+
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="acct-user/mautrix-signal-bin"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	ffmpeg? ( media-video/ffmpeg[opus] )"
 
 S="${WORKDIR}"
 

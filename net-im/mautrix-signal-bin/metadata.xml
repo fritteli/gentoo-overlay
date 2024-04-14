@@ -5,6 +5,9 @@
 		<email>manuel@fritteli.ch</email>
 		<name>Manuel Friedli</name>
 	</maintainer>
+	<use>
+		<flag name="ffmpeg">Enable brigding voice messages by using ffmpeg.</flag>
+	</use>
 	<upstream>
 		<remote-id type="github">mautrix/signal</remote-id>
 	</upstream>
