@@ -6,4 +6,4 @@ steps:
 - name: run-pkgcheck
   image: fritteli/pkgcheck:latest
   commands:
-  - pkgcheck --color true scan --exit error --net .
+  - pkgcheck --color true scan --exit error,warning,style --net .
