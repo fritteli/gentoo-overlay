@@ -4,6 +4,6 @@ name: default
 
 steps:
 - name: run-pkgcheck
-  image: tastytea/pkgcheck:latest
+  image: fritteli/pkgcheck:latest
   commands:
   - pkgcheck --color true scan --exit error --net .
