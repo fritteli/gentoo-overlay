@@ -1,5 +1,5 @@
 [Unit]
-Description=mautrix-signal bridge
+Description=mautrix-whatsapp bridge
 
 [Service]
 Type=exec

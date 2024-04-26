@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig
+DEFINED_PHASES=compile install unpack
+DEPEND=acct-user/mautrix-whatsapp-bin
+DESCRIPTION=A Matrix-WhatsApp puppeting bridge.
+EAPI=8
+HOMEPAGE=https://docs.mau.fi/bridges/go/whatsapp/index.html
+INHERIT=systemd
+IUSE=postgres
+KEYWORDS=~amd64
+LICENSE=AGPL-3
+RDEPEND=acct-user/mautrix-whatsapp-bin postgres? ( >=dev-db/postgresql-10 ) !postgres? ( dev-db/sqlite )
+SLOT=0
+SRC_URI=https://github.com/mautrix/whatsapp/releases/download/v0.10.7/mautrix-whatsapp-amd64 -> mautrix-whatsapp-bin-0.10.7
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	systemd	c8b03e8df84486aa991d4396686e8942
+_md5_=7a483d7cc00f3d16aa7f32e43af0032a

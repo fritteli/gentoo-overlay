@@ -8,12 +8,16 @@ DESCRIPTION="A Matrix-WhatsApp puppeting bridge."
 HOMEPAGE="https://docs.mau.fi/bridges/go/whatsapp/index.html"
 SRC_URI="https://github.com/mautrix/whatsapp/releases/download/v${PV}/mautrix-whatsapp-amd64 -> ${P}"
 
+IUSE="postgres"
+
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="acct-user/mautrix-whatsapp-bin"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+    postgres? ( >=dev-db/postgresql-10 )
+    !postgres? ( dev-db/sqlite )"
 
 S="${WORKDIR}"
 
@@ -30,11 +34,11 @@ src_install() {
 	doexe mautrix-whatsapp
 
 	insinto /opt/mautrix-whatsapp
-	doins "${FILESDIR}/example-config.yaml"
+	newins "${FILESDIR}/example-config.yaml" config.yaml
 
 	systemd_dounit "${FILESDIR}"/mautrix-whatsapp.service
 
-	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/mautrix-whatsapp
-	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/example-config.yaml
-	fperms 0640 /opt/mautrix-whatsapp/example-config.yaml
+#	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/mautrix-whatsapp
+#	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/example-config.yaml
+#	fperms 0640 /opt/mautrix-whatsapp/example-config.yaml
 }
