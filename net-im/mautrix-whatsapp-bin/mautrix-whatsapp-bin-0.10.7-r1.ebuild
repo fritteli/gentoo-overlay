@@ -39,6 +39,6 @@ src_install() {
 	systemd_dounit "${FILESDIR}"/mautrix-whatsapp.service
 
 	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/mautrix-whatsapp
-	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/example-config.yaml
+	fowners mautrix-whatsapp-bin:mautrix-whatsapp-bin /opt/mautrix-whatsapp/config.yaml
 	fperms 0640 /opt/mautrix-whatsapp/config.yaml
 }
