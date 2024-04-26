@@ -16,8 +16,8 @@ KEYWORDS="~amd64"
 
 DEPEND="acct-user/mautrix-whatsapp-bin"
 RDEPEND="${DEPEND}
-    postgres? ( >=dev-db/postgresql-10 )
-    !postgres? ( dev-db/sqlite )"
+	postgres? ( >=dev-db/postgresql-10 )
+	!postgres? ( dev-db/sqlite )"
 
 S="${WORKDIR}"
 
