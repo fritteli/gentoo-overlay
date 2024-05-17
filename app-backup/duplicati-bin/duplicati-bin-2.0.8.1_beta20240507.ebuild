@@ -40,4 +40,7 @@ src_prepare() {
 
 src_install() {
 	cp -R "${S}/usr/" "${D}/" || die "install failed"
+	fperms 0755 /usr/bin/duplicati
+	fperms 0755 /usr/bin/duplicati-cli
+	fperms 0755 /usr/bin/duplicati-server
 }
