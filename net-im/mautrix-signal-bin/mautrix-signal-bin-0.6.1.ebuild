@@ -8,19 +8,18 @@ DESCRIPTION="A Matrix-Signal puppeting bridge."
 HOMEPAGE="https://docs.mau.fi/bridges/go/signal/index.html"
 SRC_URI="https://github.com/mautrix/signal/releases/download/v${PV}/mautrix-signal-amd64 -> ${P}"
 
-IUSE="+ffmpeg postgres"
+S="${WORKDIR}"
 
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
+IUSE="+ffmpeg postgres"
 
 DEPEND="acct-user/mautrix-signal-bin"
 RDEPEND="${DEPEND}
 	ffmpeg? ( media-video/ffmpeg[opus] )
 	postgres? ( >=dev-db/postgresql-10 )
 	!postgres? ( dev-db/sqlite )"
-
-S="${WORKDIR}"
 
 src_unpack() {
 	cp "${DISTDIR}/${P}" "${S}/mautrix-signal"
