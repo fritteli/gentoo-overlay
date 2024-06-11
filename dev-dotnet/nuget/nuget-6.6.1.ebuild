@@ -9,13 +9,13 @@ DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="https://www.nuget.org/"
 SRC_URI="https://dist.nuget.org/win-x86-commandline/v${PV}/nuget.exe -> ${P}.exe"
 
+S="${WORKDIR}"
+
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="dev-lang/mono"
-
-S="${WORKDIR}"
 
 src_compile() { :; }
 

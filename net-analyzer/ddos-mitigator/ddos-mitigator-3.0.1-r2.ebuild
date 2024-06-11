@@ -9,14 +9,16 @@ inherit python-single-r1
 DESCRIPTION="Script for blocking IP addresses with many concurrent connections"
 HOMEPAGE="https://gittr.ch/linux/ddos-mitigator"
 SRC_URI="https://gittr.ch/linux/ddos-mitigator/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-RESTRICT="mirror"
+
+S="${WORKDIR}/${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-S="${WORKDIR}/${PN}"
+RESTRICT="mirror"
+
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="
 	${PYTHON_DEPS}

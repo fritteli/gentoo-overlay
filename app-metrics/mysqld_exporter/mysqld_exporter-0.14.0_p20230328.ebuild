@@ -27,6 +27,8 @@ SRC_URI="
 	${SRC_URI_VENDOR}
 	"
 
+S="${WORKDIR}/${PN}-${MY_PV}"
+
 LICENSE="Apache-2.0 BSD BSD-2 MIT MPL-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -37,9 +39,6 @@ DEPEND="acct-group/mysqld_exporter
 	acct-user/mysqld_exporter"
 
 RDEPEND="${DEPEND}"
-
-# Comment this for a normal release.
-S="${WORKDIR}/${PN}-${MY_PV}"
 
 PATCHES=( "${FILESDIR}"/${PN}-0.12.1-skip-tests.patch )
 

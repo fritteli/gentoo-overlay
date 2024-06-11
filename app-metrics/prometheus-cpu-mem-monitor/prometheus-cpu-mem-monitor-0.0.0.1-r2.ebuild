@@ -5,16 +5,16 @@ EAPI=8
 
 inherit systemd
 
-KEYWORDS="~amd64"
-
 DESCRIPTION="CPU and memory monitoring for prometheus"
 HOMEPAGE="https://gittr.ch/linux/gentoo-overlay"
-LICENSE="GPL-2"
-SLOT="0"
-
-DEPEND="sys-process/procps"
 
 S="${WORKDIR}"
+
+LICENSE="GPL-2"
+SLOT="0"
+KEYWORDS="~amd64"
+
+DEPEND="sys-process/procps"
 
 src_install() {
 	dobin "${FILESDIR}/${PN}.sh"

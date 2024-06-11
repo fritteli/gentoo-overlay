@@ -7,6 +7,8 @@ DESCRIPTION="libsignal-ffi prebuilt binary package"
 HOMEPAGE="https://github.com/signalapp/libsignal"
 SRC_URI="https://gentoo-overlay.friedli.info/libsignal_ffi-${PV}.a -> ${P}.a"
 
+S="${WORKDIR}"
+
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -14,8 +16,6 @@ KEYWORDS="~amd64"
 RDEPEND="${DEPEND}"
 
 RESTRICT="mirror"
-
-S="${WORKDIR}"
 
 MY_TARGET_NAME="libsignal_ffi-${PV}.a"
 

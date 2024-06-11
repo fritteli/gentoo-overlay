@@ -369,6 +369,8 @@ HOMEPAGE="https://gitlab.com/famedly/conduit https://famedly.gitlab.io/conduit/"
 SRC_URI="${CARGO_CRATE_URIS}
 https://gitlab.com/famedly/conduit/-/archive/v${PV}/conduit-v${PV}.tar.bz2 -> ${P}.tar.bz2"
 
+S="${WORKDIR}/conduit-v${PV}"
+
 # License set may be more restrictive as OR is not respected
 # use cargo-license for a more accurate license picture
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-1 BSD-2 Boost-1.0 CC0-1.0 ISC MIT MIT-0 MPL-2.0 Unicode-DFS-2016 Unlicense ZLIB"
@@ -378,8 +380,6 @@ KEYWORDS="~amd64"
 RDEPEND="${DEPEND}
 	acct-user/conduit"
 BDEPEND="sys-devel/clang"
-
-S="${WORKDIR}/conduit-v${PV}"
 
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /
