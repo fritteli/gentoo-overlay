@@ -7,4 +7,4 @@ LICENSE=AGPL-3
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://gentoo-overlay.friedli.info/libsignal_ffi-0.42.0.a -> libsignal-ffi-bin-0.42.0.a
-_md5_=aa8c84b50b3e9740dcbf0056f7c4f999
+_md5_=18a4de6668c111e58f35bb26c5b9b0e0

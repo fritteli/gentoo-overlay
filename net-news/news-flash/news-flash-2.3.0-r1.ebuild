@@ -13,6 +13,8 @@ DESCRIPTION="Simple News Feed Reader for feeds aggregated by an online RSS reade
 HOMEPAGE="https://gitlab.com/news-flash/news_flash_gtk"
 SRC_URI="https://gitlab.com/${PN}/${MY_PN}/-/archive/${MY_PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2"
 
+S="${WORKDIR}/${MY_P}"
+
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -29,8 +31,6 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	gui-libs/gtk:4
 	x11-misc/xdg-utils"
-
-S="${WORKDIR}/${MY_P}"
 
 pkg_postinst() {
 	xdg_icon_cache_update

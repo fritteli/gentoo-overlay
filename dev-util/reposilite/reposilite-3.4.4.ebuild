@@ -9,6 +9,8 @@ DESCRIPTION="Reposilite - Simple Maven Repository hosting"
 HOMEPAGE="https://reposilite.com/"
 SRC_URI="https://maven.reposilite.com/releases/com/reposilite/reposilite/${PV}/reposilite-${PV}-all.jar -> reposilite-${PV}.jar"
 
+S="${WORKDIR}"
+
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -17,8 +19,6 @@ RESTRICT="mirror"
 RDEPEND=">=acct-user/reposilite-1
 	|| ( >=virtual/jdk-11 >=virtual/jre-11 )
 "
-
-S="${WORKDIR}"
 
 src_unpack() {
 	cp "${DISTDIR}/${A}" "${WORKDIR}"

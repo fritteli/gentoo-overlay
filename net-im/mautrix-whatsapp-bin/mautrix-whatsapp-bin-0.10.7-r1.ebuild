@@ -8,19 +8,19 @@ DESCRIPTION="A Matrix-WhatsApp puppeting bridge."
 HOMEPAGE="https://docs.mau.fi/bridges/go/whatsapp/index.html"
 SRC_URI="https://github.com/mautrix/whatsapp/releases/download/v${PV}/mautrix-whatsapp-amd64 -> ${P}"
 
-IUSE="+ffmpeg postgres"
+S="${WORKDIR}"
 
 LICENSE="AGPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
+
+IUSE="+ffmpeg postgres"
 
 DEPEND="acct-user/mautrix-whatsapp-bin"
 RDEPEND="${DEPEND}
 	ffmpeg? ( media-video/ffmpeg[opus] )
 	postgres? ( >=dev-db/postgresql-10 )
 	!postgres? ( dev-db/sqlite )"
-
-S="${WORKDIR}"
 
 src_unpack() {
 	cp "${DISTDIR}/${P}" "${S}/mautrix-whatsapp"

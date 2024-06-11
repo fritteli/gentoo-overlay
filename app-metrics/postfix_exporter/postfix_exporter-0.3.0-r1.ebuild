@@ -5,8 +5,6 @@ EAPI=8
 
 inherit go-module systemd
 
-KEYWORDS="~amd64"
-
 DESCRIPTION="Prometheus Exporter for Postfix"
 HOMEPAGE="https://github.com/kumina/postfix_exporter"
 SRC_URI="https://github.com/kumina/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
@@ -14,6 +12,7 @@ SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/${P}-vendor.tar.xz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
+KEYWORDS="~amd64"
 IUSE="systemd"
 
 DEPEND="systemd? ( sys-apps/systemd )"

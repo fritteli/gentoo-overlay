@@ -508,6 +508,8 @@ HOMEPAGE="https://gitlab.com/news-flash/news_flash_gtk"
 SRC_URI="https://gitlab.com/${PN}/${MY_PN}/-/archive/${MY_PV}/${MY_P}.tar.bz2 -> ${P}.tar.bz2
 ${CARGO_CRATE_URIS}"
 
+S="${WORKDIR}/${MY_P}"
+
 # License set may be more restrictive as OR is not respected
 # use cargo-license for a more accurate license picture
 LICENSE="0BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD Boost-1.0 GPL-3+ ISC MIT MPL-2.0 Unicode-DFS-2016 Unlicense ZLIB"
@@ -523,8 +525,6 @@ RDEPEND="${DEPEND}"
 # rust does not use *FLAGS from make.conf, silence portage warning
 # update with proper path to binaries this crate installs, omit leading /
 QA_FLAGS_IGNORED="usr/bin/${PN}"
-
-S="${WORKDIR}/${MY_P}"
 
 pkg_postinst() {
 	xdg_icon_cache_update
