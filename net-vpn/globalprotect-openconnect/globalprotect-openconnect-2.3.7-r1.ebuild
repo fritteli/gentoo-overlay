@@ -526,6 +526,8 @@ LICENSE+="
 SLOT="0"
 KEYWORDS="~amd64"
 
+RDEPEND="dev-libs/libayatana-appindicator"
+
 cargo_src_install() {
 	dobin "${S}/target/x86_64-unknown-linux-gnu/release/gpauth"
 	dobin "${S}/target/x86_64-unknown-linux-gnu/release/gpclient"
