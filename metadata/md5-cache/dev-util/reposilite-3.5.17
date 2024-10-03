@@ -9,6 +9,6 @@ LICENSE=Apache-2.0
 RDEPEND=>=acct-user/reposilite-1 || ( >=virtual/jdk-11 >=virtual/jre-11 )
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://maven.reposilite.com/releases/com/reposilite/reposilite/3.4.4/reposilite-3.4.4-all.jar -> reposilite-3.4.4.jar
+SRC_URI=https://maven.reposilite.com/releases/com/reposilite/reposilite/3.5.17/reposilite-3.5.17-all.jar -> reposilite-3.5.17.jar
 _eclasses_=toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	multilib	7e1347c006a76bb812f3a9f663b79991	systemd	0f241b5c9f3758c3d3423df59a7f655a
-_md5_=97166463680d4d919a3c1e62f01090c1
+_md5_=319655193155b2c54e9228f09355520b

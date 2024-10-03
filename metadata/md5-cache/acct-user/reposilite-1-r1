@@ -5,5 +5,5 @@ INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/reposilite
 SLOT=0
-_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-user	bab50e8bac8e1df6a32a6b9e2fb19a64
+_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-user	76c38e662eb0e762f606ede7e4d034d3
 _md5_=f95de6d5ad159d8b33bfb2c464dd5cbb
