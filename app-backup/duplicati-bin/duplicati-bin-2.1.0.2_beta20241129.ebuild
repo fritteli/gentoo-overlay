@@ -24,7 +24,7 @@ MY_PV="${MY_MAIN_PV}_${MY_BUILDTYPE}_${MY_YEAR}-${MY_MONTH}-${MY_DAY}"
 MY_P="${MY_PN}-${MY_PV}-linux-x64-gui"
 
 DESCRIPTION="A backup client that securely stores encrypted, incremental, compressed backups."
-HOMEPAGE="https://www.duplicati.com/"
+HOMEPAGE="https://duplicati.com/"
 SRC_URI="https://github.com/${MY_PN}/${MY_PN}/releases/download/v${MY_PV}/${MY_P}.zip -> ${P}.zip"
 
 S="${WORKDIR}"
