@@ -1,0 +1,11 @@
+BDEPEND=app-arch/unzip
+DEFINED_PHASES=install
+DESCRIPTION=A backup client that securely stores encrypted, incremental, compressed backups.
+EAPI=8
+HOMEPAGE=https://www.duplicati.com/
+KEYWORDS=~amd64
+LICENSE=LGPL-2
+RESTRICT=strip
+SLOT=0
+SRC_URI=https://github.com/duplicati/duplicati/releases/download/v2.1.0.2_beta_2024-11-29/duplicati-2.1.0.2_beta_2024-11-29-linux-x64-gui.zip -> duplicati-bin-2.1.0.2_beta20241129.zip
+_md5_=f17ddc3c5723d946db13bc8a5eb1a059
