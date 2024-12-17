@@ -1,5 +1,0 @@
-*opendkim-0-r1 (07 Sep 2020)
-
-  07 Sep 2020; Manuel Friedli <manuel@fritteli.ch> +metadata.xml,
-  +opendkim-0-r1.ebuild:
-  acct-user/opendkim: Add ebuild.  As per https://wiki.gentoo.org/wiki/OpenDKIM
