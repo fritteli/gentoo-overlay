@@ -356,6 +356,7 @@ DESCRIPTION="A standards-compliant bridge to Reolink IP cameras"
 HOMEPAGE="https://github.com/QuantumEntangledAndy/neolink"
 SRC_URI="https://github.com/QuantumEntangledAndy/neolink/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
 	${CARGO_CRATE_URIS}
+	https://gentoo-overlay.friedli.info/${P}-update-cargo-lock.patch
 "
 
 LICENSE="AGPL-3+"
@@ -368,5 +369,5 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 PATCHES=(
-	"${FILESDIR}"/01-update-cargo-lock.patch
+	"${DISTDIR}/${P}-update-cargo-lock.patch"
 )
