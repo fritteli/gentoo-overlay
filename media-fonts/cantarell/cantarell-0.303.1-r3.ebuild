@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,7 +8,7 @@ inherit font gnome.org meson
 
 DESCRIPTION="Default fontset for GNOME Shell"
 HOMEPAGE="https://wiki.gnome.org/Projects/CantarellFonts"
-SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/cantarell-static-fonts-0.303.1.tar"
+SRC_URI+=" https://gentoo-overlay.friedli.info/cantarell-static-fonts-0.303.1.tar"
 
 LICENSE="OFL-1.1"
 SLOT="0"

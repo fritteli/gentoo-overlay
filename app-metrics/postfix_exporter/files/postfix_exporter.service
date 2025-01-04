@@ -3,7 +3,7 @@ Description=Postfix Exporter
 
 [Service]
 User=postfix_exporter
-Group=postdrop
+Group=postfix_exporter
 EnvironmentFile=/etc/conf.d/postfix_exporter
 ExecStart=/usr/bin/postfix_exporter $command_args
 

@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,17 +6,23 @@ inherit go-module systemd
 
 DESCRIPTION="Drone CI - Docker Runner"
 HOMEPAGE="https://www.drone.io/ https://github.com/drone-runners/drone-runner-docker"
-SRC_URI="https://github.com/drone-runners/drone-runner-docker/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-SRC_URI+=" https://manuel.friedli.info/gentoo-overlay/${P}-vendor.tar.xz"
+SRC_URI="
+	https://github.com/drone-runners/drone-runner-docker/archive/v${PV}.tar.gz -> ${P}.tar.gz
+	https://gentoo-overlay.friedli.info/${P}-vendor.tar.xz
+"
 
 LICENSE="|| ( PolyForm-Small-Business-1.0.0 PolyForm-Free-Trial-1.0.0 )"
 SLOT="0"
 KEYWORDS="~amd64"
 
-DEPEND="acct-group/drone-runner-docker
-	acct-user/drone-runner-docker"
-	RDEPEND="${DEPEND}
-		app-containers/docker"
+DEPEND="
+	acct-group/drone-runner-docker
+	acct-user/drone-runner-docker
+"
+
+RDEPEND="${DEPEND}
+	app-containers/docker
+"
 
 RESTRICT="mirror"
 
