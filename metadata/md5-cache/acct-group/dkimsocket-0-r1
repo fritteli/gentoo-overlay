@@ -1,8 +1,0 @@
-DEFINED_PHASES=install preinst pretend
-DESCRIPTION=Group used to share the OpenDKIM socket
-EAPI=8
-INHERIT=acct-group
-KEYWORDS=~amd64
-SLOT=0
-_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-group	c2bb1fc7bada6e119b3ce202ca42476f
-_md5_=58dd10a0a0dd9c7936b09866c066b703
