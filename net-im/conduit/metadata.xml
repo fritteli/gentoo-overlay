@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>julien@jroy.ca</email>
+		<name>Julien Roy</name>
+	</maintainer>
+	<maintainer type="person">
+		<email>cyber+gentoo@sysrq.in</email>
+		<name>Anna</name>
+	</maintainer>
+	<longdescription>
+		A fast Matrix homeserver that is optimized for smaller, personal servers,
+		instead of a server that has high scalability.
+	</longdescription>
+	<use>
+		<flag name="rocksdb">
+			Add support for RocksDB; a key/value, LSM database
+		</flag>
+		<flag name="system-rocksdb">
+			Use the system-wide <pkg>dev-libs/rocksdb</pkg> installation
+		</flag>
+	</use>
+	<upstream>
+		<maintainer>
+			<name>Timo Kösters</name>
+			<email>timo@koesters.xyz</email>
+		</maintainer>
+		<bugs-to>https://gitlab.com/famedly/conduit/-/issues</bugs-to>
+		<changelog>https://conduit.rs/changelog/</changelog>
+		<doc>https://docs.conduit.rs/</doc>
+		<remote-id type="gitlab">famedly/conduit</remote-id>
+	</upstream>
+</pkgmetadata>
