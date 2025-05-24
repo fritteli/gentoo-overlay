@@ -5,5 +5,5 @@ INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/apache_exporter
 SLOT=0
-_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-user	a4bf64e6c32b95705287346a2b678ae1
+_eclasses_=user-info	9951b1a0e4f026d16c33a001fd2d5cdf	acct-user	cf1210dd7bebfa79756df4fb6735d975
 _md5_=75d24045e06b0a8e4cfe6b6e58a1c9d9
