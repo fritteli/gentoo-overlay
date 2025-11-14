@@ -23,6 +23,10 @@ RDEPEND="
 	acct-user/${PN}
 "
 
+PATCHES=(
+	"${FILESDIR}"/01-mautrix-whatsapp-0.2510-fix-version-identifiers.patch
+)
+
 src_compile() {
 	ego build ./cmd/mautrix-whatsapp $(use crypt || echo '-tags nocrypto')
 }
