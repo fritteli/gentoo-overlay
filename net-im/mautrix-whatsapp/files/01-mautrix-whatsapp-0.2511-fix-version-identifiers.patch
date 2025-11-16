@@ -1,0 +1,15 @@
+diff --git a/cmd/mautrix-whatsapp/main.go b/cmd/mautrix-whatsapp/main.go
+index b71912f..42f248a 100644
+--- a/cmd/mautrix-whatsapp/main.go
++++ b/cmd/mautrix-whatsapp/main.go
+@@ -9,8 +9,8 @@ import (
+ // Information to find out exactly which commit the bridge was built from.
+ // These are filled at build time with the -X linker flag.
+ var (
+-	Tag       = "unknown"
+-	Commit    = "unknown"
++	Tag       = "v0.2511.0"
++	Commit    = "f77169b4262bad8765e935b6a4bb0d3cec447a8b"
+ 	BuildTime = "unknown"
+ )
+ 
