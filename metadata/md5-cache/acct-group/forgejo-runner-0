@@ -1,0 +1,8 @@
+DEFINED_PHASES=install preinst pretend
+DESCRIPTION=Group used for the forgejo-runner
+EAPI=8
+INHERIT=acct-group
+KEYWORDS=~amd64
+SLOT=0
+_eclasses_=user-info	563da40a1a20ea1e55bbf4d149fc190d	acct-group	75df1c6be0fa643823bd4283c4abd422
+_md5_=b72701ce2ec0d7b792ba7779ed76def3
