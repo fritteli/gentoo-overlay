@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit go-module systemd toolchain-funcs
+inherit go-module systemd
 
 MY_P="beszel-${PV}"
 DESCRIPTION="Beszel Hub - Simple, lightweight server monitoring"
@@ -29,22 +29,25 @@ LICENSE+=" AGPL-3 Apache-2.0 BSD GPL-3+ ISC MIT MPL-2.0 public-domain"
 SLOT="0"
 KEYWORDS="~amd64"
 
+DEPEND="acct-user/beszel-hub
+	acct-group/beszel"
+
 src_compile() {
 	cd internal/cmd/hub
 	ego build -ldflags "-w -s"
 }
 
 src_install() {
-        newbin "${S}"/internal/cmd/hub/hub beszel-hub
+	newbin "${S}"/internal/cmd/hub/hub beszel-hub
 
-        dodir /etc/beszel-hub
+	dodir /etc/beszel-hub
 
-        insinto /etc/beszel-hub
-        doins "${FILESDIR}"/beszel-hub.env
+	insinto /etc/beszel-hub
+	doins "${FILESDIR}"/beszel-hub.env
 
-        fowners -R beszel-hub:beszel /etc/beszel-hub
-        fperms 0750 /etc/beszel-hub
-        fperms 0600 /etc/beszel-hub/beszel-hub.env
+	fowners -R beszel-hub:beszel /etc/beszel-hub
+	fperms 0750 /etc/beszel-hub
+	fperms 0600 /etc/beszel-hub/beszel-hub.env
 
-        systemd_dounit "${FILESDIR}"/beszel-hub.service
+	systemd_dounit "${FILESDIR}"/beszel-hub.service
 }

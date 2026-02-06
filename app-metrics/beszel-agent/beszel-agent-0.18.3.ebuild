@@ -23,7 +23,6 @@ DEPEND="acct-user/beszel-agent
 	acct-group/beszel"
 
 src_compile() {
-	# emake build-agent
 	cd internal/cmd/agent
 	ego build -ldflags "-w -s"
 }
