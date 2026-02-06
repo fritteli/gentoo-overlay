@@ -1,0 +1,29 @@
+[Unit]
+Description=Beszel Agent Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/usr/bin/beszel-agent
+EnvironmentFile=/etc/beszel-agent/beszel-agent
+Restart=on-failure
+RestartSec=5
+StateDirectory=beszel-agent
+
+User=beszel-agent
+Group=beszel
+
+# Security/sandboxing settings
+KeyringMode=private
+LockPersonality=yes
+NoNewPrivileges=yes
+ProtectClock=yes
+ProtectHome=read-only
+ProtectHostname=yes
+ProtectKernelLogs=yes
+ProtectSystem=strict
+RemoveIPC=yes
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target
