@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 ExecStart=/usr/bin/beszel-agent
-EnvironmentFile=/etc/beszel-agent/beszel-agent
+EnvironmentFile=/etc/beszel-agent/beszel-agent.env
 Restart=on-failure
 RestartSec=5
 StateDirectory=beszel-agent
