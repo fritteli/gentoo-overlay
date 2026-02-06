@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit go-module systemd toolchain-funcs
+inherit go-module systemd
 
 MY_P="beszel-${PV}"
 DESCRIPTION="Beszel Agent - Simple, lightweight server monitoring"
@@ -30,4 +30,16 @@ src_compile() {
 
 src_install() {
 	newbin "${S}"/internal/cmd/agent/agent beszel-agent
+
+	dodir /etc/beszel-agent
+	keepdir /var/lib/beszel-agent
+
+	insinto /etc/beszel-agent
+	doins "${FILESDIR}"/beszel-agent.env
+
+	fowners -R beszel-agent:beszel /etc/beszel-agent /var/lib/beszel-agent
+	fperms 0750 /etc/beszel-agent /var/lib/beszel-agent
+	fperms 0600 /etc/beszel-agent/beszel-agent.env
+
+	systemd_dounit "${FILESDIR}"/beszel-agent.service
 }
