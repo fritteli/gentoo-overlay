@@ -1,14 +1,14 @@
 [Unit]
 Description=Beszel Hub Service
-After=network-online.target
-Wants=network-online.target
+After=network.target
 
 [Service]
-ExecStart=/usr/bin/beszel-hub --dir /var/lib/beszel-hub
-EnvironmentFile=/etc/beszel-hub/beszel-hub.env
-Restart=on-failure
+Type=simple
+Restart=always
 RestartSec=5
-StateDirectory=beszel-hub
+ExecStart=/usr/bin/beszel-hub serve --dir /var/lib/beszel-hub/data --http ${BESZEL_HUB_SERVE_HTTP} --https ${BESZEL_HUB_SERVE_HTTPS}
+WorkingDirectory=/var/lib/beszel-hub
+EnvironmentFile=/etc/beszel-hub/beszel-hub.env
 
 User=beszel-hub
 Group=beszel
