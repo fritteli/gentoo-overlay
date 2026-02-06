@@ -24,6 +24,7 @@ ProtectKernelLogs=yes
 ProtectSystem=strict
 RemoveIPC=yes
 RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/beszel-hub
 
 [Install]
 WantedBy=multi-user.target
