@@ -1,8 +1,8 @@
 DEFINED_PHASES=install preinst pretend
-DESCRIPTION=Group used for the drone.io docker runner
+DESCRIPTION=Group used for the Beszel monitoring hub and agent
 EAPI=8
 INHERIT=acct-group
 KEYWORDS=~amd64
 SLOT=0
 _eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-group	64c2dcae095a4889476d76ba39d2ce21
-_md5_=c8e24b5f96a608bc3f11b1545f72054d
+_md5_=bf14925505f7b3b4191a5d10b2e2db41
