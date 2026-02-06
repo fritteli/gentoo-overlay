@@ -4,7 +4,7 @@ After=network-online.target
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/bin/beszel-hub
+ExecStart=/usr/bin/beszel-hub --dir /var/lib/beszel-hub
 EnvironmentFile=/etc/beszel-hub/beszel-hub.env
 Restart=on-failure
 RestartSec=5

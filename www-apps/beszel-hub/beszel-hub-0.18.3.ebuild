@@ -41,12 +41,13 @@ src_install() {
 	newbin "${S}"/internal/cmd/hub/hub beszel-hub
 
 	dodir /etc/beszel-hub
+	keepdir /var/lib/beszel-hub
 
 	insinto /etc/beszel-hub
 	doins "${FILESDIR}"/beszel-hub.env
 
-	fowners -R beszel-hub:beszel /etc/beszel-hub
-	fperms 0750 /etc/beszel-hub
+	fowners -R beszel-hub:beszel /etc/beszel-hub /var/lib/beszel-hub
+	fperms 0750 /etc/beszel-hub /var/lib/beszel-hub
 	fperms 0600 /etc/beszel-hub/beszel-hub.env
 
 	systemd_dounit "${FILESDIR}"/beszel-hub.service
