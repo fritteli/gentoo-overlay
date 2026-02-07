@@ -16,12 +16,12 @@ Group=beszel
 # Security/sandboxing settings
 KeyringMode=private
 LockPersonality=yes
-NoNewPrivileges=yes
+NoNewPrivileges=no
 ProtectClock=yes
 ProtectHome=read-only
 ProtectHostname=yes
 ProtectKernelLogs=yes
-ProtectSystem=strict
+ProtectSystem=full
 RemoveIPC=yes
 RestrictSUIDSGID=true
 ReadWritePaths=/var/lib/beszel-hub
