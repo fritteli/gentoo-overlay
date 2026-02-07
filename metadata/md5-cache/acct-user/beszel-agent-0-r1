@@ -1,0 +1,10 @@
+DEFINED_PHASES=install postinst preinst prerm pretend setup
+DESCRIPTION=User for the Beszel monitoring agent
+EAPI=8
+INHERIT=acct-user
+IUSE=docker
+KEYWORDS=~amd64
+RDEPEND=acct-group/beszel
+SLOT=0
+_eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-user	8c5f04cd2cfafc30ffb9bae9cf5f5605
+_md5_=68743e0393992a8b8a9c919f1222571b
