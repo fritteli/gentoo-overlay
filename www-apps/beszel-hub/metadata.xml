@@ -6,6 +6,6 @@
 		<name>Manuel Friedli</name>
 	</maintainer>
 	<upstream>
-		<remote-id type="github">prometheus/node_exporter</remote-id>
+		<remote-id type="github">henrygd/beszel</remote-id>
 	</upstream>
 </pkgmetadata>

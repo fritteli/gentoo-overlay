@@ -1,5 +1,0 @@
-*apache_exporter-0 (29 Sep 2020)
-
-  29 Sep 2020; Manuel Friedli <manuel@gentoo.org> +apache_exporter-0.ebuild,
-  +metadata.xml:
-  acct-group/apache_exporter: Add apache_exporter group
