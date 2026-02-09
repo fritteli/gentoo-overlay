@@ -1,8 +1,0 @@
-DEFINED_PHASES=install preinst pretend
-DESCRIPTION=Group used for the apache_exporter prometheus plugin
-EAPI=8
-INHERIT=acct-group
-KEYWORDS=~amd64
-SLOT=0
-_eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-group	64c2dcae095a4889476d76ba39d2ce21
-_md5_=6223075d6587ef091669de9ca0d2fa63
