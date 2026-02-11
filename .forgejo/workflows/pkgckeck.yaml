@@ -1,0 +1,11 @@
+on: [push]
+jobs:
+  pkgcheck:
+    runs-on: docker
+    container:
+      image: gittr.ch/linux/pkgcheck:latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Run repository checks
+        run: pkgcheck --color true scan --exit error,style --net .
