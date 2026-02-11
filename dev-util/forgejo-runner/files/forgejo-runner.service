@@ -8,7 +8,7 @@ ExecStart=/usr/bin/forgejo-runner daemon
 ExecReload=/bin/kill -s HUP $MAINPID
 
 # This user and working directory must already exist
-User=forgeko-runner
+User=forgejo-runner
 WorkingDirectory=/var/lib/forgejo-runner
 Restart=on-failure
 TimeoutSec=0

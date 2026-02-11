@@ -82,7 +82,4 @@ src_install() {
 		dodoc -r "examples"
 		docompress -x "/usr/share/doc/${PF}/examples"
 	fi
-
-	keepdir /var/lib/forgejo-runner
-	fowners forgejo-runner:forgejo-runner /var/lib/forgejo-runner
 }

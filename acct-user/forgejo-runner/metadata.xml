@@ -5,4 +5,7 @@
 		<email>manuel@fritteli.ch</email>
 		<name>Manuel Friedli</name>
 	</maintainer>
+	<use>
+		<flag name="docker">Add the user to the docker group.</flag>
+	</use>
 </pkgmetadata>
