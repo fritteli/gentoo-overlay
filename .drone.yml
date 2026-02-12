@@ -1,9 +1,0 @@
-kind: pipeline
-type: docker
-name: default
-
-steps:
-- name: run-pkgcheck
-  image: gittr.ch/linux/pkgcheck:latest
-  commands:
-  - pkgcheck --color true scan --exit error,style --net .
