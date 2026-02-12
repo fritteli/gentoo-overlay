@@ -1,9 +1,9 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2026 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit gnome2 meson # cargo
+inherit gnome2 meson
 
 DESCRIPTION="Trim videos quickly"
 HOMEPAGE="https://apps.gnome.org/de/app/org.gnome.gitlab.YaLTeR.VideoTrimmer/"
@@ -22,8 +22,4 @@ RDEPEND="gui-libs/gtk
 
 DEPEND="${RDEPEND}
 	>=dev-util/blueprint-compiler-0.2.0
-	virtual/rust"
-
-PATCHES=(
-	"${FILESDIR}/fix-amp-entity-in-de-po.patch"
-)
+	|| ( dev-lang/rust dev-lang/rust-bin )"
