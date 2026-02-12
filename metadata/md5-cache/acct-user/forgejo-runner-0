@@ -1,9 +1,10 @@
-DEFINED_PHASES=install postinst preinst prerm pretend
+DEFINED_PHASES=install postinst preinst prerm pretend setup
 DESCRIPTION=User for the forgejo-runner
 EAPI=8
 INHERIT=acct-user
-KEYWORDS=~amd64
-RDEPEND=acct-group/forgejo-runner acct-group/docker
+IUSE=docker
+KEYWORDS=~amd64 ~arm64
+RDEPEND=acct-group/forgejo-runner
 SLOT=0
 _eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-user	8c5f04cd2cfafc30ffb9bae9cf5f5605
-_md5_=058599e4d1d9c24aea4e089309dda59f
+_md5_=7682098824203bb780ea9bbb2c2f73e2

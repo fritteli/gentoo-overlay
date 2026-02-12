@@ -17,7 +17,7 @@ HOMEPAGE="https://www.beszel.dev/"
 # cd ../../..
 # tar --auto-compress -cf ${MY_P}-site.tar.xz ${MY_P}/internal/site/dist
 # Upload to mirror
-SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz
 	https://gentoo-overlay.friedli.info/${MY_P}-vendor.tar.xz
 	https://gentoo-overlay.friedli.info/${P}-site.tar.xz"
 
