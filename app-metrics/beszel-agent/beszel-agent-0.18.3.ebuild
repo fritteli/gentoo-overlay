@@ -8,7 +8,7 @@ inherit go-module systemd
 MY_P="beszel-${PV}"
 DESCRIPTION="Beszel Agent - Simple, lightweight server monitoring"
 HOMEPAGE="https://www.beszel.dev/"
-SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz
+SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz
 	https://gentoo-overlay.friedli.info/${MY_P}-vendor.tar.xz"
 
 S="${WORKDIR}/${MY_P}"
