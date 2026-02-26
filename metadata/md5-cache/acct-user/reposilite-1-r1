@@ -1,9 +1,0 @@
-DEFINED_PHASES=install postinst preinst prerm pretend
-DESCRIPTION=User for the reposilite maven repo server
-EAPI=8
-INHERIT=acct-user
-KEYWORDS=~amd64
-RDEPEND=acct-group/reposilite
-SLOT=0
-_eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-user	8c5f04cd2cfafc30ffb9bae9cf5f5605
-_md5_=f95de6d5ad159d8b33bfb2c464dd5cbb
