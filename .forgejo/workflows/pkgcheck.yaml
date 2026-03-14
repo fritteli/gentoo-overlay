@@ -6,6 +6,6 @@ jobs:
       image: gittr.ch/linux/pkgcheck:latest
     steps:
       - name: Checkout repository
-        uses: https://gittr.ch/linux/forgejo-actions/checkout@v0.2
+        uses: https://gittr.ch/linux/forgejo-actions/checkout@v1
       - name: Run repository checks
         run: pkgcheck --color true scan --exit error,style --net .
