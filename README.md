@@ -7,7 +7,7 @@ overlay (provided I'm satisfied with them).
 Build status of the
 [main branch](https://gittr.ch/linux/gentoo-overlay/src/branch/main), as seen
 by `pkgcheck scan --exit error --net .`:
-[![Build Status](https://ci.gittr.ch/api/badges/linux/gentoo-overlay/status.svg?ref=refs/heads/main)](https://ci.gittr.ch/linux/gentoo-overlay)
+[![Build Status](https://gittr.ch/linux/gentoo-overlay/badges/workflows/pkgcheck.yaml/badge.svg?branch=main)](https://gittr.ch/linux/gentoo-overlay/actions)
 
 ## Using this overlay
 Just execute these commands:
