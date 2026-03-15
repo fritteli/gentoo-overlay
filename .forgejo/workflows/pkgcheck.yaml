@@ -3,7 +3,7 @@ jobs:
   pkgcheck:
     runs-on: docker
     container:
-      image: gittr.ch/linux/pkgcheck:20260314
+      image: gittr.ch/linux/pkgcheck:20260315
     steps:
       - name: Checkout repository
         uses: https://gittr.ch/linux/forgejo-actions/checkout@v1
