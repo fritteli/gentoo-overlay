@@ -6,7 +6,7 @@
 		<name>Manuel Friedli</name>
 	</maintainer>
 	<use>
-		<flag name="enable-ocr">Enable OCR functionality</flag>
+		<flag name="ocr">Enable OCR functionality</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">AlexanderVanhee/Gradia</remote-id>

@@ -15,7 +15,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64"
 
-IUSE="enable-ocr"
+IUSE="ocr"
 
 DEPEND="
 	dev-util/blueprint-compiler
@@ -23,13 +23,14 @@ DEPEND="
 	dev-util/desktop-file-utils
 	dev-libs/glib
 	dev-libs/appstream
+	dev-python/pytesseract
 "
 
 RDEPEND="
 	dev-libs/glib:2
-	dev-python/pygobject
-	gui-libs/gtk:4
-	gui-libs/libadwaita:1
+	>=dev-python/pygobject-3.48.0
+	>=gui-libs/gtk-4.12.0:4
+	>=gui-libs/libadwaita-1.5.0:1
 	gui-libs/gtksourceview:5
 "
 
@@ -37,7 +38,7 @@ IDEPEND="dev-util/desktop-file-utils"
 
 src_configure() {
 	local emesonargs=(
-		$(meson_use enable-ocr)
+		$(meson_use ocr enable-ocr)
 	)
 	meson_src_configure
 }
