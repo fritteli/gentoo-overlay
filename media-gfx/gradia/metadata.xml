@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<use>
+		<flag name="enable-ocr">Enable OCR functionality</flag>
+	</use>
+	<upstream>
+		<remote-id type="github">AlexanderVanhee/Gradia</remote-id>
+	</upstream>
+</pkgmetadata>

@@ -5,17 +5,17 @@ EAPI=8
 
 inherit meson
 
-DESCRIPTION="Gradia allows you to quickly modify screenshots of application windows to put them better in context."
+DESCRIPTION="Quickly modify screenshots of application windows to put them better in context."
 HOMEPAGE="https://github.com/AlexanderVanhee/Gradia"
 SRC_URI="https://github.com/AlexanderVanhee/Gradia/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
-IUSE="enable-ocr"
+S="${WORKDIR}/Gradia-${PV}"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~x64"
+KEYWORDS="~amd64"
 
-S="${WORKDIR}/Gradia-${PV}"
+IUSE="enable-ocr"
 
 DEPEND="
 	dev-util/blueprint-compiler
@@ -34,8 +34,8 @@ RDEPEND="
 "
 
 src_configure() {
-        local emesonargs=(
-                $(meson_use enable-ocr)
-        )
-        meson_src_configure
+	local emesonargs=(
+		$(meson_use enable-ocr)
+	)
+	meson_src_configure
 }
