@@ -29,6 +29,7 @@ DEPEND="
 RDEPEND="
 	dev-libs/glib:2
 	>=dev-python/pygobject-3.48.0
+	gui-libs/gdk-pixbuf-loader-webp
 	>=gui-libs/gtk-4.12.0:4
 	>=gui-libs/libadwaita-1.5.0:1
 	gui-libs/gtksourceview:5
