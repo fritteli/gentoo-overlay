@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit gnome2 meson
+inherit gnome2-utils meson
 
 DESCRIPTION="Quickly modify screenshots of application windows to put them better in context."
 HOMEPAGE="https://github.com/AlexanderVanhee/Gradia"
@@ -46,14 +46,16 @@ src_install() {
 	meson_src_install
 }
 
-pkg_preinst() {
-	gnome_pkg_preinst
-}
-
 pkg_postinst() {
-	gnome2_pkg_postinst
+	gnome2_schemas_update
+	xdg_desktop_database_update
+	xdg_icon_cache_update
+	xdg_mimeinfo_database_update
 }
 
 pkg_postrm() {
-	gnome2_pkg_postrm
+	gnome2_schemas_update
+	xdg_desktop_database_update
+	xdg_icon_cache_update
+	xdg_mimeinfo_database_update
 }
