@@ -17,6 +17,8 @@ KEYWORDS="~amd64"
 
 IUSE="ocr"
 
+PATCHES="${FILESDIR}/gradia-1.12.0-pygobject-3.50-compat.patch"
+
 DEPEND="
 	dev-util/blueprint-compiler
 	sys-devel/gettext
