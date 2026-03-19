@@ -11,11 +11,13 @@ SRC_URI="https://github.com/AlexanderVanhee/Gradia/archive/refs/tags/v${PV}.tar.
 
 S="${WORKDIR}/Gradia-${PV}"
 
-LICENSE="GPL-3"
+LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
 
 IUSE="ocr"
+
+PATCHES="${FILESDIR}/gradia-1.12.0-pygobject-3.50-compat.patch"
 
 DEPEND="
 	dev-util/blueprint-compiler
@@ -29,6 +31,7 @@ DEPEND="
 RDEPEND="
 	dev-libs/glib:2
 	>=dev-python/pygobject-3.48.0
+	gui-libs/gdk-pixbuf-loader-webp
 	>=gui-libs/gtk-4.12.0:4
 	>=gui-libs/libadwaita-1.5.0:1
 	gui-libs/gtksourceview:5
