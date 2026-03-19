@@ -42,6 +42,10 @@ src_configure() {
 	meson_src_configure
 }
 
+src_install() {
+	meson_src_install
+}
+
 pkg_postinst() {
 	xdg_desktop_database_update
 	xdg_icon_cache_update
