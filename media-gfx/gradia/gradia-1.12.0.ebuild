@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit meson
+inherit meson xdg-utils
 
 DESCRIPTION="Quickly modify screenshots of application windows to put them better in context."
 HOMEPAGE="https://github.com/AlexanderVanhee/Gradia"
@@ -33,9 +33,19 @@ RDEPEND="
 	gui-libs/gtksourceview:5
 "
 
+IDEPEND="dev-util/desktop-file-utils"
+
 src_configure() {
 	local emesonargs=(
 		$(meson_use enable-ocr)
 	)
 	meson_src_configure
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
 }
