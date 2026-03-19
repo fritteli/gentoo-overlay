@@ -11,7 +11,7 @@ SRC_URI="https://github.com/AlexanderVanhee/Gradia/archive/refs/tags/v${PV}.tar.
 
 S="${WORKDIR}/Gradia-${PV}"
 
-LICENSE="GPL-3"
+LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64"
 
