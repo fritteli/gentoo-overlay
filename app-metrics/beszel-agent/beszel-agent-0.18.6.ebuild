@@ -22,6 +22,8 @@ KEYWORDS="~amd64"
 DEPEND="acct-user/beszel-agent
 	acct-group/beszel"
 
+BDEPEND=">=dev-lang/go-1.26.0"
+
 src_compile() {
 	cd internal/cmd/agent
 	ego build -ldflags "-w -s"

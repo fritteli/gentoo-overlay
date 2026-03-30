@@ -13,13 +13,13 @@ HOMEPAGE="https://www.beszel.dev/"
 # - Checkout the repo at the correct tag into the dir ${MY_P}
 # cd ${MY_P}/internal/site
 # npm install
-# npm build
+# npm run build
 # cd ../../..
 # tar --auto-compress -cf ${MY_P}-site.tar.xz ${MY_P}/internal/site/dist
 # Upload to mirror
 SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz
 	https://gentoo-overlay.friedli.info/${MY_P}-vendor.tar.xz
-	https://gentoo-overlay.friedli.info/${P}-site.tar.xz"
+	https://gentoo-overlay.friedli.info/${MY_P}-site.tar.xz"
 
 S="${WORKDIR}/${MY_P}"
 
@@ -31,6 +31,8 @@ KEYWORDS="~amd64"
 
 DEPEND="acct-user/beszel-hub
 	acct-group/beszel"
+
+BDEPEND=">=dev-lang/go-1.26.0"
 
 src_compile() {
 	cd internal/cmd/hub
