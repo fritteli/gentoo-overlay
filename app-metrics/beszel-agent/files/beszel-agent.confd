@@ -1,0 +1,12 @@
+# /etc/conf.d/beszel-agent: config file for /etc/init.d/beszel-agent
+
+# User and group as which to run
+#BESZEL_AGENT_USER="beszel-agent"
+#BESZEL_AGENT_GROUP="beszel"
+
+# Extra options for beszel
+#BESZEL_AGENT_OPTS=""
+
+# beszel uses enviroment variables for its configuration. Following file
+# should be modified in order to configure beszel agent
+#BESZEL_AGENT_ENVFILE="/etc/beszel-agent/beszel-agent.env"
