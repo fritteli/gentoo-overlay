@@ -1,0 +1,18 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="beszel daemon"
+description="beszel monitoring agent"
+command=/usr/bin/beszel-agent
+command_args="${BESZEL_AGENT_OPTS}"
+command_user="${BESZEL_AGENT_USER:-beszel-agent}:${BESZEL_AGENT_GROUP:-beszel}"
+supervisor=supervise-daemon
+
+set -o allexport
+source ${BESZEL_AGENT_ENVFILE:-/etc/beszel-agent/beszel-agent.env}
+set +o allexport
+
+depend() {
+	need net
+}
