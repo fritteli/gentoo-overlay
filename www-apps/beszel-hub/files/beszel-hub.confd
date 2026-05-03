@@ -1,0 +1,15 @@
+# /etc/conf.d/beszel-hub: config file for /etc/init.d/beszel-hub
+
+# User and group as which to run
+#BESZEL_HUB_USER="beszel-hub"
+#BESZEL_HUB_GROUP="beszel"
+
+# Extra options for beszel.
+#BESZEL_HUB_OPTS=""
+
+# beszel-hub uses enviroment variables for its configuration. Following file
+# should be modified in order to configure beszel hub
+#BESZEL_HUB_ENVFILE="/etc/beszel-hub/beszel-hub.env"
+
+# beszel-hub data directory
+#BESZEL_HUB_DIR="/var/lib/beszel-hub"
