@@ -7,7 +7,7 @@ inherit go-module systemd
 
 MY_P="beszel-${PV}"
 DESCRIPTION="Beszel Hub - Simple, lightweight server monitoring"
-HOMEPAGE="https://www.beszel.dev/"
+HOMEPAGE="https://www.beszel.dev/ https://github.com/henrygd/beszel/"
 
 # How to create the vendor tarball:
 # https://wiki.gentoo.org/wiki/Writing_go_Ebuilds#Vendor_tarball
@@ -43,17 +43,19 @@ src_compile() {
 }
 
 src_install() {
-	newbin "${S}"/internal/cmd/hub/hub beszel-hub
+	newbin "${S}/internal/cmd/hub/hub" ${PN}
 
-	dodir /etc/beszel-hub
-	keepdir /var/lib/beszel-hub
+	dodir /etc/${PN}
+	keepdir /var/lib/${PN}
 
-	insinto /etc/beszel-hub
-	doins "${FILESDIR}"/beszel-hub.env
+	insinto /etc/${PN}
+	doins "${FILESDIR}/${PN}.env"
 
-	fowners -R beszel-hub:beszel /etc/beszel-hub /var/lib/beszel-hub
-	fperms 0750 /etc/beszel-hub /var/lib/beszel-hub
-	fperms 0600 /etc/beszel-hub/beszel-hub.env
+	fowners -R ${PN}:beszel /etc/${PN} /var/lib/${PN}
+	fperms 0750 /etc/${PN} /var/lib/${PN}
+	fperms 0600 /etc/${PN}/${PN}.env
 
-	systemd_dounit "${FILESDIR}"/beszel-hub.service
+	systemd_dounit "${FILESDIR}/${PN}.service"
+	newconfd "${FILESDIR}/${PN}.confd" ${PN}
+	newinitd "${FILESDIR}/${PN}.initd" ${PN}
 }

@@ -1,0 +1,18 @@
+#!/sbin/openrc-run
+# Copyright 2026 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+name="beszel hub"
+description="beszel server monitoring"
+command=/usr/bin/beszel-hub
+command_args="serve --dir ${BESZEL_HUB_DIR:-/var/lib/beszel-hub}/data ${BESZEL_HUB_OPTS}"
+command_user="${BESZEL_HUB_USER:-beszel-hub}:${BESZEL_HUB_GROUP:-beszel}"
+supervisor=supervise-daemon
+
+set -o allexport
+source ${BESZEL_HUB_ENVFILE:-/etc/beszel-hub/beszel-hub.env}
+set +o allexport
+
+depend() {
+	need net
+}
