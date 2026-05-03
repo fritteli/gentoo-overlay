@@ -6,7 +6,7 @@ EAPI=8
 inherit acct-user
 
 DESCRIPTION="User for the Beszel monitoring agent"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm64"
 IUSE="docker"
 
 ACCT_USER_ID=-1
