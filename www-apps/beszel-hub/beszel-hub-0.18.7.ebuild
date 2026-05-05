@@ -9,6 +9,9 @@ MY_P="beszel-${PV}"
 DESCRIPTION="Beszel Hub - Simple, lightweight server monitoring"
 HOMEPAGE="https://www.beszel.dev/ https://github.com/henrygd/beszel/"
 
+# How to create the vendor tarball:
+# https://wiki.gentoo.org/wiki/Writing_go_Ebuilds#Vendor_tarball
+#
 # How to create the site tarball:
 # - Checkout the repo at the correct tag into the dir ${MY_P}
 # cd ${MY_P}/internal/site
@@ -18,8 +21,9 @@ HOMEPAGE="https://www.beszel.dev/ https://github.com/henrygd/beszel/"
 # tar --auto-compress -cf ${MY_P}-site.tar.xz ${MY_P}/internal/site/dist
 # Upload to mirror
 SRC_URI="https://github.com/henrygd/beszel/archive/refs/tags/v${PV}.tar.gz -> ${MY_P}.tar.gz
-	https://files.levelnine.at/${MY_P}-vendor.tar.xz
-	https://files.levelnine.at/${MY_P}-site.tar.xz"
+	https://gentoo-overlay.friedli.info/${MY_P}-vendor.tar.xz
+	https://gentoo-overlay.friedli.info/${MY_P}-site.tar.xz"
+
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="AGPL-3+"
