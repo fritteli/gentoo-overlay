@@ -5,5 +5,5 @@ INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/beszel
 SLOT=0
-_eclasses_=user-info	d7c261c6f7c2392145e8789913f1bf7e	acct-user	8c5f04cd2cfafc30ffb9bae9cf5f5605
+_eclasses_=user-info	9bc91a5977c2453c0a861b26f65057ea	edo	a5e294016aa84979fcb2459749eb80b2	acct-user	b9c88d767674bff385e6af737802d263
 _md5_=6a03acc20812cf3b41bfab4aebc71e36
