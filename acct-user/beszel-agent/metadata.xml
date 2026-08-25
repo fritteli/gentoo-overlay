@@ -7,6 +7,6 @@
 	</maintainer>
 	<use>
 		<flag name="docker">Add the user to the docker group in order to access docker stats. Beware that this will grant the user full access to docker!</flag>
-		<flag name="smartctl">Add the user to the disk group in order to access S.M.A.R.T. stats. Requires sys-apps/smartmontools to work. Beware that this will grant the user full (raw) access disks!</flag>
+		<flag name="smartctl">Add the user to the disk group in order to access S.M.A.R.T. stats. Requires sys-apps/smartmontools to work. Beware that this will grant the user full (raw) access to your disks!</flag>
 	</use>
 </pkgmetadata>
