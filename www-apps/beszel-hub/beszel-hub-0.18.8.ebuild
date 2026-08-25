@@ -32,7 +32,7 @@ KEYWORDS="~amd64"
 DEPEND="acct-user/beszel-hub
 	acct-group/beszel"
 
-BDEPEND=">=dev-lang/go-1.26.0"
+BDEPEND=">=dev-lang/go-1.26.6"
 
 src_compile() {
 	cd internal/cmd/hub
