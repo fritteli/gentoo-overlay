@@ -5,7 +5,7 @@ EAPI=8
 
 inherit gnome2-utils meson
 
-DESCRIPTION="Quickly modify screenshots of application windows to put them better in context."
+DESCRIPTION="Quickly modify screenshots of application windows to put them better in context"
 HOMEPAGE="https://github.com/AlexanderVanhee/Gradia"
 SRC_URI="https://github.com/AlexanderVanhee/Gradia/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -17,7 +17,9 @@ KEYWORDS="~amd64"
 
 IUSE="ocr"
 
-PATCHES="${FILESDIR}/gradia-1.12.0-pygobject-3.50-compat.patch"
+PATCHES=(
+	"${FILESDIR}/gradia-1.12.0-pygobject-3.50-compat.patch"
+)
 
 DEPEND="
 	dev-util/blueprint-compiler
