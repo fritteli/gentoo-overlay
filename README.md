@@ -50,7 +50,7 @@ request, please make sure your changes don't upset
 in the directory of the ebuild and fix warnings and errors:
 
 ```commandline
-pkgcheck scan --net .
+pkgcheck scan --exit error,style --net .
 ```
 
 ## Maintainers
