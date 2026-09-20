@@ -1,9 +1,10 @@
 DEFINED_PHASES=install postinst preinst prerm pretend
 DESCRIPTION=User for the Beszel monitoring hub
 EAPI=8
+IDEPEND=>=sys-apps/shadow-4.6
 INHERIT=acct-user
 KEYWORDS=~amd64
 RDEPEND=acct-group/beszel
 SLOT=0
-_eclasses_=user-info	9bc91a5977c2453c0a861b26f65057ea	edo	a5e294016aa84979fcb2459749eb80b2	acct-user	b9c88d767674bff385e6af737802d263
+_eclasses_=user-info	9bc91a5977c2453c0a861b26f65057ea	edo	a5e294016aa84979fcb2459749eb80b2	acct-user	17748197da03d8a5b016d1aee8495ed3
 _md5_=6a03acc20812cf3b41bfab4aebc71e36

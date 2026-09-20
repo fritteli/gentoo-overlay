@@ -1,10 +1,11 @@
 DEFINED_PHASES=install postinst preinst prerm pretend setup
 DESCRIPTION=User for the Beszel monitoring agent
 EAPI=8
+IDEPEND=>=sys-apps/shadow-4.6
 INHERIT=acct-user
 IUSE=docker smartctl
 KEYWORDS=~amd64 ~arm64
 RDEPEND=acct-group/beszel
 SLOT=0
-_eclasses_=user-info	9bc91a5977c2453c0a861b26f65057ea	edo	a5e294016aa84979fcb2459749eb80b2	acct-user	b9c88d767674bff385e6af737802d263
+_eclasses_=user-info	9bc91a5977c2453c0a861b26f65057ea	edo	a5e294016aa84979fcb2459749eb80b2	acct-user	17748197da03d8a5b016d1aee8495ed3
 _md5_=a48ec8f0dded528a4a81af6147b1fd81
