@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>manuel@fritteli.ch</email>
+		<name>Manuel Friedli</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="gitlab">famedly/conduit</remote-id>
+		<remote-id type="github">ruma/ruma</remote-id>
+	</upstream>
+	<use>
+		<flag name="rocksdb">Add support for the rocksdb database backend</flag>
+		<flag name="system-rocksdb">Use the system-wide install of rocksdb</flag>
+	</use>
+</pkgmetadata>
