@@ -32,6 +32,7 @@ CRATES="
 	base64@0.22.1
 	base64ct@1.6.0
 	bindgen@0.69.5
+	bindgen@0.72.1
 	bitflags@1.3.2
 	bitflags@2.9.1
 	blake2b_simd@1.0.2
@@ -256,10 +257,11 @@ CRATES="
 	ring@0.17.14
 	rusqlite@0.35.0
 	rust-argon2@2.1.0
-	rust-librocksdb-sys@0.37.0+10.2.1
-	rust-rocksdb@0.41.0
+	rust-librocksdb-sys@0.39.0+10.5.1
+	rust-rocksdb@0.43.0
 	rustc-demangle@0.1.25
 	rustc-hash@1.1.0
+	rustc-hash@2.1.1
 	rustc_version@0.4.0
 	rustix@0.38.44
 	rustls-native-certs@0.7.0
@@ -500,6 +502,10 @@ DEPEND="${COMMON_DEPEND}
 	)
 "
 BDEPEND="virtual/pkgconfig"
+
+PATCHES=(
+	"${FILESDIR}/conduit-0.15.0-update-rocksdb.patch"
+)
 
 DOCS=( {APPSERVICES,CODE_OF_CONDUCT,DEPLOY,README,TURN}.md )
 
