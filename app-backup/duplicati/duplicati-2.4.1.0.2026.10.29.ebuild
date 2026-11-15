@@ -335,7 +335,7 @@ fi
 # Edit index.html: set <base href="/ngclient/">
 # Make sure to remove index.html~ afterwards.
 # $ cd <srcroot>/..
-# tar --auto-compress -cf duplicati-${P_FRONT_V}.dist.tar.xz <srcroot>/Duplicati/Server/webroot/ngclient
+# $ tar --auto-compress -cf duplicati-${P_FRONT_V}.dist.tar.xz <srcroot>/Duplicati/Server/webroot/ngclient
 
 SRC_URI+=" ${NUGET_URIS}
 	https://gentoo-overlay.friedli.info/duplicati-${P_FRONT_V}-site.tar.xz"
