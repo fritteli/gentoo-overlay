@@ -293,7 +293,20 @@ else
 	KEYWORDS="~amd64"
 fi
 
-SRC_URI+=" ${NUGET_URIS} "
+# Create the ngclient web content:
+# Make sure <srcroot> is named like ${PN}-${P_REAL_V}, i.e.
+# duplicati-2.2.0.3_stable_2026-01-06. Then, run these commands:
+# $ cd <srcroot>/Duplicati/Server/webroot/ngclient
+# $ npm install
+# $ mv node_modules/@duplicati/ngclient/* .
+# $ rm node_modules
+# Edit index.html: set <base href="/ngclient/">
+# Make sure to remove index.html~ afterwards.
+# $ cd <srcroot>/..
+# tar --auto-compress -cf duplicati-${P_FRONT_V}.dist.tar.xz <srcroot>/Duplicati/Server/webroot/ngclient
+
+SRC_URI+=" ${NUGET_URIS}
+	https://gentoo-overlay.friedli.info/duplicati-${P_FRONT_V}-site.tar.xz"
 
 LICENSE="Apache-2.0 BSD MIT"
 SLOT="0/${P_STABILITY}"
